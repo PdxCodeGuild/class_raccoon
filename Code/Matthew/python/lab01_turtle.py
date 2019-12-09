@@ -5,7 +5,7 @@ from turtle import *
 # import turtle
 
 
-color('red')
+color('green')
 
 
 forward(100)

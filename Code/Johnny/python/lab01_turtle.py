@@ -62,6 +62,7 @@ forward(100)
 backward(100)
 left(25)
 forward(100)
+right(5)
 
 
 done()

@@ -3,6 +3,7 @@
 from turtle import *
 
 #stick figure
+speed(0)
 
 #make circular head!
 fillcolor('orange')

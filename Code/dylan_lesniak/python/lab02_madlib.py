@@ -55,11 +55,13 @@ He {verb[0]}(verb, past tense) {adv[0]}(adverb)
 through the large tunnel that led to its {adj[1]}(adjective)
 {noun[1]}(noun). I got some peanuts and passed
 them through the cage to a gigantic gray {noun[2]}(noun)
-towering above my head. Feeding that animal made
-me hungry. I went to get a {adj[2]}(adjective) scoop
+towering above my head. Feeding that animal made''')
+    input("... click enter to continue.")
+    print(f'''me hungry. I went to get a {adj[2]}(adjective) scoop
 of ice cream. It filled my stomach. Afterwards I had to
 {verb[1]}(verb) {adv[1]} (adverb) to catch our bus.
 When I got home I {verb[2]}(verb, past tense) my
 mom for a {adj[3]}(adjective) day at the zoo. ''')
+
 
 start()

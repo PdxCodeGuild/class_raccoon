@@ -49,10 +49,11 @@ secrets.py
 ```
 
 
-### Set Your Username & Email
+### Set Your Name, Email, and GitHub Credentials
 
 - `git config --global user.name "Your Name"`
 - `git config --global user.email you@email.com`
+- `git config --global credential.helper store`
 
 ### Set Connections to Remote Repositories
 

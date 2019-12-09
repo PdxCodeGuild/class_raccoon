@@ -1,7 +1,7 @@
 
 
 
-## Setup Checklist
+# Setup Checklist
 
 - Send me an email so I have your email address
 - Create a Slack account (I'll send you an invite)

@@ -1,4 +1,4 @@
-# Using the CLI
+# CLI - Command Line Interfact
 
 CLI stands for 'command-line interface', and it was the only way to use a computer before the development of GUIs 'graphical user interface'. It's still used to perform many computer operations that go 'under the hood'.
 

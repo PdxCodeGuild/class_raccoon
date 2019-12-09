@@ -1,9 +1,16 @@
+# Lab 02 madlibs
+
+
+print("Let's play a madlibs game")
+# variables
+# user promp
 animal = input("What is your favorite animal?:...")
 veggi = input("Vegetable:...")
 hungry = input("The felling when you want to eat:...")
 size = input("Your shirt size:...")
 
-print("Let's play a madlibs game")
+
+
 print(f'''
 \nToday I went to the zoo.
 \nI saw a {animal} jumping up and down in its tree.
@@ -16,13 +23,14 @@ play_again = input("Do you want to play again? (y/n)").lower()
 
 
 while play_again == "y":
+    print("Let's play a madlibs game")
 
     animal = input("What is your favorite animal?:...")
     veggi = input("Vegetable:...")
     hungry = input("The felling when you want to eat:...")
     size = input("Your shirt size:...")
 
-    print("Let's play a madlibs game")
+
     print(f'''
     \nToday I went to the zoo.
     \nI saw a {animal} jumping up and down in its tree.

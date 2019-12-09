@@ -2,6 +2,7 @@
 Tim Galloway'''
 
 from turtle import *
+
 hideturtle()
 color("white")
 setposition(-100, -100)

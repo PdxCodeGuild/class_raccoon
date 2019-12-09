@@ -1,0 +1,36 @@
+''' Lab01 turtle
+Tim Galloway'''
+
+from turtle import *
+
+hideturtle()
+color("white")
+setposition(-100, -100)
+color("green")
+right(-70)
+forward(80)
+right(130)
+forward(80)
+right(180)
+forward(80)
+right(30)
+forward(120)
+left(140)
+forward(70)
+left(180)
+forward(70)
+right(45)
+forward(70)
+right(180)
+forward(70)
+right(90)
+forward(15)
+right(90)
+circle(110)
+
+color("white")
+left(90)
+forward(120)
+color("green")
+circle(25)
+done()

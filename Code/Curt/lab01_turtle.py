@@ -4,27 +4,15 @@ from turtle import *
 
 #stick figure
 
-#make head
-penup()
-left(90)
-forward(200)
-pendown()
-left(90)
-forward(50)
-left(90)
-forward(100)
-left(90)
-forward(100)
-left(90)
-forward(100)
-left(90)
-forward(50)
+#make circular head!
+x = range(359)
+for n in x:
+    forward(1)
+    left(1)
+left(1)
 
 #make body
-penup()
-left(90)
-forward(100)
-pendown()
+right(90)
 forward(200)
 
 #make left arm
@@ -82,5 +70,6 @@ left(180)
 forward(30)
 right(55)
 forward(110)
+
 
 done()

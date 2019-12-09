@@ -8,17 +8,21 @@ turn_around = 180
 acute = 25
 leg = half_segment + (half_segment/2)
 
-#code
+
+#stick_figure_code
 def head():
-    forward(full_segment)
-    left(full_turn)
-    forward(full_segment)
-    left(full_turn)
-    forward(full_segment)
-    left(full_turn)
-    forward(full_segment)
-    left(full_turn)
+    fillcolor('red')
+    begin_fill()
+
+    i = 0 
+    while i < 4:
+        forward(full_segment)
+        left(full_turn)
+        i += 1
+    
     forward(half_segment)
+
+    end_fill()
 
 
 def neck():

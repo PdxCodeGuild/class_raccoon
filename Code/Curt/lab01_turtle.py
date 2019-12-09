@@ -150,6 +150,6 @@ end_fill()
 
 fillcolor('white')
 penup()
-forward(50)
+forward(150)
 
 done()

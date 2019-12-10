@@ -1,6 +1,6 @@
 # Lab 03 Grading
 
-user_input = int(input('What is your score (0 - 100)?'))
+user_input = float(input('What is your score (0 - 100)?'))
 
 # 90-100: A
 if user_input in range(90, 101):

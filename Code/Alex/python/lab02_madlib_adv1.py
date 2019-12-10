@@ -8,21 +8,35 @@ import random
 
 #variables and user inputs
 
-x = list(input("Choose 3 adjectives: ").split())
-print(x)
-q = list(input("Choose 7 singular nouns: ").split())
-print(q)
-#is there a function i can use to capitalize them^?
-c = input("Choose a plural noun: ")
-d = input("Choose a part of the body: ")
-e = input("Choose a part of the body (plural): ")
+adj_list = list(input("Choose 3 adjectives: ").split(" "))
+for x in range(len(adj_list)):
+    adj_list[x] = adj_list[x].capitalize()
+
+singular_noun_list = list(input("Choose 7 singular nouns: ").split(" "))
+for x in range(len(singular_noun_list)):
+    singular_noun_list[x] = singular_noun_list[x].capitalize()
+
+plural_noun = input("Choose a plural noun: ")
+
+pob = input("Choose a part of the body: ")
+for x in range(len(pob)):
+    pob[x] = pob[x].capitalize()
+    
+pob_plural = input("Choose a part of the body (plural): ")
 
 
-adj_list = random.choice(x)
-noun_list = random.choice(q)
+
+#to do for next advanced version
+'''#plural nouns list
+plnoun_lst = ""
+while len(plnoun_lst) != 2:
+    plnoun1 = input("Give two plural nouns, separated by commas: ").replace(", ",",")
+    plnoun_lst = plnoun1.split(",") #turn into list
+    plnoun_lst = [x.lower() for x in plnoun_lst] #Lower and replace
+'''
 
 
 #mad lib calculation
 
-print(f"\n\n\nHere is a list of the most {adj_list} horror {c} ever made in Hollywood!")
-print(f"Each of these {adj_list} films received a rating of two {e}-up from Siskel and Ebert\n\n1. The Hunch {d} of Notre {noun_list}\n2. The {noun_list} of the Living {noun_list}\n3. {noun_list} of Frankenstein\n4. Invasion of the {noun_list} Snatchers\n5. {noun_list} from the {adj_list} Lagoon\n6. Last {noun_list} on the Left\n7. The {noun_list} of the Opera\n\n")
+print(f"\n\n\nHere is a list of the most {random.choice(adj_list)} horror {plural_noun} ever made in Hollywood!")
+print(f"Each of these {random.choice(adj_list)} films received a rating of two {pob_plural}-up from Siskel & Ebert\n\n1. The Hunch {pob} of Notre {random.choice(singular_noun_list)}\n2. The {random.choice(singular_noun_list)} of the Living {random.choice(singular_noun_list)}\n3. {random.choice(singular_noun_list)} of Frankenstein\n4. Invasion of the {random.choice(singular_noun_list)} Snatchers\n5. {random.choice(singular_noun_list)} from the {random.choice(adj_list)} Lagoon\n6. Last {random.choice(singular_noun_list)} on the Left\n7. The {random.choice(singular_noun_list)} of the Opera\n\n")

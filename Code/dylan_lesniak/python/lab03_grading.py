@@ -7,6 +7,11 @@ Purpose: Take user number input and convert to a letter grade, complete with +/-
 def grading():
     print("Welcome! Please insert your number grade (0-100). ")
     user_grade = input("> ")
+    user_grade = input_checker(user_grade)
+    letter_grade = letter(user_grade) + plus_minus(user_grade)
+    print(f"Your grade is a(n) {letter_grade}. ")
+
+def input_checker(user_grade):
     while not user_grade.isdigit():
         print("Invalid entry. Please enter a number. (0-100)")
         user_grade = input("> ")
@@ -18,10 +23,8 @@ def grading():
             print("Invalid entry. Please enter a number. (0-100)")
             user_grade = input("> ")
         user_grade = int(user_grade)
-    letter_grade = letter(user_grade)
-    letter_grade += plus_minus(user_grade)
-    print(f"Your grade is a(n) {letter_grade}. ")
-    
+    return user_grade
+
 def letter(user_grade):
     #take grade and turn to letter
     letter = ""

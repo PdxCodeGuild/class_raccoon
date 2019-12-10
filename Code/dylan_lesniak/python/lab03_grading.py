@@ -26,7 +26,6 @@ def input_checker(user_grade):
     return user_grade
 
 def letter(user_grade):
-    #take grade and turn to letter
     letter = ""
     if user_grade < 60:
         letter = "F"
@@ -40,9 +39,7 @@ def letter(user_grade):
         letter = "A"
     return letter
 
-def plus_minus(user_grade):
-    #use % to create distinctions. 
-    #but make 100 an A+ and anything below 60 an F. 
+def plus_minus(user_grade): 
     add_on = ""
     if user_grade == 100:
         add_on = "+"

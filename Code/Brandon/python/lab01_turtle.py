@@ -31,7 +31,7 @@ forward(200)
 pendown()
 
 #Draw Star next to stick figure
-
+#Secondary
 forward(100)
 right(144)
 forward(100)

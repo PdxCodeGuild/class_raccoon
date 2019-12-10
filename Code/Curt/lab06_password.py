@@ -9,6 +9,7 @@ print("Welcome to the Password Generator!\n")
 
 lower_c = list(string.ascii_lowercase)
 upper_c = list(string.ascii_uppercase)
+all_ltr = list(string.ascii_letters)
 number_c = list(string.digits)
 special_c = list(string.punctuation)
 all_c = list(lower_c + upper_c + number_c + special_c)

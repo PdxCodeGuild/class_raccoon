@@ -3,6 +3,7 @@
 from turtle import *
 
 #stick figure
+speed(0)
 
 #make circular head!
 fillcolor('orange')
@@ -150,6 +151,6 @@ end_fill()
 
 fillcolor('white')
 penup()
-forward(50)
+forward(150)
 
 done()

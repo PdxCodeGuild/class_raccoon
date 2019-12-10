@@ -26,6 +26,16 @@ pob_plural = input("Choose a part of the body (plural): ")
 
 
 
+#to do for next advanced version
+'''#plural nouns list
+plnoun_lst = ""
+while len(plnoun_lst) != 2:
+    plnoun1 = input("Give two plural nouns, separated by commas: ").replace(", ",",")
+    plnoun_lst = plnoun1.split(",") #turn into list
+    plnoun_lst = [x.lower() for x in plnoun_lst] #Lower and replace
+'''
+
+
 #mad lib calculation
 
 print(f"\n\n\nHere is a list of the most {random.choice(adj_list)} horror {plural_noun} ever made in Hollywood!")

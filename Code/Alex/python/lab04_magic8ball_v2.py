@@ -20,6 +20,8 @@ Display the result of the 8-ball.
 Version 2
 
 Using a while loop, keep asking the user for a question, if they enter 'done', exit
+
+check out matthews file
 '''
 
 

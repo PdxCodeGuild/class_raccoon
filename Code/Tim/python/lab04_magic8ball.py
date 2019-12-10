@@ -9,4 +9,4 @@ while repeat == "y":
 
     repeat = input("¸,ø¤º°`°º¤ø,¸,ø¤°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸,ø¤°º¤ø,¸¸,ø¤º°`°º¤ø,¸\n Do you have another question for the all-knowing eight ball?\n¸,ø¤º°`°º¤ø,¸,ø¤°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸,ø¤°º¤ø,¸¸,ø¤º°`°º¤ø,¸\n\n(y/n)>")
     if repeat == "n":
-        print("\n\n\n++++++++++++++++++++++++++++++++++++++++++++++++++++\nFine, the eight ball was done answering you anyway.\n++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n\n")
+        print("\n\n\n++++++++++++++++++++++++++++++++++++++++++++++++++++\nFine, the eight ball was done answering you anyway.\n++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n╭∩╮(Ο_Ο)╭∩╮\n\n")

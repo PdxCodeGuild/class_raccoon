@@ -4,7 +4,7 @@ print ("\nWelcome to Madlibs!")
 
 first_name = input("What is your name?")
 
-print(f"Hey {first_name}! Thank you for signing up")
+print(f"Hey {first_name}! Thank you for playing")
 
 def madlibs():
     noun = input("\nChoose a city\n")

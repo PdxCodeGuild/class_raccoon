@@ -16,10 +16,6 @@ elif gpa >= 60:
 else:
     lt_grade = "F"
 
-
-for x in range (70, 90):
-    print(x, x%10)
-
 sp_grade = gpa%10
 
 if gpa >= 100:

@@ -15,9 +15,10 @@ def add(a, b):
 
 Get a string from the user, print out another string, doubling every letter.
 
-```
->>> Enter some text: hello
-hheelllloo
+```python
+def double_letters(word):
+  ...
+print(double_letters('hello')) # hheelllloo
 ```
 
 ## Problem 2
@@ -25,14 +26,18 @@ hheelllloo
 Write a function that takes a string, and returns a list of strings, each missing a different character.
 
 ```python
-missing_char('kitten') → ['itten', 'ktten', 'kiten', 'kiten', 'kittn', 'kitte']
+def missing_char(word):
+  ...
+print(missing_char('kitten')) # ['itten', 'ktten', 'kiten', 'kiten', 'kittn', 'kitte']
 ```
 
 ## Problem 3
 Return the letter that appears the latest in the english alphabet.
-```
->>> latest_letter('pneumonoultramicroscopicsilicovolcanoconiosis')
-the latest letter is v.
+
+```python
+def latest_letter(word):
+  ...
+print(latest_letter('pneumonoultramicroscopicsilicovolcanoconiosis')) # v
 ```
 
 ## Problem 4
@@ -40,7 +45,9 @@ the latest letter is v.
 Write a function that returns the number of occurances of 'hi' in a given string.
 
 ```python
-count_hi('hihi') → 2
+def count_hi(text):
+  ...
+print(count_hi('hihi')) # 2
 ```
 
 ## Problem 5
@@ -48,13 +55,12 @@ count_hi('hihi') → 2
 Write a function that returns True if a given string contains the same number of 'cat' as it does 'dog'
 
 ```python
-cat_dog('catdog') → True
-cat_dog('catcat') → False
-cat_dog('catdogcatdog') → True
+def cat_dog(text):
+  ...
+print(cat_dog('catdog')) # True
+print(cat_dog('catcat')) # False
+print(cat_dog('catdogcatdog')) # True
 ```
-
-
-
 
 ## Problem 6
 
@@ -62,15 +68,17 @@ Return the number of letter occurances in a string.
 ```python
 def count_letter(letter, word):
     ...
-count_letter('i', 'antidisestablishmentterianism') → 5
-count_letter('p', 'pneumonoultramicroscopicsilicovolcanoconiosis') → 2
+print(count_letter('i', 'antidisestablishmentterianism')) # 5
+print(count_letter('p', 'pneumonoultramicroscopicsilicovolcanoconiosis')) # 2
 ```
 
 ## Problem 7
 
 Convert input strings to lowercase without any surrounding whitespace.
 
-```
-lower_case("SUPER!") → 'super!'
-lower_case("        NANNANANANA BATMAN        ") → 'nannananana batman'
+```python
+def lower_case(text):
+  ...
+print(lower_case("SUPER!")) # 'super!'
+print(lower_case("        NANNANANANA BATMAN        ")) # 'nannananana batman'
 ```

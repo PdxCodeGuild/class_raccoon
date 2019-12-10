@@ -18,24 +18,26 @@ def add(a, b):
 
 Write a function using random.randint to generate an index, use that index to pick a random element of a list and return it.
 
-```
+```python
 def random_element(a):
     ...
-
-fruits = ['apples', 'bananas', 'pears']
-random_element(fruits) could return 'apples', 'bananas' or 'pears'
+print(random_element(['apples', 'bananas', 'pears'])) # 'apples', 'bananas' or 'pears'
 ```
 
 ## Problem 2
 
 Write a REPL which asks users for a list of numbers, which they enter, until they say 'done'. Then print out the list.
 
-```
-Enter a number (or 'done'): 5
-Enter a number (or 'done'): 34
-Enter a number (or 'done'): 515
-Enter a number (or 'done'): done
-[5, 34, 515]
+```python
+def get_numbers():
+  ...
+print(get_numbers())
+# example run -----------------
+# Enter a number (or 'done'): 5
+# Enter a number (or 'done'): 34
+# Enter a number (or 'done'): 515
+# Enter a number (or 'done'): done
+# [5, 34, 515]
 ```
 
 
@@ -44,35 +46,46 @@ Enter a number (or 'done'): done
 Write a function that takes a list of numbers, and returns True if there is an even number of even numbers.
 
 ```python
-eveneven([5, 6, 2]) → True
-eveneven([5, 5, 2]) → False
+print(eveneven([5, 6, 2])) # True
+print(eveneven([5, 5, 2])) # False
 ```
-
 
 ## Problem 4
 
 Print out every other element of a list, first using a while loop, then using a for loop.
 
-```
->>> nums = [0, 1, 2, 3, 4, 5, 6, 7, 8]
->>> print_every_other(nums)
-0, 2, 4, 6, 8
+```python
+def print_every_other(nums):
+  ...
+print_every_other([0, 1, 2, 3, 4, 5, 6, 7, 8]) # 0, 2, 4, 6, 8
 ```
 
 ## Problem 5
 Write a function that returns the reverse of a list.
 
-`def reverse(nums):`
+```python
+def reverse(nums):
+  ...
+print(reverse([1, 2, 3])) # 3, 2, 1
+```
 
 ## Problem 6
 Write a function to move all the elements of a list with value less than 10 to a new list and return it.
 
-`def extract_less_than_ten(nums):`
+```python
+def extract_less_than_ten(nums):
+  ...
+print(extract_less_than_ten([2, 8, 12, 18])) # [2, 8]
+```
 
 ## Problem 7
 Write a function to find all common elements between two lists.
 
-`def common_elements(nums1, nums2):`
+```python
+def common_elements(nums1, nums2):
+  ...
+print(common_elements([1, 2, 3], [2, 3, 4])) # [2, 3]
+```
 
 
 ## Problem 8
@@ -81,21 +94,19 @@ Write a function to combine two lists of equal length into one, alternating elem
 ```python
 def combine(nums1, nums2):
     ...
-combine(['a','b','c'],[1,2,3]) → ['a', 1, 'b', 2, 'c', 3]
+print(combine(['a','b','c'],[1,2,3])) # ['a', 1, 'b', 2, 'c', 3]
 ```
 
 
 ## Problem 9
 
-Given a list of numbers, and a target number, find a pair of numbers from the list that sum to a target number
+Given a list of numbers, and a target number, find a pair of numbers from the list that sum to a target number. Optional: return a list of all pairs of numbers that sum to a target value.
 
 ```python
-nums = [5, 6, 2, 3]
-target = 7
-find_pair(nums, target) → [5, 2]
+def find_pair(nums, target):
+  ...
+print(find_pair([5, 6, 2, 3], 7)) # [5, 2]
 ```
-
-Optional: return a list of all pairs of numbers that sum to a target value.
 
 
 ## Problem 10
@@ -103,7 +114,9 @@ Optional: return a list of all pairs of numbers that sum to a target value.
 Write a function that merges two lists into a single list, where each element of the output list is a list containing two elements, one from each of the input lists.
 
 ```python
-merge([5,2,1], [6,8,2]) → [[5,6],[2,8],[1,2]]
+def merge(nums1, nums2):
+  ...
+print(merge([5,2,1], [6,8,2])) # [[5,6],[2,8],[1,2]]
 ```
 
 
@@ -112,17 +125,19 @@ merge([5,2,1], [6,8,2]) → [[5,6],[2,8],[1,2]]
 Write a function `combine_all` that takes a list of lists, and returns a list containing each element from each of the lists.
 
 ```python
-nums = [[5,2,3],[4,5,1],[7,6,3]]
-combine_all(nums) → [5,2,3,4,5,1,7,6,3]
+def combine_all(nums):
+  ...
+print(combine_all([[5,2,3],[4,5,1],[7,6,3]])) # [5,2,3,4,5,1,7,6,3]
 ```
-
 
 ## Problem 12
 
 Write a function that takes `n` as a parameter, and returns a list containing the first `n` [Fibonacci Numbers](https://en.wikipedia.org/wiki/Fibonacci_number).
 
 ```python
-fibonacci(8) → [1, 1, 2, 3, 5, 8, 13, 21]
+def fibonacci(n):
+  
+print(fibonacci(8)) # [1, 1, 2, 3, 5, 8, 13, 21]
 ```
 
 ## Problem 13
@@ -152,5 +167,5 @@ Write a function which takes a list as a parameter and returns a new list with a
 def find_unique(nums):
     ...
 nums = [12, 24, 35, 24, 88, 120, 155, 88, 120, 155]
-unique_nums = find_unique(nums) → [12, 24, 35, 88, 120, 155]
+unique_nums = find_unique(nums) # [12, 24, 35, 88, 120, 155]
 ```

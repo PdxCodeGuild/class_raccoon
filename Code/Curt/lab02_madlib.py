@@ -1,5 +1,6 @@
 #lab02_madlib.py
 print("Welcome to Madlibs!\n")
+import string
 
 # Advanced Version 3 - Multiple entries
 
@@ -12,37 +13,36 @@ time2 = input("Give me a unit of time (second, year, etc): ")
 #relatives list
 rel_lst = ""
 while len(rel_lst) != 2:
-    rel = input("Name two types of relatives (father, brother, meemaw), separated by commas: ")
+    rel = input("Name two types of relatives (father, brother, meemaw), separated by commas: ").replace(", ",",")
     rel_lst = rel.split(",") #turn into list
-    rel_lst = [(x.lower()).replace(" ", "") for x in rel_lst] #Lower and replace
+    rel_lst = [x.lower() for x in rel_lst] #Lower and replace
 
 #plural nouns list
 plnoun_lst = ""
 while len(plnoun_lst) != 2:
-    plnoun1 = input("Give two plural nouns, separated by commas: ")
+    plnoun1 = input("Give two plural nouns, separated by commas: ").replace(", ",",")
     plnoun_lst = plnoun1.split(",") #turn into list
-    plnoun_lst = [(x.lower()).replace(" ", "") for x in plnoun_lst] #Lower and replace
+    plnoun_lst = [x.lower() for x in plnoun_lst] #Lower and replace
 
 #past-tense verb list
 past_vb_lst = ""
 while len(past_vb_lst) != 3:
-    past_vb1 = input("Give three past-tense verbs, separated by commas: ")
+    past_vb1 = input("Give three past-tense verbs, separated by commas: ").replace(", ",",")
     past_vb_lst = past_vb1.split(",") #turn into list
-    past_vb_lst = [(x.lower()).replace(" ", "") for x in past_vb_lst] #Lower and replace
+    past_vb_lst = [x.lower() for x in past_vb_lst] #Lower and replace
 
 #nouns list
 noun_lst = ""
 while len(noun_lst) != 5:
-    noun1 = input("Give me five nouns, separated by commas: ")
+    noun1 = input("Give me five nouns, separated by commas: ").replace(", ",",")
     noun_lst = noun1.split(",") #turn into list
-    noun_lst = [(x.lower()).replace(" ", "") for x in noun_lst] #Lower and replace
 
 #verbs list
 verb_lst = ""
 while len(verb_lst) != 7:
-    verb1 = input("Last one! Give seven verbs (present tense),\nseparated by commas: ")
+    verb1 = input("Last one! Give seven verbs (present tense),\nseparated by commas: ").replace(", ",",")
     verb_lst = verb1.split(",") #turn into list
-    verb_lst = [(x.lower()).replace(" ", "") for x in verb_lst] #Lower and replace
+    verb_lst = [x.lower() for x in verb_lst] #Lower and replace
 
 input("Here's the original poem:\n")
 print("THE LOSER")
@@ -70,9 +70,9 @@ input("")
 input("And now here's your poem:")
 print(f"THE {noun_lst[0]}".upper())
 print(f"by {auth_name}\n")
-print(f"{rel_lst[0].title()} said I'd {verb_lst[0]} my {noun_lst[1]}")
+print(f"{rel_lst[0].capitalize()} said I'd {verb_lst[0]} my {noun_lst[1]}")
 print(f"If it wasn't {past_vb_lst[0]} on.")
-print(f"{time1.title()} I guess it wasn't")
+print(f"{time1.capitalize()} I guess it wasn't")
 print(f"'Cause while {pres_par} with my {rel_lst[1]}")
 print(f"It {past_vb_lst[1]} off and {past_vb_lst[2]} away")
 print(f"And now it's {adj1}.")

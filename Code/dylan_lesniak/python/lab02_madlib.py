@@ -48,7 +48,9 @@ def start():
     adv = get_advs()
     noun = get_nouns()
     verb = get_verbs()
-    print ( f'''Today I went to the zoo. I saw a(n)
+    hear_story = input("Would you like to hear the story? (y/n)")
+    while hear_story == "y":
+        print ( f'''Today I went to the zoo. I saw a(n)
 {adj[0]}(adjective)
 {noun[0]}(Noun) jumping up and down in its tree.
 He {verb[0]}(verb, past tense) {adv[0]}(adverb)
@@ -56,12 +58,18 @@ through the large tunnel that led to its {adj[1]}(adjective)
 {noun[1]}(noun). I got some peanuts and passed
 them through the cage to a gigantic gray {noun[2]}(noun)
 towering above my head. Feeding that animal made''')
-    input("... click enter to continue.")
-    print(f'''me hungry. I went to get a {adj[2]}(adjective) scoop
+        input("... click enter to continue.")
+        print(f'''me hungry. I went to get a {adj[2]}(adjective) scoop
 of ice cream. It filled my stomach. Afterwards I had to
 {verb[1]}(verb) {adv[1]} (adverb) to catch our bus.
 When I got home I {verb[2]}(verb, past tense) my
 mom for a {adj[3]}(adjective) day at the zoo. ''')
+        hear_story = input("Would you like to hear the story again? (y/n)")
 
+cont = "y"
 
-start()
+while cont == "y":
+    start()
+    cont = input("Would you like to start again? (y/n)")
+
+exit()

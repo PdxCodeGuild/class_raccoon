@@ -12,4 +12,5 @@ while True:
     print(f"{user_input}..really? {answer}")
 
     if input('play again? ') == 'no':
+        print("goodbye")
         break

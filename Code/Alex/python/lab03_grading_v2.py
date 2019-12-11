@@ -17,6 +17,8 @@ Version 2
 
 Find the specific letter grade (A+, B-, etc). You can check for more specific ranges using if statements, or use modulus % to get the ones-digit to set another string to '+', '-', or ' '. Then you can concatenate that string with your grade string.
 
+check out matthews file on this
+
 
 '''
 

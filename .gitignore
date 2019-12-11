@@ -1,6 +1,10 @@
 
-.DS_Store
 
+secrets.py
+
+
+.DS_Store
+4
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

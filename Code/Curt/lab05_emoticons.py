@@ -1,5 +1,7 @@
 import random
 
+print("Emoticon generator! Let's make some emoticons!\n")
+
 eyes = [':', 'B', ';', '=', '8', 'X', '>:', 'O:']
 nose = ['', '-', 'o', 'c', '^', ]
 mouth = [')', ']', '/', 'D', '[', '<', '>', 'O', 'o', 'P', 'p', 'L', 'S', '$', '3', 'J']

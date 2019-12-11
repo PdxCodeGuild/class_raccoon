@@ -22,7 +22,7 @@ Instead of hard-coding the coins, store them in a list. This way you can make cu
 
 ```python
 coins = [
-    ('quarter', 50),
+    ('quarter', 25),
     ('dime', 10),
     ('nickel', 5),
     ('penny', 1)

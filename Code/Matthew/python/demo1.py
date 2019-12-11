@@ -1,7 +1,18 @@
 
 
 
+s = ''
+for i in range(10):
+    print(s)
+    s = str(i) + ' ' + s
+print(s)
 
+
+
+
+
+
+exit()
 
 
 

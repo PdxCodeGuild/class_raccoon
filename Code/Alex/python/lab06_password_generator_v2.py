@@ -19,26 +19,23 @@ Allow the user to enter the value of n, remember to convert its type, as input r
 '''
 
 
+#i need the random module to GENERATE randomness into the password calculation
+#i need to import string to GENERATE the string libraries within my code
 import random
 import string
 
-#these are the variables
+#i need all password options. so i created variables representing each individual library of strings that i need.
 uppercase_letters = string.ascii_uppercase
 lowercase_letters = string.ascii_lowercase
 numbers = string.digits
 punctuation = string.punctuation
-password = '' #this is the literal password
-counter = 0 #this line is keeping the loop going
-user = input(password)
+password = '' #because i am dealing with strings
 
-print("Create a password.")
+counter = 0 #this lines purpose is to keep the loop going
 
-
-#generating password with while loop
-
-while counter <= 10: #because we are working with 10 passwords
-    password += random.choice(uppercase_letters + lowercase_letters + numbers + punctuation) #this line is randomizing the password and also working with line 14
-    counter += 1 #this line is expanding the length of the loop by 1 each time
-
+#using while loop to keep counter going
+while counter <= 10: #because we need 10 passwords
+    password += random.choice(uppercase_letters + lowercase_letters + numbers + punctuation) #the password calculation. adding and combining the blank string with the calculation for the password
+    counter += 1 #this variable within the loop is incrimenting/adding 1 to the counter each time through the loop so that we get to 10 passwords one by one
 
 print(password) #putting this outside of the while loop ensures that the password wont be looped

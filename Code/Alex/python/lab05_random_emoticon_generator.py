@@ -22,8 +22,12 @@ Example output:
 :-P
 '''
 
+#modules
 import random
+
+#variables & emoticon features lists
 eyes = [':', 'B', '8', ';', 'x', 'X']
 noses = ['-', '>', '%']
 mouths = [')', 'D', 'p', '(', '3', 'P', '*', '^', 'v', 'V', 'd', '[', ']', '{', '}', '"', 'c', 'C', 'o', 'O', '0', '/', '\\']
+
 print(random.choice(eyes) + random.choice(noses) + random.choice(mouths))

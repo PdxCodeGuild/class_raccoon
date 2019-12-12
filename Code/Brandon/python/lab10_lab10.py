@@ -16,7 +16,7 @@ def conversion_1(x,measurement):
 #Use info collected to run both functions. conv 1 is the meter conversion, conversion 2 is the output
 while True:
     print("Welcome to the unit converter.")
-    type_1 = input("What type of unit is your measurement? Please enter correct spelling of unit.\n:").lower()
+    type_1 = input("What type of unit is your measurement? Please enter ft for 'feet',mi for 'mile',m for 'meter',km for 'kilometer.\n:").lower()
     measurement = input("Please enter the amount to be converted\n:")
     type_2 = input("What would you like to convert it to?\n:")
     measurement = float(measurement)

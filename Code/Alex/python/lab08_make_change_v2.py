@@ -17,8 +17,10 @@ Have the user enter a dollar amount (1.36), convert this to the total in pennies
 '''
 
 
-#User needs to choose how many pennies
-pennies = int(input("Enter the total number of pennies you want.\n"))
+#User needs to choose a dollar amount to work with
+pennies = float(input("Enter a dollar amount.\n"))#now a float instead of an int. because the user will type a float and i cant give a float to an int.
+
+pennies = int(pennies * 100)#but i can convert it after the fact
 
 quarters = pennies // 25 #because quarters are 25 with no remainder
 

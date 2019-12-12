@@ -53,41 +53,8 @@ def KilometerToMeter(km):
 
 # =====================================
 
-# User input in feet
-# input_feet = float(input('What is the distance in feet?'))
-# answerFeetMeter = float(round(FeetToMeter(input_feet), 4))
-# answerFeetMile = float(round(FeetToMile(input_feet), 4))
-# answerFeetKilometer = float(round(FeetToKilometer(input_feet), 4))
-
-# print(f'{input_feet} ft. = {answerFeetMeter} m. = {answerFeetMile} mi. = {answerFeetKilometer} km.')
-
-# User input in meter
-# input_meter = float(input('What is the distance in meter?'))
-# answerMeterFeet = float(round(MeterToFeet(input_meter), 4))
-# answerMeterMile = float(round(MeterToMile(input_meter), 4))
-# answerMeterKilometer = float(round(MeterToKilometer(input_meter), 4))
-
-# print(f'{input_meter} m. = {answerMeterFeet} ft. = {answerMeterMile} mi. = {answerMeterKilometer} km.')
-
-# User input in mile
-# input_mile = float(input('What is the distance in mile?'))
-# answerMileFeet = float(round(MileToFeet(input_mile), 4))
-# answerMileMeter = float(round(MileToMeter(input_mile), 4))
-# answerMileKilometer = float(round(MileToKilometer(input_mile), 4))
-
-# print(f'{input_mile} mi. = {answerMileFeet} ft. = {answerMileMeter} m. = {answerMileKilometer} km.')
-
-# User input in kilometer
-# input_kilometer = float(input('What is the distance in kilometer?'))
-# answerKilometerFeet = float(round(KilometerToFeet(input_kilometer), 4))
-# answerKilometerMile = float(round(KilometerToMile(input_kilometer), 4))
-# answerKilometerMeter = float(round(KilometerToMeter(input_kilometer), 4))
-
-# print(f'{input_kilometer} km. = {answerKilometerFeet} ft. = {answerKilometerMile} mi. = {answerKilometerMeter} m.')
-
-
-
-
+def print4(x):
+    print(round(x,4))
 
 converse_again = 'y'
 
@@ -100,39 +67,39 @@ while converse_again == 'y':
         if unit_output == 'ft':
             print('1')
         elif unit_output == 'm':
-            print(FeetToMeter(user_input))
+            print4(FeetToMeter(user_input))
         elif unit_output == 'mi':
-            print(FeetToMile(user_input))
+            print4(FeetToMile(user_input))
         elif unit_output == 'km':
-            print(FeetToKilometer(user_input))
+            print4(FeetToKilometer(user_input))
 
     elif unit_input == 'm':
         if unit_output == 'ft':
-            print(MeterToFeet(user_input))
+            print4(MeterToFeet(user_input))
         elif unit_output == 'm':
             print('1')
         elif unit_output == 'mi':
-            print(MeterToMile(user_input))
+            print4(MeterToMile(user_input))
         elif unit_output == 'km':
-            print(MeterToKilometer(user_input))
+            print4(MeterToKilometer(user_input))
 
     elif unit_input == 'mi':
         if unit_output == 'ft':
-            print(MileToFeet(user_input))
+            print4(MileToFeet(user_input))
         elif unit_output == 'm':
-            print(MileToMeter(user_input))
+            print4(MileToMeter(user_input))
         elif unit_output == 'mi':
             print('1')
         elif unit_output == 'km':
-            print(MileToKilometer(user_input))
+            print4(MileToKilometer(user_input))
 
     elif unit_input == 'km':
         if unit_output == 'ft':
-            print(KilometerToFeet(user_input))
+            print4(KilometerToFeet(user_input))
         elif unit_output == 'm':
-            print(KilometerToMeter(user_input))
+            print4(KilometerToMeter(user_input))
         elif unit_output == 'mi':
-            print(KilometerToMile(user_input))
+            print4(KilometerToMile(user_input))
         elif unit_output == 'km':
             print('1')
 

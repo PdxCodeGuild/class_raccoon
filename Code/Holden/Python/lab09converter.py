@@ -1,7 +1,7 @@
 import string
 excl=string.ascii_lowercase+string.whitespace
 #unit names that occur inside of other unit names must be added after the larger named unit (kilometer must be before meter)
-multiplier={"kilometer":1000, "meter":1, "feet":0.3048, "foot":0.3048, "mile":1609.34, "yard":0.9144, "inch":0.0254}
+multiplier={"kilometer":1000, "km":1000, "meter":1, "feet":0.3048, "foot":0.3048, "ft":0.3048, "mile":1609.34, "yard":0.9144, "inch":0.0254}
 while True:
     usin=input("Please input measurement and units(meters, kilometers, inches, feet, yards, miles)(example: 4 miles): ").lower()
     try:

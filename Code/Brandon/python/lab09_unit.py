@@ -7,19 +7,22 @@ def conversion_1(x,measurement):
     global user_1
     if x == "feet":
         user_1 = measurement * unit_dict["ft"]
-        print(f"That is {user_1} meters. Below is your requested conversion.")
+        return(f"That is {user_1} meters. Below is your requested conversion.")
     elif x == "mile":
         user_1 = measurement * unit_dict["mi"]
-        print(f"That is {user_1} meters. Below is your requested conversion.")
+        return(f"That is {user_1} meters. Below is your requested conversion.")
     elif x == "meter":
         user_1 = measurement * unit_dict["m"]
-        print(f"That is {user_1} meters. Below is your requested conversion.")
+        return(f"That is {user_1} meters. Below is your requested conversion.")
     elif x == "kilometer":
         user_1= measurement * unit_dict["km"]
-        print(f"That is {user_1} meters. Below is your requested conversion.")
+        return(f"That is {user_1} meters. Below is your requested conversion.")
+
 def conversion2(y):
+    
     if y == "meter":
-        print(f"{user_1} meters)
+        # user_2 = user_1 * unit_dict["m"]
+        print(f"{user_1} meters")
     elif y == "feet":
         user_2 = user_1 // unit_dict["ft"]
         print(f"{user_2} feet")
@@ -35,7 +38,7 @@ def conversion2(y):
 #Use info collected to run both functions. conv 1 is the meter conversion, conversion 2 is the output
 while True:
     print("Welcome to the unit converter.")
-    type_1 = input("What type of unit is your measurement? Please enter correct spelling of unit.\n:")
+    type_1 = input("What type of unit is your measurement? Please enter correct spelling of unit.\n:").lower
     measurement = input("Please enter the amount to be converted\n:")
     type_2 = input("What would you like to convert it to?\n:")
     measurement = float(measurement)

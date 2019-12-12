@@ -55,6 +55,5 @@ while symb > 0:
     symb -= 1
 output=list(output)
 random.shuffle(output)
-prntstr=""
-prntstr=prntstr.join(output)
+prntstr="".join(output)
 print(prntstr)

@@ -15,3 +15,22 @@ Version 2
 
 Have the user enter a dollar amount (1.36), convert this to the total in pennies.
 '''
+
+
+#User needs to choose how many pennies
+pennies = int(input("Enter the total number of pennies you want.\n"))
+
+quarters = pennies // 25 #because quarters are 25 with no remainder
+
+pennies = pennies % 25 #because we need to use the remainder after quarters are calculated to get the amount in order to calculate the next biggest value, in order to get the fewest amount of coins
+
+dimes = pennies // 10
+
+pennies = pennies % 10
+
+nickles = pennies // 5
+
+pennies = pennies % 5
+
+#calculation printed. shows the user
+print(f"\n\nI did you a service.. Kind of like a modern day cash register. Here is the fewest amount of coins you will need in change.\n\nThis many quarters: {quarters}\nThis many dimes: {dimes}\nThis many nickles: {nickles}\nThis many pennies: {pennies}")

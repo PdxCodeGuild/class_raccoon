@@ -1,6 +1,7 @@
 #lab02_madlib.py
 print("Welcome to Madlibs!\n")
 import string
+import random
 
 # Advanced Version 3 - Multiple entries
 

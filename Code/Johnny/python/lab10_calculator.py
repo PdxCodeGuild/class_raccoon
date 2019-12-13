@@ -1,24 +1,17 @@
 # lab10_calculator.py
 
-user_input = input("Please enter a number (1 - 4) : \n"
-    "1. Add \n"
-    "2. Subtract \n"
-    "3. Multiply \n"
-    "4. Divide \n")
-user_input1 = int(input("What's the first number: "))
-user_input2 = int(input("What's the second number: "))
+equation = input("Whats the equation, (3 + 5): ").split(" ")
+num1 = float(equation[0])
+operate1 = equation[1]
+num2 = float(equation[2])
 
-if user_input == '1':
-    results = user_input1 + user_input2
-    print(results)
-elif user_input == '2':
-    results = user_input1 - user_input2
-    print(results)
-elif user_input == '3':
-    results = user_input1 * user_input2
-    print(results)
-elif user_input == '4':
-    results = user_input1 / user_input2
-    print(results)
+if equation[1] == '+':
+    print(num1 + num2)
+elif equation[1] == '-':
+    print(num1 - num2)
+elif equation[1] == '*':
+    print(num[1] * num[2])
+elif equation[1] == '/':
+    print(num[1] / num[2])
 else:
     print("Invalid choice. ")

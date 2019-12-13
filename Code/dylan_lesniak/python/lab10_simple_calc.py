@@ -43,7 +43,7 @@ def oper_checker(oper):
     opers = "+-*/"
     while True:
         if oper in opers:
-            return oper
+            return oper[0]
         else: 
             print("Please enter valid operation: (+ - * /)")
             oper = input("> ")

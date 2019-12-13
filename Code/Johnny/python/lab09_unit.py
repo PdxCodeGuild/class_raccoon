@@ -14,5 +14,3 @@ if units not in units_dict.keys():
 else:
     result = distance * units_dict[units]
     print(f"{distance}{units} is {result}m")
-units_dict["yd"] = 0.9144
-units_dict["in"] = 0.0254

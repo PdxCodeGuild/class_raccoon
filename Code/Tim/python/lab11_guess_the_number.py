@@ -14,7 +14,7 @@ while user_guess != comp_number and count < 3:
         count += 1
 
 while count == 3 and comp_number != user_guess:
-    print ("You LOSE! ")
+    print("You LOSE! ")
     break
 
 while comp_number == user_guess:

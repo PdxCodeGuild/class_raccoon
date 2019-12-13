@@ -1,0 +1,3 @@
+if not var SAME AS if var == false
+
+list.append(var) # Adds variable to list

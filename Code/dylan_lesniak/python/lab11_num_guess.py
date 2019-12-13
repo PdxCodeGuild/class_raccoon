@@ -89,7 +89,7 @@ def pc_guesser():
             print(f"Your number is: {user_num}.")
             print(f"The computer guessed: {computer_guess}.")
             esc = input("Click ENTER to let the computer try again, or write 'Done' to exit.\n")
-            if esc == "Done":
+            if esc.capitalize() == "Done":
                 cont = "n"
         i += 1
 

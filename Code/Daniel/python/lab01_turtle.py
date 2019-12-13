@@ -2,7 +2,10 @@
 
 from turtle import *
 #Draw the head
+fillcolor("green")
+begin_fill()
 circle(30)
+end_fill()
 #Draw the arms
 right (45)
 forward(45)
@@ -28,4 +31,6 @@ forward(45)
 pendown()
 right(90)
 forward(45)
+
+
 done()

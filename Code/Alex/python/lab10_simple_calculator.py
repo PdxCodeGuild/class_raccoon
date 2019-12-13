@@ -8,3 +8,16 @@ Let's write a simple REPL (read evaluate print loop) calculator that can handle 
 > What is the second number? 12
 > 5 + 12 = 17
 '''
+
+
+print("I am a simple calculator.\n\n")
+
+operation = (input("What is the operation you would like to perform? "))
+
+operator = float(int(input("\nWhat is the operator (first number in the equation)? ")))
+
+operand = float(int(input("\nWhat is the operand or the quantity on which an operation is to be done? ")))
+
+calculation = (operator) + (operation) + (operand)
+
+print(calculation)

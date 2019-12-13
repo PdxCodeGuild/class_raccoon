@@ -7,10 +7,6 @@ def conversion_1(x,measurement):
     user_1 = measurement * unit_dict[x]
     return float(user_1)
    
-# def conversion2(y, user_1):
-#     user_2 = user_1 * unit_dict[y]
-#     print(f"{float(user_2)}")
-
 
 #Welcome and collect data
 #Use info collected to run both functions. conv 1 is the meter conversion, conversion 2 is the output

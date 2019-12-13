@@ -10,8 +10,8 @@ if equation[1] == '+':
 elif equation[1] == '-':
     print(num1 - num2)
 elif equation[1] == '*':
-    print(num[1] * num[2])
+    print(num1 * num2)
 elif equation[1] == '/':
-    print(num[1] / num[2])
+    print(num1 / num2)
 else:
     print("Invalid choice. ")

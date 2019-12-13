@@ -26,5 +26,7 @@ if output1 in win:
     print("You Win!")
 elif output1 in tie:
     print("Tie.")
-else:
+elif output1 in lose:
     print("You Lose.")
+else:
+    print("Invalid choice.")

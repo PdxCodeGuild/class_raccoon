@@ -16,7 +16,7 @@ while True:
         splt=usin.find(op)
         if usin.find(op) != -1:
             if not usin[:splt].isdigit() and not usin[splt+1:].isdigit():
-                print("Please input a valid equation.")
+                print("Please input valid digits to equate.")
                 break
             if op == "+":
                 print(int(usin[:splt])+int(usin[splt+1:]))

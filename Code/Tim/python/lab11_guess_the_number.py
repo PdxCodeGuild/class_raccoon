@@ -2,7 +2,7 @@ import random
 
 comp_number = random.randint(1,20)
 count = 1
-print(comp_number)
+# print(comp_number)
 user_guess = int(input("Guess a number between 1-20. You have 3 tries. "))
 
 while user_guess != comp_number and count < 3:

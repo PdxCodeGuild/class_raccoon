@@ -15,10 +15,12 @@ Version 2
 
 Have the user enter a dollar amount (1.36), convert this to the total in pennies.
 '''
-
-
+print("\n\#                                /|")
+print("\n\n                             （・⊝・)                                   \n")
+print("                         |")
+print("                       How many dollaz we talkin?                     \n\n")
 #User needs to choose a dollar amount to work with
-pennies = float(input("Enter a dollar amount.\n"))#now a float instead of an int. because the user will type a float and i cant give a float to an int.
+pennies = float(input("dollar amount: "))#now a float instead of an int. because the user will type a float and i cant give a float to an int.
 
 pennies = int(pennies * 100)#but i can convert it after the fact
 
@@ -35,4 +37,4 @@ nickles = pennies // 5
 pennies = pennies % 5
 
 #calculation printed. shows the user
-print(f"\n\nI did you a service.. Kind of like a modern day cash register. Here is the fewest amount of coins you will need in change.\n\nThis many quarters: {quarters}\nThis many dimes: {dimes}\nThis many nickles: {nickles}\nThis many pennies: {pennies}")
+print(f"\n\n\n\n\n\nThis the fewest amount of coins you can have w dat many cents. hehe\n\nquarters: {quarters}\ndimes: {dimes}\nnickles: {nickles}\npennies: {pennies}\n\nsee ya!\n\n")

@@ -14,7 +14,7 @@ Have the user enter the total number in pennies, e.g. for $1.36, the user will e
 '''
 
 #User needs to choose how many pennies
-pennies = int(input("Enter the total number of pennies you want.\n"))
+pennies = int(input("How many pennies?\n"))
 
 quarters = pennies // 25 #because quarters are 25 with no remainder
 
@@ -28,5 +28,5 @@ nickles = pennies // 5
 
 pennies = pennies % 5
 
-#calculation printed. shows the user 
-print(f"\n\nI did you a service.. Kind of like a modern day cash register. Here is the fewest amount of coins you will need in change.\n\nThis many quarters: {quarters}\nThis many dimes: {dimes}\nThis many nickles: {nickles}\nThis many pennies: {pennies}")
+#calculation printed. shows the user
+print(f"\n\n\n\n\n\nThis the fewest amount of coins you can have w dat many cents. hehe\n\nquarters: {quarters}\ndimes: {dimes}\nnickles: {nickles}\npennies: {pennies}\n\nsee ya!\n\n")

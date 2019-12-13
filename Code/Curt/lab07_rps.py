@@ -1,4 +1,4 @@
-#rockps.py
+#lab07_rps.py
 import random
 print("Let's play rock, paper, scissors!")
 

@@ -45,20 +45,29 @@ cards = {
 }
 print('Let\'s play Blackjack')
 
+#  While loop condition
 play_again = 'y'
+
 while play_again == 'y':
+    # User input
     first_card = input('What\'s your first card (A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, or K)? ').lower()
     second_card = input('What\'s your second card (A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, or K)? ').lower()
     third_card = input('What\'s your third card (A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, or K)? ').lower()
 
+    # Pass the user input to library
+    # Total score calculation
     score = cards[first_card] + cards[second_card] + cards[third_card]
 
+    # if score Less than 17, advise to "Hit"
     if score < 17:
         print(f'{score} Hit')
+    # if score Greater than or equal to 17, but less than 21, advise to "Stay"
     elif score >= 17 and score < 21:
         print(f'{score} Stay')
+    # if score Over 21, advise "Already Busted"
     elif score > 21:
         print(f'{score} Already Busted')
+    # if score Exactly 21, advise "Blackjack!"
     else:
         print(f'{score} Blackjack!')
     play_again = input('Do you want to play again (y/n)?').lower()

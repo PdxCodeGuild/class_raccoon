@@ -64,6 +64,8 @@ def get_advice(score):
         print("You should hit. \n")
     elif 17 < score < 21:
         print("You should stay. \n")
+    elif score == 21:
+        print("BLACKJACK BABYYYYYY")
     else:
         print("You WENT BUST!!! Lol \n")
 

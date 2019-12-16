@@ -18,11 +18,11 @@ while card_counter < 3:
     card_counter += 1
 card_total = card_list[0] + card_list [1] + card_list[2]
 card_total_ace = card_list_ace[0] + card_list_ace[1] + card_list_ace[2]
-if card_total_ace < 21:
+if card_total_ace <= 21:
     card_total = card_total_ace
 
 
-    
+
 if card_total <= 17:
     print(f"Your total is {card_total}, hit.")
 elif 17 < card_total < 20:

@@ -1,5 +1,5 @@
 
-# Lab 17: Palindrome and Anagram
+# Lab: Palindrome and Anagram
 
 Let's write a palindrome and anagram checker.
 

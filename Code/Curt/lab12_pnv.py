@@ -4,14 +4,12 @@ data = [1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 5, 6, 7, 8, 9, 8, 7, 6, 7, 8, 9]
 
 def peaks(input):
     peaks_list = []
-    for x in range(len(input)):
-        if x == len(input) - 1:
-            return peaks_list
-        elif input[x-1] < input[x]:
+    for x in range(1, len(input)-1):
+        if input[x-1] < input[x]:
                 if input[x+1] == input[x-1]:
                     peaks_list.append(x)
-        else:
-            continue
+    return peaks_list
+
 
 def valleys(input):
     valleys_list = []

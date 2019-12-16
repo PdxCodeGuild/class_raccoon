@@ -18,7 +18,6 @@ while play_again == 'y':
 
     if guess_num == random_num:
         print(f'Your guess number is {guess_num}, Computer random is {random_num}.. You won! you guesses {count} times')
-        break
     else:
         if guess_num > random_num:
             print(f'Your guess number is {guess_num}, Computer random is {random_num}.. You loose! too high! you guesses {count} times')
@@ -35,12 +34,12 @@ while play_again == 'y':
 
     # Switching to computer
     if com_num == random_num:
-        print(f'Computer guess number is {com_num}, Computer random is {random_num}.. You won! you guesses {count} times')
+        print(f'Computer guess number is {com_num}, Computer random is {random_num}.. You won! Computer guesses {count} times')
     else:
         if com_num > random_num:
-            print(f'Computer guess number is {com_num}, Computer random is {random_num}.. Computer loose! too high! you guesses {count} times')
+            print(f'Computer guess number is {com_num}, Computer random is {random_num}.. Computer loose! too high! Computer guesses {count} times')
         else:
-            print(f'Computer guess number is {com_num}, Computer random is {random_num}.. Computer loose! too low! you guesses {count} times')
+            print(f'Computer guess number is {com_num}, Computer random is {random_num}.. Computer loose! too low! Computer guesses {count} times')
 
     count += 1
 

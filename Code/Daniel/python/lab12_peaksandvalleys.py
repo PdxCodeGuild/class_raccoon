@@ -15,11 +15,25 @@ def pv_decider(data):
         if point1 == point2:
             point3 = data[i]
             if point1 < point3:
-                peak_list.append(point3)
-                both_list.append(point3)
+                peak_list.append(i)
+                both_list.append(i)
             elif point1 > point3:
-                valley_list.append(point3)
-                both_list.append(point3)
+                valley_list.append(i)
+                both_list.append(i)
     return peak_list, valley_list
 pv_decider(data)
 print(f"The peaks are{peak_list}and the valleys are {valley_list} and together they are {both_list}")
+
+def pv_draw(data):
+    mountainview = ""
+    maxpoint = max(data)
+    while maxpoint > 0:
+        for i in data:
+            if i > maxpoint:
+                mountainview += (" X ")
+            else: 
+                mountainview += ("   ")
+        maxpoint = maxpoint-1
+        mountainview += "\n" 
+    return mountainview   
+print(pv_draw(data))

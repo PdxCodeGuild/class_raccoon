@@ -1,6 +1,6 @@
 
 
-# Mob Programming: Jackalope Simulator
+# Lab: Jackalope Simulator
 
 ## Version 1
 
@@ -23,4 +23,3 @@ Now let's give the jackalopes distinct sexes and extend their gestation period t
 - whether they're pregnant
 
 Jackalopes can only mate with those immediately around them. Every generation Jackalopes are randomly shuffled.
-

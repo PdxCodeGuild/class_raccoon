@@ -88,4 +88,4 @@ while cont == 'y':
     print("The face cards are worth 10 points except for the Ace which is worth either 11 or 1 if 11 would put you over 21.")
     get_cards()
     print("Would you like to play again?")
-    cont = (input("> "))r
+    cont = (input("> "))

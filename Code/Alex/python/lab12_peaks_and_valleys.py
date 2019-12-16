@@ -70,17 +70,17 @@ def peaks_and_valleys(list): #let's define the combo of both lists
     #these are the 3 obvious variables i need
     peaks_list = peaks(list)
     valleys_list = valleys(list)
-    pnv_list = []
+    peaksnvalleys_list = []
 
     #now we're appending the peaks and valleys into the new list
     for i in peaks_list:
-        pnv_list.append(i)
+        peaksnvalleys_list.append(i)
     for num in valleys_list:
-        pnv_list.append(i)
+        peaksnvalleys_list.append(i)
 
     pnv_list.sort() #sorted them
 
-    return pnv_list #returned the definition of the peaks and valleys list.
+    return peaksnvalleys_list #returned the definition of the peaks and valleys list.
 
 
 

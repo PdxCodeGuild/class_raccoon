@@ -59,15 +59,13 @@ def get_score(cards):
     return score
 
 def get_advice(score):
+    print(f"Your score is: {score}")
     if score < 17:
-        print(f"Your score is: {score}")
         print("You should hit. \n")
     elif 17 < score < 21:
-        print(f"Your score is: {score}")
         print("You should stay. \n")
     else:
-        print(f"Your score is: {score}")
-        print("You WENT BUST!!! Lol")
+        print("You WENT BUST!!! Lol \n")
 
 
 def input_checker(txt):
@@ -88,4 +86,4 @@ while cont == 'y':
     print("The face cards are worth 10 points except for the Ace which is worth either 11 or 1 if 11 would put you over 21.")
     get_cards()
     print("Would you like to play again?")
-    cont = (input("> "))
+    cont = (input("> "))r

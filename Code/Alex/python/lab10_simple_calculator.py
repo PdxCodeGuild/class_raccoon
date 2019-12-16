@@ -10,14 +10,26 @@ Let's write a simple REPL (read evaluate print loop) calculator that can handle 
 '''
 
 
-print("I am a simple calculator.\n\n")
+print("I am a simple calculator.\n\n\n")
 
-operation = (input("What is the operation you would like to perform? "))
+calculation = input("What is the operation you would like to perform?\n\nEx.) 1 + 1\n\n")
 
-operator = float(int(input("\nWhat is the operator (first number in the equation)? ")))
+calculation = calculation.split(' ')
 
-operand = float(int(input("\nWhat is the operand or the quantity on which an operation is to be done? ")))
+operand1 = int(float(calculation[0]))
 
-calculation = (operator) + (operation) + (operand)
+operation = calculation[1]
 
-print(calculation)
+operand2 = int(float(calculation[2]))
+
+if operation == '+':
+    print(f"{operand1} {operation} {operand2} = {operand1 + operand2}")
+
+elif operation == '-':
+    print(f"{operand1} {operation} {operand2} = {operand1 - operand2}")
+
+elif operation == '*':
+    print(f"{operand1} {operation} {operand2} = {operand1 * operand2}")
+
+elif operation == '/':
+    print(f"{operand1} {operation} {operand2} = {operand1 / operand2}")

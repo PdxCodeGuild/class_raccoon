@@ -78,17 +78,29 @@ def peaks_and_valleys(list): #let's define the combo of both lists
     for num in valleys_list:
         peaksnvalleys_list.append(i)
 
-    pnv_list.sort() #sorted them
+    peaksnvalleys_list.sort() #sorted them
 
     return peaksnvalleys_list #returned the definition of the peaks and valleys list.
 
 
+#this is the list of data.
+data1 = [1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 5, 6, 7, 8, 9, 8, 7, 6, 7, 8, 9]
 
-#this is the list of where the peaks and valleys are.
-data = [1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 5, 6, 7, 8, 9, 8, 7, 6, 7, 8, 9]
-
+'''
 for value in data:
     print('x'*value)
+'''
 
+counter = max(data1)#max of the data1 which is the height
+mountain = ''#to be defined below with the while loop. variable representing the print
+while counter > 0: #going through the list for each index of data1
+    for value in data1: #giving a value to each counter
+        if value < counter:
+            mountain += "   "
+        else:
+            mountain += "X  "
+    counter -= 1 #because we are working down
+    mountain += '\n'#after the loop runs for each index point it goes down a line. forms a graph
 
-#and now i don't know how to get them to turn lol
+print(mountain)
+print(data1)

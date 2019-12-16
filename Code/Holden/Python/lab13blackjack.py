@@ -17,7 +17,12 @@ while True:
     if card3 in cardlist:
         break
     print("Please input valid card.")
-
+if cardlist.index(card1) > 10:
+    card1 = "10"
+if cardlist.index(card2) > 10:
+    card2 = "10"
+if cardlist.index(card3) > 10:
+    card3 = "10"
 output = cardlist.index(card1) + cardlist.index(card2) + cardlist.index(card3)
 acecount=0
 if card1 == "a":

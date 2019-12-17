@@ -1,23 +1,44 @@
 # lab14_creditcard.py
+# prompt user
+cc = input("Card info: ")
+card_info = list(cc)
+for num in range(len(card_info)):
+    card_info[num] = int(card_info[num])
+print(type(card_info))
 
-# input
-card = []
-check_digit = []
-card_nums = input("Enter your credit card: ")
+# Slice and check digits
+check_digits = card_info.pop(-1)
+print(check_digits)
+print(card_info)
 
-# convert to list
+# reverse
+card_info.reverse()
+print(card_info)
 
-card_nums = list(card_nums)
-print(card_nums)
+# double every number
+for num in range(len(card_info)):
+    if num %2 == 0:
+        card_info[num] = 2*card_info[num]
+    else:
+        card_info[num] = 2*card_info[num]
+print(card_info)
 
-# pop off last digit for check digit
-check_digit1 = card_nums.pop(len(card_nums)-1)
+# subtract nine from numbers over nine
+for num in range(len(card_info)):
+    if num > 9:
+        card_info[num] = card_info[num] - 9
+    else:
+        card_info[num] = card_info[num]
 
-# append last digit to the top list
-check_digit.append(check_digit1)
-print(check_digit)
-print(card_nums)
 
-# reverse list
-card_nums.reverse()
-print(card_nums)
+# sum all
+card_info = sum(card_info)
+
+print(card_info)
+print(check_digits)
+
+# Check if last digit matches
+if card_info % 10 == check_digits:
+        print("Match.")
+else:
+        print("No Match.")

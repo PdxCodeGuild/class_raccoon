@@ -1,0 +1,17 @@
+﻿1. Open your .bashrc.
+Your .bashrc file is located in your user directory. Open it in your favorite text editor.
+1
+$ atom ~/.bashrc 
+2. Go to the end of the file.
+
+3. Add the alias.
+A simple way to chain commands in Linux is to use the && operator. This operator will run a set of commands and only continue to the next command if the previous one was successful.
+For our example, we might have an alias that looks like this:
+1
+alias tailmyless='cd /home/myuser/public_html/less && lessc -c style.less > ../style.css && cd ../ && tail style.css' 
+This looks complicated but it really isn’t.  Here’s the basic format:
+1
+alias aliasname='commands' 
+One gotcha is that there cannot be a space between the “aliasname” and the EQUAL sign. Also, there can
+
+Mine reads: alias py="python3"

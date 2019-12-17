@@ -59,15 +59,15 @@ def get_score(cards):
     return score
 
 def get_advice(score):
+    print(f"Your score is: {score}")
     if score < 17:
-        print(f"Your score is: {score}")
         print("You should hit. \n")
     elif 17 < score < 21:
-        print(f"Your score is: {score}")
         print("You should stay. \n")
+    elif score == 21:
+        print("BLACKJACK BABYYYYYY")
     else:
-        print(f"Your score is: {score}")
-        print("You WENT BUST!!! Lol")
+        print("You WENT BUST!!! Lol \n")
 
 
 def input_checker(txt):

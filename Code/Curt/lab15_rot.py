@@ -9,8 +9,13 @@ def cipher(num):
     print(rotalpha)
     return rotalpha
 
-numval = int(input("What's the rotation amount in this substitution cipher? "))
-numval = numval % 26 - 1
+while True:
+    try:
+        numval = int(input("What's the rotation amount in this substitution cipher? "))
+        numval = numval % 26 - 1
+        break
+    except ValueError:
+        print("Invalid entry!")
 
 rotalpha = cipher(numval)
 alphabet=list(alphabet)
@@ -25,5 +30,17 @@ for i in userphrase:
     else:
         passphrase += i
 
-print(userphrase)
+print("Here's your encoded text:")
 print(passphrase)
+
+#decrypt
+passphrase2 = input("Type in your encoded text: ")
+userphrase2 = ""
+for i in passphrase2:
+    if i in rotalpha:
+        userphrase2 += alphabet[rotalpha.index(i)]
+    else:
+        userphrase2 += i
+
+print("Here's your decoded text")
+print(userphrase2)

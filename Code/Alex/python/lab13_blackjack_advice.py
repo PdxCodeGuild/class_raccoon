@@ -25,10 +25,11 @@ What's your third card? A
 21 Blackjack!
 '''
 
-print("\n\n\n\n\n\n\n\n\n\n\nLet's play blackjack.\n\n")
-print("Here are the card choices:\n\n A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K")
+#intro
+input("\n\n\n\n\n\n\n\n\n\n\nLet's play blackjack.\n\n\n")
+input("Here are the card choices:\n\n\n A\n 2\n 3\n 4\n 5\n 6\n 7\n 8\n 9\n 10\n J\n Q\n K\n\n\n")
 
-
+#i made a dictionary for the values that way i could give a value to each card choice
 values = {
     'a': 1,
     '2': 2,
@@ -43,26 +44,27 @@ values = {
     'j': 10,
     'q': 10,
     'k': 10,
-}
+} #key's are on the left and values for the keys are on the right.
 
-
+#i made empty string values for the three card choices since the input in the while loop will be a string
 card1 = ''
 card2 = ''
 card3 = ''
 
+#i used a while loop to make it to where if the user doesnt pick something in the dictionary, it prompts them to pick the card again. Rather than telling them 'invalid entry' or something.
 while card1 not in list(values.keys()):
     card1 = input("\n\nPick first card. ").lower()
 while card2 not in list(values.keys()):
     card2 = input("\n\nPick second card. ").lower()
 while card3 not in list(values.keys()):
     card3 = input("\n\nPick a final card. ").lower()
+#i used .lower() and made the keys all lower that way the user could put in uppercase or lowercase and it wouldnt matter
 
-
-
+#i then put the strings together to show the total value of the cards chosen
 hand = (values[card1] + values[card2] + values[card3])
 
 
-
+#i then put in place the instructions of how the game goes and bottaboom bottabing.. good to go
 if hand <= 17:
     print(f"\n{hand} Hit")
 elif hand >= 17 and hand < 21:

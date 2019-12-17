@@ -7,7 +7,7 @@ peak = []
 valley = []
 both = []
 # for loop to iteriate through elements
-for i in range(1, len(data)-1):
+for i in range(1, len(data)-1): # restrict range instead of (0, end -1)
     if data[i] > data[i-1] and data[i] > data[i+1]:
         # append to index
         peak.append(i)
@@ -25,7 +25,7 @@ def sideways(data):
     maxpoint = max(data)
     while maxpoint > 0:
         for i in data:
-            if i + 1 > maxpoint:
+            if i + 1 > maxpoint: # if i is more than i, print X
                 mountain += (" X ")
             else:
                 mountain += ("   ")

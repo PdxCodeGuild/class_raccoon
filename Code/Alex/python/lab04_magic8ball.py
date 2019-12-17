@@ -18,12 +18,10 @@ Prompt the user to ask the 8-ball a question "will I win the lottery tomorrow?"
 Display the result of the 8-ball.
 '''
 
-
+import random
 
 choices = ["It is certain" , "It is decidedly so" , "Without a doubt" , "Yes, definitely" , "You may rely on it" , "As i see it yes" , "Most likely" , "Outlook good" , "Yes" , "Signs point to yes" , "Reply hazy, try again" , "Ask again later" , "Better not tell you now" , "Cannot predict now" , "Concentrate and ask again" , "Don't count on it" , "My reply is no" , "My sources say no" , "Outlook not so good" , "Very doubtful"]
 
-input("I am the Magic 8 Ball. You may ask me any question.")
+input("\n\n\n\nI am the Magic 8 Ball.\nAsk me yes or no questions or I will not make any sense whatsoever.\n\n")
 
-import random
-random_choice = random.choice(choices)
-print(random_choice)
+print(f"\n\n{random.choice(choices)}\n\n\n\n\n")

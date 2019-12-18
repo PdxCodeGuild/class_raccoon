@@ -45,13 +45,11 @@ output =""
 for i in range(len(places)):
     if places[i]%5 == 4:
         output = romannum[i*2] + romannum[i*2+(places[i]+1)//5] + output
-        print(output)
     else:
         num_numerals = 0
         if (places[i]%5) > 0:
             num_numerals = (places[i]%5)-1
         output = romannum[i*2+(places[i])//5] + (romannum[i*2]*num_numerals) + output
-        print(output)
 
 
 print(output)

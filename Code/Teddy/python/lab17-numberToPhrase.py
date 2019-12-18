@@ -45,6 +45,7 @@ numberTeen = {
     17 : 'Seventeen',
     18 : 'Eighteen',
     19 : 'Nineteen'
+}
 
 # Set condition
 play_again = 'y'

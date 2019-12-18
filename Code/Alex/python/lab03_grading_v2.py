@@ -1,40 +1,20 @@
 '''
-Let's convert a number grade to a letter grade, using if and elif statements and comparisons.
-
-Have the user enter a number representing the grade (0-100)
-Convert the number grade to a letter grade
-Numeric Ranges
-
-90-100: A
-80-89: B
-70-79: C
-60-69: D
-0-59: F
-
-
-
-Version 2
+Version 2 *not complete*
 
 Find the specific letter grade (A+, B-, etc). You can check for more specific ranges using if statements, or use modulus % to get the ones-digit to set another string to '+', '-', or ' '. Then you can concatenate that string with your grade string.
-
-check out matthews file on this
-
-
 '''
 
-print("Hello, welcome to the grade conversion.")
+grade = int(input("\n\n\n\nHello, welcome to the grade conversion.\n\nWhat is your score?  "))
 
-grade = input("What is your score: ")
-grade = int(grade)
 if 90 < grade <= 100:
-    print("A")
+    print(f"\nA {grade} is a A\n\n\n\n")
 elif 80 < grade < 89:
-    print("B")
+    print(f"\nA {grade} is a B\n\n\n\n")
 elif 70 < grade < 79:
-    print("C")
+    print(f"\nA {grade} is a C\n\n\n\n")
 elif 60 < grade < 69:
-    print("D")
+    print(f"\nA {grade} is a D\n\n\n\n")
 elif 0 <= grade < 59:
-    print("F")
+    print(f"\nA {grade} is an F\n\n\n\n")
 else:
-    print("invalid entry")
+    print("\ninvalid entry\n")

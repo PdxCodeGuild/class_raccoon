@@ -12,12 +12,12 @@ ones_digit = x%10
 Hint 2: use the digit as an index for a list of strings.
 '''
 
-number = int(input("Enter a number below 100: "))
+number = int(input("Enter a number below 100: "))#this is the number we are coding to convert to english.
+#first we need to figure for a number below 100 so we will have a ones digit and tens digit.
+ones_digit = number % 10#this makes the variable always a ones digit by finding the remainder of the number.
+tens_digit = number // 10#this makes the variable always a tens digit because it erases the remainder(ones digit)
 
-
-ones_digit = number % 10
-tens_digit = number // 10
-
+#i have a dictionary for the ones digits as they are spelled in English.
 ones_digit_dict = {
 1: 'one',
 2: 'two',
@@ -29,7 +29,7 @@ ones_digit_dict = {
 8: 'eight',
 9: 'nine',
 }
-
+#a dictionary of the tens digits in English
 tens_digit_dict = {
 2: 'twenty',
 3: 'thirty',
@@ -40,7 +40,7 @@ tens_digit_dict = {
 8: 'eighty',
 9: 'ninety',
 }
-
+#the exceptions for when (defined below) the ten digit = 1.
 teens_dict = {
 0: 'ten',
 1: 'eleven',

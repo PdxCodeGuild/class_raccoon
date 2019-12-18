@@ -49,11 +49,14 @@ print(f'Single digit: {z}')
 
 # if conditions to find keys from dictionary and print results
 if y >= 2:
-    if z >= 1:
+    if z == 0:
+        print(f">>> {tens[y]} <<<")
+    else:
+        z >= 1
         print(f">>> {tens[y]}-{ones[z]} <<<")
 elif y == 1:
     if z > 0:
-        print(teens[z])
+        print(f'>>> {teens[z]} <<<')
 
 
 

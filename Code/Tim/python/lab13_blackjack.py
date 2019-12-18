@@ -1,6 +1,7 @@
 import random
 import os
 import string
+os.system('cls')
 
 face_cards = ['J','Q','K', 'j', 'q', 'k']
 

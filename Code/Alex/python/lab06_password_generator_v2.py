@@ -1,4 +1,5 @@
 '''
+*not complete*
 Lab 6: Password Generator
 
 Let's generate a password of length n using a while loop and random.choice, this will be a string of random characters.
@@ -11,8 +12,6 @@ input, print
 looping
 random.choice
 the 'sting builder pattern'
-
-
 Version 2
 
 Allow the user to enter the value of n, remember to convert its type, as input returns a string.
@@ -31,10 +30,12 @@ numbers = string.digits
 punctuation = string.punctuation
 password = '' #because i am dealing with strings
 
-counter = 0 #this lines purpose is to keep the loop going
+counter = 0
+length = int(input("How many characters in the password? ")#this lines purpose is to keep the loop going
 
 #using while loop to keep counter going
-while counter <= 10: #because we need 10 passwords
+
+while counter <= length:
     password += random.choice(uppercase_letters + lowercase_letters + numbers + punctuation) #the password calculation. adding and combining the blank string with the calculation for the password
     counter += 1 #this variable within the loop is incrimenting/adding 1 to the counter each time through the loop so that we get to 10 passwords one by one
 

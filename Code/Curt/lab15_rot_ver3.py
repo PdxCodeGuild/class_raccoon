@@ -4,9 +4,11 @@ import random
 
 print("True substitution cipher!")
 
+#create a list of all displayable characters
 allchar = string.ascii_lowercase + string.ascii_uppercase + string.digits + string.punctuation + " "
 print(allchar)
 
+#function for using seed to generate cipher
 def cipherseed(phrase):
     rotchar = list(allchar)
     seedval = input(phrase)
@@ -16,6 +18,7 @@ def cipherseed(phrase):
     print(rotchar)
     return rotchar
 
+#call cipherseed
 rotchar = cipherseed("Input any value to generate the cipher seed: ")
 allchar=list(allchar)
 rotchar=list(rotchar)

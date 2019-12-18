@@ -64,24 +64,24 @@ def num_to_word(hundreds_digit, tens_digit):
     word = ''
 
     if hundreds_digit >= 1:
-        word += f"\"{hundreds_digit_dict[hundreds_digit]}"
+        word += f"{hundreds_digit_dict[hundreds_digit]}"
         if tens_digit == 0:
-            word += f"{ones_digit_dict[ones_digit]}\""
+            word += f"{ones_digit_dict[ones_digit]}"
         elif tens_digit == 1:
-            word += f"{teens_dict[ones_digit]}\""
+            word += f"{teens_dict[ones_digit]}"
         elif tens_digit > 1:
-            word += f"{tens_digit_dict[tens_digit]}-{ones_digit_dict[ones_digit]}\""
+            word += f"{tens_digit_dict[tens_digit]}-{ones_digit_dict[ones_digit]}"
 
     if hundreds_digit == 0:
         if tens_digit == 0:
-            word += f"\"{ones_digit_dict[ones_digit]}\""
+            word += f"{ones_digit_dict[ones_digit]}"
         elif tens_digit == 1:
-            word += f"\"{teens_dict[ones_digit]}\""
+            word += f"{teens_dict[ones_digit]}"
         elif tens_digit > 1:
-            word += f"\"{tens_digit_dict[tens_digit]}-{ones_digit_dict[ones_digit]}\""
+            word += f"{tens_digit_dict[tens_digit]}-{ones_digit_dict[ones_digit]}"
     return word
 
 #now we are assigning the function to a variable so that we can call it later.
 final_conversion = num_to_word(hundreds_digit, tens_digit)
 
-print(f"Your number to words is {final_conversion}")#now we call the solutions. and print the final result.
+print(f"You spell your number like \"{final_conversion}\"")#now we call the solutions. and print the final result.

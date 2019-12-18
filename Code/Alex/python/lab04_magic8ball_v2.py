@@ -1,27 +1,9 @@
 '''
 Lab 4: Magic 8-Ball
 
-Let's write a program to simulate the classic "Magic Eight Ball"
-
-Concepts Covered
-
-input, print
-import
-random.choice
-
-
-Instructions
-
-Print a welcome screen to the user.
-Use the random module's random.choice() to choose a prediction.
-Prompt the user to ask the 8-ball a question "will I win the lottery tomorrow?"
-Display the result of the 8-ball.
-
 Version 2
 
 Using a while loop, keep asking the user for a question, if they enter 'done', exit
-
-check out matthews file
 '''
 
 
@@ -36,9 +18,9 @@ choices = ["It is certain" , "It is decidedly so" , "Without a doubt" , "Yes, de
 
 #looping for user to keep playing.
 while True:
-    user_question = input("\n\nI am the Magic 8 Ball. You may ask me any question or just type 'done'\n\n").lower().strip()
+    user_question = input("\n\nI am the Magic 8 Ball.\nAsk me a yes or no question or i will make absolutely no sense.\n\n...or just type 'done' to quit.\n\n\n").lower().strip()
 
     if user_question == 'done':
         break
-    print(" \n")
-    print(random.choice(choices))
+
+    print(f"\n\n{random.choice(choices)}\n\n\n\n\n")

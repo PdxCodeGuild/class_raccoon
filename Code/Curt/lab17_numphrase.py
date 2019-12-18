@@ -1,7 +1,5 @@
 #lab17_numphrase.py
 
-import string
-
 print("Number to phrase!")
 
 #Get the value

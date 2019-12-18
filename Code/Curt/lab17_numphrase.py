@@ -4,11 +4,11 @@ print("Number to phrase!")
 
 #Get the value
 numval = -1
-while numval not in range(0,1000):
+while numval <= 0 or numval >=1000:
     numval = input("Pick a number between 0-999: ")
     try:
         numval = int(numval)
-        if numval not in range(0,1000):
+        if numval <= 0 or numval >= 1000:
             print("Number outside of range!")
     except ValueError:
         print("Invalid entry!")
@@ -86,14 +86,18 @@ check = False
 while check is False:
     time = input("What is the time in digits (ex: 7:35)? ")
     time = time.split(":")
+    flag = False
     for x in range(len(time)):
         try:
             time[x] = int(time[x])
         except ValueError:
             check = False
+            flag = True
             print("Invalid entry!")
             break
-    if time[0] > 0 and time[0] <= 12 and time[1] >= 0 and time[1] < 60:
+    if flag:
+        continue
+    if time[0] > 0 and time[0] <= 12 and time[1] >= 0 and time[1] < 60 and len(time) == 2:
         hour = time[0]
         minute = time[1]
         check = True

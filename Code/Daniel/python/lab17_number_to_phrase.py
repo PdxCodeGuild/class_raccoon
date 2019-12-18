@@ -25,15 +25,26 @@ onesdigit = user_input % 10
 #logic to take the values from above and convert them into their component phrases
 if user_input == 0:
     return_number = "0"
+
+elif hundredsdigit >= 1 and tensdigit == 1:
+    return_number = triple_digit[hundredsdigit-1] + " ten"
+
+elif hundredsdigit == 1:
+    return_number = triple_digit[hundredsdigit-1] + " and " + single_digits[onesdigit]
+
+elif hundredsdigit > 1:
+    return_number = triple_digit[hundredsdigit-1] + " " + double_digits[tensdigit-1] + " " + single_digits[onesdigit]
+
 elif tensdigit == 0:
     return_number = single_digits[onesdigit]
+
 elif tensdigit == 1 and onesdigit == 0:
     return_number = "ten"
-#like I said, teen numbers are stupid
+
+    #like I said, teen numbers are stupid
 elif tensdigit == 1:
     return_number = teens_digit[onesdigit-1]
-elif hundredsdigit >= 1:
-    return_number = triple_digit[hundredsdigit-1] + " " + double_digits[tensdigit-1] + " " + single_digits[onesdigit]
+
 elif 1 < tensdigit :
     return_number = double_digits[tensdigit-1] + " " + single_digits[onesdigit]
 
@@ -42,11 +53,15 @@ elif 1 < tensdigit :
 #same as logic above, but for roman numerals (also simpler because no teen numbers)
 if user_input == 0:
     return_number_roman = "none"
+elif hundredsdigit == 1 and tensdigit == 0:
+    return_number_roman = rhundolist[hundredsdigit] + roneslist[onesdigit]
+elif hundredsdigit >= 1:
+    return_number_roman = rhundolist[hundredsdigit] + rtenslist[tensdigit] + roneslist[onesdigit]
 elif tensdigit == 0:
     return_number_roman = roneslist[onesdigit]
 elif tensdigit >= 1 and hundredsdigit == 0:
     return_number_roman = rtenslist[tensdigit] + roneslist[onesdigit]
-elif hundredsdigit > 0:
-    return_number_roman = rhundolist[hundredsdigit] + rtenslist[tensdigit] + roneslist[onesdigit]
+
+
 
 print(f"The number you selected is {return_number} or {return_number_roman} in roman numerals")

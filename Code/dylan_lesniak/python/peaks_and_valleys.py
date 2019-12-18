@@ -71,10 +71,7 @@ def high_points(list,peaks,valleys):
 #gonna do it Matthew's way. Go through each row at the top. 
 #Maybe start just by going 
 def lakes(data,high_points):
-    count = 0 
-    for i in range(len(data)):
-        
-        for height2 in data:
+    
 
     return count
       

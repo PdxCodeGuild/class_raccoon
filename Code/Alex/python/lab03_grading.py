@@ -12,18 +12,17 @@ Numeric Ranges
 0-59: F
 '''
 
-print("Hello, welcome to the grade conversion.")
-grade = input("What is your score: ")
-grade = int(grade)
+grade = int(input("\n\n\n\nHello, welcome to the grade conversion.\n\nWhat is your score?  "))
+
 if 90 < grade <= 100:
-    print("A")
+    print(f"\nA {grade} is a A\n\n\n\n")
 elif 80 < grade < 89:
-    print("B")
+    print(f"\nA {grade} is a B\n\n\n\n")
 elif 70 < grade < 79:
-    print("C")
+    print(f"\nA {grade} is a C\n\n\n\n")
 elif 60 < grade < 69:
-    print("D")
+    print(f"\nA {grade} is a D\n\n\n\n")
 elif 0 <= grade < 59:
-    print("F")
+    print(f"\nA {grade} is an F\n\n\n\n")
 else:
-    print("invalid entry")
+    print("\ninvalid entry\n")

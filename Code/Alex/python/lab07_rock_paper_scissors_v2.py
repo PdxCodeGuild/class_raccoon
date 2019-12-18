@@ -6,8 +6,6 @@ Version 2 (optional)
 After playing, ask them if they'd like to play again. If they say yes, restart the game, otherwise exit
 '''
 
-
-
 #i imported the random module to enable the computer to play back using a random choice of the given strings
 import random
 

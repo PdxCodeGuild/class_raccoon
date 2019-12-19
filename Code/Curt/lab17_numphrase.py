@@ -1,16 +1,14 @@
 #lab17_numphrase.py
 
-import string
-
 print("Number to phrase!")
 
-Get the value
+#Get the value
 numval = -1
-while numval not in range(0,1000):
+while numval <= 0 or numval >=1000:
     numval = input("Pick a number between 0-999: ")
     try:
         numval = int(numval)
-        if numval not in range(0,1000):
+        if numval <= 0 or numval >= 1000:
             print("Number outside of range!")
     except ValueError:
         print("Invalid entry!")
@@ -84,16 +82,45 @@ if hundo_digit == 0 and tens_digit == 0 and ones_digit == 0:
 print(f"In Roman numerals: {word}")
 
 # VERSION 4 - Check the time
-# check = False
-# while check is False:
-#     time = input("What is the time in digits (ex: 7:35)? ")
-#     time = time.split(":")
-#     for x in range(len(time)):
-#         time[x] = int(time[x])
-#     if time[0] > 0 and time[0] <= 12 and time[1] >= 0 and time[1] < 60:
-#         check = True
-#     else:
-#         check = False
-#         print("Invalid time!")
-#
-# print("The current time is: ")
+check = False
+while check is False:
+    time = input("What is the time in digits (ex: 7:35)? ")
+    time = time.split(":")
+    flag = False
+    for x in range(len(time)):
+        try:
+            time[x] = int(time[x])
+        except ValueError:
+            check = False
+            flag = True
+            print("Invalid entry!")
+            break
+    if flag:
+        continue
+    if time[0] > 0 and time[0] <= 12 and time[1] >= 0 and time[1] < 60 and len(time) == 2:
+        hour = time[0]
+        minute = time[1]
+        check = True
+    else:
+        check = False
+        print("Invalid time!")
+
+def timecalc(numval):
+    word = ""
+    tens_digit = numval//10
+    ones_digit = numval%10
+    if tens_digit > 1:
+        word += tenslist[tens_digit]
+        if ones_digit > 0:
+            word += "-" + oneslist[ones_digit]
+    elif tens_digit == 1:
+        word += teenlist[ones_digit]
+    elif ones_digit > 0:
+        word = oneslist[ones_digit]
+    return word
+
+timeword = ""
+timeword += timecalc(hour) + " " + timecalc(minute)
+
+
+print(f"The time is: {timeword}")

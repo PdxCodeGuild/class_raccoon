@@ -28,7 +28,7 @@ password = '' #because i am dealing with strings
 counter = 0 #this lines purpose is to keep the loop going
 
 #using while loop to keep counter going
-while counter <= 10: #because we need 10 passwords
+while counter < 10: #because we need 10 passwords
     password += random.choice(uppercase_letters + lowercase_letters + numbers + punctuation) #the password calculation. adding and combining the blank string with the calculation for the password
     counter += 1 #this variable within the loop is incrimenting/adding 1 to the counter each time through the loop so that we get to 10 passwords one by one
 

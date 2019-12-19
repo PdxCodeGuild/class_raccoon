@@ -1,5 +1,6 @@
 import string
 import os
+
 os.system('cls')
 
 card_number = list(input('Enter your 16 digit card number\n> '))

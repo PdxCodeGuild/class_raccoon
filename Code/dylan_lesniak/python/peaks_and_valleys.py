@@ -3,6 +3,7 @@ Filename: peaks_and_valleys.py
 Author: Dylan
 Purpose: Identify peak/valley locations in a list
 '''
+
 #mods
 import numpy as np
 #given a list, identify all peaks and all valleys

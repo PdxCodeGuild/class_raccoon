@@ -7,10 +7,11 @@ Concepts Covered
 
 conditionals, comparisons
 arithmetic
+
+
 Version 1
 
 Have the user enter the total number in pennies, e.g. for $1.36, the user will enter 136.
-
 '''
 
 #User needs to choose how many pennies

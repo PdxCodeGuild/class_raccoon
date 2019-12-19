@@ -62,13 +62,17 @@ def make_following_dict(ordered_pairs):
     return counted_dict
 
 def print_following_random(word,counted_dict):
+    goobly_sentence = f"{word.capitalize()} "
     i = 0
     while i < 10:
         following_words_list = counted_dict[word]
         following_word = random.choice(following_words_list)
-        print(f"{word.capitalize()} => {following_word.capitalize()}")
+        goobly_sentence += following_word.lower()
+        if i < 9:
+            goobly_sentence += " "
         word = following_word
         i += 1
+    print(goobly_sentence + ".")
         
         
 

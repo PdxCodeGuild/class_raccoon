@@ -1,6 +1,8 @@
 #snippets.py
 
 allchar = string.ascii_lowercase + string.ascii_uppercase + string.digits + string.punctuation
+string.whitespace
+text = [c for c in text if c not in string.punctation + string.whitespace]
 
 def seedgen(phrase, elem):
     cipher = list(elem)

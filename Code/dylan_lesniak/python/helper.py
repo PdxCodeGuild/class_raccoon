@@ -24,7 +24,7 @@ def text_checker(text,acceptable_inputs = []):
                 if text in acceptable_inputs:
                     return text
                 else:
-                    print(f"INVALID ENTRY: Please input from list: {acceptable_inputs}.")
+                    print(f"INVALID ENTRY: Entry not in list.")
                     text = input("> ")
             else:
                 return text

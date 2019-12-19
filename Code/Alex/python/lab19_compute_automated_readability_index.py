@@ -1,14 +1,14 @@
-# Lab 19: Compute Automated Readability Index
+'''
+Lab 19: Compute Automated Readability Index
 
 Compute the ARI for a given body of text loaded in from a file. The automated readability index (ARI) is a formula for computing the U.S. grade level for a given block of text. The general formula to compute the ARI is as follows:
 
-![ARI Formula](https://en.wikipedia.org/api/rest_v1/media/math/render/svg/878d1640d23781351133cad73bdf27bdf8bfe2fd)
+ARI Formula
 
-The score is computed by multiplying the number of characters divided by the number of words by 4.71, adding the number of words divided by the number of sentences multiplied by 0.5, and subtracting 21.43. **If the result is a decimal, always round up.** Scores greater than 14 should be presented as having the same age and grade level as scores of 14.
+The score is computed by multiplying the number of characters divided by the number of words by 4.71, adding the number of words divided by the number of sentences multiplied by 0.5, and subtracting 21.43. If the result is a decimal, always round up. Scores greater than 14 should be presented as having the same age and grade level as scores of 14.
 
 Scores correspond to the following ages and grad levels:
 
-```
     Score  Ages     Grade Level
      1       5-6    Kindergarten
      2       6-7    First Grade
@@ -24,11 +24,8 @@ Scores correspond to the following ages and grad levels:
     12     16-17    Eleventh grade
     13     17-18    Twelfth grade
     14     18-22    College
-```
-
 Once you’ve computed the ARI score, you can use the following dictionary to look up the age range and grade level.
 
-```python
 ari_scale = {
      1: {'ages':   '5-6', 'grade_level': 'Kindergarten'},
      2: {'ages':   '6-7', 'grade_level':    '1st Grade'},
@@ -45,14 +42,41 @@ ari_scale = {
     13: {'ages': '17-18', 'grade_level':   '12th Grade'},
     14: {'ages': '18-22', 'grade_level':      'College'}
 }
-```
-
 The output should look something like the following:
 
-    --------------------------------------------------------
+--------------------------------------------------------
 
-    The ARI for gettysburg-address.txt is 12
-    This corresponds to a 11th Grade level of difficulty
-    that is suitable for an average person 16-17 years old.
+The ARI for gettysburg-address.txt is 12
+This corresponds to a 11th Grade level of difficulty
+that is suitable for an average person 16-17 years old.
 
-    --------------------------------------------------------
+--------------------------------------------------------
+'''
+
+
+
+import requests
+import re
+import random
+
+def get_random_book_code():
+    response = requests.get('https://www.gutenberg.org/ebooks/search/?sort_order=random')
+    text = response.text
+    # print(text)
+    codes = re.findall('/ebooks/(\d+)', text)
+    return random.choice(codes)
+    # return random.choice(urls)
+
+# https://www.gutenberg.org/files/58714/58714-0.txt
+# http://www.gutenberg.org/cache/epub/5785/pg5785.txt
+def get_random_book_text():
+
+    code = get_random_book_code()
+
+    url = f'https://www.gutenberg.org/files/{code}/{code}-0.txt'
+    response = requests.get(url)
+    if response.status_code == 404:
+        url = f'http://www.gutenberg.org/cache/epub/{code}/pg{code}.txt'
+        response = requests.get(url)
+
+    return response.text

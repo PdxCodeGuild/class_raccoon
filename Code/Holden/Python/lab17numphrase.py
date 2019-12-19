@@ -51,5 +51,5 @@ for i in range(len(places)):
             num_numerals = (places[i]%5)-1
         output = romannum[i*2+(places[i])//5] + (romannum[i*2]*num_numerals) + output
 
-
-print(output)
+if usin != "0":
+    print(output)

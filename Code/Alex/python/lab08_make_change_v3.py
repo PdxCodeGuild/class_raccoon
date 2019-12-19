@@ -4,7 +4,6 @@ Lab 8: Make Change
 Version 3
 
 Instead of hard-coding the coins, store them in a list. This way you can make custom coins.
-
 '''
 
 
@@ -22,10 +21,10 @@ coins = [
 ]
 
 #amount is the users input turned into an integer
-amount = input('How much?\n\n$')
+amount = input('How much?  $')
 amount = int(float(amount)*100)
 
-print(f"\n\n\n\n\nThis the fewest amount of coins you can have w dat many cents. hehe\n\n")
+print(f"\n\n\nThis the fewest amount of coins you can have w dat many cents. hehe\n\n")
 #calculation
 for coin in coins:#runs through each item in the list. in this list the first item is ('quarters', 25)
     num_coins = amount//coin[1]

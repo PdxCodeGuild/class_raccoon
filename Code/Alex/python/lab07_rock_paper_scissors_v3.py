@@ -1,4 +1,4 @@
-'''
+'''*not complete*
 Lab 7: Rock Paper Scissors
 
 Version 3 (optional)

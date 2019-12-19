@@ -84,4 +84,4 @@ def num_to_word(hundreds_digit, tens_digit):
 #now we are assigning the function to a variable so that we can call it later.
 final_conversion = num_to_word(hundreds_digit, tens_digit)
 
-print(f"You spell your number like \"{final_conversion}\"")#now we call the solutions. and print the final result.
+print(f"\nYou spell that number like \"{final_conversion}\"\n\n\n")#now we call the solutions. and print the final result.

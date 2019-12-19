@@ -35,6 +35,6 @@ word_follow={}
 for i in range(len(wordlist)-1):
     if wordlist[i] == userword and wordlist[i+1] not in word_follow:
         word_follow[wordlist[i+1]] = 1
-    if wordlist[i] == userword:
+    elif wordlist[i] == userword:
         word_follow[wordlist[i+1]] += 1
 print_word_count(word_follow)

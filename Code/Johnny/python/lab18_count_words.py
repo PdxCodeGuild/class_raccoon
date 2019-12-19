@@ -18,8 +18,8 @@ for word in words:
 out_words = list(word_dict.items()) # .items() returns a list of tuples
 out_words.sort(key=lambda tup: tup[1], reverse=True)  # sort largest to smallest, based on count
 for i in range(min(10, len(out_words))):  # print the top 10 words, or all of them, whichever is smaller
-    # print(out_words[i])
-    pass
+    print(f'This is your most common words: {out_words[i]}')
+
 
 word_pairs = []
 for i in range(len(words)-1):
@@ -34,4 +34,4 @@ for word in word_pairs:
 out_pairs = list(pairs_dict.items())
 out_pairs.sort(key=lambda tup: tup[1], reverse=True)
 for i in range(min(10, len(out_pairs))):
-     print(out_pairs[i]) # prints out most common pairs
+     print(f'This is the most common pairs: {out_pairs[i]}') # prints out most common pairs

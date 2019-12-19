@@ -45,7 +45,7 @@ whole_words = int(whole_book[0])
 whole_sent = int(whole_book[2])
  
 ari = (4.71 * (whole_text/whole_words) + .5 * (whole_words/whole_sent) - 21.43)
-ari = round(ari)
+ari = math.ceil(ari)
 
 ari_scale = {
      1: {'ages':   '5-6', 'grade_level': 'Kindergarten'},

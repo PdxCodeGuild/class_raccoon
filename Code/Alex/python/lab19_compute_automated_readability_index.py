@@ -54,10 +54,11 @@ that is suitable for an average person 16-17 years old.
 '''
 
 
-
+import math
 import requests
 import re
 import random
+
 
 def get_random_book_code():
     response = requests.get('https://www.gutenberg.org/ebooks/search/?sort_order=random')
@@ -69,9 +70,7 @@ def get_random_book_code():
 
 # https://www.gutenberg.org/files/58714/58714-0.txt
 # http://www.gutenberg.org/cache/epub/5785/pg5785.txt
-def get_random_book_text():
-
-    code = get_random_book_code()
+def get_random_book_text(code):
 
     url = f'https://www.gutenberg.org/files/{code}/{code}-0.txt'
     response = requests.get(url)
@@ -80,3 +79,49 @@ def get_random_book_text():
         response = requests.get(url)
 
     return response.text
+
+def get_book_title(code):
+    response = requests.get('https://www.gutenberg.org/ebooks/' + code)
+    text = response.text
+    title = re.findall('<h1 itemprop=\"name\">(.+)</h1>', text)
+    return title[0]
+
+code = get_random_book_code()
+title = get_book_title(code)
+text = get_random_book_text(code)
+characters = len(re.findall(r"\w", text))
+words = len(re.findall(r"\w+'*\w+", text))
+sentences = len(re.findall(r"\s+[^.!?]*[.?!]", text))
+#print(sentences)
+
+
+ari_formula = (4.71*(characters / words) + 0.5*(words / sentences) - 21.43)
+ari_formula = math.ceil(ari_formula)
+
+if ari_formula >= 14:
+    ari_formula = 14
+
+ari_scale = {
+     1: {'ages':   '5-6', 'grade_level': 'Kindergarten'},
+     2: {'ages':   '6-7', 'grade_level':    '1st Grade'},
+     3: {'ages':   '7-8', 'grade_level':    '2nd Grade'},
+     4: {'ages':   '8-9', 'grade_level':    '3rd Grade'},
+     5: {'ages':  '9-10', 'grade_level':    '4th Grade'},
+     6: {'ages': '10-11', 'grade_level':    '5th Grade'},
+     7: {'ages': '11-12', 'grade_level':    '6th Grade'},
+     8: {'ages': '12-13', 'grade_level':    '7th Grade'},
+     9: {'ages': '13-14', 'grade_level':    '8th Grade'},
+    10: {'ages': '14-15', 'grade_level':    '9th Grade'},
+    11: {'ages': '15-16', 'grade_level':   '10th Grade'},
+    12: {'ages': '16-17', 'grade_level':   '11th Grade'},
+    13: {'ages': '17-18', 'grade_level':   '12th Grade'},
+    14: {'ages': '18-22', 'grade_level':      'College'}
+}
+
+ari_scale = ari_scale[ari_formula]
+grade = ari_scale['grade_level']
+age = ari_scale['ages']
+
+
+#find a function that grabs the first line of the book (the book title) so that i can call it down here instead of saying "random book chosen"
+print(f"\n\n\n\n\n\n\n\n\n\n\nThe ARI for the {title} is {ari_formula}. This corresponds to a {grade} level of difficulty that is suitable for an average person {age} years old.\n\n\n\n\n\n\n\n")

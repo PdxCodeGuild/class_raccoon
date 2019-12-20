@@ -60,7 +60,7 @@ hundreds_digit_dict = {
 #im using a function to define our two variables being used.
 def num_to_word(hundreds_digit, tens_digit):
     if number == 0:
-        return "\"zero\""
+        return "zero"
     word = ''
 
     if hundreds_digit >= 1:

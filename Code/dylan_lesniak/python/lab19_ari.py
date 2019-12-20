@@ -67,7 +67,6 @@ def output_ari_score():
     print(f"That means is is best for students aged, {ari_scale[score]['ages']},")
     print(f"And is meant for grade level: {ari_scale[score]['grade_level']}")
 
-
 if __name__ == "__main__":
     print(f"The book is: {title}")
     output_ari_score()

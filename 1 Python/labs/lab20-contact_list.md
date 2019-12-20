@@ -27,8 +27,8 @@ with open('contacts.csv', 'r') as file:
 Once you've processed the file, your list of contacts will look something like this...
 ```python
 contacts = [
-    {'name':'matthew', 'favorite fruit':'blackberries', 'favorite color':'orange'},
-    {'name':'sam', 'favorite fruit':'pineapple' ...}
+    {'name':'joe', 'age': '34', 'email': 'joe@gmail.com', 'favorite color':'blue'},
+    {'name':'jane', 'age':'43' ...}
 ]
 ```
 

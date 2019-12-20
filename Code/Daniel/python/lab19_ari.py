@@ -66,9 +66,9 @@ ari_scale = {
 if ari <= 14:
     grade = str(ari_scale[ari]['grade_level'])
     age = str(ari_scale[ari]['ages'])
-    print(f"That book is at ARI level {ari}, which is a {grade} level and is recomended for people age {age}")
+    print(f"\nThat book is at ARI level {ari}, which is a {grade} level and is recomended for people age {age}\n")
 else:
-    print("This book might be to complicated, I mean it doesn't even have any pictures")
+    print("\nThis book might be to complicated, I mean it doesn't even have any pictures\n")
 
 
 

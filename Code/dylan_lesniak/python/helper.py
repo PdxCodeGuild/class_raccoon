@@ -4,6 +4,8 @@ Author: Dylan
 Purpose: simple reusable helper methods
 '''
 
+import string
+
 def digit_checker(num,digits = None):
     while True:
         if digits is not None:
@@ -17,14 +19,18 @@ def digit_checker(num,digits = None):
             num = input("> ")
 
 def text_checker(text,acceptable_inputs = []):
-    text = text.capitalize()
+    ok_formats = f"{string.ascii_letters},{string.whitespace}"
+    text = text.lower()
     while True:
-        if text.isalpha():
+        if all([char for char in text if char in ok_formats]):
             if len(acceptable_inputs) > 0:
-                if text in acceptable_inputs:
+                if any([option for option in acceptable_inputs if text in option.lower()]):
                     return text
                 else:
                     print(f"INVALID ENTRY: Entry not in list.")
+                    if len(acceptable_inputs) <= 20:
+                        print(f"You entered: {text}")
+                        print(f"Acceptable inputs are: {acceptable_inputs}")
                     text = input("> ")
             else:
                 return text

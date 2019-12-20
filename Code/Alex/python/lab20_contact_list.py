@@ -19,3 +19,30 @@ contacts = [
     {'name':'jane', 'age':'43' ...}
 ]
 '''
+
+
+with open('contacts.csv', 'r') as file:
+    lines = file.read().split('\n')
+lines = lines[0:-1]
+header_list = lines[0].split(',')
+
+contacts_list = []
+contacts = []
+
+for i in range(1, len(lines)):
+    contacts_list.append(lines[i].split(','))
+
+for i in range(len(contacts_list)):
+
+    contacts_dict = {}
+
+    for j in range(len(header_list)):
+
+        contacts_dict[header_list[j]] = contacts_list[i][j]
+
+    contacts.append(contacts_dict)
+
+print(contacts)
+
+
+    #print(lines[i].split(','))

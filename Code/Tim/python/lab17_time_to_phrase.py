@@ -67,6 +67,15 @@ def english_conversion(x):
         print(output)
 
 # Define function to convert numbers into Roman
+def roman_conversion(x):
+    output = ''
+    if x <= 10:
+        print(roman_dict[user_input])
+    elif x > 10:
+        tens_digit = roman_dict[(user_input) - (user_input%10)]
+        ones_digit = output + roman_dict[user_input%10]
+        output = tens_digit+ones_digit
+        print(output)
 
 # Define function to get the current time
 
@@ -74,3 +83,5 @@ def english_conversion(x):
 
 if dict_choice == 1:
     english_conversion(user_input)
+if dict_choice == 2:
+    roman_conversion(user_input)

@@ -82,6 +82,6 @@ def check_num(value,user_input):
         
 user_input = list(input("Enter a number in the range of 0-99. ie 09,11,46\n:"))
 value = int(len(user_input))
-print(value)
+# print(value)
 check_num(value,user_input)
 

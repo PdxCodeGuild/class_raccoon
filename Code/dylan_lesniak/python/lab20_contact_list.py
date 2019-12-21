@@ -4,67 +4,106 @@
 #mods
 import helper 
 
-with open('contacts.csv', 'r') as file:
-    lines = file.read().split('\n')
+with open('contacts.csv', 'r') as f:
+    contents = f.read()
 
-contacts = {
-}
+lines = contents.split('\n')
+lines = [line for line in lines if line != ""]
+
+
+def get_headers():
+    headers = []
+    profile = {}
+    headers = lines[0].split(",")
+    for header in headers:
+        profile[header.capitalize()] = ""
+    return headers, profile
+
 
 def get_contact_dict(lines):
-    valid_inputs = lines[1:]
-    for contact in valid_inputs:
-        contact_split = contact.split(",")
-        name = contact_split[0].capitalize()
-        age = contact_split[1]
-        email = contact_split[2]
-        color = contact_split[3]
-        person_dict = {"Age": age, "Email": email, "Favorite color": color}
-        contacts[name] = person_dict
-    
-'''
-    Create a record: ask the user for each attribute, add a new contact to your contact list with the attributes that the user entered.
-    Retrieve a record: ask the user for the contact's name, find the user with the given name, and display their information
-    Update a record: ask the user for the contact's name, then for which attribute of the user they'd like to update and the value of the attribute they'd like to set.
-    Delete a record: ask the user for the contact's name, remove the contact with the given name from the contact list.
-'''
-
+    contacts = [] #this will become a list of dicts, where each dict is one person's record. 
+    valid_inputs = lines[1:] #first line is headers, everything after is data. 
+    for contact in valid_inputs: #gives us each user.
+        contact_split = contact.split(",") #in the csv, all the data is separated by only a comma
+        temp_profile = {}
+        i = 0
+        for attribute in contact_split: #gives us the user information after they've been established in the dict. 
+            temp_profile[headers[i].capitalize()] = attribute.capitalize()
+            i += 1
+        contacts.append(temp_profile)
+    return contacts
+            
 def create_record(): 
-    print("Please enter a new name: ")
-    name = helper.text_checker(input("> ")).capitalize()
-    print("Please enter an age for that person. ")
-    age = helper.digit_checker(input("> "))
-    print("Please enter an email address for that person. ")
-    email = input("> ") #write email_checker
-    print("Please enter a favorite color.")
-    color = helper.text_checker(input("> "))
-    contacts[name] = {"Age": age, "Email": email, "Favorite color": color}
-    print(f"A new record has been created for {name}. \n")
+    info_list = []
+    for i in range(len(headers)):
+        print(f"Please enter a new {headers[i].capitalize()}: ")
+        info = input("> ").capitalize()
+        info_list.append(info)
+    temp_profile = {}
+    i = 0   
+    for attribute in info_list: #gives us the user information after they've been established in the dict. 
+        temp_profile[headers[i].capitalize()] = attribute.capitalize()
+        i += 1
+    contacts.append(temp_profile) #once a dictionary for the new user has been made, it gets thrown into contacts
+    print(f"A new record has been created for {info_list[0].capitalize()}. \n")
+    
 
 def retrieve_record():
-    print("Please enter name of record you would like to retrieve. ")
-    name = helper.text_checker(input("> "), contacts).capitalize()
-    print(f"Here is the record for {name}. \n{contacts[name]}\n")
+    print("Please enter name of record you would like to retrieve. ")        
+    name = name_checker(input("> ")).capitalize()
+    record = [record for record in contacts if record["Name"] == name] #gives back the record if the "Name" key matches.
+    print(f"Here is the record for {name}. \n{record[0]}\n")
 
 def update_record():
     print("Whose record would you like to update? ")
-    name = helper.text_checker(input("> "), contacts).capitalize()
+    name = name_checker(input("> ")).capitalize()
+    record_idx = find_record_idx_by("Name", name)
     print("What attribute would you like to update? ")
-    attributes = []
-    for attribute in contacts[name]:
-        attributes.append(attribute)
-    update_attribute = helper.text_checker(input("> "), attributes).capitalize()
+    attribute = attribute_checker(input("> ")).capitalize()
     print("Please enter update: ")
     update = helper.text_checker(input("> ")).capitalize()
-    contacts[name][update_attribute] = update
-    print(f"{name}'s {update_attribute} has been updated. \n")
+    contacts[record_idx][attribute] = update #using the record_idx, we find the proper record w/in list of dictionaries. 
+    print(f"{name}'s {attribute} has been updated. ")
+    print(f"{contacts} \n")
+
+def find_record_idx_by(attribute, value):
+    record_idx = 0
+    i = 0 
+    for record in contacts:
+        if record[attribute] == value:
+            return i
+        i += 1 #I shouldn't have to write in an escape her as one of the checker methods should have handled that already. 
 
 def delete_record():
     print("Who would you like to delete from records? ")
-    name = helper.text_checker(input("> "), contacts).capitalize()
-    del contacts[name]
-    print(f"{name} has been deleted. \n" )
+    name = name_checker(input("> ")).capitalize()
+    record_idx = find_record_idx_by("Name", name)
+    del contacts[record_idx]
+    print(f"{name} has been deleted. " )
+    print(f"{contacts} \n")
 
+def name_checker(name):
+    all_names = []
+    for record in contacts:
+        for attribute in record:
+            if attribute == "Name":
+                all_names.append(record[attribute])
+    return helper.text_checker(name, all_names)
 
+def attribute_checker(attribute):
+    attribute = helper.text_checker(attribute, headers)
+    attribute_idx = [i for i in range(len(headers)) if attribute in headers[i]]
+    return headers[attribute_idx[0]]
+
+def create_csv():
+    new_str = ""
+    for record in contacts:
+        record_str = ""
+        for keys in record:
+            record_str += record[keys] + ","
+        record_str = record_str[:-1] + "\n"
+        new_str += record_str
+    return new_str
 
 def crud(): 
     create_record()
@@ -74,5 +113,11 @@ def crud():
 
 
 if __name__ == "__main__":
-    get_contact_dict(lines)
+    headers, profile = get_headers()
+    contacts = get_contact_dict(lines)
     crud()
+    new_csv = create_csv()
+
+    with open('contacts_backup.csv', 'w') as contacts_backup:
+        contacts_backup.write(new_csv)
+    

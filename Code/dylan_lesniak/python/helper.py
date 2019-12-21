@@ -24,7 +24,8 @@ def text_checker(text,acceptable_inputs = []):
     while True:
         if all([char for char in text if char in ok_formats]):
             if len(acceptable_inputs) > 0:
-                if any([option for option in acceptable_inputs if text in option.lower()]):
+                print()
+                if any([option for option in acceptable_inputs if text.lower() in option.lower()]):
                     return text
                 else:
                     print(f"INVALID ENTRY: Entry not in list.")

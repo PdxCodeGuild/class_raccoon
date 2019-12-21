@@ -45,7 +45,7 @@ whole_words = int(whole_book[0])
 whole_sent = int(whole_book[2])
  
 ari = (4.71 * (whole_text/whole_words) + .5 * (whole_words/whole_sent) - 21.43)
-ari = round(ari)
+ari = math.ceil(ari)
 
 ari_scale = {
      1: {'ages':   '5-6', 'grade_level': 'Kindergarten'},
@@ -66,9 +66,9 @@ ari_scale = {
 if ari <= 14:
     grade = str(ari_scale[ari]['grade_level'])
     age = str(ari_scale[ari]['ages'])
-    print(f"That book is at ARI level {ari}, which is a {grade} level and is recomended for people age {age}")
+    print(f"\nThat book is at ARI level {ari}, which is a {grade} level and is recomended for people age {age}\n")
 else:
-    print("This book might be to complicated, I mean it doesn't even have any pictures")
+    print("\nThis book might be to complicated, I mean it doesn't even have any pictures\n")
 
 
 

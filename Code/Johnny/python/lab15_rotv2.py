@@ -2,11 +2,12 @@ import string
 
 alphabet = string.ascii_lowercase
 num_chars = len(alphabet)
-rot_amt = 13
+
 
 string_input = input('Enter something to encrypt: ').lower()
+user_rot = int(input('Enter a encryption number: '))
 
-
+rot_amt = user_rot
 string_output = ''
 for i in string_input:
     char_loc = alphabet.index(i)

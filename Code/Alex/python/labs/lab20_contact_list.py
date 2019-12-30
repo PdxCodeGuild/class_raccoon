@@ -22,19 +22,13 @@ contacts = [
 
 
 with open('contacts.csv', 'r') as file:
-    lines = file.read().split('\n')
-#given to us. this info takes from file. reads it and splits it in lines.
+    lines = file.read().split('\n')#this takes info from file. reads it and splits it in lines.
 
-#accounting for all lines.
-lines = lines[0:-1]
 
-#the first lines is the headers list. when split by comas
-header_list = lines[0].split(',')
-
-#we made blank lists to be defined below
+lines = lines[0:-1]#accounting for all lines.
+header_list = lines[0].split(',')#the first lines is the headers list. when split by comas
 contacts_list = []
 contacts = []
-
 
 for i in range(1, len(lines)):#range starting at 1 because of line one being the header list
     contacts_list.append(lines[i].split(','))#we append all indicies separated by comas into the contacts list.

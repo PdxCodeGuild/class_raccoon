@@ -74,4 +74,16 @@ while continue_yn == "yes":
     
 
 else:
-    print("Goodbye")
+    output = ""
+    for header in headers:
+        output += header + ","
+    output += "\n"
+    for dictionaries in contact_info:
+        for value in list(dictionaries.values()):
+            output += value + ","
+        output += "\n"
+    print(output)
+    
+    
+    with open("contacts.csv", "w") as file:
+        file.write(output)

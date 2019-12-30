@@ -13,8 +13,10 @@ Update a record: ask the user for the contact's name, then for which attribute o
 
 Delete a record: ask the user for the contact's name, remove the contact with the given name from the contact list.
 '''
+
 import string
 import re
+import os
 
 with open('contacts.csv', 'r') as file:
     lines = file.read().lower().split('\n')
@@ -37,59 +39,77 @@ for i in range(len(contacts_list)):#now we use our contacts_list info to create 
     for j in range(len(header_list)):
         contacts_dict[header_list[j]] = contacts_list[i][j]#assigning the value contacts_list[i][j] to the key contacts_dict[header_list[j]
     contacts.append(contacts_dict) #this is appending the dictionary to the contacts list. making a list of dictionaries
+while True:
+    os.system("clear")
+    user_choice = input("Would you like to create, retrieve, update or delete a record? ").lower()
 
-user_choice = input("\n\n\n\n\n\n\n\n\n\n\nWould you like to create, retrieve, update or delete a record? ").lower()
-
-if user_choice == "create":
-    while True:
-        flag = ''
-        name_choice = input("Name: ").lower()
-        for i in name_choice:
-            if i in string.ascii_lowercase:
+    if user_choice == "create":
+    #name
+        while True:
+            flag = ''
+            name_choice = input("Name: ").lower()
+            for i in name_choice:
+                if i in string.ascii_lowercase:
+                    continue
+                else:
+                    flag = "flag"
+            if flag == "flag":
+                print("invalid input\n")
                 continue
-            else:
-                flag = "flag"
-        if flag == "flag":
-            print("invalid input\n")
-            continue
-        break
-
-    while True:
-        flag = ''
-        age_choice = input("Age: ").lower()
-        for i in age_choice:
-            if i in string.digits:
+            break
+    #age
+        while True:
+            flag = ''
+            age_choice = input("Age: ").lower()
+            for i in age_choice:
+                if i in string.digits:
+                    continue
+                else:
+                    flag = "flag"
+            if flag == "flag":
+                print("invalid input\n")
                 continue
-            else:
-                flag = "flag"
-        if flag == "flag":
-            print("invalid input\n")
+            break
+    #email
+        email_choice = input("Email: ").lower()
+
+    #color
+        while True:
+            flag = ''
+            color_choice = input("Favorite Color: ").lower()
+            for i in color_choice:
+                if i in string.ascii_lowercase:
+                    continue
+                else:
+                    flag = "flag"
+            if flag == "flag":
+                print("invalid input\n")
+                continue
+            break
+    #are you sure
+        create_sure = input("Are you sure you want to create this contact? ").lower()
+        if create_sure == "yes" or create_sure == "y":
+            print("The record was successfully created.\n\n\n")
+        elif create_sure == "no" or create_sure == "n":
+            print("The record was not created\n\n\n")
             continue
-        break
-
-    email_choice = input("Email: ").lower()
-    color_choice = input("Favorite Color: ").lower()
-    create_sure = input("Are you sure you want to create this contact? ").lower()
-    create_approved = print("Your record was successfully created.\n\n\n")
 
 
 
+    elif user_choice == "retrieve":
+        retrieve_contact = input("What's the name of the contact you are looking for? ").lower()
+        print()
 
+    elif user_choice == "update":
+        update_contact = input("Who's account are we updating? ").lower()
+        update_sure = input("Are you sure you want to update this account? ").lower()
+        update_approved = print()
 
-elif user_choice == "retrieve":
-    retrieve_contact = input("What's the name of the contact you are looking for? ").lower()
-    print()
+    elif user_choice == "delete":
+        delete_contact = input("Who's account are we deleting?").lower()
+        delete_sure = input("Are you sure you want to delete this account? ").lower()
+        delete_really_sure = input("Are you reeeaally sure you want to delete it? ").lower()
+        delete_approved = print()
 
-elif user_choice == "update":
-    update_contact = input("Who's account are we updating? ").lower()
-    update_sure = input("Are you sure you want to update this account? ").lower()
-    update_approved = print()
-
-elif user_choice == "delete":
-    delete_contact = input("Who's account are we deleting?").lower()
-    delete_sure = input("Are you sure you want to delete this account? ").lower()
-    delete_really_sure = input("Are you reeeaally sure you want to delete it? ").lower()
-    delete_approved = print()
-
-else:
-    print("invalid entry" + user_choice)
+    else:
+        print("invalid entry" + user_choice)

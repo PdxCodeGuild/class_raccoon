@@ -15,7 +15,7 @@ def digit_checker(num,digits = None):
         if num.isdigit():
             return num
         else:
-            print("INVALID ENTRY: Enter number ONLY.")
+            print("INVALID ENTRY: Enter integer numbers ONLY.")
             num = input("> ")
 
 def text_checker(text,acceptable_inputs = []):

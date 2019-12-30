@@ -1,5 +1,5 @@
 
-# Lab 25: ATM
+# Lab 22: ATM
 
 Let's represent an ATM with a class containing two attributes: a balance and an interest rate. A newly created account will default to a balance of 0 and an interest rate of 0.1%. Implement the initializer, as well as the following functions:
 

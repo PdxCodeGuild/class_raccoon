@@ -50,9 +50,14 @@ all_sentences = len(re.findall(r"[A-Z].*?[\.!?]", text))
 # print(all_words)
 # print(all_sentences)
 
+# calcuate equation
 ari = (4.71 * (all_chars/all_words) + 0.5 * (all_words/all_sentences) - 21.43)
 ari = math.ceil(ari)
+
+
 print(f'ARI of: {ari}')
+
+# compare output of equation to list above, return values from key
 if ari <= 14:
     age = ari_scale[ari]['ages']
     grade = ari_scale[ari]['grade_level']

@@ -1,5 +1,7 @@
 '''
-
+Filename: lab20_contact_list.py
+Author: Dylan
+Purpose: Take in a csv, make various edits, and then edit the file (a backup in this case)
 '''
 #mods
 import helper 

@@ -36,18 +36,22 @@ print(date.strftime('%d-%b-%Y'))  # 25-Mar-2016
 
 Now that you've successfully extracted the data, let's done some statistics.
 
-Calculate the mean of the data:
+### 1. Calculate the mean of the data:
 
 ![mean](https://wikimedia.org/api/rest_v1/media/math/render/svg/c7740a0aa91314dbf006e8583ce6f61585e3aab6)
 
 
-Use the mean to calculate the variance:
+### 2. Use the mean to calculate the standard deviation, which is a measure of how "spread out" the data is:
 
-![variance](https://wikimedia.org/api/rest_v1/media/math/render/svg/0c5c6e7bbd52e69c29e2d5cfe21989313aba55d4)
+![standard_deviation](https://www.gstatic.com/education/formulas/images_long_sheet/sample_standard_deviation.svg)
 
-Find the day which had the most rain.
+68.2% of the data falls within 1 standard deviation of the mean.
 
-Find the year which had the most rain on average.
+![bell_curve](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Standard_deviation_diagram.svg/500px-Standard_deviation_diagram.svg.png)
+
+### 3. Find the day which had the most rain.
+
+### 4. Find the year which had the most rain on average.
 
 
 ## Version 3
@@ -65,3 +69,8 @@ Some charts you can make are:
 - all the data, date vs daily total
 - monthly totals, average across multiple years
 - total yearly rainfall, year by year
+
+
+## Version 4 (optional)
+
+Use regular expressions to pull all the .rain files from the html source of the main page and do statistics on all of them.

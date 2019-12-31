@@ -41,9 +41,10 @@ for i in range(len(contacts_list)):#now we use our contacts_list info to create 
     contacts.append(contacts_dict) #this is appending the dictionary to the contacts list. making a list of dictionaries
 while True:
     os.system("clear")
-    user_choice = input("Would you like to create, retrieve, update or delete a record? ").lower()
-
+    user_choice = input("Would you like to create, retrieve, update or delete a record?\nYou can also save or quit the session by typing 'save' or 'quit'.\n\n").lower()
+#create
     if user_choice == "create":
+        new_contact = {}
     #name
         while True:
             flag = ''
@@ -57,6 +58,7 @@ while True:
                 print("invalid input\n")
                 continue
             break
+        new_contact["name"] = name_choice
     #age
         while True:
             flag = ''
@@ -88,22 +90,41 @@ while True:
             break
     #are you sure
         create_sure = input("Are you sure you want to create this contact? ").lower()
+
         if create_sure == "yes" or create_sure == "y":
             print("The record was successfully created.\n\n\n")
+            contacts.append(new_contact)
+
         elif create_sure == "no" or create_sure == "n":
             print("The record was not created\n\n\n")
             continue
 
 
-
+#retrieve
     elif user_choice == "retrieve":
         retrieve_contact = input("What's the name of the contact you are looking for? ").lower()
-        print()
 
+        for contact in contacts:
+            if retrieve_contact == contact["name"]:
+                print(f'\n{contact}')
+
+#update
     elif user_choice == "update":
         update_contact = input("Who's account are we updating? ").lower()
+
+        for contact in contacts:
+            if retrieve_contact == contact["name"]:
+                input("")
+
         update_sure = input("Are you sure you want to update this account? ").lower()
         update_approved = print()
+
+
+
+
+
+
+
 
     elif user_choice == "delete":
         delete_contact = input("Who's account are we deleting?").lower()
@@ -111,5 +132,27 @@ while True:
         delete_really_sure = input("Are you reeeaally sure you want to delete it? ").lower()
         delete_approved = print()
 
-    else:
-        print("invalid entry" + user_choice)
+#make a temp list?
+
+
+
+    #
+    #
+    #
+    # elif user_choice == "save":
+    #
+    #
+    #
+    #
+    #
+    #
+    # elif user_choice == "quit":
+    #
+    #
+    #
+    #
+    #
+    #
+    # else:
+    #     print("invalid entry" + user_choice)
+    input('')

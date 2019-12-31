@@ -65,3 +65,8 @@ Some charts you can make are:
 - all the data, date vs daily total
 - monthly totals, average across multiple years
 - total yearly rainfall, year by year
+
+
+## Version 4 (optional)
+
+Use regular expressions to pull all the .rain files from the html source of the main page and do statistics on all of them.

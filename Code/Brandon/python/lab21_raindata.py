@@ -3,11 +3,12 @@ from datetime import datetime
 import re
 import requests
 import math
+import matplotlib.pyplot as plt
 
 
 #Requests the data from the web
-def get_rain_data():
-    response = requests.get("https://or.water.usgs.gov/non-usgs/bes/hayden_island.rain")
+def get_rain_data(file_name):
+    response = requests.get(f"https://or.water.usgs.gov/non-usgs/bes/{file_name}.rain")
     response = response.text
     return(response)
 
@@ -72,29 +73,43 @@ def most_rainfall(data):
             day = value[0]
 
     return (f" the rainiest year was {year} and it rained {counter*.01} inches. The rainiest day was {day.strftime('%d-%b-%Y')} and it rained {highest_day*.01} inches.")
+
+def make_chart(data):
+    x_cord = []
+    y_cord = []
+    for key in data:
+        x_cord.append(key)
+        y_cord.append(data[key]*.01)
+    
+     
+    plt.plot(x_cord, y_cord)
+    plt.show()
     
   
 
 
 while True:
-    data = get_rain_data()
+    data = get_rain_data('hayden_island')
     data = (get_rain_info(data))
 
     annual_rainfall = annual_rain(data)
     mean = mean_rainfall(data)
     
-    action = input("What would you like to do? chose from the following -- \n(1) For annual rainfall for chosen year. \n(2) for the mean rainfall from 1998-2019. \n(3) for the standard deviation and \n(4) for the day that produced the most rain and the year that produced the most rain on average. \n(5) TO QUIT\n:")
+    action = input("What would you like to do? chose from the following -- \n(1) For annual rainfall for chosen year. \n(2) for the mean rainfall from 1998-2019. \n(3) for the standard deviation and \n(4) for the day that produced the most rain and the year that produced the most rain on average. \n(5) To plot a chart \n(6) TO QUIT\n:")
     if action == "1":
         print(year_rainfall(annual_rainfall))
     elif action == "2":
-        print(f"The mean rainfall for Hayden Island between 1998 and 2019 is {mean_rainfall(data)}")
+        print(f"The mean rainfall for Hayden Island between 1998 and 2019 is {mean_rainfall(data)}\n")
     elif action == "3":
-        print(f"The mean standard deviation for Hayden Island between 1998 and 2019 is {standard_deviation_rainfall(mean,data)}")
+        print(f"The mean standard deviation for Hayden Island between 1998 and 2019 is {standard_deviation_rainfall(mean,data)}\n")
     elif action == "4":
         print(most_rainfall(data))
     elif action == "5":
+        print(make_chart(annual_rainfall))
+    elif action == "6":
         print("Goodbye")
         break
+
 
 
 

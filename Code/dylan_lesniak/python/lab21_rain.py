@@ -9,7 +9,7 @@ import requests
 import re
 import datetime
 import math
-from collections import defaultdict
+import matplotlib.pyplot as plt
 
 def get_rain_urls(): 
     response = requests.get('https://or.water.usgs.gov/non-usgs/bes/')
@@ -41,6 +41,7 @@ def get_page_info(file):
     print(f"The day with the most rain was {day_max[0]} with a total of {day_max[1]} inches.")
     print(f"The year with the most rain was {year_max}.")
     
+    return year_avg
 
 
 def get_data_dicts(data_lines): 
@@ -97,10 +98,24 @@ def get_year_avg(data_dicts):
     for year in year_values:
         year_avgs[year] = (year_values[year]["total"] / year_values[year]["days"])
     return year_avgs
-    
 
+def get_xy_values(year_avgs):
+    x_values = []
+    y_values = []
+    for year in year_avgs:
+        x_values.append(year)
+        y_values.append(round(year_avgs[year],2))
+    xy_values = [x_values,y_values]
+    return xy_values  
 
-rains = get_rain_urls()
-file = requests.get(rains[1])
-get_page_info(file)
+if __name__ == "__main__":
+    rains = get_rain_urls()
+    file = requests.get(rains[3])
+    year_avgs = get_page_info(file)
+    xy_values = get_xy_values(year_avgs)
+    x_values = xy_values[0]
+    y_values = xy_values[1]
+    plt.plot(x_values, y_values)
+    plt.show()
+
 #data starts at array value 11. This is consistent on the forms, thankfully. 

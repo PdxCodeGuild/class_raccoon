@@ -5,7 +5,7 @@ Purpose: Create average, median, and mode for a given list of inputs.
 '''
 
 import helper 
-
+.
 def get_list(): #going to take the user's numbers and return them into a list which will be returned.
     done = "no" #This list will then be passed into other functions as necessary. 
     current_nums = []
@@ -35,7 +35,7 @@ def ave(current_nums):
 def median(current_nums):
     current_nums.sort()
     if len(current_nums) % 2 == 0:
-        median_idx = len(current_nums) / 2
+        median_idx = len(current_nums) // 2
         median_list = [current_nums[median_idx],current_nums[median_idx + 1]] #the middlemost two values
         print(median_list)
 

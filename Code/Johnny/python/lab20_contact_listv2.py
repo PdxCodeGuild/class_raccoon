@@ -43,6 +43,7 @@ elif user_input == 'update':
     d[f'{update_thing}'] = update_thing2
     print(contact_info)
 elif user_input == 'delete':
+    print(contact_info)
     delete_name = input('Enter the name to delete: ').lower()
     for i in range(len(contact_info)-1):
         if contact_info[i]['name'] == delete_name:

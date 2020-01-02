@@ -35,44 +35,53 @@ def add_contacts(keys,contact):
     return contact_dict
 
 #This function runs the program.....supposedly....
-def what_to_do():
-    lines = get_lines('contact.csv')
-    headers = lines.pop(0)
-    contacts = get_contacts(headers, lines)
+def what_to_do(to_do):
+        lines = get_lines('contact.csv')
+        headers = lines.pop(0)
+        contacts = get_contacts(headers, lines)
 
-    to_do = input("Do you want to add, find, update or delete?\n:").lower()
-    if to_do == "add":
-        contacts.append(add_contacts(headers, contacts))
-        return(contacts)
-        
-    elif to_do == "find":
-        who_find = input("Who do you want to find?\n:")
-        for person in contacts:
-            if who_find == person["name"]:
-                return(person)
-        else:
-            return("not in database.")
-    elif to_do == "update":
-        who_update = input("Who do you want to update?\n:")
-        for person in contacts:
-            if who_update == person["name"]:
-                chose_key = input("What would you like to update?\n:")
-                if chose_key in person.keys():
-                    person[chose_key] = input("What do you want to change it to?\n:")
+
+        if to_do == "add":
+            contacts.append(add_contacts(headers, contacts))
+            return(contacts)
+
+        elif to_do == "find":
+            who_find = input("Who do you want to find?\n:").lower()
+            for person in contacts:
+                if who_find == person["name"]:
+                    return(person)
+            else:
+                return("not in database.")
+        elif to_do == "update":
+            who_update = input("Who do you want to update?\n:")
+            for person in contacts:
+                if who_update == person["name"]:
+                    chose_key = input("What would you like to update?\n:")
+                    if chose_key in person.keys():
+                        person[chose_key] = input("What do you want to change it to?\n:")
+                        return(contacts)
+                    else:
+                        return("Not in database. Please enter a correct name.")
+        elif to_do == "delete":
+            print(lines)
+            who_delete = input("Who do you want to delete?\n:")
+            for i in range(len(contacts)):
+                if who_delete in contacts[i]["name"]:
+                    contacts.pop(i)
                     return(contacts)
-                else:
-                    return("Not in database. Please enter a correct name.")
-    elif to_do == "delete":
-        print(lines)
-        who_delete = input("Who do you want to delete?\n:")
-        for i in range(len(contacts)):
-            if who_delete in contacts[i]["name"]:
-                contacts.pop(i)
-                return(contacts)
+        # elif to_do == "save":
+        #     with open('contact.csv', 'w') as file:
+        #         lines = file.write(contact_dict).split('\n')
 
 
 
 
 lines = get_lines('contact.csv')
 print(f"The current contacts in the list are {lines}")
-print(what_to_do())
+while True:
+    to_do = input("Do you want to add, find, update or delete save or quit?\n:").lower()
+    if to_do == "add" or to_do == "find" or to_do == "update" or to_do == "delete":
+        print(what_to_do(to_do))
+    elif to_do == "quit":
+        print('goodbye')
+        break

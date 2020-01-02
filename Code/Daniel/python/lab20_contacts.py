@@ -9,8 +9,6 @@ contact_info = []
 contacts = lines
 headers = contacts[0].split(",")
 
-
-
 for info in lines[1:len(lines)]:
     contact_dict = {}
     info = info.split(",")

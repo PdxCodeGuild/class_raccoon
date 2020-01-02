@@ -27,7 +27,7 @@ for i in range(min(10, len(output_words))):  # print the top 10 words, or all of
 
 # build a list of tuples [('I', 'ran'), ('ran', 'to'), ('to', 'the')]
 word_pairs = []
-for i in range(len(words )-1):
+for i in range(len(words)-1):
     pair = (words[i], words[i+1])
     word_pairs.append(pair)
 for pair in word_pairs:

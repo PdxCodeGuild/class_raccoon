@@ -12,12 +12,12 @@ import math
 
 class ATM:
     '''
-    
+    This class has multiple methods that allow the user to check the balance of their account and to modify their account. No data is saved after program run is complete.
     '''
     
     def __init__(self,balance = 0.00,interest = .01):
         '''
-        
+        Initializes the users balance, sets the banks interest rate for the account and creates a blank list that keeps track of the users actions within the program. 
         '''
         self.balance = balance
         self.interest = interest
@@ -47,7 +47,7 @@ class ATM:
             print(t)
         
     
-
+''' Program activation under a while loop, allowing the user to perform multiple functions. Checks are in place to preven invalid inputs and data is passed through the ATM class only'''
 member_account = ATM()
 while True:
     what_to_do = input("(1) to check balance\n(2) to make a deposit\n(3) to make a withdrawl\n(4) to check balance with interest\n(5) When transation complete.\n(6) To view transactions.\n:")

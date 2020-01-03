@@ -14,9 +14,9 @@ class ATM:
     def deposit(self, amount):
         self.balance += amount
         self.__round()
-        self.transactions.append(f"User deposited ${amount}")
-        print(f"${amount} deposited.")
-        print(f"Your new balance is ${self.balance}.")
+        self.transactions.append("User deposited $%.2f." %amount)
+        print("$%.2f deposited." %amount)
+        print("Your new balance is $%.2f." %self.balance)
 
 
     def check_withdrawal(self, amount):
@@ -26,11 +26,11 @@ class ATM:
         if self.check_withdrawal(amount):
             self.balance -= amount
             self.__round()
-            self.transactions.append(f"User withdrew ${amount}.")
-            print(f"${withdraw} withdrawn.")
-            print(f"Your new balance is ${self.balance}.")
+            self.transactions.append("User withdrew $%.2f." %amount)
+            print("$%.2f withdrawn." %amount)
+            print("Your new balance is $%.2f." %self.balance)
         else:
-            print(f"Insufficient funds! Your current balance is ${self.balance}.")
+            print("Insufficient funds! Your current balance is $%.2f." %self.balance)
 
     def calc_interest(self):
         return round(self.balance * self.interest, 2)
@@ -43,9 +43,8 @@ class ATM:
 
 balance = float(input('What is your starting balance? '))
 balance = ATM(balance)
-print(f"Your current balance is ${balance.check_balance()}.")
-
-print(f"Your accrued interest on ${balance.check_balance()} is ${balance.calc_interest()}.")
+print("Your current balance is $%.2f." %balance.check_balance())
+print("Your accrued interest on $%.2f is $" %balance.check_balance() + "%.2f" %balance.calc_interest())
 
 #VERSION 3 - REPL
 replist = ('deposit', 'withdraw', 'check balance', 'history','quit')
@@ -68,7 +67,7 @@ while userinput != 'quit':
         balance.withdraw(withdraw)
 
     elif userinput == 'check balance':
-        print(f"Your current balance is ${balance.check_balance()}")
+        print("Your current balance is $%.2f" %balance.check_balance())
 
     elif userinput == 'history':
         print("Here's your list of transactions:")

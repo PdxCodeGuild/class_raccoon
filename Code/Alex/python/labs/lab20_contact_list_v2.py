@@ -1,4 +1,4 @@
-'''*not complete*
+'''
 Lab 20: Contact List
 
 Version 2

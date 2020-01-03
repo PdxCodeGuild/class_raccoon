@@ -22,11 +22,14 @@ while True:
     if usin in quit_list:
         break
     print("Your contacts are ", end="")
-    for i in range(len(contacts)):
-        if i == len(contacts)-1:
-            print(f"and {contacts[i]['name']}.")
-            break
-        print(f"{contacts[i]['name']}, ", end="")
+    if len(contacts) > 0:
+        for i in range(len(contacts)):
+            if i == len(contacts)-1:
+                print(f"and {contacts[i]['name']}.")
+                break
+            print(f"{contacts[i]['name']}, ", end="")
+    else:
+        print("empty.")
     if usin == "find":
         found = False
         usin = input("Whose details do you want? ")
@@ -35,11 +38,18 @@ while True:
         continue
     if usin == "add":
         keyiter = 0
-        key = list(contacts[0].keys())
-        for i in contacts[0]:
-            contactdict[key[keyiter]] = input(f"Please input {key[keyiter]}: ")
-            keyiter += 1
-        contacts.append(contactdict)
+        if len(contacts) == 0:
+            #do more here
+            contactdict["name"] = input("Please input name: ")
+            contactdict["email"] = input("Please input email: ")
+            contacts.append(contactdict)
+        else:
+            key = list(contacts[0].keys())
+            for i in contacts[0]:
+                print(key, keyiter, key[keyiter])
+                contactdict[key[keyiter]] = input(f"Please input {key[keyiter]}: ")
+                keyiter += 1
+            contacts.append(contactdict)
         continue
     if usin == "update":
         current_entry = input("Whose details do you want to update? ")
@@ -55,7 +65,7 @@ while True:
                 if quit_query in quit_list:
                     break
         continue
-    if usin == "delete":
+    if usin == "delete" or usin == "del":
         current_entry = input("Who do you want to delete? ")
         found_entry = findentry(current_entry)
         if found_entry != None:
@@ -73,10 +83,10 @@ while True:
     if save_query in yes_to_save:
         key_out = contacts[0].keys()
         save_output = [",".join(key_out)]
-        for i in range(len(contacts)):
+        for contact in contacts:
             lineout = []
             for keys in key_out:
-                lineout.append(contacts[i][keys])
+                lineout.append(contact[i][keys])
             save_output.append(",".join(lineout))
         with open(r'FFPy\contacts.csv', 'w') as file:
             file.write('\n'.join(save_output))

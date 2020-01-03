@@ -18,6 +18,21 @@ def digit_checker(num,digits = None):
             print("INVALID ENTRY: Enter integer numbers ONLY.")
             num = input("> ")
 
+def float_checker(nums,digits = None):
+    acceptable_inputs = [" 0123456789$%.,"]
+    while True:
+        if digits is not None:
+            if len(list(num)) > digits:
+                print(f"INVALID ENTRY: Entry too large. Please keep to {digits} digits.")
+                num = input("> ")
+        if all([num for num in nums if num in acceptable_inputs]):
+            return_nums = [num for num in nums if num.isdigit() or num == "."]
+            return_nums = "".join(return_nums)
+            return return_nums
+        else:
+            print("INVALID ENTRY: Enter numbers ONLY.")
+            num = input("> ")
+
 def text_checker(text,acceptable_inputs = []):
     ok_formats = f"{string.ascii_letters},{string.whitespace}"
     text = text.lower()

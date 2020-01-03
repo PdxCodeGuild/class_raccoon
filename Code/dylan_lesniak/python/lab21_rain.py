@@ -15,21 +15,22 @@ from inspect import currentframe, getframeinfo
 import numpy as np
 
 
-def get_rain_urls(): 
+def get_rain_urls(): #gets every file with rain data
     response = requests.get('https://or.water.usgs.gov/non-usgs/bes/')
     page_source = response.text
     rain_files = re.findall(r'\w+\.rain',page_source)
     rain_files = ['https://or.water.usgs.gov/non-usgs/bes/' + rain_file for rain_file in rain_files]
     return rain_files
 
-def get_page_info(file):
+#our central hub. Defines most of the data by referencing other methods. 
+def get_page_info(file): 
     file_text = file.text
     file_text = file_text.split('\n')
-    data_lines = [line.split(" ") for line in file_text[11:]]
-    for i in range(len(data_lines)):
+    data_lines = [line.split(" ") for line in file_text[11:]] #the last value in the list is always an empty list, which breaks the program
+    for i in range(len(data_lines)): #a lot of values wound up being ["","",""] so this cuts those.
         data_lines[i] = [char for char in data_lines[i] if char != ""]
     data_lines = [line[:2] for line in data_lines]
-    data_lines = data_lines[:-1] #the last value in the list is always an empty list, which breaks the program 
+    data_lines = data_lines[:-1]  
     
     data_dicts = get_data_dicts(data_lines)
     data_avg = get_mean(data_dicts)
@@ -54,7 +55,8 @@ def get_page_info(file):
         month_dict = get_month_dict(data_dicts)
         show_graph(month_dict)
     elif graph_type == "year":
-        pass
+        year_dict = get_year_dict(data_dicts)
+        show_graph(year_dict, "yes") #this reverses the order, so it goes, farthest back to most recent
     else:
         print("ERROR: You should not have gotten here.")
         frameinfo = getframeinfo(currentframe())
@@ -65,12 +67,11 @@ def get_page_info(file):
 def get_data_dicts(data_lines): 
     data_dicts = []
     for line in data_lines:
-        
-        date = datetime.datetime.strptime(line[0], '%d-%b-%Y')
+        date = datetime.datetime.strptime(line[0], '%d-%b-%Y') #formats the dates into a more workeable format
         if line[1] == "-":
             continue
         else:
-            daily_total = int(line[1]) / 100
+            daily_total = int(line[1]) / 100 #converts tips into inches
         temp_dict = {"Date":date,"Daily Total": daily_total}
         data_dicts.append(temp_dict)
     return data_dicts
@@ -103,6 +104,7 @@ def get_day_max(data_dicts):
 
 
 #make a dict of dicts. Year and then two values for total and days. 
+#for each year, you take the total rainfall and divide it by the number of days
 def get_year_avg(data_dicts):
     year_values = {}
     for dictionary in data_dicts:
@@ -144,22 +146,42 @@ def get_month_dict(data_dicts):
     months_avg = {}
     months_list = [month for month in months_dict]
     months_list.sort()
-    for month in months_list:
+    for month in months_list: #gives us the month back in a readable string. For output in the graph later. 
         months_avg[datetime.date(1900,month,1).strftime('%B')] = round(months_dict[month]["rain"] / months_dict[month]["days"], 2)
     return months_avg
 
+def get_year_dict(data_dicts):
+    year_dict = {}
+    for day in data_dicts:
+        year = day["Date"].year
+        daily_total = day["Daily Total"]
+        if year in year_dict:
+            year_dict[year] += daily_total
+        else:
+            year_dict[year] = daily_total
+    for year in year_dict:
+        year_dict[year] = round(year_dict[year],2)
+    return year_dict
+    
 
-def get_xy_values(graph_dictionary):
+#puts the data into a proper format to be displayed in a graph
+def get_xy_values(graph_dictionary,reverse = "no"):
     x_values = []
     y_values = []
-    for year in graph_dictionary:
-        x_values.append(year)
-        y_values.append(round(graph_dictionary[year],2))
-    xy_values = [x_values,y_values]
+    if reverse == "yes":
+        for year in graph_dictionary:
+            x_values.insert(0,year)
+            y_values.insert(0,round(graph_dictionary[year],2))
+        xy_values = [x_values,y_values]
+    else:
+        for year in graph_dictionary:
+            x_values.append(year)
+            y_values.append(round(graph_dictionary[year],2))
+        xy_values = [x_values,y_values]
     return xy_values  
 
-def show_graph(dict_to_show): 
-    xy = get_xy_values(dict_to_show)
+def show_graph(dict_to_show, reverse = "no"): 
+    xy = get_xy_values(dict_to_show, reverse)
     month = np.array(xy[0])
     y = xy[1]
     plt.xticks(range(len(y)), month)

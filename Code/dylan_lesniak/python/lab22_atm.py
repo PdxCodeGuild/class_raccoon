@@ -53,6 +53,7 @@ class ATM:
     def run(self):
         print(f"Welcome to Trustworthy Bank, {self.name}. Where you can trust us because you don't have a choice. ")
         actions = ["Check balance, Check history, Check interest, Deposit, Withdraw, Quit"]
+        #this part matches a text input with a function to later call. 
         functions = {"check balance": self.check_balance,"check history": self.print_transactions,"check interest": self.calc_interest,"deposit": self.deposit,"withdraw": self.withdraw,"quit": self.quit}
         while self.cont == "y":
             print("\nWhat would you like to do? (Check balance, Check history, Check interest, Deposit, Withdraw, or 'Quit' to exit.)")

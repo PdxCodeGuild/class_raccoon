@@ -70,6 +70,6 @@ while True:
         member_account.transactions()
     else:
         print("Invalid input.")
-        break
+        continue
         
         

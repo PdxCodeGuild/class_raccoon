@@ -22,7 +22,7 @@ with open('contacts.csv', 'r') as file:
     lines = file.read().lower().split('\n')
 #given to us. this info takes from file. reads it and splits it in lines.
 
-lines = lines[0:-1]#accounting for all lines.
+#lines = lines[0:-1]#old.
 header_list = lines[0].split(',')#the first lines is the headers list. when split by comas
 contacts_list = []
 contacts = []
@@ -39,12 +39,17 @@ for i in range(len(contacts_list)):#now we use our contacts_list info to create 
     for j in range(len(header_list)):
         contacts_dict[header_list[j]] = contacts_list[i][j]#assigning the value contacts_list[i][j] to the key contacts_dict[header_list[j]
     contacts.append(contacts_dict) #this is appending the dictionary to the contacts list. making a list of dictionaries
+
+
 while True:
     os.system("clear")
-    user_choice = input("Would you like to create, retrieve, update or delete a record?\nYou can also save or quit the session by typing 'save' or 'quit'.\n\n").lower()
+    user_choice = input("Would you like to list, create, retrieve, update or delete contacts?\nYou can also save or quit the session by typing 'save' or 'quit'.\n\n").lower()
+
+
 #create
     if user_choice == "create":
         new_contact = {}
+
     #name
         while True:
             flag = ''
@@ -59,6 +64,7 @@ while True:
                 continue
             break
         new_contact["name"] = name_choice
+
     #age
         while True:
             flag = ''
@@ -72,7 +78,8 @@ while True:
                 print("invalid input\n")
                 continue
             break
-    #email
+
+    #email *needs developed*
         email_choice = input("Email: ").lower()
 
     #color
@@ -88,16 +95,21 @@ while True:
                 print("invalid input\n")
                 continue
             break
+
     #are you sure
-        create_sure = input("Are you sure you want to create this contact? ").lower()
+        while True:
+            create_sure = input("Are you sure you want to create this contact? ").lower()
 
-        if create_sure == "yes" or create_sure == "y":
-            print("The record was successfully created.\n\n\n")
-            contacts.append(new_contact)
+            if create_sure == "yes" or create_sure == "y":
+                print("The record was successfully created.\n\n\n")
+                contacts.append(new_contact)
 
-        elif create_sure == "no" or create_sure == "n":
-            print("The record was not created\n\n\n")
-            continue
+            elif create_sure == "no" or create_sure == "n":
+                print("\nThe record was not created\n\n\n")
+                break
+            else:
+                print("\nSorry, I don't understand what you want.\n\n")
+                None
 
 
 #retrieve
@@ -107,52 +119,55 @@ while True:
         for contact in contacts:
             if retrieve_contact == contact["name"]:
                 print(f'\n{contact}')
+        else: print(f"{retrieve_contact} is not a valid name.")
 
-#update
+
+#update not finished
     elif user_choice == "update":
         update_contact = input("Who's account are we updating? ").lower()
 
         for contact in contacts:
-            if retrieve_contact == contact["name"]:
-                input("")
+            if update_contact == contact["name"]:
+                update_what = input('Choose a field to update: Name, age, email or favorite color. ')
+                if update_what not in header_list:
+                    print('Not a valid field')
 
-        update_sure = input("Are you sure you want to update this account? ").lower()
-        update_approved = print()
+                else:
+                    value = input(f'What will the new {update_what} be? ')
+                    value = update_what[contacts]
+
+        # update_sure = input("Are you sure you want to update this account? ").lower()
+        # if update_sure == "y" or "yes"
+        # update_complete = print(f"You have successfully updated {update_contact}'s account. ")
+        #
+
+# #delete not finished
+#     elif user_choice == "delete":
+#         delete_contact = input("Who's account are we deleting?").lower()
+#         delete_sure = input("Are you sure you want to delete this account? ").lower()
+#         delete_really_sure = input("Are you reeeaally sure you want to delete it? ").lower()
+#         delete_approved = print()
+#
+
+#list
+    elif user_choice == "list":
+        for contact in contacts:
+            for key in contact:
+                print(key + ': ' +contact[key])
+            print()
 
 
-
-
-
-
-
-
-    elif user_choice == "delete":
-        delete_contact = input("Who's account are we deleting?").lower()
-        delete_sure = input("Are you sure you want to delete this account? ").lower()
-        delete_really_sure = input("Are you reeeaally sure you want to delete it? ").lower()
-        delete_approved = print()
-
-#make a temp list?
-
-
-
-    #
-    #
-    #
+#save not finished
     # elif user_choice == "save":
     #
-    #
-    #
-    #
-    #
-    #
-    # elif user_choice == "quit":
-    #
-    #
-    #
-    #
-    #
-    #
-    # else:
-    #     print("invalid entry" + user_choice)
-    input('')
+
+
+#quit
+    elif user_choice == "quit":
+        break
+
+
+#else
+    else:
+        print(f"Whatever you just did is invalid.")
+    input("")

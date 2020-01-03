@@ -34,6 +34,7 @@ class Member_Account:
         print(self.transaction)
 
 # start and call ATM class and each functions
+# start loop and continue til user input quit
 start = Member_Account()
 while True:
     user_input = input('What would you like to do (Deposit, Withdraw, Balance, History or Quit): ').lower()
@@ -48,3 +49,5 @@ while True:
     elif user_input == 'quit':
         print('Goodbye')
         break
+    else:
+        print('Invalid entry.')

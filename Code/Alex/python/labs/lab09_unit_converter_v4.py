@@ -1,4 +1,4 @@
-'''*not complete*
+'''
 Lab 9: Unit Converter
 
 Version 4
@@ -29,6 +29,24 @@ import os
 import string
 
 
+
+
+def check_units(units):
+    if units in ['feet', 'feets', 'ft', 'foot']:
+        return 'ft'
+    elif units in ['mile', 'miles', 'mi']:
+        return 'mi'
+    elif units in ['meter', 'meters', 'm']:
+        return 'm'
+    elif units in ['kilometer', 'kilometers', 'km']:
+        return 'km'
+    elif units in ['yard', 'yards', 'yd']:
+        return 'yd'
+    elif units in ['inch', 'inches', 'in']:
+        return 'in'
+    return None
+
+
 units_dict = {
 "ft": 0.3048,
 "mi": 1609.34,
@@ -40,35 +58,22 @@ units_dict = {
 
 while True:
     os.system("clear")
-    units = input("What measurement type are we going to convert? (ft, mi, m, km, yd or in)")
-    distance = input(f"How many? ")
-    for char in distance:
-        if char not in string.digits and char != ".":
-            print("The units have to be a number.")
-            break
-        else:
-            distance = float(distance)
-#calculating units
-    if units == "ft" or units == "feet" or units == "foot":
-        result = distance * units_dict["ft"]
-        units = "ft"
-    elif units == "mi" or units == "miles" or units == "mile":
-        result = distance * units_dict["mi"]
-        units = "mi"
-    elif units == "m" or units == "meters" or units == "meter":
-        result = distance * units_dict["m"]
-        units = "m"
-    elif units == "km" or units == "kilometers" or units == "kilometer":
-        result = distance * units_dict["km"]
-        units = "km"
-    elif units == "yd" or units == "yards" or units == "yard":
-        result = distance * units_dict["yd"]
-        units = "yd"
-    elif units == "in" or units == "inches" or units == "inch":
-        result = distance * units_dict["in"]
-        units = "in"
-    else:
-        print("invalid input")
 
-    print(f"{distance}{units} is {result}m")
-    input('')
+    text = input('Enter your conversion (5 miles in inches): ')
+    text = text.split(' ')
+    distance = text[0]
+    input_units = text[1]
+    output_units = text[3]
+
+    distance = float(distance)
+    input_units = check_units(input_units)
+    output_units = check_units(output_units)
+    if input_units == None or output_units == None:
+        print('invalid units')
+        exit()
+
+    output_distance = distance*units[input_units]/units[output_units]
+    output_distance = round(output_distance, 4)
+    print(f'{distance} {input_units} is {output_distance} {output_units}')
+
+    

@@ -80,18 +80,18 @@ def wettest_year(rain_data):
 
 the_rainpocolypse = wettest_year(rain_data)
 
-# def graphit(rain_data):
-x_values = []
-y_values = []
-year = int(input("What year would you like to graph? (2001-2019) "))
-for days in rain_data:
-    if year == days[0].year:
-        x_values.append(days[0])
-        y_values.append(days[1])
-plt.plot(x_values, y_values)
-plt.show()
+def graphit(rain_data):
+    x_values = []
+    y_values = []
+    year = int(input("What year would you like to graph? (2001-2019) "))
+    for days in rain_data:
+        if year == days[0].year:
+            x_values.append(days[0])
+            y_values.append(days[1])
+    plt.plot(x_values, y_values)
+    plt.show()
 
-
+graphit(rain_data)
 
 print(f"The mean is {rainmean_inches} and the variance is {round(rain_variance,3)}. The wettest day was {the_rainening[0].strftime('%d-%b-%Y')} with {the_rainening[1]} inches of rainfall. The wettest year, also known as the rainpocalypse was {the_rainpocolypse[0]} with {the_rainpocolypse[1]*.01} inches.")
 

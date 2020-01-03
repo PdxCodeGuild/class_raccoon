@@ -63,6 +63,7 @@ while continue_yn == "yes":
         for i in range(len(contact_info)):
             if deleter != contact_info[i]["name"]:
                 temp_list.append(contact_info[i])
+        continue_yn = input("Would you like to make another change? ")
             
         contact_info = temp_list
         print(contact_info)
@@ -73,13 +74,26 @@ while continue_yn == "yes":
 
 else:
     output = ""
-    for header in headers:
-        output += header + ","
+    for i in range(len(headers)):
+        if i == len(headers)-1:
+            output += headers[i] 
+        else:
+            output += headers[i] + ","
+
     output += "\n"
-    for dictionaries in contact_info:
-        for value in list(dictionaries.values()):
-            output += value + ","
-        output += "\n"
+
+    
+    for x in range(len(contact_info)):
+        temp_list = list(contact_info[x].values())
+        for i in range(len(temp_list)):
+            if i == len(temp_list)-1:
+                output += temp_list[i]
+            else:
+                output += temp_list[i] + ","
+        if x < len(contact_info) - 1:
+            output += "\n"
+        
+
     print(output)
     
     

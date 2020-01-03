@@ -50,7 +50,7 @@ elif user_input == 'delete':
     for i in range(len(contact_info)-1):
         if contact_info[i]['name'] == delete_name:
             del contact_info[i]
-    print(contact_info)
+            print(contact_info)
 else:
     print('Goodbye. ')
 

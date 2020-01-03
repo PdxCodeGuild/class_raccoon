@@ -25,11 +25,11 @@ Stub:
 class Stack:
   def __init__(self):
     self.root = None
-  def push(self, element): # insert an element at the start
+  def push(self, element): # insert an element at the start (new root)
     ...
-  def pop(self, element): # remove an element from the start
+  def pop(self): # remove an element from the start (the root becomes the next node)
     ...
-  def peek(self): # returns the element on the root node or None
+  def peek(self): # returns the element on the root node or None if there is no root
     ...
   def length(self): # return the number of elements
     ...

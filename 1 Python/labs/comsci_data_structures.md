@@ -7,9 +7,12 @@ Using the following Node class, let's implement some data structures.
 
 ```python
 class Node:
-  def __init__(element, next=None):
-    self.element = element
-    self.next = next
+    def __init__(self, element, next=None):
+        self.element = element
+        self.next = next
+
+    def __str__(self):
+        return f'({self.element}, {self.next is not None})'
 ```
 
 ## Version 1 - Stack

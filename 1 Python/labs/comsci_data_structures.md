@@ -43,7 +43,7 @@ print(s.pop()) # 5
 
 ## Version 2 - Linked List
 
-A [linked list](https://en.wikipedia.org/wiki/Linked_list).
+A [linked list](https://en.wikipedia.org/wiki/Linked_list) is like a regular list in Python, and provides methods for adding and removing elements.
 
 Stub:
 ```python

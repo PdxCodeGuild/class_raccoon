@@ -7,9 +7,12 @@ Using the following Node class, let's implement some data structures.
 
 ```python
 class Node:
-  def __init__(element, next=None):
-    self.element = element
-    self.next = next
+    def __init__(self, element, next=None):
+        self.element = element
+        self.next = next
+
+    def __str__(self):
+        return f'({self.element}, {self.next is not None})'
 ```
 
 ## Version 1 - Stack
@@ -22,9 +25,11 @@ Stub:
 class Stack:
   def __init__(self):
     self.root = None
-  def push(self, element): # insert an element at the start
+  def push(self, element): # insert an element at the start (new root)
     ...
-  def pop(self, element): # remove an element from the start
+  def pop(self): # remove an element from the start (the root becomes the next node)
+    ...
+  def peek(self): # returns the element on the root node or None if there is no root
     ...
   def length(self): # return the number of elements
     ...

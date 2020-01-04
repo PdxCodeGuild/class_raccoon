@@ -1,6 +1,8 @@
 # lab20_contact_list.py
 # extract files from contacts.csv with open, and close
 import re
+import csv
+
 with open('contacts.csv', 'r') as file:
     lines = file.read().split('\n')
 
@@ -26,7 +28,7 @@ if user_input == 'create':
     create_age = input('Enter age: ').lower()
     create_email = input('Email address: ').lower()
     create_color = input('Favorite color: ').lower()
-    print(f'File to create. \nName: {create_name}, Age: {create_age}, Email: {create_email} and Favorite color: {create_color}.')
+    create_confirm = input(f'File to create. \nName: {create_name}, Age: {create_age}, Email: {create_email} and Favorite color: {create_color}. YES/NO: ').lower()
     create_file = {'name': create_name, 'age': create_age, 'email': create_email, 'favorite color': create_color}
     contact_info.append(create_file)
     print(contact_info)
@@ -51,6 +53,36 @@ elif user_input == 'delete':
     print(contact_info)
 else:
     print('Goodbye. ')
+
+# CSV update write
+try:
+    with open('contacts.csv', 'w') as file: #calling CSV and naming it file
+        writer = csv.DictWriter(file, fieldnames=contact_key) #file and using keys as headers
+        writer.writeheader()
+        for data in contact_info: # define data in update contact info dict to write
+            writer.writerow(data) # write data
+except IOError:
+    print("I/O error")
+
+
+#THIS WRITE REQUIRES FILE TO BE STR NOT LIST
+#with open("contacts2.csv", "w") as file:
+#    file.write(contact_info)
+
+#WRITER APPENDS HEADERS
+#with open("contacts2.csv", "w") as f:
+#    writer = csv.writer(f)
+#    writer.writerows(contact_info)
+
+
+# TEST WRITE BUT OVERWRITES WITH JUST KEYS
+# with open('contacts2.csv','w') as f:
+#    for info in contact_info:
+#        for item in info:
+#            f.write(item + ',')
+#        f.write('\n')
+
+
 
 
 

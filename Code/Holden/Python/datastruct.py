@@ -51,19 +51,36 @@ class Stack:
         prev_index.next = new_index
         if index == self.len:
             self.last = self.last.next
+        self.len += 1
 
     def remove(self, element):
         current_index = self.root
+        prev_index = current_index
         for i in range(self.len):
-            prev_index = current_index
             if current_index.element == element:
                 prev_index.next = current_index.next
-                if i = self.len-1:
+                if i == 0:
+                    self. root = current_index.next
+                if current_index.next == None:
+                    self.root = None
+                    self.last = None
+                elif i == self.len-1:
                     self.last = prev_index
+                self.len -= 1
                 break
+            prev_index = current_index
+            current_index = current_index.next
         else:
             print("element not in list")
 
+    def find(self, element):
+        current_index = self.root
+        for i in range(self.len):
+            if current_index.element == element:
+                return i
+            current_index = current_index.next
+        else:
+            return -1
 
     def __str__(self):
         output = "["
@@ -83,6 +100,13 @@ teststack.push(40)
 teststack.push("dumb")
 teststack.push(var)
 teststack.append("ap")
+teststack.insert(8,4)
+teststack.push(8)
+print(teststack)
+teststack.remove(8)
+teststack.insert("end?", 8)
+teststack.append("end.")
+print(teststack.find("end?"))
 print(teststack)
 print(teststack.length())
 print(teststack.pop())

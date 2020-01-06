@@ -1,15 +1,16 @@
-# lab15_rot.py
-
-# importing modules to use, in this instance, 'string'
 import string
 
-# string with the ascii lowercase
-rot = string.ascii_lowercase
+alphabet = string.ascii_lowercase
+num_chars = len(alphabet)
+rot_amt = 13
 
-# prompt for input
-user_input = input("Enter something to encrypt: ")
+string_input = input('Enter something to encrypt: ').lower()
 
-user_output = ""
-for i in user_input:
-    user_output += rot[(rot.find(i)+13)%len(rot)]
-print(user_output)
+
+string_output = ''
+for i in string_input:
+    char_loc = alphabet.index(i)
+    new_loc = (char_loc + rot_amt) % num_chars
+    string_output += alphabet[new_loc]
+
+print(string_output)

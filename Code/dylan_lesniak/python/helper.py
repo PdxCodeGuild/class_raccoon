@@ -15,7 +15,22 @@ def digit_checker(num,digits = None):
         if num.isdigit():
             return num
         else:
-            print("INVALID ENTRY: Enter number ONLY.")
+            print("INVALID ENTRY: Enter integer numbers ONLY.")
+            num = input("> ")
+
+def float_checker(nums,digits = None):
+    acceptable_inputs = [" 0123456789$%.,"]
+    while True:
+        if digits is not None:
+            if len(list(num)) > digits:
+                print(f"INVALID ENTRY: Entry too large. Please keep to {digits} digits.")
+                num = input("> ")
+        if all([num for num in nums if num in acceptable_inputs]):
+            return_nums = [num for num in nums if num.isdigit() or num == "."]
+            return_nums = "".join(return_nums)
+            return return_nums
+        else:
+            print("INVALID ENTRY: Enter numbers ONLY.")
             num = input("> ")
 
 def text_checker(text,acceptable_inputs = []):
@@ -24,7 +39,8 @@ def text_checker(text,acceptable_inputs = []):
     while True:
         if all([char for char in text if char in ok_formats]):
             if len(acceptable_inputs) > 0:
-                if any([option for option in acceptable_inputs if text in option.lower()]):
+                print()
+                if any([option for option in acceptable_inputs if text.lower() in option.lower()]):
                     return text
                 else:
                     print(f"INVALID ENTRY: Entry not in list.")

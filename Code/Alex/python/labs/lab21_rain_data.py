@@ -26,3 +26,25 @@ print(date.day)    # 25
 print(date)  # 2016-03-25 00:00:00
 print(date.strftime('%d-%b-%Y'))  # 25-Mar-2016
 '''
+
+
+import re
+import datetime
+
+#write function to load the file
+with open('rain_data.txt', 'r') as file:
+    rain_data = file.read()
+#create a list of tuples to represent the Data
+data = re.findall("(\d{2}-\w{3}-\d{4})\s+(\d+)", rain_data)
+#print(data)
+
+#parse the dates with datetime.strptime. The result will be a datetime object
+rain_data = []
+for item in data:
+    date = datetime.datetime.strptime(item[0], '%d-%b-%Y')
+    rain_data.append((date, item[1]))
+    #print(rain_data)
+for item in rain_data[:100]:
+    print(item[0].strftime('%d-%b-%Y'), item[1])
+
+

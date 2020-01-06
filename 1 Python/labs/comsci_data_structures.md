@@ -7,9 +7,12 @@ Using the following Node class, let's implement some data structures.
 
 ```python
 class Node:
-  def __init__(element, next=None):
-    self.element = element
-    self.next = next
+    def __init__(self, element, next=None):
+        self.element = element
+        self.next = next
+
+    def __str__(self):
+        return f'({self.element}, {self.next is not None})'
 ```
 
 ## Version 1 - Stack
@@ -22,9 +25,11 @@ Stub:
 class Stack:
   def __init__(self):
     self.root = None
-  def push(self, element): # insert an element at the start
+  def push(self, element): # insert an element at the start (new root)
     ...
-  def pop(self, element): # remove an element from the start
+  def pop(self): # remove an element from the start (the root becomes the next node)
+    ...
+  def peek(self): # returns the element on the root node or None if there is no root
     ...
   def length(self): # return the number of elements
     ...
@@ -43,7 +48,7 @@ print(s.pop()) # 5
 
 ## Version 2 - Linked List
 
-A [linked list](https://en.wikipedia.org/wiki/Linked_list).
+A [linked list](https://en.wikipedia.org/wiki/Linked_list) is like a regular list in Python, and provides methods for adding and removing elements. You may also like to follow [this tutorial](https://stackabuse.com/python-linked-lists/).
 
 Stub:
 ```python
@@ -73,6 +78,10 @@ print(nums.length()) # 2
 ```
 
 
+
+## Version 3 (optional) - Doubly Linked List
+
+In a [doubly-linked list](https://en.wikipedia.org/wiki/Doubly_linked_list) each node maintains a reference to both the next and previous node. Implement a class `DoubleyLinkedList` with the same methods as `LinkedList` but with each node having a reference to both the `previous` and `next` nodes.
 
 
 

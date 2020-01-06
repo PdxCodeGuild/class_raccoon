@@ -58,9 +58,7 @@ def multiplication(num1,num2):
             print(f"{carry} carry")
             print(num1)
         for i in range(i):
-            carry.reverse()
-            carry.append(0)
-            carry.reverse()
+            carry.insert(0,0)
         output = addition(carry,output)
     return output
 

@@ -13,7 +13,8 @@ def get_lines(file_path):
         lines = file.read().split('\n')
     new_list = []
     for line in lines:
-        new_list.append(line.split(","))
+        if line != '':
+            new_list.append(line.split(","))
     return new_list
 
 def get_contacts(headers, lines):
@@ -33,23 +34,29 @@ def add_contacts(keys,contact):
     for j in range(len(keys)):
         contact_dict[keys[j]] = update_user[j]
     return contact_dict
+    
+def create_csv(headers,contacts):
+    csv_str = ','.join(headers)+"\n"
+    for i in range(len(contacts)):
+        csv_str += ','.join(list(contacts[i].values()))+ "\n"
+    return csv_str
+        
+        
 
 #This function runs the program.....supposedly....
-def what_to_do():
-    lines = get_lines('contact.csv')
-    headers = lines.pop(0)
-    contacts = get_contacts(headers, lines)
+def what_to_do(to_do, headers, contacts):
 
-    to_do = input("Do you want to add, find, update or delete?\n:").lower()
+
     if to_do == "add":
         contacts.append(add_contacts(headers, contacts))
-        return(contacts)
-        
+        return contacts
+
     elif to_do == "find":
-        who_find = input("Who do you want to find?\n:")
+        who_find = input("Who do you want to find?\n:").lower()
         for person in contacts:
             if who_find == person["name"]:
-                return(person)
+                
+                return ",".join(list(person.values()))
         else:
             return("not in database.")
     elif to_do == "update":
@@ -69,10 +76,24 @@ def what_to_do():
             if who_delete in contacts[i]["name"]:
                 contacts.pop(i)
                 return(contacts)
+    elif to_do == "save":
+        
+        save = create_csv(headers,contacts)
+        print("hello")
+        with open('contact.csv', 'w') as file:
+            file.write(save)
 
 
 
 
 lines = get_lines('contact.csv')
+headers = lines.pop(0)
+contacts = get_contacts(headers, lines)
 print(f"The current contacts in the list are {lines}")
-print(what_to_do())
+while True:
+    to_do = input("Do you want to add, find, update or delete save or quit?\n:").lower()
+    if to_do == "add" or to_do == "find" or to_do == "update" or to_do == "delete" or to_do == "save":
+        print(what_to_do(to_do, headers, contacts))
+    elif to_do == "quit":
+        print('goodbye')
+        break

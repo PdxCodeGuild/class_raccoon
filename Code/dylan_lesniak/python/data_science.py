@@ -66,31 +66,86 @@ class LinkedList:
         self.len = 0 
         self.reference = None
 
-    def append(self,element): #add element to the end
+    def push(self,element): #insert an element at the start
         self.root = Node(element,self.root)
+        self.len += 1
+    
+    def pop(self): #remove an element from the start
+        if self.root is None:
+            return None
+        ele = self.root.element
+        self.root = self.root.next
+        self.len -= 1
+        return ele
+
+
+    def peek(self):
+        if self.root is None:
+            return None
+        else:
+            return self.root.element
+
+    def length(self):
+        return self.len
+
+    def append(self,element): #add element to the end
+        if self.root is None: 
+            self.root = Node(element)
+        else:
+            current_node = self.root #this just goes through the list until the next value is empty
+            #which of course means that it's the end of the list
+            while current_node.next is not None:
+                current_node = current_node.next
+            current_node.next = Node(element)    
         self.len += 1
 
     def insert(self,element, idx): #insert element at given index
-        current_idx = self.len -1
-        current_spot = self.root
-        previous_spot = current_spot
-        new_stack = None
-        while current_spot is not None:
-            print(previous_spot)
-            if current_idx == idx:
-                print(current_spot)
-            # current_spot = current_spot.append(current_spot.next)
-            previous_spot = previous_spot.next
-            current_spot = current_spot.next
-            current_idx -= 1
         self.len += 1
+        index = 0 
+        if idx == 0: 
+            self.push(element)
+            return
+        current_node = self.root
+        while current_node is not None:
+            if counter+1 == idx:
+                new_node = Node(element, current_node)
+                current_node.next = new_node
+                break
+            index += 1
+            current_node = current_node.next
+        else:
+            self.append(element)
     
     def remove(self,element): #remove the first occurrence of the element
+        if self.root is None:
+            return
         self.len -= 1
+        if self.root == element:
+            self.root = self.root.next
+            return
+        current_node = self.root
+        previous_node = None
+        while current_node is not None:
+            if current_node.element == element:
+                previous_node.next = current_node.next
+            previous_node = current_node
+            current_node = current_node.next
+
+        
+
+
 
     def find(self,element): #find the first occurence of the element
         if self.root is None:
             return None
+        index = 0 
+        current_node = self.root
+        while current_node is not None:
+            if current_node.element == element:
+                return index
+            index += 1
+            current_node = current_node.next
+        return False
         
     
     def length(self): #return the length of the list
@@ -110,7 +165,7 @@ nums.append(5)
 nums.append(6)
 nums.insert(7, 0)
 print(nums) # [7, 5, 6]
-# # print(nums.find(5)) # 1
-# # nums.remove(5)
-# print(nums) # [7, 6]
-# print(nums.length()) # 2
+print(nums.find(5)) # 1
+nums.remove(5)
+print(nums) # [7, 6]
+print(nums.length()) # 2

@@ -36,7 +36,7 @@ def binary_search(nums, value):
     return "ERROR: VALUE NOT IN RANGE"
 
 #VERSION 3:
-nums = [5,1,4,2,9,8]
+nums = [5,1,4,2,9,9,8]
 print(nums)
 
 #jeez, just gotta :=
@@ -72,6 +72,7 @@ def quicksort_recursive(nums,low,high):
         part = partition(nums,low,high)
         quicksort_recursive(nums,low,part) #sorts the first half
         quicksort_recursive(nums,part+1,high) #
+    
 
 def partition(nums, low, high): 
     mid = (low + high) // 2

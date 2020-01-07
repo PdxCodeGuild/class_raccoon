@@ -31,7 +31,7 @@ quote_count = 1
 while True:
     
     url = f'https://favqs.com/api/quotes?page={page}&filter={keyword}'
-    headers = {'Authorization': 'Token token="855df50978dc9afd6bf86579913c9f8b"'}
+    headers = {'Authorization': 'Token token="ENTER TOKEN HERE"'}
     response = requests.get(url, headers=headers)
     data = json.loads(response.text)["quotes"]
     # print(data)

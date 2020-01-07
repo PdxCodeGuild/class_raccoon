@@ -17,3 +17,15 @@ Version 1: Get a Random Quote
 
 The URL to get a random quote is https://favqs.com/api/qotd, send a request here, parse the JSON in the response into a python dictionary, and show the quote and the author.
 '''
+
+import requests
+import json
+
+url = 'https://favqs.com/api/qotd'
+response = requests.get(url) # send the request to the api
+#print(response.text) # look at the raw json
+data = json.loads(response.text) # turn the json into a python dictionary
+body = data['quote']['body'] # get a part of the response data out of the dictionary
+author = data['quote']['author']
+
+print(f"\"{body}\"\n-{author}")

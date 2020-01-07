@@ -1,5 +1,5 @@
 import re
-
+from decimal import Decimal
 
 class atm:
     def __init__(self, bal = 0, intrst = 0.1):
@@ -7,18 +7,22 @@ class atm:
         self.intrst = intrst
         self.history = []
 
-    def check_balance():
-        return self.bal
+    def check_balance(self):
+        return "$" + str(self.bal)
 
-    def deposit(amount):
+    def print_history(self):
+        for transaction in self.history:
+            print(transaction)
+
+    def deposit(self, amount):
         self.bal += amount
         print(f"${amount} has been deposited to account.")
         self.history.append(f"User deposited ${amount}")
 
-    def check_withdrawl(amount):
+    def check_withdrawl(self, amount):
         return self.bal - amount > 0
 
-    def withdrawl(amount):
+    def withdrawl(self, amount):
         if check_withdrawl(amount):
             self.bal -= amount
             print(f"${amount} has been withdrawn from account.")
@@ -27,13 +31,14 @@ class atm:
             print("We kept you from overdrawing your account because we're nice people.")
             print(f"You have ${self.bal} in your account.")
 
-    def calc_interest():
-        return decimal(self.bal * self.intrst)
+    def calc_interest(self):
+        return round(Decimal(self.bal * self.intrst),2)
 
 def clean_input(usin):
     found_d_smb = usin.find("$")
     found_dol = usin.find("dollars")
     found_cents = usin.find("cents")
+    dollars = 0
     cents = 0
     if found_dol != -1 and found_d_smb != -1:
         return None
@@ -45,25 +50,38 @@ def clean_input(usin):
         if re.search(r"\$\d+\.*\d* ?cents", usin):
             return None
     if found_cents != -1:
-        # need to fix search thingy
-        cents += int("0." + re.findall(r"(\d).?cents", usin))
+        cents_value = re.findall(r"(\d+).?cents", usin)
+        if len(cents_value) != 1:
+            return None
+        cents += Decimal(int(cents_value[0])/100)
     if found_dol != -1:
-        dollars = int(re.search(r"(\d+)\.*\d* ?dollars", usin))
-        if re.search(r"\d+\.*(\d*) ?dollars", usin):
-            cents += int("0." + re.search(r"\d+\.*(\d*) ?dollars", usin))
+        dollar_value = re.findall(r"(\d+)\.*\d* ?dollars", usin)
+        if len(dollar_value) != 1:
+            return None
+        dollars = Decimal(dollar_value[0])
+        dollar_cents = re.findall(r"\d+\.*(\d{2}) ?dollars", usin)
+        if len(dollars_cents) == 1 and dollar_cents[0]:
+            cents += Decimal("0." + dollar_cents[0])
     if found_d_smb != -1:
-        dollars = int(re.search(r"(\d+)\.*\d*", usin))
-        if re.search(r"\$\d+\.*(\d*)", usin):
-            cents += int("0." + re.search(r"\$\d+\.*(\d*)", usin))
+        dollar_value = re.findall(r"\$(\d+)\.*\d*", usin)
+        if len(dollar_value) != 1:
+            return None
+        dollars = Decimal(dollar_value[0])
+        dollar_cents = re.findall(r"\$\d+\.*(\d{2})", usin)
+        if len(dollar_cents) == 1 and dollar_cents[0]:
+            cents += Decimal("0." + dollar_cents[0])
     if dollars + cents != 0:
-        return decimal(dollars + cents)
+        return round(Decimal(dollars + cents),2)
 
 validin = ["deposit", "depo", "withdraw", "with", "check balance", "check", "history", "hist"]
 quitprompt = ["quit", "q", "exit"]
 deposit_prompt = ["deposit", "depo"]
+withdraw_prompt = ["withdraw", "with"]
+check_prompt = ["check balance", "check"]
+history_prompt = ["history", "hist"]
 user = atm(0, 0.1)
 while True:
-    usin = input("> what would you like to do (deposit, withdraw, check balance, history)? \n> ").lower()
+    usin = input("> what would you like to do (deposit, withdraw, check balance, history, quit)? \n> ").lower()
     if usin in quitprompt:
         break
     if usin not in validin:
@@ -77,3 +95,15 @@ while True:
             if cleaned == None:
                 print("Please input a valid dollar amount")
         user.deposit(cleaned)
+    if usin in withdraw_prompt:
+        cleaned = None
+        while cleaned == None:
+            usin = input("Input withdrawl amount: \n> ")
+            cleaned = clean_input(usin)
+            if cleaned == None:
+                print("Please input a valid dollar amount")
+        user.withdrawl(cleaned)
+    if usin in check_prompt:
+        print(f"Your balance is {user.check_balance()}")
+    if usin in history_prompt:
+        user.print_history()

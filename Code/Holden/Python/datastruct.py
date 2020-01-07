@@ -34,44 +34,63 @@ class Stack:
     def length(self):
         return str(self.len)
 
+    def __len__(self):
+        return self.len
+
     def append(self, element):
         self.last.next = Node(element)
         self.last = self.last.next
         self.len += 1
 
     def insert(self, element, index):
-        if index - 1 > self.len:
+        if index - 1 > self.len or index < 0:
             print("index out of range")
             exit()
-        current_index = self.root
+        current_node = self.root
         for i in range(index):
-            prev_index = current_index
-            current_index = current_index.next
-        new_index = Node(element, current_index)
-        prev_index.next = new_index
+            prev_node = current_node
+            current_node = current_node.next
+        prev_node.next = Node(element, current_node)
         if index == self.len:
             self.last = self.last.next
+        self.len += 1
 
     def remove(self, element):
-        current_index = self.root
+        current_node = self.root
+        prev_node = current_node
         for i in range(self.len):
-            prev_index = current_index
-            if current_index.element == element:
-                prev_index.next = current_index.next
-                if i = self.len-1:
-                    self.last = prev_index
+            if current_node.element == element:
+                prev_node.next = current_node.next
+                if i == 0:
+                    self.root = current_node.next
+                if current_node.next == None:
+                    self.root = None
+                    self.last = None
+                elif i == self.len-1:
+                    self.last = prev_node
+                self.len -= 1
                 break
+            prev_node = current_node
+            current_node = current_node.next
         else:
             print("element not in list")
 
+    def find(self, element):
+        current_node = self.root
+        for i in range(self.len):
+            if current_node.element == element:
+                return i
+            current_node = current_node.next
+        else:
+            return -1
 
     def __str__(self):
         output = "["
-        current_root = self.root
+        current_node = self.root
         for i in range(self.len-1):
-            output += str(current_root.element) + ", "
-            current_root = current_root.next
-        output += str(current_root.element) + "]"
+            output += str(current_node.element) + ", "
+            current_node = current_node.next
+        output += str(current_node.element) + "]"
         return output
 
 var = "lel"
@@ -83,6 +102,13 @@ teststack.push(40)
 teststack.push("dumb")
 teststack.push(var)
 teststack.append("ap")
+teststack.insert(8,4)
+teststack.push(8)
+print(teststack)
+teststack.remove(8)
+teststack.insert("end?", 8)
+teststack.append("end.")
+print(f'\"end?\" found at {teststack.find("end?")}')
 print(teststack)
 print(teststack.length())
 print(teststack.pop())

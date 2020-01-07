@@ -25,11 +25,11 @@ def binary_search(num_list,user):
 def bubble_sort(nums):
     for i in range(len(nums)-1,0,-1):#starts at the end, goes to the beginning in reverse order
         for j in range(i):
-            if nums[j] > nums[j+1]:#If its greater than, swap
+            if nums[j] > nums[j+1]:#check if its greater than, if so start the swap
                 sorted = nums[j]#temporary variable for the swap
                 nums[j] = nums[j+1]#Swappage
                 nums[j+1] = sorted #New list
-    return f"The new list is {nums}"
+    return f"The sorted list is {nums}"
     
 def insertion_sort(nums):
     for i in range(len(nums)):

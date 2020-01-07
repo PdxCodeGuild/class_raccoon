@@ -1,4 +1,4 @@
-'''
+'''*not complete*
 Lab 21: Rain data
 
 Version 2
@@ -21,3 +21,39 @@ bell_curve
 
 4. Find the year which had the most rain on average.
 '''
+
+
+import re
+import datetime
+
+#write function to load the file
+with open('rain_data.txt', 'r') as file:
+    rain_data = file.read()
+#create a list of tuples to represent the Data
+data = re.findall("(\d{2}-\w{3}-\d{4})\s+(\d+)", rain_data)
+#print(data)
+
+#parse the dates with datetime.strptime. The result will be a datetime object
+rain_data = []
+for item in data:
+    date = datetime.datetime.strptime(item[0], '%d-%b-%Y')
+    rain_data.append((date, item[1]))
+    #print(rain_data)
+#for item in rain_data[:100]:
+    #print(item[0].strftime('%d-%b-%Y'), item[1])
+
+
+#calculate the mean of the DATA
+    #print(data)
+count_for_the_total = 0
+for i in range(len(rain_data)):
+    count_for_the_total += int(rain_data[i][1])
+total = count_for_the_total
+mean = total / len(rain_data)
+print(mean)
+
+#Use the mean to calculate the standard deviation
+
+#Find the day which had the most rain.
+
+#Find the year which had the most rain on average.

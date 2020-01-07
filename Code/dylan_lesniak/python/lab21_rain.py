@@ -22,15 +22,18 @@ def get_rain_urls(): #gets every file with rain data
     rain_files = ['https://or.water.usgs.gov/non-usgs/bes/' + rain_file for rain_file in rain_files]
     return rain_files
 
-#our central hub. Defines most of the data by referencing other methods. 
-def get_page_info(file): 
+def get_file_data(file):
     file_text = file.text
     file_text = file_text.split('\n')
     data_lines = [line.split(" ") for line in file_text[11:]] #the last value in the list is always an empty list, which breaks the program
     for i in range(len(data_lines)): #a lot of values wound up being ["","",""] so this cuts those.
         data_lines[i] = [char for char in data_lines[i] if char != ""]
     data_lines = [line[:2] for line in data_lines]
-    data_lines = data_lines[:-1]  
+    data_lines = data_lines[:-1] 
+    get_page_info(data_lines)
+
+#our central hub. Defines most of the data by referencing other methods. 
+def get_page_info(data_lines): 
     
     data_dicts = get_data_dicts(data_lines)
     data_avg = get_mean(data_dicts)
@@ -191,8 +194,14 @@ def show_graph(dict_to_show, reverse = "no"):
 
 if __name__ == "__main__":
     rains = get_rain_urls()
-    file = requests.get(rains[3])
-    get_page_info(file)
+    files = []
+    for rain in rains:
+        files.append(requests.get(rain))
+    file_list = []
+    for file in files:
+        for line in file:
+            file_list.append(line)
+    get_file_data(file_list) #make file_list a filetype (or whatever), not a list 
     
 
 #data starts at array value 11. This is consistent on the forms, thankfully. 

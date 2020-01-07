@@ -39,7 +39,7 @@ The Favqs Quote API also supports getting a list of quotes associated with a giv
 This API endpoint requires an API key be included in a request header. You can find documentation of specifying request headers [here](https://requests.readthedocs.io/en/master/user/quickstart/#custom-headers) and documentation on authorization with the Favqs API [here](https://favqs.com/api/) under "Authorization".
 
 ```python
-url = '...'
+url = 'https://favqs.com/api/quotes?page=1&filter=nature'
 headers = {'Authorization': 'Token token="855df50978dc9afd6bf86579913c9f8b"'}
 response = requests.get(url, headers=headers)
 ```

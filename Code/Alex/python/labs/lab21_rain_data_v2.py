@@ -39,14 +39,18 @@ for item in data:
     date = datetime.datetime.strptime(item[0], '%d-%b-%Y')
     rain_data.append((date, item[1]))
     #print(rain_data)
-for item in rain_data[:100]:
-    print(item[0].strftime('%d-%b-%Y'), item[1])
-
-
-
+#for item in rain_data[:100]:
+    #print(item[0].strftime('%d-%b-%Y'), item[1])
 
 
 #calculate the mean of the DATA
+    #print(data)
+count_for_the_total = 0
+for i in range(len(rain_data)):
+    count_for_the_total += int(rain_data[i][1])
+total = count_for_the_total
+mean = total / len(rain_data)
+print(mean)
 
 #Use the mean to calculate the standard deviation
 

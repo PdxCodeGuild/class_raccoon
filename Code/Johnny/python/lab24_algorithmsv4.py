@@ -1,14 +1,14 @@
 def insertion_sort(nums):
-   for index in range(1,len(nums)):
+   for i in range(1,len(nums)):
 
-     currentvalue = nums[index]
-     position = index
+     current = nums[i]
+     pos = i
 
-     while position>0 and nums[position-1]>currentvalue:
-         nums[position]=nums[position-1]
-         position = position-1
+     while pos>0 and nums[pos-1]>current:
+         nums[pos]=nums[pos-1]
+         pos = pos-1
 
-     nums[position]=currentvalue
+     nums[pos]=current
      print(nums)
 
 nums = [6,7,8,9,3,4,2,1,5,0]

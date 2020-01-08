@@ -25,15 +25,14 @@ bell_curve
 
 import re
 import datetime
+import math
 
-#write function to load the file
+
 with open('rain_data.txt', 'r') as file:
     rain_data = file.read()
-#create a list of tuples to represent the Data
+
 data = re.findall("(\d{2}-\w{3}-\d{4})\s+(\d+)", rain_data)
 #print(data)
-
-#parse the dates with datetime.strptime. The result will be a datetime object
 rain_data = []
 for item in data:
     date = datetime.datetime.strptime(item[0], '%d-%b-%Y')
@@ -42,7 +41,6 @@ for item in data:
 #for item in rain_data[:100]:
     #print(item[0].strftime('%d-%b-%Y'), item[1])
 
-
 #calculate the mean of the DATA
     #print(data)
 count_for_the_total = 0
@@ -50,10 +48,25 @@ for i in range(len(rain_data)):
     count_for_the_total += int(rain_data[i][1])
 total = count_for_the_total
 mean = total / len(rain_data)
-print(mean)
+print(f"\n\nThe mean of the data is {mean}\n")
 
 #Use the mean to calculate the standard deviation
+    # for each number: subtract the Mean and square the result.
+    # Then work out the mean of those squared differences.
+    # Take the square root of that and we are done!
+standard_deviation = []
+for i in range(len(rain_data)):
+    standard_deviation.append((int(rain_data[i][1]) - mean)**2)
+s_mean = sum(standard_deviation) / len(standard_deviation)
+s_mean = math.sqrt(s_mean)
+print(f"The standard deviation of the data is {s_mean}\n")
 
 #Find the day which had the most rain.
+day_most_rain = rain_data[0]
+for item in rain_data:
+    if item[1] > day_most_rain[1]:
+        day_most_rain = item
+print(f"The day with the most rain had {day_most_rain[1]} tips\n")
 
 #Find the year which had the most rain on average.
+

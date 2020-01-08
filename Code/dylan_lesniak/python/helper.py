@@ -33,8 +33,7 @@ def float_checker(nums,digits = None):
             print("INVALID ENTRY: Enter numbers ONLY.")
             num = input("> ")
 
-def text_checker(text,acceptable_inputs = []):
-    ok_formats = f"{string.ascii_letters},{string.whitespace}"
+def text_checker(text,acceptable_inputs = [], ok_formats = string.ascii_letters):
     text = text.lower()
     while True:
         if all([char for char in text if char in ok_formats]):

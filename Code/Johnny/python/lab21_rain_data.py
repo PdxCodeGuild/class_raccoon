@@ -15,4 +15,19 @@ for day in data:
     dates = datetime.datetime.strptime(day[0], '%d-%b-%Y')
     days_most.append((dates,day[1]))
     years_most.append(dates.year)
-print(days_most)
+
+
+# trying to calcuate the total means
+# extract total from list and convert to int to calcuate
+total_mean = [i[1] for i in days_most]
+total_mean = [int(i) for i in total_mean]
+print(len(total_mean)) #7196
+print(sum(total_mean))
+print('Total mean: ')
+print(sum(total_mean)/7196)
+
+# Using lambda to figure out max value at end of tuples and return date
+print('Day with most rainfall: ')
+print(max(days_most, key = lambda i : i[1])) #shows full value and date
+rain = max(days_most, key = lambda i : i[1])[0] #shows date and time (inner tuples)
+print(rain)

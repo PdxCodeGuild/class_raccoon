@@ -36,7 +36,7 @@ def binary_search(nums, value):
     return "ERROR: VALUE NOT IN RANGE"
 
 #VERSION 3:
-nums = [5,1,4,2,9,9,8]
+nums = [9,5,1,4,2,9]
 print(nums)
 
 #jeez, just gotta :=
@@ -83,11 +83,13 @@ def partition(nums, low, high):
     elif nums[mid] < nums[high]:
         nums[mid], nums[high] = nums[high], nums[mid]
     pivot = nums[high]
-    i = low
-    j = high
+    i = low -1
+    j = high + 1
     while True:
+        i += 1
         while nums[i] < pivot:
             i += 1
+        j -= 1
         while nums[j] > pivot:
             j -= 1
         if i >= j:

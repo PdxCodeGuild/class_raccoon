@@ -28,7 +28,7 @@ while True:
 #random
     if user_choice == "random":
         os.system("clear")
-        headers = {"api_key" : "rHH2bcJvdAtFJag6LLxFcAnHHZsfHBOm"}
+        headers = {"api_key" : "rHH2bcJvdAtFJag6LLxFcAnHHZsfHBOm", 'User-Agent': 'Mozilla/5.0'}
         url = 'http://api.giphy.com/v1/gifs/random'
         response = requests.get(url, params=headers)
         data = response.json()

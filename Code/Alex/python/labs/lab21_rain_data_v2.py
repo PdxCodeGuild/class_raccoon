@@ -68,5 +68,14 @@ for item in rain_data:
         day_most_rain = item
 print(f"The day with the most rain had {day_most_rain[1]} tips\n")
 
-#Find the year which had the most rain on average.
 
+
+
+#todo
+
+#
+# #Find the year which had the most rain on average.
+# list_of_years = []
+# for i in range(len(rain_data))
+#     list_of_years.append(i)
+# print(f"The year with the most rain was {year_most_rain}")

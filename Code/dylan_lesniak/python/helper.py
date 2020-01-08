@@ -6,7 +6,7 @@ Purpose: simple reusable helper methods
 
 import string
 
-def digit_checker(num = input("> "),digits = None):
+def digit_checker(num,digits = None):
     while True:
         if digits is not None:
             if len(list(num)) > digits:
@@ -18,7 +18,7 @@ def digit_checker(num = input("> "),digits = None):
             print("INVALID ENTRY: Enter integer numbers ONLY.")
             num = input("> ")
 
-def float_checker(nums = input("> "),digits = None):
+def float_checker(nums,digits = None):
     acceptable_inputs = [" 0123456789$%.,"]
     while True:
         if digits is not None:
@@ -33,8 +33,7 @@ def float_checker(nums = input("> "),digits = None):
             print("INVALID ENTRY: Enter numbers ONLY.")
             num = input("> ")
 
-def text_checker(text = input("> "),acceptable_inputs = []):
-    ok_formats = f"{string.ascii_letters},{string.whitespace}"
+def text_checker(text,acceptable_inputs = [], ok_formats = string.ascii_letters):
     text = text.lower()
     while True:
         if all([char for char in text if char in ok_formats]):
@@ -54,7 +53,7 @@ def text_checker(text = input("> "),acceptable_inputs = []):
             print("INVALID ENTRY: Please enter valid text entry. ")
             text = input("> ")
 
-def time_checker(num = input("> ")):
+def time_checker(num):
     while True:
         num_list = list(num)
         first_half = num_list[:2]

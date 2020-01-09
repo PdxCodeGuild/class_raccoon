@@ -37,19 +37,19 @@ for i in range(height):  # loop over the rows
         board[i].append(' ')  # append an empty space to the board
 
 # define the player position
-player_i = 4
-player_j = 4
+player_i = 4 #position in row the player is in
+player_j = 4 #position in column the player is in
 
 # add 4 enemies in random locations
-for i in range(4):
-    enemy_i = random.randint(0, height - 1)
-    enemy_j = random.randint(0, width - 1)
-    board[enemy_i][enemy_j] = '§'
+for i in range(4): ''' I LEARNED SOMETHING. with range, the upperbound is exclusive. We put 4 because their are 4 enemies'''
+    enemy_i = random.randint(0, height - 1) #puts enemy at a random spot in any row
+    enemy_j = random.randint(0, width - 1) #puts enemy at a random spot in any column
+    board[enemy_i][enemy_j] = '§' #creates and displays an enemy symbol for each enemy
 
 # loop until the user says 'done' or dies
 while True:
-
-    command = input('what is your command? ')  # get the command from the user
+# get the command from the user
+    command = input('what is your command? ')
 
     if command == 'done':
         break  # exit the game
@@ -62,22 +62,21 @@ while True:
     elif command == 'down':
         player_i += 1  # move down
 
-    # check if the player is on the same space as an enemy
+# check if the player is on the same space as an enemy
     if board[player_i][player_j] == '§':
-        print('you\'ve encountered an enemy!')
-        action = input('what will you do? ')
-        if action == 'attack':
-            print('you\'ve slain the enemy')
+        print('you\'ve encountered an enemy!') #prompts the player
+        action = input('what will you do? ') #gives them a choice
+        if action == 'attack': #if they choose to attack
+            print('you\'ve slain the enemy') #prompts user
             board[player_i][player_j] = ' '  # remove the enemy from the board
         else:
-            print('you hestitated and were slain')
+            print('you hestitated and were slain')#prompts user
             break
 
-            # print out the board
-    for i in range(height):
-        for j in range(width):
-            # if we're at the player location, print the player icon
-            if i == player_i and j == player_j:
+# print out the board
+    for i in range(height): #for any space in row
+        for j in range(width): #for any space in column
+            if i == player_i and j == player_j: #if we're at the player location, print the player icon
                 print('☺', end=' ')
             else:
                 print(board[i][j], end=' ')  # otherwise print the board square

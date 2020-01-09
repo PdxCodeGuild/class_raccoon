@@ -36,6 +36,8 @@ while True:
         player_i -= 1  # move up
     elif command in ['south', 's', 'down']:
         player_i += 1  # move down
+        #stupid changes
+        
 
     # check if the player is on the same space as an enemy
     if board[player_i][player_j] == '§': # if you're sitting on an enemy

@@ -1,7 +1,7 @@
 import random
 
-width = 5  # the width of the board
-height = 5  # the height of the board
+width = 10  # the width of the board
+height = 10  # the height of the board
 
 # create a board with the given width and height
 # we'll use a list of list to represent the board
@@ -14,17 +14,19 @@ for i in range(height):  # loop over the rows
 # define the player position
 player_i = 4
 player_j = 4
+board[player_i][player_j] = '☺'
 
 # add 4 enemies in random locations
 for i in range(4):
-    conflict == True
+    conflict = True
     while conflict:
         enemy_i = random.randint(0, height - 1)
         enemy_j = random.randint(0, width - 1)
         if board[enemy_i][enemy_j] != ' ':
-            conflict == True
+            conflict = True
         else:
             board[enemy_i][enemy_j] = '§'
+            conflict = False
 
 # loop until the user says 'done' or dies
 while True:
@@ -38,7 +40,7 @@ while True:
                 print(board[i][j], end=' ')  # otherwise print the board square
         print()
 
-    command = input('what is your command? ')  # get the command from the user
+    command = input("What is your command? ")  # get the command from the user
     if command == 'done':
         break  # exit the game
     elif command in ['left','l','west','w']:
@@ -64,13 +66,13 @@ while True:
 
     # check if the player is on the same space as an enemy
     if board[player_i][player_j] == '§':
-        print('you\'ve encountered an enemy!')
-        action = input('what will you do? ')
+        print("You've encountered an enemy!")
+        action = input("What will you do? ")
         if action == 'attack':
-            print('you\'ve slain the enemy')
+            print("You've slain the enemy!")
             board[player_i][player_j] = ' '  # remove the enemy from the board
         else:
-            print('you hestitated and were slain')
+            print("You hestitated and were slain!")
             break
 
             # print out the board

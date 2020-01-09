@@ -20,7 +20,7 @@ Possible modifications:
     add hidden treasure, make the objective to find all the treasure
     add a 'final boss' that you can only face once collecting items
     re-use previous labs (guess the number, rock-paper-scissors)
-"""
+""" 
 
 import random
 

@@ -24,6 +24,15 @@ for i in range(4):
 
 # loop until the user says 'done' or dies
 while True:
+    # print out the board
+    for i in range(height):
+        for j in range(width):
+            # if we're at the player location, print the player icon
+            if i == player_i and j == player_j:
+                print('☺', end=' ')
+            else:
+                print(board[i][j], end=' ')  # otherwise print the board square
+        print()
 
     command = input('what is your command? ')  # get the command from the user
 
@@ -48,13 +57,3 @@ while True:
         else:
             print('you hestitated and were slain')
             break
-
-            # print out the board
-    for i in range(height):
-        for j in range(width):
-            # if we're at the player location, print the player icon
-            if i == player_i and j == player_j:
-                print('☺', end=' ')
-            else:
-                print(board[i][j], end=' ')  # otherwise print the board square
-        print()

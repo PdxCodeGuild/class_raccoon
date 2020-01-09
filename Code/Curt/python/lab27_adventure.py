@@ -47,7 +47,11 @@ while True:
         else:
             print('you hestitated and were slain')
             break
+<<<<<<< HEAD
 
+=======
+            #I MADE A CHANGE
+>>>>>>> origin/comments
             # print out the board
     for i in range(height):
         for j in range(width):

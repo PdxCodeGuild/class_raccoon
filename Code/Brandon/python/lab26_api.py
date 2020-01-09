@@ -10,21 +10,21 @@ import random
 import json
 import string
 
-def merge(list1, list2): 
+def merge(ingredients, measurement): 
       
     merged_list = [] 
-    for i in range(max((len(list1), len(list2)))): 
+    for i in range(max((len(ingredients), len(measurement)))): 
   
         while True: 
             try: 
-                tup = (list1[i], list2[i]) 
+                tup = (ingredients[i], measurement[i]) 
             except IndexError: 
-                if len(list1) > len(list2): 
-                    list2.append('') 
-                    tup = (list1[i], list2[i]) 
-                elif len(list1) < len(list2): 
-                    list1.append('') 
-                    tup = (list1[i], list2[i]) 
+                if len(ingredients) > len(measurement): 
+                    measurement.append('') 
+                    tup = (ingredients[i], measurement[i]) 
+                elif len(ingredients) < len(measurement): 
+                    ingredients.append('') 
+                    tup = (ingredients[i], measurement[i]) 
                 continue
   
             merged_list.append(tup) 

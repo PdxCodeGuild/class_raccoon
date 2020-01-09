@@ -37,14 +37,14 @@ for i in range(height):  # loop over the rows
         board[i].append(' ')  # append an empty space to the board
 
 # define the player position
-player_i = 4
-player_j = 4
+player_i = 4 #starting position. I is y axis
+player_j = 4 #j is x axis. 
 
 # add 4 enemies in random locations
 for i in range(4):
-    enemy_i = random.randint(0, height - 1)
+    enemy_i = random.randint(0, height - 1) #creates four bad guys. Well, techincally, up to four. The positions could be the same. Change in future edit. 
     enemy_j = random.randint(0, width - 1)
-    board[enemy_i][enemy_j] = '§'
+    board[enemy_i][enemy_j] = '§' #board[position] = "bad-guy character"
 
 # loop until the user says 'done' or dies
 while True:
@@ -63,22 +63,22 @@ while True:
         player_i += 1  # move down
 
     # check if the player is on the same space as an enemy
-    if board[player_i][player_j] == '§':
+    if board[player_i][player_j] == '§': #if the inteded location of the player already has a bad guy, enter encounter
         print('you\'ve encountered an enemy!')
         action = input('what will you do? ')
-        if action == 'attack':
+        if action == 'attack': 
             print('you\'ve slain the enemy')
             board[player_i][player_j] = ' '  # remove the enemy from the board
         else:
-            print('you hestitated and were slain')
+            print('you hestitated and were slain') 
             break
 
             # print out the board
-    for i in range(height):
-        for j in range(width):
+    for i in range(height): #for the x axis
+        for j in range(width): #for the y axis
             # if we're at the player location, print the player icon
-            if i == player_i and j == player_j:
-                print('☺', end=' ')
+            if i == player_i and j == player_j: #if the current printable position is the player position
+                print('☺', end=' ') #print player 
             else:
                 print(board[i][j], end=' ')  # otherwise print the board square
         print()

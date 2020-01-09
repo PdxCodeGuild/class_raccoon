@@ -4,18 +4,19 @@
 import string
 import requests
 import json
+import webbrowser
 
 
 print('Generate testimonial to add to your business.')
 print('Pick random or enter attribute and create your own.')
 print('-'*45)
 print('Random           Random profile.')
-print('M/F/Both         Add male & female or both.')
+print('Male/Female/Both Add male & female or both.')
 print('Region           Add a country.')
 print('Email            Attach a email to the profile.')
 print('Phone            Add a phone number.')
 print('Photo            Inlude a photo.')
-print('Testimonial      Random testimonial.')
+print('Testimonial      Random testimonial.') # Testimonial is from Kayne West quotes
 print('Create           Create profile.')
 print('Quit')
 print('-'*45)
@@ -36,6 +37,7 @@ profile_dict = {'name': data['name'],
                 'email': data['email'],
                 'testimonial': data2['quote'],
                 'photo': data['photo']}
+
 profile = []
 while True:
     user_input = input('>> ').lower()
@@ -52,4 +54,4 @@ while True:
         break
     elif user_input == 'create' or user_input == 'quit':
         break
-print(profile_dict[f'{user_input}'])
+ 

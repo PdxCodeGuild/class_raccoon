@@ -10,6 +10,28 @@ import random
 import json
 import string
 
+def merge(ingredients, measurement): 
+      
+    merged_list = [] 
+    for i in range(max((len(ingredients), len(measurement)))): 
+  
+        while True: 
+            try: 
+                tup = (ingredients[i], measurement[i]) 
+            except IndexError: 
+                if len(ingredients) > len(measurement): 
+                    measurement.append('') 
+                    tup = (ingredients[i], measurement[i]) 
+                elif len(ingredients) < len(measurement): 
+                    ingredients.append('') 
+                    tup = (ingredients[i], measurement[i]) 
+                continue
+  
+            merged_list.append(tup) 
+            break
+    for a, b in (merged_list):  # <-- this unpacks the tuple like a, b = (0, 1)
+        print(a, b)
+
 def search_drink_name(user):
     url = f"https://www.thecocktaildb.com/api/json/v1/1/search.php?s={user}"
     response = requests.get(url)
@@ -21,17 +43,30 @@ def search_drink_name(user):
     choices = {}
     for drink in drinks:
         ingredients = []
+        measurement = []
+        mixed = []
         for key in drink:
             if "strIngredient" in key:
                 if drink[key] == None:
                     continue
                 else:
                     ingredients.append(drink[key])
-            choices[(drink["strDrink"])] = {"ingredients": ingredients, "Instructions": drink["strInstructions"]}
+              
+            if "strMeasure" in key:
+                if drink[key] == None:
+                    continue
+                else:
+                    measurement.append(drink[key])
+        choices[(drink["strDrink"])] = {"ingredients": ingredients, "measurement": measurement, "mixed": mixed, "Instructions": drink["strInstructions"]}
+            # merge(ingredients,measurement)
+            
     for key in choices:
-        print(f"\n{key}")
-        print(f"\nThe ingredients are : {', '.join(choices[key]['ingredients'])}\n")
+        print(f"\n The {key}")
+        print(f"\nThe ingredients are :\n<><><><><><><><><><>") #{', '.join(choices[key]['ingredients'])} \n")
+        print(f"{merge(ingredients,measurement)} \n")
         print(f"To make this drink: {choices[key]['Instructions']}\n-------------------------")
+        # print(merge(ingredients,measurement))
+        # print(f"\nThe Measurements for the booze are as follows..\n: {', '.join(choices[key]['mixed'])}\n")
 
 def search_liqour(user):
     url = f"https://www.thecocktaildb.com/api/json/v1/1/filter.php?i={user}"
@@ -44,7 +79,6 @@ def search_liqour(user):
 
     random.shuffle(drinks)
     counter = 0
-    # list_counter = 0
     while counter < len(drinks):
         for i in range(counter, counter + 10):
             if i == len(drinks):
@@ -56,7 +90,7 @@ def search_liqour(user):
         elif more != "":
             if more.isdigit():
                 more = int(more)
-                if more < len(drinks):
+                if more <= len(drinks):
                     drink_choice = drinks[more-1]
                     search_drink_name(drink_choice["strDrink"])
                 else:

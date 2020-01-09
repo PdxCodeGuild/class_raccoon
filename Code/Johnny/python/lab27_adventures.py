@@ -1,27 +1,27 @@
+"""
+Lab 27: Adventure
 
-# Lab 27: Adventure
-
-Let's build a simple board game that runs on the terminal. We'll represent the board using a **list of lists**. We'll use two `int`s to represent that player's position on the board. Every iteration of the game loop, the user will be prompted for a command. Start with the code below, and add your own modifications.
+Let's build a simple board game that runs on the terminal. We'll represent the board using a list of lists. We'll use two ints to represent that player's position on the board. Every iteration of the game loop, the user will be prompted for a command. Start with the code below, and add your own modifications.
 
 Possible modifications:
-- use more succinct commands (l/u/d/r for up/down/left/right or n/s/e/w for north/south/east/west)
-- add boundaries to the map, when the player attempts to move beyond the boundary, stop them or move them to the other side
-- make what's printed on the screen a part of a much larger map (with the player always shown at the center of the screen)
-- loading a text file containing the map, or procedurally generate things
-- walls / barriers
-- use different unicode characters (you can find [lists online](https://www.google.com/search?q=cool+unicode+characters&rlz=1C1CHBF_enUS773US773&oq=cool+unicode+chara&aqs=chrome.0.0j69i57j0l3.90708j1j1&sourceid=chrome&ie=UTF-8))
-- ascii art
-- [colorama](https://pypi.python.org/pypi/colorama) for custom colors, or [curses](https://docs.python.org/3/howto/curses.html) for even more control of the terminal
-- add 'fog of war' - only show the elements of board immediately around the player (you can then find a torch item, which expands your visibility)
-- have enemies move around
-- add an inventory system
-- add player health, more complex encounters
-- add hidden treasure, make the objective to find all the treasure
-- add a 'final boss' that you can only face once collecting items
-- re-use previous labs (guess the number, rock-paper-scissors)
 
+    use more succinct commands (l/u/d/r for up/down/left/right or n/s/e/w for north/south/east/west)
+    add boundaries to the map, when the player attempts to move beyond the boundary, stop them or move them to the other side
+    make what's printed on the screen a part of a much larger map (with the player always shown at the center of the screen)
+    loading a text file containing the map, or procedurally generate things
+    walls / barriers
+    use different unicode characters (you can find lists online)
+    ascii art
+    colorama for custom colors, or curses for even more control of the terminal
+    add 'fog of war' - only show the elements of board immediately around the player (you can then find a torch item, which expands your visibility)
+    have enemies move around
+    add an inventory system
+    add player health, more complex encounters
+    add hidden treasure, make the objective to find all the treasure
+    add a 'final boss' that you can only face once collecting items
+    re-use previous labs (guess the number, rock-paper-scissors)
+"""
 
-```python
 import random
 
 width = 10  # the width of the board
@@ -81,5 +81,3 @@ while True:
             else:
                 print(board[i][j], end=' ')  # otherwise print the board square
         print()
-
-```

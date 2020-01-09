@@ -14,12 +14,12 @@ word_dict = {}
 word_list = re.findall(r'\w+', text)
 
 # Function to strip out the punctuation
-# def text_stripper(x):
-#     global text_stripped
-#     for char in x:
-#         if char not in string.punctuation:
-#             text_stripped += char
-#     return text_stripped
+def text_stripper(x):
+    global text_stripped
+    for char in x:
+        if char not in string.punctuation:
+            text_stripped.append(char)
+    return text_stripped
 
 # Function to break the string into a list
 # def convert_to_list(text):
@@ -51,4 +51,5 @@ dictionary_maker(word_list)
 words = list(word_dict.items())
 words.sort(key=lambda tup: tup[1], reverse=True)  # sort largest to smallest, based on count
 # for i in range(min(10, len(words))):  # print the top 10 words, or all of them, whichever is smaller
-print(word_dict)
+# print(word_dict)
+print(text_stripped)

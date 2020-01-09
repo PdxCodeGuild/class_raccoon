@@ -4,6 +4,9 @@ class Node:
         self.element = element
         self.next = next
 
+    def __str__(self):
+        return f'({self.element}, {self.next is not None})'
+
 class Stack:
     def __init__(self):
         self.root = None
@@ -93,7 +96,7 @@ class LinkedList:
         if current_node.element == element:
             return index
         current_node = current_node.next
-        
+
   def length(self): # return the length of the list
     count = 0
     n = self.root

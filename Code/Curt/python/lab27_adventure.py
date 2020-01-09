@@ -14,7 +14,7 @@ for i in range(height):  # loop over the rows
 # define the player position
 player_i = 4
 player_j = 4
-board[player_i][player_j] = '☺'
+board[player_i][player_j] = '☺' #generates player for conflict testing
 
 # add 4 enemies in random locations
 for i in range(4):
@@ -28,9 +28,20 @@ for i in range(4):
             board[enemy_i][enemy_j] = '§'
             conflict = False
 
+# add a sword in a random location:
+conflict = True
+while conflict:
+    sword_i = random.randint(0, height - 1)
+    sword_j = random.randint(0, width - 1)
+    if board[sword_i][sword_j] != ' ':
+        conflict = True
+    else:
+        board[sword_i][sword_j] = '⚔'
+        conflict = False
+
+board[player_i][player_j] = ' ' #removes generated player marker
 # loop until the user says 'done' or dies
 while True:
-
     for i in range(height):
         for j in range(width):
             # if we're at the player location, print the player icon
@@ -63,6 +74,12 @@ while True:
         if player_i not in range(len(board)):
             print("Can't go there!")
             player_i -= 1
+
+    #get the sword
+    if board[player_i][player_j] == '⚔':
+        print("You got the sword!")
+        board[player_i][player_j] = ' '
+        sword = True
 
     # check if the player is on the same space as an enemy
     if board[player_i][player_j] == '§':

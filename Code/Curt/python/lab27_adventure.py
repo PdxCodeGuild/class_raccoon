@@ -24,18 +24,38 @@ for i in range(4):
 # loop until the user says 'done' or dies
 while True:
 
-    command = input('what is your command? ')  # get the command from the user
+    for i in range(height):
+        for j in range(width):
+            # if we're at the player location, print the player icon
+            if i == player_i and j == player_j:
+                print('☺', end=' ')
+            else:
+                print(board[i][j], end=' ')  # otherwise print the board square
+        print()
 
+    command = input('what is your command? ')  # get the command from the user
     if command == 'done':
         break  # exit the game
-    elif command == 'left':
+    elif command in ['left','l','west','w']:
         player_j -= 1  # move left
-    elif command == 'right':
+        if player_j not in range(len(board[0])):
+            print("Can't go there!")
+            player_j += 1
+    elif command in ['right','r','east','e']:
         player_j += 1  # move right
-    elif command == 'up':
+        if player_j not in range(len(board[0])):
+            print("Can't go there!")
+            player_j -= 1
+    elif command in ['up','u','north','n']:
         player_i -= 1  # move up
-    elif command == 'down':
+        if player_i not in range(len(board)):
+            print("Can't go there!")
+            player_i += 1
+    elif command in ['down','d','south','s']:
         player_i += 1  # move down
+        if player_i not in range(len(board)):
+            print("Can't go there!")
+            player_i -= 1
 
     # check if the player is on the same space as an enemy
     if board[player_i][player_j] == '§':
@@ -47,13 +67,5 @@ while True:
         else:
             print('you hestitated and were slain')
             break
-            #I MADE A CHANGE
+
             # print out the board
-    for i in range(height):
-        for j in range(width):
-            # if we're at the player location, print the player icon
-            if i == player_i and j == player_j:
-                print('☺', end=' ')
-            else:
-                print(board[i][j], end=' ')  # otherwise print the board square
-        print()

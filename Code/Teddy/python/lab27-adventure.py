@@ -49,17 +49,17 @@ for i in range(4):
 # loop until the user says 'done' or dies
 while True:
 
-    command = input('what is your command? ')  # get the command from the user
+    command = input('what is your command? ').lower()  # get the command from the user
 
     if command == 'done':
         break  # exit the game
-    elif command == 'left':
+    elif command in ['l','left']:
         player_j -= 1  # move left
-    elif command == 'right':
+    elif command in ['r','right']:
         player_j += 1  # move right
-    elif command == 'up':
+    elif command in ['u','up']:
         player_i -= 1  # move up
-    elif command == 'down':
+    elif command in ['d','down']:
         player_i += 1  # move down
 
     # check if the player is on the same space as an enemy

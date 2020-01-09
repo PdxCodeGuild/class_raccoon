@@ -1,26 +1,27 @@
-"""
+'''
 Lab 27: Adventure
-
-Let's build a simple board game that runs on the terminal. We'll represent the board using a list of lists. We'll use two ints to represent that player's position on the board. Every iteration of the game loop, the user will be prompted for a command. Start with the code below, and add your own modifications.
+Let's build a simple board game that runs on the terminal. We'll represent the board using a list of lists.
+We'll use two ints to represent that player's position on the board. Every iteration of the game loop,
+the user will be prompted for a command. Start with the code below, and add your own modifications.
 
 Possible modifications:
 
-    use more succinct commands (l/u/d/r for up/down/left/right or n/s/e/w for north/south/east/west)
-    add boundaries to the map, when the player attempts to move beyond the boundary, stop them or move them to the other side
-    make what's printed on the screen a part of a much larger map (with the player always shown at the center of the screen)
-    loading a text file containing the map, or procedurally generate things
-    walls / barriers
-    use different unicode characters (you can find lists online)
-    ascii art
-    colorama for custom colors, or curses for even more control of the terminal
-    add 'fog of war' - only show the elements of board immediately around the player (you can then find a torch item, which expands your visibility)
-    have enemies move around
-    add an inventory system
-    add player health, more complex encounters
-    add hidden treasure, make the objective to find all the treasure
-    add a 'final boss' that you can only face once collecting items
-    re-use previous labs (guess the number, rock-paper-scissors)
-"""
+- use more succinct commands (l/u/d/r for up/down/left/right or n/s/e/w for north/south/east/west)
+- add boundaries to the map, when the player attempts to move beyond the boundary, stop them or move them to the other side
+- make what's printed on the screen a part of a much larger map (with the player always shown at the center of the screen)
+- loading a text file containing the map, or procedurally generate things
+- walls / barriers
+- use different unicode characters (you can find lists online)
+- ascii art
+- colorama for custom colors, or curses for even more control of the terminal
+- add 'fog of war' - only show the elements of board immediately around the player (you can then find a torch item, which expands your visibility)
+- have enemies move around
+- add an inventory system
+- add player health, more complex encounters
+- add hidden treasure, make the objective to find all the treasure
+- add a 'final boss' that you can only face once collecting items
+- re-use previous labs (guess the number, rock-paper-scissors)
+'''
 
 import random
 
@@ -45,22 +46,20 @@ for i in range(4):
     enemy_j = random.randint(0, width - 1)
     board[enemy_i][enemy_j] = '§'
 
-
 # loop until the user says 'done' or dies
 while True:
-# need to add instructions to push out
-    print('>> left, right, down, up, or done <<')
+
     command = input('what is your command? ').lower()  # get the command from the user
 
     if command == 'done':
         break  # exit the game
-    elif command in ['l', 'left']:
+    elif command in ['l','left']:
         player_j -= 1  # move left
-    elif command in ['r', 'right']:
+    elif command in ['r','right']:
         player_j += 1  # move right
-    elif command in ['u', 'up']:
+    elif command in ['u','up']:
         player_i -= 1  # move up
-    elif command in ['d', 'down']:
+    elif command in ['d','down']:
         player_i += 1  # move down
 
     # check if the player is on the same space as an enemy

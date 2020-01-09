@@ -38,17 +38,15 @@ yelpresponse = requests.get(yelpurl, headers=yelpheaders)
 yelpdata = json.loads(yelpresponse.text)['businesses']
 brewerylist = []
 for x in yelpdata:
-    brewerylist.append((x['name'],x['location']['display_address'][0],x['location']['display_address'][1],x['distance']))
+    brewerylist.append((x['name'],x['location']['display_address'][0],x['location']['display_address'][-1],x['distance']))
 brewerylist.sort(key = lambda x: x[3])
-print(brewerylist)
 
-if len(brewerylist) <= 10:
+if len(brewerylist) >= 10:
     total = 10
 else:
     total = len(brewerylist)
-print(brewerylist)
 
-print(f"Here are the {total} closest breweries:")
+print(f"\nHere are the {total} closest breweries:")
 count = 0
 for x in brewerylist[:total]:
     print(x[0])

@@ -1,9 +1,7 @@
-#lab27_adventure.py
-
 import random
 
 width = 10  # the width of the board
-height = 12  # the height of the board
+height = 10  # the height of the board
 
 # create a board with the given width and height
 # we'll use a list of list to represent the board
@@ -24,39 +22,32 @@ for i in range(4):
     board[enemy_i][enemy_j] = '§'
 
 # loop until the user says 'done' or dies
-# def boundary(player_i, player_j, board)
+while True:
 
+    command = input('what is your command? ')  # get the command from the user
 
-while True: #loops until player done playing
-
-    command = input('What is your command? ').casefold()  # get the command from the user
-
-    #moves the player
     if command == 'done':
         break  # exit the game
-    elif command == 'left' or command == 'l':
+    elif command == 'left':
         player_j -= 1  # move left
-        if player_j not in range(len(board[1])):
-            print("Can't go there!")
-            player_j += 1
-    elif command == 'right' or command == 'r':
+    elif command == 'right':
         player_j += 1  # move right
-    elif command == 'up' or command == 'u':
+    elif command == 'up':
         player_i -= 1  # move up
-    elif command == 'down' or command == 'd':
+    elif command == 'down':
         player_i += 1  # move down
 
     # check if the player is on the same space as an enemy
     if board[player_i][player_j] == '§':
-        print("You've encountered an enemy!")
-        action = input('What will you do? ').casefold()
+        print('you\'ve encountered an enemy!')
+        action = input('what will you do? ')
         if action == 'attack':
-            print("You've slain the enemy!")
+            print('you\'ve slain the enemy')
             board[player_i][player_j] = ' '  # remove the enemy from the board
         else:
-            print("You hestitated and were slain, you dummy!\nDEAAAAAD DUMMY")
+            print('you hestitated and were slain')
             break
-
+            #I MADE A CHANGE
             # print out the board
     for i in range(height):
         for j in range(width):

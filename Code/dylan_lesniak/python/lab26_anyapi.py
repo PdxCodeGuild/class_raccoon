@@ -69,11 +69,15 @@ class AirApi:
         response = requests.get('http://' + self.info_urls['cities'][0] + self.state + self.info_urls['cities'][1] + self.country + self.info_urls['cities'][2] + self.key)
         cities_dict = json.loads(response.text)['data'] #this gives us a list of dictionaries, where each dictionary is a city
         for city in cities_dict:
+            if type(city) == str:
+                print(city)
+                exit()
             self.cities.append(city['city'])
 
     def get_city_data(self):
         print(f"\nAvailable cities are: ",end= ' ')
         i = 0 
+
         for city in self.cities:
             if i == len(self.cities) - 1:
                 print(city)
@@ -110,6 +114,19 @@ class AirApi:
         self.populate_cities()
         self.get_city_data()
         self.print_city_data()
+
+
+#code sometimes gives back an error. Something like:
+'''
+Traceback (most recent call last):
+  File "lab26_anyapi.py", line 119, in <module>
+    new_api.run_api()
+  File "lab26_anyapi.py", line 110, in run_api
+    self.populate_cities()
+  File "lab26_anyapi.py", line 72, in populate_cities
+    self.cities.append(city['city'])
+TypeError: string indices must be integers
+'''
             
 
 if __name__ == "__main__":

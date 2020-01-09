@@ -26,7 +26,6 @@ def getcoords():
 
     #return latitude and longitude as a tuple
     finalcoords = (geocoords['lat'],geocoords['lng'])
-    print(type(finalcoords))
     return finalcoords
 
 #call address function to create coordinates for both locations

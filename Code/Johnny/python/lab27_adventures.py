@@ -45,20 +45,22 @@ for i in range(4):
     enemy_j = random.randint(0, width - 1)
     board[enemy_i][enemy_j] = '§'
 
+
 # loop until the user says 'done' or dies
 while True:
-
-    command = input('what is your command? ')  # get the command from the user
+# need to add instructions to push out
+    print('>> left, right, down, up, or done <<')
+    command = input('what is your command? ').lower()  # get the command from the user
 
     if command == 'done':
         break  # exit the game
-    elif command == 'left':
+    elif command in ['l', 'left']:
         player_j -= 1  # move left
-    elif command == 'right':
+    elif command in ['r', 'right']:
         player_j += 1  # move right
-    elif command == 'up':
+    elif command in ['u', 'up']:
         player_i -= 1  # move up
-    elif command == 'down':
+    elif command in ['d', 'down']:
         player_i += 1  # move down
 
     # check if the player is on the same space as an enemy

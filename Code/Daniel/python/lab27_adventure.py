@@ -24,18 +24,34 @@ for i in range(4):
 # loop until the user says 'done' or dies
 while True:
 
-    command = input('what is your command? ')  # get the command from the user
+    command = input('what is your command? ').lower()  # get the command from the user
 
-    if command == 'done':
+    if command in ['done' , 'quit' , 'end']:
         break  # exit the game
-    elif command == 'left':
-        player_j -= 1  # move left
-    elif command == 'right':
-        player_j += 1  # move right
-    elif command == 'up':
-        player_i -= 1  # move up
-    elif command == 'down':
-        player_i += 1  # move down
+    elif command in ['left', 'west', 'w', 'l']:
+        if player_j != 0:
+            player_j -= 1  # move left
+        elif player_j == 0:
+            player_j += 9 # loop back to the right side of the map
+    elif command in ['right', 'east', 'e', 'r']:
+        if player_j != width-1:
+            player_j += 1  # move right
+        elif player_j == width-1:
+            player_j -= 9 # loop back to the left
+    elif command in ['north', 'n', 'up', 'u']:
+        print(player_i)
+        if player_i != 0:
+            player_i -= 1  # move up
+        elif player_i == 0:
+            player_i += 9 # loop to the bottom
+    elif command in ['south', 's', 'down', 'u']:
+        print(player_i)
+        if player_i != height-1:
+            player_i += 1  # move down
+        elif player_i == height-1:
+            player_i -= 9 # loop to the top
+
+        
 
     # check if the player is on the same space as an enemy
     if board[player_i][player_j] == '§': # if you're sitting on an enemy

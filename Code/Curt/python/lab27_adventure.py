@@ -1,7 +1,7 @@
 import random
 
-width = 10  # the width of the board
-height = 10  # the height of the board
+width = 5  # the width of the board
+height = 5  # the height of the board
 
 # create a board with the given width and height
 # we'll use a list of list to represent the board
@@ -17,9 +17,14 @@ player_j = 4
 
 # add 4 enemies in random locations
 for i in range(4):
-    enemy_i = random.randint(0, height - 1)
-    enemy_j = random.randint(0, width - 1)
-    board[enemy_i][enemy_j] = '§'
+    conflict == True
+    while conflict:
+        enemy_i = random.randint(0, height - 1)
+        enemy_j = random.randint(0, width - 1)
+        if board[enemy_i][enemy_j] != ' ':
+            conflict == True
+        else:
+            board[enemy_i][enemy_j] = '§'
 
 # loop until the user says 'done' or dies
 while True:

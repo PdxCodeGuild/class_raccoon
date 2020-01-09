@@ -1,5 +1,24 @@
 #Finally the Adventure... Brandon G.
 
+# Possible modifications:
+# 
+#     use more succinct commands (l/u/d/r for up/down/left/right or n/s/e/w for north/south/east/west)
+#     add boundaries to the map, when the player attempts to move beyond the boundary, stop them or move them to the other side
+#     make what's printed on the screen a part of a much larger map (with the player always shown at the center of the screen)
+#     loading a text file containing the map, or procedurally generate things
+#     walls / barriers
+#     use different unicode characters (you can find lists online)
+#     ascii art
+#     colorama for custom colors, or curses for even more control of the terminal
+#     add 'fog of war' - only show the elements of board immediately around the player (you can then find a torch item, which expands your visibility)
+#     have enemies move around
+#     add an inventory system
+#     add player health, more complex encounters
+#     add hidden treasure, make the objective to find all the treasure
+#     add a 'final boss' that you can only face once collecting items
+#     re-use previous labs (guess the number, rock-paper-scissors)
+
+
 import random
 
 width = 10  # the width of the board
@@ -27,16 +46,16 @@ for i in range(4):
 while True:
 
     command = input('what is your command? ')  # get the command from the user
-
+    #Commands using multiple input types associated with the direction
     if command == 'done':
         break  # exit the game
-    elif command == 'left':
+    elif command in ['left','l','west','w']:
         player_j -= 1  # move left
-    elif command == 'right':
+    elif command  in ['right','r','east','e']:
         player_j += 1  # move right
-    elif command == 'up':
+    elif command  in ['up','u','north','n']:
         player_i -= 1  # move up
-    elif command == 'down':
+    elif command  in ['down','d','south','s']:
         player_i += 1  # move down
 
     # check if the player is on the same space as an enemy

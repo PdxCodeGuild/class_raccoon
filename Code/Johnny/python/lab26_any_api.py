@@ -38,10 +38,10 @@ profile_dict = {'name': data['name'],
                 'testimonial': data2['quote'],
                 'photo': data['photo']}
 
-profile = []
+profile = {}
 while True:
     user_input = input('>> ').lower()
-    profile.append(user_input)
+    profile.update(user_input)
     if user_input == 'random':
         print(f"Picture: {data['photo']}")
         print(f"Name:    {data['name']}")
@@ -54,4 +54,4 @@ while True:
         break
     elif user_input == 'create' or user_input == 'quit':
         break
- 
+print(profile)

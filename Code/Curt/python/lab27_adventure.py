@@ -11,83 +11,83 @@ for i in range(height):  # loop over the rows
     for j in range(width):  # loop over the columns
         board[i].append(' ')  # append an empty space to the board
 
-# define the player position
-player_i = 4
-player_j = 4
-board[player_i][player_j] = '☺' #generates player for conflict testing
+# randomize the player starting position
+player_y = random.randint(0, height - 1)
+player_x = random.randint(0, width - 1)
+board[player_y][player_x] = '☺' #generates player for conflict testing
 
 # add 4 enemies in random locations
 for i in range(4):
     conflict = True
     while conflict:
-        enemy_i = random.randint(0, height - 1)
-        enemy_j = random.randint(0, width - 1)
-        if board[enemy_i][enemy_j] != ' ':
+        enemy_y = random.randint(0, height - 1)
+        enemy_x = random.randint(0, width - 1)
+        if board[enemy_y][enemy_x] != ' ':
             conflict = True
         else:
-            board[enemy_i][enemy_j] = '§'
+            board[enemy_y][enemy_x] = '§'
             conflict = False
 
 # add a sword in a random location:
 conflict = True
 while conflict:
-    sword_i = random.randint(0, height - 1)
-    sword_j = random.randint(0, width - 1)
-    if board[sword_i][sword_j] != ' ':
+    sword_y = random.randint(0, height - 1)
+    sword_x = random.randint(0, width - 1)
+    if board[sword_y][sword_x] != ' ':
         conflict = True
     else:
-        board[sword_i][sword_j] = '⚔'
+        board[sword_y][sword_x] = '⚔'
         conflict = False
 
-board[player_i][player_j] = ' ' #removes generated player marker
+board[player_y][player_x] = ' ' #removes generated player marker
 # loop until the user says 'done' or dies
 while True:
     for i in range(height):
         for j in range(width):
             # if we're at the player location, print the player icon
-            if i == player_i and j == player_j:
+            if i == player_y and j == player_x:
                 print('☺', end=' ')
             else:
                 print(board[i][j], end=' ')  # otherwise print the board square
         print()
 
     command = input("What is your command? ")  # get the command from the user
-    if command == 'done':
+    if command in ['done','quit','exit']:
         break  # exit the game
     elif command in ['left','l','west','w']:
-        player_j -= 1  # move left
-        if player_j not in range(len(board[0])):
+        player_x -= 1  # move left
+        if player_x not in range(len(board[0])):
             print("Can't go there!")
-            player_j += 1
+            player_x += 1
     elif command in ['right','r','east','e']:
-        player_j += 1  # move right
-        if player_j not in range(len(board[0])):
+        player_x += 1  # move right
+        if player_x not in range(len(board[0])):
             print("Can't go there!")
-            player_j -= 1
+            player_x -= 1
     elif command in ['up','u','north','n']:
-        player_i -= 1  # move up
-        if player_i not in range(len(board)):
+        player_y -= 1  # move up
+        if player_y not in range(len(board)):
             print("Can't go there!")
-            player_i += 1
+            player_y += 1
     elif command in ['down','d','south','s']:
-        player_i += 1  # move down
-        if player_i not in range(len(board)):
+        player_y += 1  # move down
+        if player_y not in range(len(board)):
             print("Can't go there!")
-            player_i -= 1
+            player_y -= 1
 
     #get the sword
-    if board[player_i][player_j] == '⚔':
+    if board[player_y][player_x] == '⚔':
         print("You got the sword!")
-        board[player_i][player_j] = ' '
+        board[player_y][player_x] = ' '
         sword = True
 
     # check if the player is on the same space as an enemy
-    if board[player_i][player_j] == '§':
+    if board[player_y][player_x] == '§':
         print("You've encountered an enemy!")
         action = input("What will you do? ")
         if action == 'attack':
             print("You've slain the enemy!")
-            board[player_i][player_j] = ' '  # remove the enemy from the board
+            board[player_y][player_x] = ' '  # remove the enemy from the board
         else:
             print("You hestitated and were slain!")
             break

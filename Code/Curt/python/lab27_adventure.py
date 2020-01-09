@@ -11,33 +11,27 @@ for i in range(height):  # loop over the rows
     for j in range(width):  # loop over the columns
         board[i].append(' ')  # append an empty space to the board
 
+#random generator for player, enemies, items, etc
+def random_gen(width, height, board, symbol):
+    conflict = True
+    while conflict:
+        unit_y = random.randint(0, height -1)
+        unit_x = random.randint(0, width - 1)
+        if board[unit_y][unit_x] != ' ':
+            conflict = True
+        else:
+            board[unit_y][unit_x] = symbol
+            conflict = False
+    return unit_y, unit_x
 # randomize the player starting position
-player_y = random.randint(0, height - 1)
-player_x = random.randint(0, width - 1)
-board[player_y][player_x] = '☺' #generates player for conflict testing
+player_y,player_x = random_gen(width, height, board, '☺')
 
 # add 4 enemies in random locations
 for i in range(4):
-    conflict = True
-    while conflict:
-        enemy_y = random.randint(0, height - 1)
-        enemy_x = random.randint(0, width - 1)
-        if board[enemy_y][enemy_x] != ' ':
-            conflict = True
-        else:
-            board[enemy_y][enemy_x] = '§'
-            conflict = False
+    enemy_y,enemy_x = random_gen(width, height, board, '§')
 
 # add a sword in a random location:
-conflict = True
-while conflict:
-    sword_y = random.randint(0, height - 1)
-    sword_x = random.randint(0, width - 1)
-    if board[sword_y][sword_x] != ' ':
-        conflict = True
-    else:
-        board[sword_y][sword_x] = '⚔'
-        conflict = False
+sword_y,sword_x = random_gen(width, height, board, '⚔')
 
 board[player_y][player_x] = ' ' #removes generated player marker
 # loop until the user says 'done' or dies

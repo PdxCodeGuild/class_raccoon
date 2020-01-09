@@ -11,27 +11,27 @@ Possible modifications:
 
 *- make what's printed on the screen a part of a much larger map (with the player always shown at the center of the screen)
 
-- loading a text file containing the map, or procedurally generate things
+- have enemies move around
 
 - walls / barriers
 
-- use different unicode characters (you can find lists online)
+- add an inventory system
+
+- add hidden treasure, make the objective to find all the treasure
+
+- add player health, more complex encounters
+
+- add a 'final boss' that you can only face once collecting items
 
 - ascii art
 
 - colorama for custom colors, or curses for even more control of the terminal
 
+- loading a text file containing the map, or procedurally generate things
+
+- use different unicode characters (you can find lists online)
+
 - add 'fog of war' - only show the elements of board immediately around the player (you can then find a torch item, which expands your visibility)
-
-- have enemies move around
-
-- add an inventory system
-
-- add player health, more complex encounters
-
-- add hidden treasure, make the objective to find all the treasure
-
-- add a 'final boss' that you can only face once collecting items
 
 - re-use previous labs (guess the number, rock-paper-scissors)
 '''

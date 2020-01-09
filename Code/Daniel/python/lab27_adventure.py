@@ -28,19 +28,29 @@ while True:
 
     if command in ['done' , 'quit' , 'end']:
         break  # exit the game
-    elif command in ['left', 'west', 'w']:
-        player_j -= 1  # move left
-    elif command in ['right', 'east', 'e']:
-        player_j += 1  # move right
-    elif command in ['north', 'n', 'up']:
-        player_i -= 1  # move up
-    elif command in ['south', 's', 'down']:
-        player_i += 1  # move down
-<<<<<<< HEAD
-        # stupid change to make changes
-=======
-        #stupid changes
->>>>>>> directions_changes
+    elif command in ['left', 'west', 'w', 'l']:
+        if player_j != 0:
+            player_j -= 1  # move left
+        elif player_j == 0:
+            player_j += 9 # loop back to the right side of the map
+    elif command in ['right', 'east', 'e', 'r']:
+        if player_j != width-1:
+            player_j += 1  # move right
+        elif player_j == width-1:
+            player_j -= 9 # loop back to the left
+    elif command in ['north', 'n', 'up', 'u']:
+        print(player_i)
+        if player_i != 0:
+            player_i -= 1  # move up
+        elif player_i == 0:
+            player_i += 9 # loop to the bottom
+    elif command in ['south', 's', 'down', 'u']:
+        print(player_i)
+        if player_i != height-1:
+            player_i += 1  # move down
+        elif player_i == height-1:
+            player_i -= 9 # loop to the top
+
         
 
     # check if the player is on the same space as an enemy

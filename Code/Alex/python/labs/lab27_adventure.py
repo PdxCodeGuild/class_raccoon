@@ -5,7 +5,7 @@ Let's build a simple board game that runs on the terminal. We'll represent the b
 
 Possible modifications:
 
-- use more succinct commands (l/u/d/r for up/down/left/right or n/s/e/w for north/south/east/west)
+- use more concise commands (l/u/d/r for up/down/left/right or n/s/e/w for north/south/east/west)
 
 - add boundaries to the map, when the player attempts to move beyond the boundary, stop them or move them to the other side
 
@@ -63,17 +63,17 @@ for i in range(4): ''' I LEARNED SOMETHING. with range, the upperbound is exclus
 # loop until the user says 'done' or dies
 while True:
 # get the command from the user
-    command = input('what is your command? ')
+    command = input('what is your command? ').lower()
 
-    if command == 'done':
+    if command in ['done', 'quit', 'q', 'exit']:
         break  # exit the game
-    elif command == 'left':
+    elif command in ['left', 'l', 'west', 'w']:
         player_j -= 1  # move left
-    elif command == 'right':
+    elif command in ['right', 'r', 'east', 'e']:
         player_j += 1  # move right
-    elif command == 'up':
+    elif command in ['up', 'u', 'north', 'n']:
         player_i -= 1  # move up
-    elif command == 'down':
+    elif command in ['down', 'd', 'south', 's']:
         player_i += 1  # move down
 
 # check if the player is on the same space as an enemy

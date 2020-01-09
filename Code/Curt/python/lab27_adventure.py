@@ -3,7 +3,7 @@
 import random
 
 width = 10  # the width of the board
-height = 10  # the height of the board
+height = 12  # the height of the board
 
 # create a board with the given width and height
 # we'll use a list of list to represent the board
@@ -26,6 +26,7 @@ for i in range(4):
 # loop until the user says 'done' or dies
 # def boundary(player_i, player_j, board)
 
+
 while True: #loops until player done playing
 
     command = input('What is your command? ').casefold()  # get the command from the user
@@ -35,6 +36,9 @@ while True: #loops until player done playing
         break  # exit the game
     elif command == 'left' or command == 'l':
         player_j -= 1  # move left
+        if player_j not in range(len(board[1])):
+            print("Can't go there!")
+            player_j += 1
     elif command == 'right' or command == 'r':
         player_j += 1  # move right
     elif command == 'up' or command == 'u':

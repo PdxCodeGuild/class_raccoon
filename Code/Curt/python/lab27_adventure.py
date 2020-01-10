@@ -12,8 +12,8 @@ def clear():
 	_ = call('clear' if os.name =='posix' else 'cls')
 
 
-width = 10  # the width of the board
-height = 10  # the height of the board
+width = 15  # the width of the board
+height = 15  # the height of the board
 
 # create a board with the given width and height
 # we'll use a list of list to represent the board
@@ -58,13 +58,15 @@ player_y,player_x = random_gen(width, height, board, '☺')
 
 # add 4 enemies in random locations
 enemycount = 0
-for i in range(4):
+for i in range(7):
     enemycount += 1
     enemy_y,enemy_x = random_gen(width, height, board, '§')
 
 # add a sword in a random location:
-sword_y,sword_x = random_gen(width, height, board, '⚔')
-sword = False #initialize sword
+swordcount = 0
+for i in range(3):
+    sword_y,sword_x = random_gen(width, height, board, '⚔')
+    sword = False #initialize sword
 
 board[player_y][player_x] = ' ' #removes generated player marker
 # loop until the user says 'done' or dies
@@ -169,24 +171,28 @@ while True:
         break  # exit the game
     elif command in ['left','l','west','w']:
         player_x -= 1  # move left
-        if player_x not in range(len(board[0])):
+        if board[player_y][player_x] == '▒':
             print("Can't go there!")
             player_x += 1
+            sleep(.8)
     elif command in ['right','r','east','e']:
         player_x += 1  # move right
-        if player_x not in range(len(board[0])):
+        if board[player_y][player_x] == '▒':
             print("Can't go there!")
             player_x -= 1
+            sleep(.8)
     elif command in ['up','u','north','n']:
         player_y -= 1  # move up
-        if player_y not in range(len(board)):
+        if board[player_y][player_x] == '▒':
             print("Can't go there!")
             player_y += 1
+            sleep(.8)
     elif command in ['down','d','south','s']:
         player_y += 1  # move down
-        if player_y not in range(len(board)):
+        if board[player_y][player_x] == '▒':
             print("Can't go there!")
             player_y -= 1
+            sleep(.8)
 
     #get the sword
     if board[player_y][player_x] == '⚔':

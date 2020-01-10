@@ -64,7 +64,6 @@ while True:
             print()
             print()
             search_again = input("Search for another gif? ").lower()
-            continue
 
 #quit
     elif user_choice == "quit":

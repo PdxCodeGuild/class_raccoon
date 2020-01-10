@@ -1,31 +1,47 @@
-"""
-Lab 27: Adventure
-
-Let's build a simple board game that runs on the terminal. We'll represent the board using a list of lists. We'll use two ints to represent that player's position on the board. Every iteration of the game loop, the user will be prompted for a command. Start with the code below, and add your own modifications.
-
-Possible modifications:
-
-    use more succinct commands (l/u/d/r for up/down/left/right or n/s/e/w for north/south/east/west)
-    add boundaries to the map, when the player attempts to move beyond the boundary, stop them or move them to the other side
-    make what's printed on the screen a part of a much larger map (with the player always shown at the center of the screen)
-    loading a text file containing the map, or procedurally generate things
-    walls / barriers
-    use different unicode characters (you can find lists online)
-    ascii art
-    colorama for custom colors, or curses for even more control of the terminal
-    add 'fog of war' - only show the elements of board immediately around the player (you can then find a torch item, which expands your visibility)
-    have enemies move around
-    add an inventory system
-    add player health, more complex encounters
-    add hidden treasure, make the objective to find all the treasure
-    add a 'final boss' that you can only face once collecting items
-    re-use previous labs (guess the number, rock-paper-scissors)
-"""
-
 import random
 
-width = 10  # the width of the board
-height = 10  # the height of the board
+
+class Look:
+    # print out the board
+    def __init__(self):
+        for i in range(height):
+            for j in range(width):
+                # if we're at the player location, print the player icon
+                if i == player_i and j == player_j:
+                    print('🐇', end=' ')
+                else:
+                    print(board[i][j], end=' ')  # otherwise print the board square
+            print()
+    def look(self):
+        for i in range(height):
+            for j in range(width):
+                # if we're at the player location, print the player icon
+                if i == player_i and j == player_j:
+                    print('🐇', end=' ')
+                else:
+                    print(board[i][j], end=' ')  # otherwise print the board square
+            print()
+
+class Battle_Roll:
+# Begins functions inside class
+    def __init__(self):
+        self.currenthp = 50
+        self.currentmana = 50
+        self.hp = 50
+        self.mana = 50
+
+    def check_hp(self):
+        print(f"STATUS: hp {self.currenthp}/{self.hp}, mana {self.currentmana}/{self.mana}")
+
+    def hp_boost(self):
+        self.hp += x
+
+    def roll_dice(self):
+        roll = random.randint(1, 10)
+        print(roll)
+
+width = 5  # the width of the board
+height = 5  # the height of the board
 
 # create a board with the given width and height
 # we'll use a list of list to represent the board
@@ -43,28 +59,50 @@ player_j = 4
 for i in range(4):
     enemy_i = random.randint(0, height - 1)
     enemy_j = random.randint(0, width - 1)
-    board[enemy_i][enemy_j] = '§'
+    board[enemy_i][enemy_j] = '🦁'
 
+for i in range(1):
+    stuff_i = random.randint(0, height - 1)
+    stuff_j = random.randint(0, width - 1)
+    board[stuff_i][stuff_j] = '^'
 
 # loop until the user says 'done' or dies
+battle = Battle_Roll()
+look_board = Look()
+moves_bar = ['left', 'right', 'down', 'up']
+moves_bar2 = ['look', 'inv', 'status', 'or done']
+inv_bar = []
+
 while True:
 # need to add instructions to push out
-    print('>> left, right, down, up, or done <<')
+    print('>>> '+', '.join(moves_bar)+' <<<')
+    print('>>> '+', '.join(moves_bar2)+' <<<')
     command = input('what is your command? ').lower()  # get the command from the user
 
     if command == 'done':
-        break  # exit the game
-    elif command in ['l', 'left']:
+        contine # exit the game
+    elif command in ['l', 'left', 'w', 'west']:
         player_j -= 1  # move left
-    elif command in ['r', 'right']:
+    elif command in ['r', 'right', 'e', 'east']:
         player_j += 1  # move right
-    elif command in ['u', 'up']:
+    elif command in ['u', 'up', 'n', 'north']:
         player_i -= 1  # move up
-    elif command in ['d', 'down']:
+    elif command in ['d', 'down', 's', 'south']:
         player_i += 1  # move down
+    elif command == 'status':
+        print(f'{battle.check_hp()}')
+    elif command == 'look':
+        look_board.look()
+    elif command == 'inv':
+        print(inv_bar)
+    elif command == 'roll':
+        print(battle.roll_dice())
+    elif command == 'fireball':
+        fire = battle.roll_dice()
+        print('Shoot fireball where? ')
 
     # check if the player is on the same space as an enemy
-    if board[player_i][player_j] == '§':
+    if board[player_i][player_j] == '🦁':
         print('you\'ve encountered an enemy!')
         action = input('what will you do? ')
         if action == 'attack':
@@ -73,13 +111,8 @@ while True:
         else:
             print('you hestitated and were slain')
             break
-
-            # print out the board
-    for i in range(height):
-        for j in range(width):
-            # if we're at the player location, print the player icon
-            if i == player_i and j == player_j:
-                print('☺', end=' ')
-            else:
-                print(board[i][j], end=' ')  # otherwise print the board square
-        print()
+    elif board[player_i][player_j] == '^':
+        x = 50
+        battle.hp_boost()
+        print(f'bonus + {x} hp')
+        board[player_i][player_j] = ' '  # remove the ^ from the board

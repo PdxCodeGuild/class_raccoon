@@ -83,18 +83,6 @@ while True:
 
     if command in ['done', 'quit', 'q', 'exit']:
         break  # exit the game
-    elif command in ['left', 'l', 'west', 'w']:
-        player_j -= 1  # move left
-        if player_j == 0:
-            player_j = width - 2
-        elif player_j == width - 1:
-            player_j = 1
-    elif command in ['right', 'r', 'east', 'e']:
-        player_j += 1  # move right
-        if player_j == 0:
-            player_j = width - 2
-        elif player_j == width - 1:
-            player_j = 1
     elif command in ['up', 'u', 'north', 'n']:
         player_i -= 1  # move up
         if player_i == 0:
@@ -107,6 +95,18 @@ while True:
             player_i = height - 2
         elif player_i == height - 1:
             player_i = 1
+    elif command in ['left', 'l', 'west', 'w']:
+        player_j -= 1  # move left
+        if player_j == 0:
+            player_j = width - 2
+        elif player_j == width - 1:
+            player_j = 1
+    elif command in ['right', 'r', 'east', 'e']:
+        player_j += 1  # move right
+        if player_j == 0:
+            player_j = width - 2
+        elif player_j == width - 1:
+            player_j = 1
     else:
         print("not a valid command")
         input()

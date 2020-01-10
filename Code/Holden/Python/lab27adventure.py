@@ -1,6 +1,5 @@
-#Finally the Adventure... Brandon G.
-
 import random
+import os
 
 width = 10  # the width of the board
 height = 10  # the height of the board

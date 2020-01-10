@@ -70,6 +70,7 @@ player_i = 4
 player_j = 4
 
 # add 4 enemies in random locations
+
 for i in range(4):
     enemy_i = random.randint(0, height - 1)
     enemy_j = random.randint(0, width - 1)
@@ -86,7 +87,7 @@ look_board = Look()
 moves_bar = ['left', 'right', 'down', 'up']
 moves_bar2 = ['look', 'inv', 'status', 'or done']
 inv_bar = []
-enemy = 0
+enemy_count = 0
 
 while True:
 # need to add instructions to push out
@@ -120,8 +121,8 @@ while True:
         if action == 'attack':
             print('you\'ve slain the enemy')
             board[player_i][player_j] = ' '
-            enemy += 1 # remove the enemy from the board
-            if enemy == height -1:
+            enemy_count += 1 # remove the enemy from the board
+            if enemy_count == 4:
                 battle.you_win()
                 break
         else:
@@ -133,4 +134,3 @@ while True:
         battle.hp_boost()
         print(f'bonus + {x} hp')
         board[player_i][player_j] = ' '  # remove the ^ from the board
-print(enemy)

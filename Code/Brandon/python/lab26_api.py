@@ -30,7 +30,7 @@ def merge(ingredients, measurement):
             merged_list.append(tup) 
             break
     for a, b in (merged_list):  # <-- this unpacks the tuple like a, b = (0, 1)
-        print(a, b)
+        print(f"{a} -- {b})
 
 def search_drink_name(user):
     url = f"https://www.thecocktaildb.com/api/json/v1/1/search.php?s={user}"
@@ -110,7 +110,7 @@ while True:
         user = input("What drink would you like to search for?\n:")
         search_drink_name(user)
     elif what_to_do == "2":
-        user = input("What liquor do you want to use?\n:")
+        user = input("What ingredient do you want to use?\n:")
         search_liqour(user)
     elif what_to_do == "3":
         print("Goodbye")

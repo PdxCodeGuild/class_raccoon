@@ -1,6 +1,17 @@
 import random
 import sys
 
+# Imported Snippet to Clear Screen:
+# import call method from subprocess module
+import os
+from subprocess import call
+from time import sleep
+# define clear function
+def clear():
+	# check and make call for specific operating system
+	_ = call('clear' if os.name =='posix' else 'cls')
+
+
 width = 10  # the width of the board
 height = 10  # the height of the board
 
@@ -52,7 +63,7 @@ def combat(sword):
 
     while playerhp > 0 and enemyhp > 0:
         #select a player action
-        actionlist = ['attack','run','run away','safety dance']
+        actionlist = ['a','attack','r','run','run away','safety dance']
         while True:
             action = input("What action would you like to take? ")
             if action not in actionlist:
@@ -61,22 +72,56 @@ def combat(sword):
                 break
 
         #player takes an action
-        print("You attack!")
-        playeratk = wpnmultiplier * random.randint(1,10)
-        enemyhp -= playeratk
-        print(f"You do {playeratk} points of damage.")
-        if enemyhp > 0:
-            print(f"The enemy has {enemyhp} HP remaining.")
+        if action in ['attack','a']:
+            print("You attack!")
+            playeratk = wpnmultiplier * random.randint(1,10)
+            enemyhp -= playeratk
+            print(f"You do {playeratk} points of damage.")
+            if enemyhp > 0:
+                print(f"The enemy has {enemyhp} HP remaining.")
+        if action in ['run','run away','r']:
+            print ("You can't run, you coward!")
+            input()
+        if action == 'safety dance':
+            chance = random.randint(1,3)
+            if chance % 3 == 0:
+                print("You acted like an imbecile.")
+                sleep(.8)
+                print("SAFETY DANCE FAILED!")
+                input("Press ENTER to continue")
+            else:
+                print("You can dance if you want to.")
+                sleep(.8)
+                print("Your enemy doesn't dance.")
+                sleep(.8)
+                print("And if it doesn't dance, well,")
+                sleep(.8)
+                print("It's no friend of mine!")
+                sleep(.8)
+                print("SAFETY DANCE SUCCEEDED!")
+                print("DEFENSE INCREASED")
+                safetydance = True
+                safetycount = 3
+                input("Press ENTER to continue")
         # input()
 
         #enemy attacks
         if enemyhp > 0:
             print("The enemy attacks!")
+            if safetycount > 0:
+                defenseup = 1
+                safetycount -= 1
+            else:
+                defenseup = 0
             enemyatk = random.randint(3,12)
+            enemyatk = int(round(enemyatk - (enemyatk * .3 * defenseup), 0))
             playerhp -= enemyatk
             print(f"You take {enemyatk} points of damage.")
             if playerhp > 0:
                 print(f"You have {playerhp} HP remaining.")
+            if safetydance and safetycount <= 0:
+                print("Your safety dance has worn off!")
+                safetydance = False
             # input()
 
     if playerhp <= 0:
@@ -88,6 +133,8 @@ def combat(sword):
     return win
 
 while True:
+    #DISPLAY THE BOARD
+    clear() # Clears the screen before displaying the board
     for i in range(height):
         for j in range(width):
             # if we're at the player location, print the player icon
@@ -123,26 +170,24 @@ while True:
 
     #get the sword
     if board[player_y][player_x] == '⚔':
+        clear()
         print("You got the sword!")
         board[player_y][player_x] = ' '
         sword = True
+        sleep(2)
 
     # check if the player is on the same space as an enemy
     if board[player_y][player_x] == '§':
         print("You've encountered an enemy!")
         # action = input("What will you do? ")
-        action = 'attack'
-        if action == 'attack':
-            win = combat(sword)
-            if win:
-                print("You've slain the enemy!")
-                board[player_y][player_x] = ' '  # remove the enemy from the board
-                enemycount -= 1
-            else:
-                print("You have been slain!")
-                sys.exit()
+        win = combat(sword)
+        if win:
+            print("You've slain the enemy!")
+            board[player_y][player_x] = ' '  # remove the enemy from the board
+            enemycount -= 1
+            sleep(2)
         else:
-            print("You hestitated and were slain!")
+            print("You have been slain!")
             sys.exit()
 
     # win conditions

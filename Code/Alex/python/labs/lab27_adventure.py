@@ -55,7 +55,7 @@ player_position_x = random.randint(1, width - 2) #position in row the player is 
 player_position_y = random.randint(1, height - 2) #position in column the player is in
 
 # add 4 enemies in random locations
-for coordinate in range(100):
+for coordinate in range(5):
     ''' I LEARNED SOMETHING. with range, the upperbound is exclusive. We put 4 because their are 4 enemies'''
     enemy_position_x = random.randint(1, width - 2) #puts enemy at a random spot in any row
     enemy_position_y = random.randint(1, height - 2) #puts enemy at a random spot in any column
@@ -85,20 +85,19 @@ while True:
         break  # exit the game
     elif command in ['left', 'l', 'west', 'w']:
         player_position_y -= 1  # move left
-        if player_position_y not in range(1, len(board) - 2):
+        if player_position_y >= 1 and player_position_y < len(board)-2:
             player_position_y = width - 2
-            # print(player_position_x, player_position_y)
     elif command in ['right', 'r', 'east', 'e']:
         player_position_y += 1  # move right
-        if player_position_y not in range(1, len(board) - 2):
+        if player_position_y >= 1 and player_position_y < len(board)-2:
             player_position_y = 1
     elif command in ['up', 'u', 'north', 'n']:
         player_position_x -= 1  # move up
-        if player_position_x not in range(1, len(board) - 2):
+        if player_position_x >= 1 and player_position_x < len(board)-2:
             player_position_x = height - 2
     elif command in ['down', 'd', 'south', 's']:
         player_position_x += 1  # move down
-        if player_position_x not in range(1, len(board) - 1):
+        if player_position_x >= 1 and player_position_x < len(board)-2:
             player_position_x = 1
     else:
         print("not a valid command")

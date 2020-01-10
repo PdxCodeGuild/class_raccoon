@@ -47,8 +47,7 @@ while True:
             print()
             print()
             random_again = input("Display another random gif? ").lower()
-        else:
-            continue
+
 #search
     elif user_choice == "search":
         term = input("What kind of gif are you looking for? ")
@@ -66,8 +65,7 @@ while True:
             print()
             search_again = input("Search for another gif? ").lower()
             continue
-        else:
-            continue
+
 #quit
     elif user_choice == "quit":
         break

@@ -18,10 +18,28 @@ height = 10  # the height of the board
 # create a board with the given width and height
 # we'll use a list of list to represent the board
 board = []  # start with an empty list
+
+#create top border
+board.append([])
+board[0].append('▒')
+for j in range(width):
+    board[0].append('▒')
+board[0].append('▒')
+
+#create board
 for i in range(height):  # loop over the rows
     board.append([])  # append an empty row
+    board[i+1].append('▒')
     for j in range(width):  # loop over the columns
-        board[i].append(' ')  # append an empty space to the board
+        board[i+1].append(' ')  # append an empty space to the board
+    board[i+1].append('▒')
+
+#create bottom border
+board.append([])
+board[-1].append('▒')
+for j in range(width):
+    board[-1].append('▒')
+board[-1].append('▒')
 
 #random generator for player, enemies, items, etc
 def random_gen(width, height, board, symbol):
@@ -55,6 +73,8 @@ board[player_y][player_x] = ' ' #removes generated player marker
 def combat(sword):
     #player's hp at full at start of combat
     playerhp = 100
+    safetycount = 0
+    safetydance = False
     wpnmultiplier = 1 #attack strength
     if sword:
         wpnmultiplier += 1
@@ -81,10 +101,10 @@ def combat(sword):
                 print(f"The enemy has {enemyhp} HP remaining.")
         if action in ['run','run away','r']:
             print ("You can't run, you coward!")
-            input()
+            sleep(1)
         if action == 'safety dance':
-            chance = random.randint(1,3)
-            if chance % 3 == 0:
+            chance = random.randint(1,5)
+            if chance % 5 == 0:
                 print("You acted like an imbecile.")
                 sleep(.8)
                 print("SAFETY DANCE FAILED!")
@@ -102,7 +122,7 @@ def combat(sword):
                 print("DEFENSE INCREASED")
                 safetydance = True
                 safetycount = 3
-                input("Press ENTER to continue")
+                sleep(1)
         # input()
 
         #enemy attacks
@@ -135,8 +155,8 @@ def combat(sword):
 while True:
     #DISPLAY THE BOARD
     clear() # Clears the screen before displaying the board
-    for i in range(height):
-        for j in range(width):
+    for i in range(len(board)):
+        for j in range(len(board[i])):
             # if we're at the player location, print the player icon
             if i == player_y and j == player_x:
                 print('☺', end=' ')
@@ -174,7 +194,7 @@ while True:
         print("You got the sword!")
         board[player_y][player_x] = ' '
         sword = True
-        sleep(2)
+        sleep(1.5)
 
     # check if the player is on the same space as an enemy
     if board[player_y][player_x] == '§':
@@ -185,7 +205,7 @@ while True:
             print("You've slain the enemy!")
             board[player_y][player_x] = ' '  # remove the enemy from the board
             enemycount -= 1
-            sleep(2)
+            sleep(1.5)
         else:
             print("You have been slain!")
             sys.exit()

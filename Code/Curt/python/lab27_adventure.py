@@ -1,8 +1,8 @@
 import random
 import sys
 
-width = 3  # the width of the board
-height = 3  # the height of the board
+width = 10  # the width of the board
+height = 10  # the height of the board
 
 # create a board with the given width and height
 # we'll use a list of list to represent the board
@@ -51,7 +51,16 @@ def combat(sword):
     enemyhp = 70 + random.randint(10, 50)
 
     while playerhp > 0 and enemyhp > 0:
-        #player attacks
+        #select a player action
+        actionlist = ['attack','run','run away','safety dance']
+        while True:
+            action = input("What action would you like to take? ")
+            if action not in actionlist:
+                print("Your enemy stares at you, contemplating whether it is worth its time to trifle with a moron.")
+            else:
+                break
+
+        #player takes an action
         print("You attack!")
         playeratk = wpnmultiplier * random.randint(1,10)
         enemyhp -= playeratk

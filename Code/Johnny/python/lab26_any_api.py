@@ -7,11 +7,11 @@ import json
 import webbrowser
 
 
+
 print('Generate testimonial to add to your business.')
 print('Pick random or enter attribute and create your own.')
 print('-'*45)
 print('Random           Random profile.')
-print('Male/Female/Both Add male & female or both.')
 print('Region           Add a country.')
 print('Email            Attach a email to the profile.')
 print('Phone            Add a phone number.')
@@ -41,7 +41,6 @@ profile_dict = {'name': data['name'],
 profile = []
 while True:
     user_input = input('>> ').lower()
-    profile.append(user_input)
     if user_input == 'random':
         print(f"Picture: {data['photo']}")
         print(f"Name:    {data['name']}")
@@ -54,4 +53,7 @@ while True:
         break
     elif user_input == 'create' or user_input == 'quit':
         break
- 
+    results = profile_dict.get(user_input)
+    profile.append(results)
+print('\n'.join(profile))
+webbrowser.open(data['photo'], new=2)

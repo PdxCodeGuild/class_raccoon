@@ -25,10 +25,12 @@ class Look:
 class Battle_Roll:
 # Begins functions inside class
     def __init__(self):
-        self.currenthp = 50
-        self.currentmana = 50
-        self.hp = 50
-        self.mana = 50
+        self.currenthp = 10
+        self.currentmana = 10
+
+        self.hp = 10
+        self.mana = 10
+
 
     def check_hp(self):
         print(f"STATUS: hp {self.currenthp}/{self.hp}, mana {self.currentmana}/{self.mana}")
@@ -38,7 +40,19 @@ class Battle_Roll:
 
     def roll_dice(self):
         roll = random.randint(1, 10)
-        print(roll)
+        print(roll)# -*- coding: utf-8 -*-
+
+    def you_win(self):
+        print(r"    _.----.        ____         ,'  _\   ___    ___     ____")
+        print(r"\      __    \    '-.  | /   `.  ___    |    \/    |   '-.   \ |  |")
+        print(r"\.    \ \   |  __  |  |/    ,','_  `.  |          | __  |    \|  |")
+        print(r"   \    \/   /,' _`.|      ,' / / / /   |          ,' _`.|     |  |")
+        print(r"    \     ,-'/  /   \    ,'   | \/ / ,`.|         /  /   \  |     |")
+        print(r"     \    \ |   \_/  |   `-.  \    `'  /|  |    ||   \_/  | |\    |")
+        print(r"      \    \ \      /       `-.`.___,-' |  |\  /| \      /  | |   |")
+        print(r"       \    \ `.__,'|  |`-._    `|      |__| \/ |  `.__,'|  | |   |")
+        print(r"        \_.-'       |__|    `-._ |              '-.|     '-.| |   |")
+        print(r"                                `'                            '-._|")
 
 width = 5  # the width of the board
 height = 5  # the height of the board
@@ -72,6 +86,7 @@ look_board = Look()
 moves_bar = ['left', 'right', 'down', 'up']
 moves_bar2 = ['look', 'inv', 'status', 'or done']
 inv_bar = []
+enemy = 0
 
 while True:
 # need to add instructions to push out
@@ -80,9 +95,9 @@ while True:
     command = input('what is your command? ').lower()  # get the command from the user
 
     if command == 'done':
-        contine # exit the game
+        break # exit the game
     elif command in ['l', 'left', 'w', 'west']:
-        player_j -= 1  # move left
+        player_j -= 1 # move left
     elif command in ['r', 'right', 'e', 'east']:
         player_j += 1  # move right
     elif command in ['u', 'up', 'n', 'north']:
@@ -97,22 +112,25 @@ while True:
         print(inv_bar)
     elif command == 'roll':
         print(battle.roll_dice())
-    elif command == 'fireball':
-        fire = battle.roll_dice()
-        print('Shoot fireball where? ')
 
     # check if the player is on the same space as an enemy
     if board[player_i][player_j] == '🦁':
-        print('you\'ve encountered an enemy!')
+        print('> you\'ve encountered an enemy! <')
         action = input('what will you do? ')
         if action == 'attack':
             print('you\'ve slain the enemy')
-            board[player_i][player_j] = ' '  # remove the enemy from the board
+            board[player_i][player_j] = ' '
+            enemy += 1 # remove the enemy from the board
+            if enemy == height -1:
+                battle.you_win()
+                break
         else:
             print('you hestitated and were slain')
+            print('GAME OVER')
             break
     elif board[player_i][player_j] == '^':
         x = 50
         battle.hp_boost()
         print(f'bonus + {x} hp')
         board[player_i][player_j] = ' '  # remove the ^ from the board
+print(enemy)

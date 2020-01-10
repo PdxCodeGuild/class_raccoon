@@ -59,7 +59,7 @@ for coordinate in range(100):
     ''' I LEARNED SOMETHING. with range, the upperbound is exclusive. We put 4 because their are 4 enemies'''
     enemy_position_x = random.randint(1, width - 2) #puts enemy at a random spot in any row
     enemy_position_y = random.randint(1, height - 2) #puts enemy at a random spot in any column
-    board[enemy_position_x][enemy_position_y] = '§' #creates and displays an enemy symbol for each enemy
+    board[enemy_position_x][enemy_position_y] = '🐍' #creates and displays an enemy symbol for each enemy
 
 
 # loop until the user says 'done' or dies
@@ -105,7 +105,7 @@ while True:
         input()
 
 # check if the player is on the same space as an enemy
-    if board[player_position_x][player_position_y] == '§':
+    if board[player_position_x][player_position_y] == '🐍':
         print('you\'ve encountered an enemy!') #prompts the player
         action = input('what will you do? ') #gives them a choice
         if action == 'attack': #if they choose to attack

@@ -39,8 +39,8 @@ Possible modifications:
 
 import random
 
-width = 60  # the width of the board
-height = 60  # the height of the board
+width = 6  # the width of the board
+height = 22  # the height of the board
 
 # create a board with the given width and height
 # we'll use a list of list to represent the board

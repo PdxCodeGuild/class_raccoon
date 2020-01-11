@@ -81,8 +81,8 @@ for i in range(4):
 
 # loop until the user says 'done' or dies
 while True:
-
-    command = input('what is your command? (u/d/l/r for up/down/left/right or done) ').lower()  # get the command from the user
+    # get the command from the user
+    command = input('what is your command? (u/d/l/r for up/down/left/right or done) ').lower()
 
     if command == 'done':
         break  # exit the game
@@ -113,8 +113,10 @@ while True:
             board[player_i][player_j] = ' '  # remove the enemy from the board
         else:
             print('You skinny as hell')
+            print()
+            break
 
-    if board[player_i][player_j] == fire:
+    elif board[player_i][player_j] == fire:
         print(f'You got burn by {fire}')
         print()
         break
@@ -124,11 +126,18 @@ while True:
         break
 
     # print out the board
+    print('###'*(width+1))
     for i in range(height):
+        print('# ', end='')
+        # print(board[0][j], end='#')
+        # print(board[width-1][j], end='#')
+
         for j in range(width):
             # if we're at the player location, print the player icon
             if i == player_i and j == player_j:
                 print(player1, end=' ')
             else:
                 print(board[i][j], end=' ')  # otherwise print the board square
+        print('#', end='')
         print()
+    print('###'*(width+1))

@@ -40,42 +40,42 @@ Possible modifications:
 import random
 
 width = 6  # the width of the board
-height = 22  # the height of the board
+height = 20  # the height of the board
 
 # create a board with the given width and height
 # we'll use a list of list to represent the board
 board = []  # start with an empty list
-for x in range(width):  # loop over the rows
+for i in range(height):  # loop over the rows
     board.append([])  # append an empty row
-    for y in range(height):  # loop over the columns
-        board[x].append(' ')  # append an empty space to the board
+    for j in range(width):  # loop over the columns
+        board[i].append(' ')  # append an empty space to the board
 
 # define the player position
-player_position_x = random.randint(1, width - 2) #position in row the player is in
-player_position_y = random.randint(1, height - 2) #position in column the player is in
+player_i = random.randint(1, height - 2) #position in column the player is in
+player_j = random.randint(1, width - 2) #position in row the player is in
+
 
 # add 4 enemies in random locations
-for coordinate in range(5):
-    ''' I LEARNED SOMETHING. with range, the upperbound is exclusive. We put 4 because their are 4 enemies'''
-    enemy_position_x = random.randint(1, width - 2) #puts enemy at a random spot in any row
-    enemy_position_y = random.randint(1, height - 2) #puts enemy at a random spot in any column
-    board[enemy_position_x][enemy_position_y] = '🐍' #creates and displays an enemy symbol for each enemy
-
+for i in range(4):
+    enemy_i = random.randint(1, height - 2)
+    enemy_j = random.randint(1, width - 2)
+    board[enemy_i][enemy_j] = '§'
 
 # loop until the user says 'done' or dies
 while True:
 
-# print out the player position and 10 spaces in all directions of that position
-    for x in range(max(0, player_position_x - 10), min(width, player_position_x + 10)):
-        for y in range(max(0, player_position_y - 10), min(height, player_position_y + 10)):
-            if x == player_position_x and y == player_position_y: #if we're at the player location, print the player icon
+#print out the board
+    for i in range(height):
+        for j in range(width):
+            # if we're at the player location, print the player icon
+            if i == player_i and j == player_j:
                 print('☺', end=' ')
-            elif x == 0 or x == width - 1:
+            elif i == 0 or i == height - 1:
                 print('x', end=' ')
-            elif y == 0 or y == height - 1:
+            elif j == 0 or j == width - 1:
                 print('x', end=' ')
             else:
-                print(board[x][y], end=' ')  # otherwise print the board square
+                print(board[i][j], end=' ')  # otherwise print the board square
         print()
 
 # get the command from the user
@@ -83,34 +83,41 @@ while True:
 
     if command in ['done', 'quit', 'q', 'exit']:
         break  # exit the game
-    elif command in ['left', 'l', 'west', 'w']:
-        player_position_y -= 1  # move left
-        if player_position_y >= 1 and player_position_y < len(board)-2:
-            player_position_y = width - 2
-    elif command in ['right', 'r', 'east', 'e']:
-        player_position_y += 1  # move right
-        if player_position_y >= 1 and player_position_y < len(board)-2:
-            player_position_y = 1
     elif command in ['up', 'u', 'north', 'n']:
-        player_position_x -= 1  # move up
-        if player_position_x >= 1 and player_position_x < len(board)-2:
-            player_position_x = height - 2
+        player_i -= 1  # move up
+        if player_i == 0:
+            player_i = height - 2
+        elif player_i == height - 1:
+            player_i = 1
     elif command in ['down', 'd', 'south', 's']:
-        player_position_x += 1  # move down
-        if player_position_x >= 1 and player_position_x < len(board)-2:
-            player_position_x = 1
+        player_i += 1  # move down
+        if player_i == 0:
+            player_i = height - 2
+        elif player_i == height - 1:
+            player_i = 1
+    elif command in ['left', 'l', 'west', 'w']:
+        player_j -= 1  # move left
+        if player_j == 0:
+            player_j = width - 2
+        elif player_j == width - 1:
+            player_j = 1
+    elif command in ['right', 'r', 'east', 'e']:
+        player_j += 1  # move right
+        if player_j == 0:
+            player_j = width - 2
+        elif player_j == width - 1:
+            player_j = 1
     else:
         print("not a valid command")
         input()
 
-# check if the player is on the same space as an enemy
-    if board[player_position_x][player_position_y] == '🐍':
-        print('you\'ve encountered an enemy!') #prompts the player
-        action = input('what will you do? ') #gives them a choice
-        if action == 'attack': #if they choose to attack
-            print('\nyou\'ve slain the enemy') #prompts user
-            board[player_position_x][player_position_y] = ' '  # remove the enemy from the board
+#check if the player is on the same space as an enemy
+    if board[player_i][player_j] == '§':
+        print('you\'ve encountered an enemy!')
+        action = input('what will you do? ')
+        if action == 'attack':
+            print('you\'ve slain the enemy')
+            board[player_i][player_j] = ' '  # remove the enemy from the board
         else:
-            print('\nyou hestitated and were slain')#prompts user
+            print('you hestitated and were slain')
             break
-        input()

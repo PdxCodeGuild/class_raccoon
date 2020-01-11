@@ -43,9 +43,11 @@ board = []  # start with an empty list
 for i in range(height):  # loop over the rows
     board.append([])  # append an empty row
     for j in range(width):  # loop over the columns
-        random_wall = random.randint(0, width - 1)
-        random_dragon = random.randint(0, width - 1)
-        if j == random_wall:
+        random_fire = random.randint(1, width - 2)
+
+        random_dragon = random.randint(1, width - 2)
+
+        if j == random_fire:
             board[i].append(fire)
         elif j == random_dragon:
             board[i].append(dragon)
@@ -58,23 +60,23 @@ player_i = 15
 player_j = 15
 
 # add enemies in random locations
-for i in range(5):
-    enemy_i = random.randint(0, height - 1)
-    enemy_j = random.randint(0, width - 1)
+for i in range(4):
+    enemy_i = random.randint(1, height - 2)
+    enemy_j = random.randint(1, width - 2)
     board[enemy_i][enemy_j] = burger
 
-for i in range(5):
-    enemy_i = random.randint(0, height - 1)
-    enemy_j = random.randint(0, width - 1)
+for i in range(4):
+    enemy_i = random.randint(1, height - 2)
+    enemy_j = random.randint(1, width - 2)
     board[enemy_i][enemy_j] = mushroom
-for i in range(5):
-    enemy_i = random.randint(0, height - 1)
-    enemy_j = random.randint(0, width - 1)
+for i in range(4):
+    enemy_i = random.randint(1, height - 2)
+    enemy_j = random.randint(1, width - 2)
     board[enemy_i][enemy_j] = apple
 
-for i in range(5):
-    enemy_i = random.randint(0, height - 1)
-    enemy_j = random.randint(0, width - 1)
+for i in range(4):
+    enemy_i = random.randint(1, height - 2)
+    enemy_j = random.randint(1, width - 2)
     board[enemy_i][enemy_j] = fries
 
 # loop until the user says 'done' or dies
@@ -103,15 +105,15 @@ while True:
             player_i = 0 # move a player to top of the board
 
     # check if the player is on the same space as an enemy
-    if board[player_i][player_j] == burger or board[player_i][player_j] == mushroom:
-        print('you\'ve encountered a food!')
-        action = input('what will you do? ')
-        if action == 'eat':
-            print('Go eat more')
+    if board[player_i][player_j] == burger or board[player_i][player_j] == mushroom or board[player_i][player_j] == apple or board[player_i][player_j] == fries:
+        print('you\'ve found a food!')
+        action = input('Do you want to eat (y/n)?  ').lower()
+        if action == 'yes' or  action == 'y':
+            print('Get bigger soon, Go eat more')
             board[player_i][player_j] = ' '  # remove the enemy from the board
         else:
-            print('you hestitated and were slain')
-            break
+            print('You skinny as hell')
+
     if board[player_i][player_j] == fire:
         print(f'You got burn by {fire}')
         print()
@@ -121,13 +123,12 @@ while True:
         print()
         break
 
-
-            # print out the board
+    # print out the board
     for i in range(height):
         for j in range(width):
             # if we're at the player location, print the player icon
             if i == player_i and j == player_j:
-                print(player, end=' ')
+                print(player1, end=' ')
             else:
                 print(board[i][j], end=' ')  # otherwise print the board square
         print()

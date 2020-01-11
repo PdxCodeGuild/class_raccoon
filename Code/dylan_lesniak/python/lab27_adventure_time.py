@@ -41,6 +41,7 @@ class Game:
         # define the player position
         self.me = None #will be initialized after the board is
         self.enemies = []
+        self.enemy_positions = []
 
     def create_board(self):
         for i in range(self.height):  # loop over the rows
@@ -65,6 +66,7 @@ class Game:
             y = self.enemies[i].y_pos
             x = self.enemies[i].x_pos
             self.board[y][x] = '| § |' #board[position] = "bad-guy character"
+            self.enemy_positions.append([y,x])
 
         #move print statement here. 
             # print out the board
@@ -97,12 +99,17 @@ class Game:
         for i in range(len(self.enemies)):
             self.reset_pos(self.enemies[i].y_pos, self.enemies[i].x_pos)
             self.enemies[i].move()
+            while self.enemies[i].pos in self.enemy_positions: #this section makes them go back and choose another spot 
+            #if spot occupied by another enemy
+                self.enemies[i].go_back
+                self.enemies[i].move()
             if self.enemies[i].pos == self.me.pos:
                 self.combat("bad_guy")
                 self.enemies[i].go_back()
                 self.update_pos(self.enemies[i].y_pos, self.enemies[i].x_pos, '| § |')
             else:
                 self.update_pos(self.enemies[i].y_pos, self.enemies[i].x_pos, '| § |')
+                self.enemy_positions[i] = [self.enemies[i].y_pos,self.enemies[i].x_pos]
         
             
 
@@ -125,14 +132,10 @@ class Game:
     def combat(self, attacker):
         if attacker == "player":
             print('you\'ve encountered an enemy!')
-            action = helper.text_checker(input('what will you do? (attack/run) '),["attack","run"])
-            if action == 'attack': 
-                return self.damage_enemy()
-            else:
-                print('you hestitated and were slain') 
-                return 'n'
+            print('Attack!!!')
+            return self.damage_enemy()
         else:
-            amount = 10
+            amount = 40
             print("An enemy attacked you.")
             print(f"You received {amount} damage.")
             input("Click ENTER")
@@ -149,7 +152,7 @@ class Game:
         i = 0 
         for bad_guy in self.enemies:
             if bad_guy.pos == [self.me.y_pos,self.me.x_pos]:
-                amount = 10
+                amount = 40
                 print(f"You dealt {amount} damage.")
                 self.enemies[i].damage(10)
                 if self.enemies[i].health <= 0:

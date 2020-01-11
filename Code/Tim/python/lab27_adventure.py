@@ -26,8 +26,6 @@ Possible modifications:
 import random
 from os import system
 
-
-
 class Player:
     def __init__(self):
         self.health = random.randint(30,50)
@@ -165,6 +163,24 @@ def ded_monster():
 # breaks out of program when player dies
 def ur_ded():
     print('Well, you\'re dead now. Byeeee')
+    print(r'''
+                 |/)\)
+                  /\_
+                  \__|=
+                 (    )
+                 __)(__
+           _____/      \\_____
+          |                  ||
+          |  _     ___   _   ||
+          | | \     |   | \  ||
+          | |  |    |   |  | ||
+          | |_/     |   |_/  ||
+          | | \     |   |    ||
+          | |  \    |   |    ||
+          | |   \. _|_. | .  ||
+          |                  ||
+  *       | *   **    * **   ||*      **
+   \))\|//)/.,(//,,..,,\||(,,.,\\,.((//''')
     input('hit <Enter> to continue\n>')
     system('cls')
 

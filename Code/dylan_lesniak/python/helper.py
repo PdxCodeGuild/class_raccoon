@@ -55,6 +55,8 @@ def text_checker(text,acceptable_inputs = [], ok_formats = string.ascii_letters)
         else:
             print("INVALID ENTRY: Please enter valid text entry. ")
             text = input("> ")
+        if text == "":
+            break
 
 def time_checker(num):
     while True:

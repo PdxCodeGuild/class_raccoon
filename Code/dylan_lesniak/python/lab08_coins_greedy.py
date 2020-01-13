@@ -4,7 +4,7 @@ Author: Dylan
 Purpose: Choose the most efficient selection of coins for a given cent value
 '''
 
-#this method will assume a standard US coin value set 
+#this method will assume a standard US coin value set
 def get_change(cents):
     cents = input_checker(cents)
     coins = [1,5,10,25]

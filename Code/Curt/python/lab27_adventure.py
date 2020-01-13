@@ -53,19 +53,50 @@ def random_gen(width, height, board, symbol):
             board[unit_y][unit_x] = symbol
             conflict = False
     return unit_y, unit_x
-# randomize the player starting position
-player_y,player_x = random_gen(width, height, board, '☺')
 
-# add 4 enemies in random locations
+#make some walls
+walllength = 3
+for i in range(5):
+    wall_y,wall_x = random_gen(len(board[0]), len(board), board, '▒')
+    for j in range(walllength):
+        addwall = False
+        if board[wall_y-1][wall_x] != ' ' and board[wall_y+1][wall_x] != ' ' and board[wall_y][wall_x-1] != ' ' and board[wall_y][wall_x+1] != ' ':
+            addwall = True #breaks loop if no valid spaces for wall creation
+        while not addwall:
+            direction = random.randint(1,4) % 4
+            if direction == 0:
+                if board[wall_y-1][wall_x] == ' ':
+                    wall_y -= 1
+                    board[wall_y][wall_x] = '▒'
+                    addwall = True
+            elif direction == 1:
+                if board[wall_y+1][wall_x] == ' ':
+                    wall_y += 1
+                    board[wall_y][wall_x] = '▒'
+                    addwall = True
+            elif direction == 2:
+                if board[wall_y][wall_x-1] == ' ':
+                    wall_x -= 1
+                    board[wall_y][wall_x] = '▒'
+                    addwall = True
+            else:
+                if board[wall_y][wall_x+1] == ' ':
+                    wall_x += 1
+                    board[wall_y][wall_x] = '▒'
+                    addwall = True
+
+# randomize the player starting position
+player_y,player_x = random_gen(len(board[0]), len(board), board, '☺')
+
+# add X enemies in random locations (currently set to 7)
 enemycount = 0
 for i in range(7):
     enemycount += 1
-    enemy_y,enemy_x = random_gen(width, height, board, '§')
+    enemy_y,enemy_x = random_gen(len(board[0]), len(board), board, '§')
 
-# add a sword in a random location:
-swordcount = 0
+# add swords in random locations:
 for i in range(3):
-    sword_y,sword_x = random_gen(width, height, board, '⚔')
+    sword_y,sword_x = random_gen(len(board[0]), len(board), board, '⚔')
     sword = False #initialize sword
 
 board[player_y][player_x] = ' ' #removes generated player marker
@@ -87,7 +118,7 @@ def combat(sword):
         #select a player action
         actionlist = ['a','attack','r','run','run away','safety dance']
         while True:
-            action = input("What action would you like to take? ")
+            action = input("What action would you like to take? \nATTACK / A\nRUN / R\n SAFETY DANCE\n").casefold()
             if action not in actionlist:
                 print("Your enemy stares at you, contemplating whether it is worth its time to trifle with a moron.")
             else:

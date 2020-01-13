@@ -89,6 +89,7 @@ class LinkedList:
         return self.len
 
     def append(self,element): #add element to the end
+        self.len += 1
         if self.root is None: 
             self.root = Node(element)
         else:
@@ -97,10 +98,8 @@ class LinkedList:
             while current_node.next is not None:
                 current_node = current_node.next
             current_node.next = Node(element)    
-        self.len += 1
 
     def insert(self,element, idx): #insert element at given index
-        self.len += 1
         index = 0 
         if idx == 0: 
             self.push(element)
@@ -114,6 +113,7 @@ class LinkedList:
             index += 1
             current_node = current_node.next
         else:
+            self.len += 1
             self.append(element)
     
     def remove(self,element): #remove the first occurrence of the element
@@ -149,7 +149,7 @@ class LinkedList:
         
     
     def length(self): #return the length of the list
-        print(self.len)
+        return self.len
         
     def __str__(self):
         output = []

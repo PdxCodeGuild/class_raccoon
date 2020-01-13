@@ -39,8 +39,11 @@ def text_checker(text,acceptable_inputs = [], ok_formats = string.ascii_letters)
         if all([char for char in text if char in ok_formats]):
             if len(acceptable_inputs) > 0:
                 print()
-                if any([option for option in acceptable_inputs if text.lower() in option.lower()]):
-                    return text
+                if any([option for option in acceptable_inputs if text.lower() in option.lower()]): #tests if text in acceptable inputs
+                    #this will return the case-matched match
+                    for option in acceptable_inputs:
+                        if option.lower() == text.lower():
+                            return option
                 else:
                     print(f"INVALID ENTRY: Entry not in list.")
                     if len(acceptable_inputs) <= 20:
@@ -52,6 +55,8 @@ def text_checker(text,acceptable_inputs = [], ok_formats = string.ascii_letters)
         else:
             print("INVALID ENTRY: Please enter valid text entry. ")
             text = input("> ")
+        if text == "":
+            break
 
 def time_checker(num):
     while True:

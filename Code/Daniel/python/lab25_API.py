@@ -31,7 +31,8 @@ quote_count = 1
 while True:
     
     url = f'https://favqs.com/api/quotes?page={page}&filter={keyword}'
-    headers = {'Authorization': 'Token token="ENTER TOKEN HERE"'}
+    headers = {'Authorization': 'Token token="ENTER TOKEN HERE"'} # I know you said that using your API key here wouldn't be a big deal, but I wanted to get into the habit of not uploading them to GIT
+    
     response = requests.get(url, headers=headers)
     data = json.loads(response.text)["quotes"]
     # print(data)

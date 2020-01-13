@@ -14,7 +14,7 @@ class QuotesApi:
         self.page = 1
         self.turns = ['next','prev','keyword']
         self.url = url
-
+    
     #json means javascript object notation
     def run_api(self):
         self.keyword = helper.text_checker(input("> "))

@@ -256,6 +256,7 @@ while True:
     # enemy_hp = 0
     # check if the player is on the same space as the heart
     if board[player_i][player_j] == '♥':
+        clear()
         print(heart)
         heart_choice = input("You've found an actuall human heart on the ground, goss... wanna eat it? ").lower()
         if heart_choice in ["y", "yes"]:
@@ -365,7 +366,7 @@ while True:
                 def_counter +=1
                 if def_counter > 2:
                     def_counter = 0
-                print(def_counter)
+                # print(def_counter)
                 if player_hp <=0:
                     print(f"Your adventure ends here, you were pecked to death by {fight_enemy.name}, good job, you lost to a bird")
                     exit()
@@ -373,8 +374,11 @@ while True:
         bird.move()
         # print(bird.i_pos)
             
-           
-        
+    if enemy_list == []:
+        print("You did it, you killed all the adorable birds and irreparably damaged the local ecosystem, good job!")   
+        sleep(3)
+        clear()
+        exit()        
            
             
         

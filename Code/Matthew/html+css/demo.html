@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="demo.css"/>
+    <link href="https://fonts.googleapis.com/css?family=IM+Fell+Great+Primer+SC&display=swap" rel="stylesheet">
+    <style type="text/css">
+
+      body {
+        /* background-image: url('https://cdn.sothebyshome.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/l/o/louis_durot_1970s_small_lips_plastic_sofa_front.jpg'); */
+        font-family: 'IM Fell Great Primer SC', serif;
+        font-size:24px;
+      }
+
+      .special_div {
+        font-size:32px;
+        color: green;
+      }
+      #special_div_id {
+        color:orange;
+      }
+      #special_div_id, #special_span {
+        color:magenta;
+      }
+      #special_span {
+        display:none;
+      }
+      div {
+        color: #0FA0CE; /* a beautiful color */
+        background-color: #202020;
+        font-size:10px;
+        text-align:center;
+        border: 1px solid green;
+      }
+      span {
+        background-color:green;
+      }
+
+      #navbar > div {
+        color:magenta;
+      }
+
+      #div_box_model {
+        margin:40px;
+        margin-top:50px;
+        padding:10px;
+        width:100px;
+        height:100px;
+        border: 10px dashed white;
+        /* overflow:hidden; */
+        white-space:nowrap;
+      }
+
+      #flexbox {
+        display:flex;
+        flex-direction:row;
+        justify-content:space-evenly;
+      }
+
+      #flexbox > div {
+        width:100px;
+        height:100px;
+        background-color:white;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="flexbox">
+      <div>A</div>
+      <div>B</div>
+      <div>C</div>
+    </div>
+    <div id="div_box_model">Box Model Demo! Box Model Demo! Box Model Demo! Box Model Demo! Box Model Demo!s</div>
+    <h1 style="color:red">Header 1</h1>
+    <h2>Header 2</h2>
+    <h3>Header 3</h3>
+    <hr/>
+    <div id="navbar">
+      <div>A</div>
+      <div>B</div>
+      <div>C</div>
+      <div>
+        <div>D</div>
+        <div>E</div>
+      </div>
+    </div>
+    <p>Vegan austin microdosing drinking vinegar pinterest plaid ethical brunch vice scenester. <br/>Hammock iPhone sustainable bushwick poutine literally swag neutra +1 venmo tofu farm-to-table pok pok lyft. Quinoa listicle artisan tattooed actually roof party mustache plaid cronut tumblr. Shabby chic plaid four loko salvia twee crucifix tilde polaroid paleo raw denim af cloud bread hoodie sriracha. Subway tile meggings knausgaard helvetica.</p>
+    <pre>                                  hello world
+
+
+
+
+
+
+
+
+      </pre>
+
+    <a href="http://google.com"><b>go</b> to google</a>
+    <img src="https://cdn.sothebyshome.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/l/o/louis_durot_1970s_small_lips_plastic_sofa_front.jpg" width="100px"/>
+    <div>this is a div</div>
+    <div id="special_div_id" class="special_div">this is a div</div>
+    <div>this is a div</div>
+    <span id="special_span">this is a span</span>
+    <span>this is a span</span>
+    <div>this is a div</div>
+    <span>this is a span</span>
+    <span>this is a span</span>
+    <table>
+      <tr>
+        <th>Header 1</th>
+        <th>Header 2</th>
+      </tr>
+      <tr>
+        <td>Value 1</td>
+        <td>Value 2</td>
+      </tr>
+      <tr>
+        <td>Value 1</td>
+        <td>Value 2</td>
+      </tr>
+    </table>
+    <ol>
+      <li>Thing 1</li>
+      <li>Thing 2</li>
+    </ol>
+    <ul>
+      <li>Thing 1</li>
+      <li>Thing 2</li>
+    </ul>
+    <button>click</button>
+    <input type="text"/>
+  </body>
+</html>

@@ -27,7 +27,7 @@ What's your second card? J
 What's your third card? A
 21 Blackjack!
 '''
-# Setup dictionary
+# Option 1 - Setup dictionary
 cards = {
   'a': 1,
   '2': 2,
@@ -43,6 +43,18 @@ cards = {
   'q': 10,
   'k': 10
 }
+
+'''
+# Option 2 - using function
+def card_value(card):
+    if card == 'a':
+        return 1
+    elif card in [j, k, q]:
+        return 10
+    else:
+        return card
+'''
+
 print('Let\'s play Blackjack')
 
 #  While loop condition
@@ -58,15 +70,20 @@ while play_again == 'y':
     # Total score calculation
     score = cards[first_card] + cards[second_card] + cards[third_card]
 
+    
+
     # if score Less than 17, advise to "Hit"
     if score < 17:
         print(f'{score} Hit')
+
     # if score Greater than or equal to 17, but less than 21, advise to "Stay"
     elif score >= 17 and score < 21:
         print(f'{score} Stay')
+
     # if score Over 21, advise "Already Busted"
     elif score > 21:
         print(f'{score} Already Busted')
+
     # if score Exactly 21, advise "Blackjack!"
     else:
         print(f'{score} Blackjack!')

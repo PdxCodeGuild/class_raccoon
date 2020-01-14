@@ -9,11 +9,8 @@ print('Welcome to password generation program')
 # Ask the user for how many lowercase letters, uppercase letters, numbers,
 # and special characters they'd like in their password.
 uppercase_letters =  int(input('How many Uppercase letters? '))
-
 lowercase_letters = int(input('How many Lowercase letters? '))
-
 numbers = int(input('How many numbers? '))
-
 special_characters = int(input('How many Special characters? '))
 
 output_upper = ''

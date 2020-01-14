@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css?family=Lekton&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="styles.css" type="text/css">
+  <link rel="stylesheet" href="script.js" type="JavaScript">
+  <!-- materialize css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Compiled and minified JavaScript with materialize -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  
+</head>
+<body>
+  
+<!-- NAVIGATION--------------- -->
+
+<nav>
+  <div class="nav-wrapper grey darken-2">
+    
+    <ul class="right hide-on-med-and-down">
+      <li><a href="lab02_bio.html">Home</a></li>
+      <li><a class="dropdown-trigger" data-target="dropdown1" href="">Blog</a></li>
+        <ul id="dropdown1" class="dropdown-content">
+          <li><a href="pirate.html">Pirate Blog</a></li>
+          <li><a href="cajun.html">Cajun Blog</a></li>
+          <li><a href="starwars.html">Star Wars Blog</a></li>
+        </ul>
+    </ul>
+        
+  </div>
+</nav>
+<!-- END NAVIGATION--------------- -->
+<!-- MAIN--------------- -->
+<!-- Pirate Blog---------- -->
+<img class="banner" src="banner.gif" alt="book banner">
+<main class="main_container">
+  <div class="carousel_box">
+    <img class="logo" src="logo.png" alt="logo">
+    <div class="carousel">
+      <a class="carousel-item" href="cajun.html"><img src="300pxcajun.jpg"></a>
+      <a class="carousel-item" href="starwars.html"><img src="300pxlucas.jpg"></a>
+      <a class="carousel-item" href="pirate.html"><img src="300pxpirate.jpg"></a>
+    </div>
+  </div>
+  <div class="content_box">
+  
+  <div class="blog_box">
+    <!-- <div class="col s12 m7"> -->
+      <div class="card">
+        <div class="card-image">
+          <img class="blog" src="pirate.png" alt="">
+        </div>
+        <div class="card-content">
+          <h4>Im here for your booty..</h4>
+          <p>Wanna read some Pirate Ipsum? Click below to check it out!</p>
+        </div>
+        <div class="card-action">
+          <a href="pirate.html">ReAd MoRe PiRaTe</a>
+        </div>
+      </div>
+  </div>
+    <!-- <div class="col s12 m7"> -->
+    <div class="blog_box">
+      <div class="card">
+        <div class="card-image">
+          <img class="blog" src="cajun.jpg" alt="Cajun">
+        </div>
+        <div class="card-content">
+          <h4>Crawfish Literature</h4>
+          <p>Wanna read some Cajun Ipsum? Click below to check it out!</p>
+        </div>
+        <div class="card-action">
+          <a href="pirate.html">ReAd MoRe CaJuN</a>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col s12 m7"> -->
+    <div class="blog_box">
+      <div class="card">
+        <div class="card-image">
+          <img class="blog" src="starwars.jpeg" alt="Star Wars">
+        </div>
+        <div class="card-content">
+          <h4>May the force be with you</h4>
+          <p>Wanna read some Star Wars Ipsum? Click below to check it out!</p>
+        </div>
+        <div class="card-action">
+          <a href="pirate.html">ReAd MoRe StAr WaRs</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+<footer class="footer grey darken-2">
+  <p>&copy; BAMF 2020</p>
+  
+</footer>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.carousel');
+    var instances = M.Carousel.init(elems, {
+      duration:200,
+      indicators:true,
+    });
+  });
+  
+  document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.dropdown-trigger');
+  var instances = M.Dropdown.init(elems, {hover:true});
+});
+</script>
+</body>
+</html>

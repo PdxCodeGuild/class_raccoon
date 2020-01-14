@@ -15,7 +15,7 @@ choices = {
 def results():
     npc = random.choice(throws)
     if choices[user_choice] == npc:
-        return("Its a tie!")
+        return("Its a tie!")    
     elif user_choice == "1":
         if npc == "Paper":
             return(f"You chose {choices[user_choice]} and the computer chose {npc}. You lose. Paper suffocates the rock.")

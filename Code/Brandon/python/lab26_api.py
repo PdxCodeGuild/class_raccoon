@@ -13,7 +13,7 @@ import string
 def merge(ingredients, measurement): 
       
     merged_list = [] 
-    for i in range(max((len(ingredients), len(measurement)))): 
+    for i in range(min((len(ingredients), len(measurement)))): 
   
         while True: 
             try: 
@@ -26,11 +26,14 @@ def merge(ingredients, measurement):
                     ingredients.append('') 
                     tup = (ingredients[i], measurement[i]) 
                 continue
-  
+            # print(tup)
             merged_list.append(tup) 
+            
             break
-    for a, b in (merged_list):  # <-- this unpacks the tuple like a, b = (0, 1)
-        print(f"{a} -- {b})
+        # print(merged_list)
+    for item in (merged_list):  # <-- this unpacks the tuple like a, b = (0, 1)
+        if item[0] != None and item[1] != None: 
+            print(f"{item[0]}--{item[1]}")
 
 def search_drink_name(user):
     url = f"https://www.thecocktaildb.com/api/json/v1/1/search.php?s={user}"
@@ -61,12 +64,12 @@ def search_drink_name(user):
             # merge(ingredients,measurement)
             
     for key in choices:
-        print(f"\n The {key}")
-        print(f"\nThe ingredients are :\n<><><><><><><><><><>") #{', '.join(choices[key]['ingredients'])} \n")
-        print(f"{merge(ingredients,measurement)} \n")
+        print(f"\nThe {key}")
+        print(f"\nThe ingredients are :\n<><><><><><><><><><>\n") #{', '.join(choices[key]['ingredients'])} \n")
+        merge(ingredients,measurement)
+        print('')
         print(f"To make this drink: {choices[key]['Instructions']}\n-------------------------")
-        # print(merge(ingredients,measurement))
-        # print(f"\nThe Measurements for the booze are as follows..\n: {', '.join(choices[key]['mixed'])}\n")
+    
 
 def search_liqour(user):
     url = f"https://www.thecocktaildb.com/api/json/v1/1/filter.php?i={user}"

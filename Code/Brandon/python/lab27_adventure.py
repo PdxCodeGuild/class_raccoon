@@ -20,35 +20,28 @@
 
 
 import random
+weapons = {"Sword":4,"Knife":1, "Bat":3, "Grenade":7, "Nuke":10,"Brass Knuckes":2}
 
-def attack_style():
-    enemy_weapon = ["Sword","Knife", "Bat", "Grenade", "Claymore"]
-    npc = random.choice(enemy_weapon)
-    if choices[user_choice] == npc:
-        return("Its a tie!")
-    elif user_choice == "1":
-        if npc == "Paper":
-            return(f"You chose {choices[user_choice]} and the computer chose {npc}. You lose. Paper suffocates the rock.")
-        elif npc == "Scissors":
-            return(f"You chose {choices[user_choice]} and the computer chose {npc}. You smashed the crap out of the scissors..")
-    elif user_choice == "2":
-        if npc == "Rock":
-            return(f"You chose {choices[user_choice]} and the computer chose {npc}. You win, paper suffocates the rock.")
-        elif npc == "Scissors":
-            return(f"You chose {choices[user_choice]} and the computer chose {npc}. You lose. You just been cut.")
-    elif user_choice == "3":
-        if npc == "Paper":
-            return(f"You chose {choices[user_choice]} and the computer chose {npc}. You win! Paper didnt stand a chance.")
-            return("You win! Paper didnt stand a chance.")
-        elif npc == "Rock":
-            return(f"You chose {choices[user_choice]} and the computer chose {npc}. You done got smashed.")
-            return("You dont got smashed.")
-def game_board():
-    width = 10  # the width of the board
-    height = 10  # the height of the board
+def attack(user_weapon):
+    npc = random.choice(list(weapons.keys()))
+    while True:
+        
+        for i in user_weapon:
+            if npc in user_weapon:
+                print(f"The enemey also has {user_weapon}.Parry!")
+                continue
+            elif weapons[i] > weapons[npc]:
+                return(f"You used a {i} against the enemy with a {npc}. You have slain the enemy.")
+            elif weapons[i] < weapons[npc]:
+                return(f"You used a {i} against the enemy with a {npc}. You done been slain by the enemy.")
+                        
+        
+def gameplay():
+    width = 15  # the width of the board
+    height = 15  # the height of the board
     weapon = []
     defense = []
-    hidden_treasure = []
+    player_weapon = []
 
     # create a board with the given width and height
     # we'll use a list of list to represent the board
@@ -63,17 +56,26 @@ def game_board():
     player_j = 4
 
     # add 4 enemies in random locations
-    for i in range(4):
+    for i in range(6):
         enemy_i = random.randint(0, height - 1)
         enemy_j = random.randint(0, width - 1)
         board[enemy_i][enemy_j] = '§'
-
-def gameplay():
-
-
+    for i in range(5):
+        weapon_i = random.randint(0, height - 1)
+        weapon_j = random.randint(0, width - 1)
+        board[weapon_i][weapon_j] = 'W'
     # loop until the user says 'done' or dies
+    player_weapon = []
     while True:
-
+        for i in range(height):
+            for j in range(width):
+                # if we're at the player location, print the player icon
+                if i == player_i and j == player_j:
+                    print('☺', end=' ')
+                else:
+                    print(board[i][j], end=' ')  # otherwise print the board square
+            print()
+        
         command = input('what is your command? ')  # get the command from the user
         #Commands using multiple input types associated with the direction
         if command == 'done':
@@ -92,23 +94,25 @@ def gameplay():
             print('you\'ve encountered an enemy!')
             action = input('what will you do? ')
             if action == 'attack':
-                print('you\'ve slain the enemy')
+                print(attack(player_weapon))
                 board[player_i][player_j] = ' '  # remove the enemy from the board
             else:
                 print('you hestitated and were slain')
                 break
-        # check if board is empty space, possibly pick up weapon or shield or hidden treasure
-                # print out the board
-        for i in range(height):
-            for j in range(width):
-                # if we're at the player location, print the player icon
-                if i == player_i and j == player_j:
-                    print('☺', end=' ')
-                else:
-                    print(board[i][j], end=' ')  # otherwise print the board square
-            print()
-gameplay()
-#This is me making a change
-#This is my second change
+        #Check to see if there is a weapon
+        if board[player_i][player_j] == 'W':
+            weapon_type = ["Sword","Knife", "Bat", "Grenade", "Claymore", "Nuke"]
+            print('you see a weapon!')
+            action = input('Press enter to pick it up or (1) to leave it be. ')
+            if action == '':
+                weapon = random.choice(list(weapons.keys()))
+                player_weapon.append(weapon)
+                print(f"You just picked up a {weapon}")
+                print(player_weapon)
+                board[player_i][player_j] = ' '  # remove the W from the board
+            elif action == '1':
+                print('Why would you do that? Tough guy huh?')
+                break    
+            
 
-#This is my final change...
+gameplay()

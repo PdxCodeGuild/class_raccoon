@@ -1,5 +1,6 @@
 /* Global--------------------------------------- */
 body {
+  margin: 0px;
   background-image: url("imgs/background.jpg");
   background-position:  center;
   background-repeat: repeat;
@@ -80,7 +81,7 @@ header a:hover{
   height:75%;
   width:75%;
   border-style: none;
-  border-radius: 300px;
+  border-radius: 50%;
   margin-left: auto;
   margin-right: auto;
   
@@ -97,7 +98,7 @@ section {
   height: 100%;
   flex-direction:column;
   align-items: center;
-  background-color:rgba(53, 81, 97,..3);
+  background-color:rgba(53, 81, 97,.7);
   color:white;
   text-align: center;
   font-size: 30px;

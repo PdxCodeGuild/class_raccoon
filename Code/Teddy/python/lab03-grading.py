@@ -7,19 +7,19 @@ if user_input >=90 and user_input <= 100:
     print('Your grade is A')
 
 # 80-89: B
-elif user_input >= 80 and user_input < 90:
+elif user_input >= 80:
     print('Your grade is B')
 
 # 70-79: C
-elif user_input >= 70 and user_input < 80:
+elif user_input >= 70:
     print('Your grade is C')
 
 # 60-69: D
-elif user_input >= 60 and user_input < 70:
+elif user_input >= 60:
     print('Your grade is D')
 
 # 0-59: F
-elif user_input >= 0 and user_input < 60:
+elif user_input >= 0:
     print('Your grade is F')
 
 else:

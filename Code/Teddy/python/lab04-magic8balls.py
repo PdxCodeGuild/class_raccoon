@@ -20,7 +20,7 @@ question = input('What is your question? ')
 result = random.choice(predictions)
 print(result)
 
-again = input('Play again? (y/n)').lower()
+again = input('Play again? (y/n)').lower().strip()
 
 while again == 'y' or again == 'yes':
     # Prompt the user to ask the 8-ball a question "will I win the lottery tomorrow?"
@@ -30,7 +30,7 @@ while again == 'y' or again == 'yes':
     result = random.choice(predictions)
     print(result)
 
-    again = input('Play again? (y/n)').lower()
+    again = input('Play again? (y/n)').lower().strip()
 
 else:
     print('Bye')

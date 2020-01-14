@@ -56,9 +56,9 @@ def KilometerToMeter(km):
 def print4(x):
     print(round(x,4))
 
-converse_again = 'y'
+convert_again = 'y'
 
-while converse_again == 'y':
+while convert_again == 'y':
     user_input = float(input('what is the distance?(number) '))
     unit_input = input('what are the input units?(ft, m, mi, km)').lower()
     unit_output = input('what are the output units?(ft, m, mi, km)').lower()
@@ -103,6 +103,6 @@ while converse_again == 'y':
         elif unit_output == 'km':
             print('1')
 
-    converse_again = input('Do it again?(y/n)').lower()
+    convert_again = input('Do it again?(y/n)').lower()
 else:
     print('See you again!')

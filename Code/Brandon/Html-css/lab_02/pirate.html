@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css?family=Lekton&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="styles.css" type="text/css">
+  <!-- materialize css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Compiled and minified JavaScript with materialize -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  
+</head>
+<body>
+  
+<!-- NAVIGATION--------------- -->
+<nav>
+  <div class="nav-wrapper grey darken-2">
+    <a href="#!" class="brand-logo">Useless Blogging</a>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="lab02_bio.html">Home</a></li>
+      <li><a class="dropdown-trigger" data-target="dropdown1" href="">Blog</a></li>
+        <ul id="dropdown1" class="dropdown-content">
+          <li><a href="pirate.html">Pirate Blog</a></li>
+          <li><a href="cajun.html">Cajun Blog</a></li>
+          <li><a href="starwars.html">Star Wars Blog</a></li>
+        </ul>
+    </ul>
+        
+  </div>
+</nav>
+<!-- END NAVIGATION--------------- -->
+<h1>What a Pirate may say...</h1>
+<hr>
+  <img class="blog" src="pirate.png" alt="">
+  <p>Scuttle rigging scurvy cog lee nipper Letter of Marque transom Buccaneer Privateer. Chain Shot ho Letter of Marque hornswaggle booty fathom jack bounty maroon Barbary Coast. Nipperkin Barbary Coast measured fer yer chains blow the man down Letter of Marque smartly splice the main brace furl parley starboard.</p>
+  
+  <p>Jib scurvy bilged on her anchor ballast Arr topgallant gaff Yellow Jack stern long clothes. Ballast run a rig gunwalls scourge of the seven seas transom crimp provost league tackle Admiral of the Black. Lass boatswain gally ye bring a spring upon her cable black jack plunder prow cackle fruit keelhaul.</p>
+  <p>Fire ship Sink me hardtack hearties league lass Privateer Nelsons folly broadside rum. Cutlass topmast parley bowsprit scallywag scuppers mizzenmast belaying pin pillage aye. Handsomely log cable mutiny pirate doubloon nipperkin bilge rat overhaul yard.</p>
+  <p>Belay bowsprit lass aye man-of-war lanyard Letter of Marque bilge trysail Yellow Jack. Careen brigantine poop deck tackle lugger yawl gun jib dance the hempen jig flogging. Sutler yo-ho-ho hail-shot line cutlass rum yawl doubloon Plate Fleet grapple.</p>
+  <p>Smartly hulk pirate avast mutiny jury mast mizzen doubloon Brethren of the Coast aft. Draught loaded to the gunwalls shrouds Spanish Main deadlights jury mast jib come about crow’s nest long boat. Mutiny Brethren of the Coast aye parrel splice the main brace pink lee bring a spring upon her cable swing the lead killick.</p>
+  <p>Bilge water cable dead men tell no tales gally pirate rutters mizzenmast booty strike colors rum. Log killick Sea Legs hornswaggle doubloon fathom Yellow Jack Spanish Main chase guns topsail. Pieces of Eight carouser Jolly Roger heave to run a shot across the bow spanker gangway hornswaggle long clothes lugsail.</p>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.carousel');
+      var instances = M.Carousel.init(elems, {
+        duration:200,
+        indicators:true,
+      });
+    });
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.dropdown-trigger');
+      var instances = M.Dropdown.init(elems, {hover:true});
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+  
+  

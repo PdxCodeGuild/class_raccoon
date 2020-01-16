@@ -103,6 +103,7 @@ def print_data(data):
                 print('x', end=' ')
         print()
 
+
 data = [1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 5, 6, 7, 8, 9, 8, 7, 6, 7, 8, 9]
 # data = generate_data4(40, 0, 12)
 print(peaks(data))

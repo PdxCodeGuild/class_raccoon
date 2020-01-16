@@ -145,13 +145,11 @@ word = wordsCount(text)
 
 sent = sentencesCount(text)
 
-
 ari_number = ariNumber(char, word, sent)
 # print(ari_number)
 grade_level = matchDict(ari_number)['grade_level']
 
 age_level = matchDict(ari_number)['ages']
-
 
 # Output
 print('***********************************')

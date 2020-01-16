@@ -1,0 +1,186 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: 'Palanquin Dark', sans-serif;
+}
+
+
+
+body {
+  background: repeating-linear-gradient(135deg, hsla(46,0%,88%,0.04) 0px, hsla(46,0%,88%,0.04) 1px,transparent 1px, transparent 81px),repeating-linear-gradient(90deg, hsla(46,0%,88%,0.04) 0px, hsla(46,0%,88%,0.04) 1px,transparent 1px, transparent 81px),repeating-linear-gradient(90deg, hsla(46,0%,88%,0.04) 0px, hsla(46,0%,88%,0.04) 1px,transparent 1px, transparent 41px),repeating-linear-gradient(45deg, hsla(46,0%,88%,0.04) 0px, hsla(46,0%,88%,0.04) 1px,transparent 1px, transparent 41px),repeating-linear-gradient(45deg, hsla(46,0%,88%,0.03) 0px, hsla(46,0%,88%,0.03) 1px,transparent 1px, transparent 11px),repeating-linear-gradient(135deg, hsla(46,0%,88%,0.03) 0px, hsla(46,0%,88%,0.03) 1px,transparent 1px, transparent 11px),repeating-linear-gradient(90deg, hsla(46,0%,88%,0.03) 0px, hsla(46,0%,88%,0.03) 1px,transparent 1px, transparent 11px),linear-gradient(90deg, hsl(152,17%,38%),hsl(152,17%,38%));
+
+  display: flex;
+  max-width: 100vw;
+}
+
+
+
+.sidenav{
+  position: fixed;
+  height: 100vh;
+  width: 200px;
+  top: 0;
+  left: 0;
+  padding-top: 60px;
+  transition: 0.5s;
+  background: repeating-linear-gradient(0deg, hsla(13,0%,82%,0.05) 0px, hsla(13,0%,82%,0.05) 1px,transparent 1px, transparent 56px),repeating-linear-gradient(45deg, hsla(13,0%,82%,0.05) 0px, hsla(13,0%,82%,0.05) 1px,transparent 1px, transparent 56px),repeating-linear-gradient(112.5deg, hsla(13,0%,82%,0.05) 0px, hsla(13,0%,82%,0.05) 1px,transparent 1px, transparent 16px),repeating-linear-gradient(157.5deg, hsla(13,0%,82%,0.05) 0px, hsla(13,0%,82%,0.05) 1px,transparent 1px, transparent 16px),repeating-linear-gradient(22.5deg, hsla(13,0%,82%,0.05) 0px, hsla(13,0%,82%,0.05) 1px,transparent 1px, transparent 16px),repeating-linear-gradient(67.5deg, hsla(13,0%,82%,0.05) 0px, hsla(13,0%,82%,0.05) 1px,transparent 1px, transparent 16px),linear-gradient(90deg, hsl(119,4%,12%),hsl(119,4%,12%));
+}
+
+
+
+.sidenav-company-name{
+  display: flex;
+  color: white;
+}
+
+
+
+
+
+.sidenav-logo > img {
+  max-height: 125px
+}
+
+
+
+.sidenav-links{
+  padding: 8px 8px 8px 20px;
+  font-size: 25px;
+  color: green;
+  display: block;
+  transition: 0.3s;
+}
+
+
+
+.sidenav-links a{
+  text-decoration: none;
+  color: white;
+}
+
+
+
+.sidenav-links li{
+  margin: 3.0em auto;
+}
+
+
+
+ul {
+  list-style: none;
+}
+
+
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+
+
+.main-content{
+  margin-left: 200px;
+  max-width: calc(100vw - 200px);
+}
+
+
+
+.intro1{
+  display: flex;
+  margin-top: 15px;
+  margin-left: 25px;
+}
+
+
+
+.intro2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+
+
+.main-pic {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+
+
+.main-pic img{
+  max-width: calc(100vw - 500px)
+}
+
+
+
+.first-thing{
+display: flex;
+flex-direction: column;
+}
+
+
+
+.who-we-are {
+  margin-left: 150px;
+  width: 50%;
+  padding: 2em;
+}
+
+
+
+.what-we-do {
+  margin-right: 150px;
+  width: 50%;
+  padding: 2em;
+}
+
+
+.things-we-do {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.flex-who-we-are{
+  display: flex;
+}
+
+
+
+.featured {
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+
+
+.project-header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.featured img{
+  height: 200px;
+
+}
+
+
+.footer{
+  display: flex;
+}
+
+
+
+.footer-logo img{
+  max-height: 100px
+}

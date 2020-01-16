@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Viva Puerto Rico</title>
+  <link rel="icon" href="https://cdn0.iconfinder.com/data/icons/business-and-finance-86/512/business_finance_money-35-2-512.png">
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  <!-- end bootstrap -->
+  <!-- Style sheet and font -->
+  <link rel="stylesheet" href="styles.css" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Strait&display=swap" rel="stylesheet"> 
+  <!-- end stylesheet and font -->
+</head>
+  
+<body id="page-container">
+  <!-- ------NavBar-------- -->
+  <div class="container-flex contact">
+      <div class="flex-nav">
+        <nav>
+          <img class="logo" src="https://images-na.ssl-images-amazon.com/images/I/41Dx14UkAGL._AC_SY355_.jpg" alt="logo">
+          <ul>
+            <li><a href="company.html" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">HOME</a></li>
+            <li><a href="menu.html" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">MENU</a></li>
+            <li><a href="contact.html" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">CONTACT</a></li>
+          </ul>
+        <div class="map">
+          <p>One of the finest Puerto Rican places around. Come join us for a great meal!</p>
+          <img class="map-logo"src="https://compote.slate.com/images/ff47615b-f476-4479-af98-add0a5255c80.jpeg?width=780&height=520&rect=1560x1040&offset=0x0" alt=""></img>
+          <h3>Our adress:</h3>
+          <p>142 SW. Myers Dr. Sabana Seca, PR 00952</p>
+          <h3>Call Us:</h3>
+          <p>251-800-8135</p>
+        </div>
+      </nav>
+    </div>
+    <!-- -------End Navbar--------- -->
+    <!-- -------Main--------- -->
+    <article class="form-flex">
+      <!--Section: Contact v.2-->
+<section class="mb-4">
+
+    <!--Section heading-->
+    <h2 class="h1-responsive font-weight-bold text-center my-4">Contact us</h2>
+    <!--Section description-->
+    <p class="text-center w-responsive mx-auto mb-5">Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
+        a matter of hours to help you.</p>
+
+    <div class="row">
+      <!--Grid column-->
+        <div class="col-md-9 mb-md-0 mb-5">
+            <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+              <!--Grid row-->
+              <div class="row">
+                <!--Grid column-->
+                <div class="col-md-6">
+                  <div class="md-form mb-0">
+                    <input type="text" id="name" name="name" class="form-control">
+                    <label for="name" class="">Your name</label>
+                  </div>
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-md-6">
+                  <div class="md-form mb-0">
+                    <input type="text" id="email" name="email" class="form-control">
+                    <label for="email" class="">Your email</label>
+                  </div>
+                </div>
+                <!--Grid column-->
+              </div>
+              <!--Grid row-->
+              
+              <!--Grid row-->
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="md-form mb-0">
+                    <input type="text" id="subject" name="subject" class="form-control">
+                    <label for="subject" class="">Subject</label>
+                  </div>
+                </div>
+              </div>
+              <!--Grid row-->
+              <!--Grid row-->
+              <div class="row">
+                
+                <!--Grid column-->
+                <div class="col-md-12">
+                  
+                  <div class="md-form">
+                    <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
+                    <label for="message">Your message</label>
+                  </div>
+                  
+                </div>
+              </div>
+              <!--Grid row-->
+            </form>
+            
+            <div class="text-center text-md-left">
+              <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Send</a>
+            </div>
+            <div class="status"></div>
+          </div>
+          <!--Grid column-->
+          <!--Grid column-->
+          <div class="col-md-3 text-center">
+            <ul class="list-unstyled mb-0">
+              <li><i class="fas fa-map-marker-alt fa-2x"></i>
+                <p>142 SW. Myers Dr. Sabana Seca, PR 00952</p>
+              </li>
+              
+              <li><i class="fas fa-phone mt-4 fa-2x"></i>
+                <p>251-800-8135</p>
+              </li>
+              
+              <li><i class="fas fa-envelope mt-4 fa-2x"></i>
+                <p>contact@vivapuertorico.com</p>
+              </li>
+            </ul>
+          </div>
+          <!--Grid column-->
+          
+        </div>
+      </section>
+      <!--Section: Contact v.2-->
+      <section>
+      <button type="button" class="btn btn-fb" onclick="window.location.href='https://www.facebook.com/pages/category/Puerto-Rican-Restaurant/La-Palma-Puerto-Rican-Restaurant-109554592415675/';"><i class="fab fa-facebook-f pr-1"></i>Facebook</button>
+      <button type="button" class="btn btn-tw"><i class="fab fa-twitter pr-1"></i> Twitter</button>
+      <button type="button" class="btn btn-ins"><i class="fab fa-instagram pr-1"></i> Instagram</button>
+      </section>
+    </article>
+
+    
+    
+    <!-- https://cdn1.iconfinder.com/data/icons/social-round-corner-4/512/social_media__vintage__facebook_-128.png
+    
+    https://cdn1.iconfinder.com/data/icons/social-round-corner-4/512/social_media__vintage__instagram-128.png
+    
+    https://cdn1.iconfinder.com/data/icons/social-round-corner-4/512/social_media__vintage__twitter_-128.png -->
+
+  </body>
+  </html>
+
+
+
+
+
+
+
+      
+
+  

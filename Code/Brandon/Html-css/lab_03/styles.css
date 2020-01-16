@@ -1,0 +1,178 @@
+body {
+  font-family: 'Strait', sans-serif;
+  /* background-color: #941004; */
+  background-image: url("https://image.freepik.com/free-vector/blank-light-grey-blurred-background-with-radial-gradient_53562-6788.jpg")
+}
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: white;
+  
+}
+footer {
+  height: 40px;
+  width: 100%;
+  background-color: black;
+  text-align: center;
+  font-size: 22px;
+  color: white;
+}
+/* -----Navbar---- */
+.flex-nav{ 
+  display: flex;
+  min-height: 100%;
+  width:280px;
+  background-color: black;
+
+
+}
+.flex-nav p {
+  text-align: center;
+  color:white;
+}
+.flex-nav h3 {
+  text-align: center;
+  color:white;
+}
+.logo {
+  height: 250px;
+  width: 250px;
+  border-style: none;
+  border-radius: 11px;
+}
+.map{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.map-logo{
+  width: 230px;
+  height: 230px;
+}
+
+/* .navbar{
+  width:30%;
+  height:100%;
+  border: 1px solid black;
+} */
+nav ul li{
+  list-style: none;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+}
+.btn:hover{
+  background-color: #960000!important;
+  color:white !important;
+} 
+.btn{
+  height:50px;
+  width: 150px; 
+  background-color: grey !important;
+  color: black;
+  border: solid 1px white !important;
+  margin: 10px;
+}
+/* -------Main------- */
+.container-flex {
+  display: flex;
+}
+.flex-main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+
+  /* border: 1px solid black; */
+}
+.sect-flex{
+  margin-top: 30px;
+  margin-bottom: 70px;
+  display: flex;
+
+}
+.card{
+  margin:20px!important;
+}
+.c-cell {
+  height: 300px;
+  width:600px;
+}
+.card {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.art-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 70%;
+  background-color: white;
+  margin-top: 20px;
+  font-size: 20px;
+}
+.form-flex{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  
+}
+
+@media(max-width:900px){
+  .container-flex {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .carousel {
+    display: none;
+  }
+  .sect-flex{
+    flex-direction: column;
+    margin:20px;
+  }
+  .flex-nav{
+    display: flex;
+    justify-content: center;
+    width:100%;
+  }
+  .card{
+    margin:20px;
+  }
+}
+.contact{
+  background-color: white;
+  
+}
+
+
+/* footer set up  */
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;            /* Footer height */
+}
+/* @media(max-width:1200px) */

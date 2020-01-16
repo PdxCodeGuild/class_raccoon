@@ -26,6 +26,7 @@
         justify-content: space-between;
         border: 2px dashed saddlebrown;
         font-size: 28px;
+        z-index: 2;
       }
       nav > div{
         margin: 0 10px;
@@ -59,6 +60,7 @@
         margin-bottom: 0px;
         border-radius: 20px;
         border: 1px solid blue;
+        z-index: -2;
       }
       #brokenimage{
         width:480px;
@@ -85,6 +87,12 @@
       .floatlink:hover{
         left: 80px;
       }
+      .sparklyfloat{
+        z-index: 1;
+        position: fixed;
+        top: 40px;
+        left: 0;
+      }
     </style>
   </head>
   <body>
@@ -109,6 +117,7 @@
       </div>
     </nav>
     <a class="floatlink" href="https://www.youtube.com/watch?v=wZZ7oFKsKzY"><img class="floaty" src="https://images-na.ssl-images-amazon.com/images/I/41HXUK8edZL.png" alt=""></a>
+    <img class="sparklyfloat" src="https://media2.giphy.com/media/xT9IgzvnOyNDYnxeHS/giphy.gif" alt="">
     <section class="posts">
       <div>
         <p>AH LOBE MUH KETTERS SO MUCH IT IS GREAT THEU OAR SO CUET IAM S SMEOAT PRSON</p>

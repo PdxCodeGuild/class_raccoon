@@ -1,0 +1,113 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: 'Palanquin Dark', sans-serif;
+}
+
+body {
+  background: repeating-linear-gradient(135deg, hsla(46,0%,88%,0.04) 0px, hsla(46,0%,88%,0.04) 1px,transparent 1px, transparent 81px),repeating-linear-gradient(90deg, hsla(46,0%,88%,0.04) 0px, hsla(46,0%,88%,0.04) 1px,transparent 1px, transparent 81px),repeating-linear-gradient(90deg, hsla(46,0%,88%,0.04) 0px, hsla(46,0%,88%,0.04) 1px,transparent 1px, transparent 41px),repeating-linear-gradient(45deg, hsla(46,0%,88%,0.04) 0px, hsla(46,0%,88%,0.04) 1px,transparent 1px, transparent 41px),repeating-linear-gradient(45deg, hsla(46,0%,88%,0.03) 0px, hsla(46,0%,88%,0.03) 1px,transparent 1px, transparent 11px),repeating-linear-gradient(135deg, hsla(46,0%,88%,0.03) 0px, hsla(46,0%,88%,0.03) 1px,transparent 1px, transparent 11px),repeating-linear-gradient(90deg, hsla(46,0%,88%,0.03) 0px, hsla(46,0%,88%,0.03) 1px,transparent 1px, transparent 11px),linear-gradient(90deg, hsl(152,17%,38%),hsl(152,17%,38%));
+
+  display: flex;
+}
+
+.sidenav{
+  position: fixed;
+  height: 100vh;
+  width: 200px;
+  top: 0;
+  left: 0;
+  padding-top: 60px;
+  transition: 0.5s;
+  background-color: red;
+}
+
+.sidenav-logo > img {
+  max-height: 160px
+}
+
+.sidenav-links{
+  padding: 8px 8px 8px 20px;
+  font-size: 25px;
+  color #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav-links a{
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.main-content{
+  margin-left: 200px;
+}
+
+.btn1{
+
+}
+
+.intro{
+
+}
+
+.whoweare{
+
+}
+
+.main-pic{
+
+}
+
+.what-we-do{
+
+}
+
+.awards{
+
+}
+
+.featured{
+
+}
+
+.portland-building{
+
+}
+
+.kcrb{
+
+}
+
+.broadway-tower{
+
+}
+
+.bottom{
+
+}
+
+.footer-header{
+
+}
+
+.btn2{
+
+}
+
+.footer-logo{
+
+}
+
+.copyright{
+
+}
+

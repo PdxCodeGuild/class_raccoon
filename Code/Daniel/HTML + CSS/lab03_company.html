@@ -19,22 +19,11 @@
 
     <link href="https://fonts.googleapis.com/css?family=Philosopher&display=swap" rel="stylesheet">
     
-
-            
+    <link rel="icon" href="http://www.pngmart.com/files/1/Banana-Fruit-Cartoon-PNG.png">           
 </head>
-<body class="yellow accent-2" onload="modal">
+<body class="yellow accent-2">
     
-    <nav>
-        
-  <!-- Modal Structure -->
-  <div id="modal1" class="modal">
-    <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
+    <nav>     
   </div>
         <div class="nav-wrapper yellow darken-3">
           <a href="#" class="brand-logo">BANANA</a>
@@ -45,7 +34,10 @@
           </ul>
         </div>
       </nav>
-    <ul id="slide-out" class="sidenav yellow accent-2">
+      <div class="parallax-container">
+        <div class="parallax"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Banana_leaf_close_up.jpg"></div>
+      </div>
+    <ul id="slide-out" class="sidenav yellow accent-2 ">
     <li><div class="user-view">
         <div class="background">
         <img src="http://bgfons.com/uploads/bananas/bananas_PNG5352.png">
@@ -58,9 +50,8 @@
     <li><a href="yellow.html">More Banana Facts</a></li>
     <li><a href="yellow.html">Increasingly Unlikely Banana facts</a></li>
     <li><a href="yellow.html">Banana Lies</a></li>
-  
     </ul>
-    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="btn-floating btn-large waves-effect waves-light yellow"></i></a>
+    <a href="#" data-target="slide-out" class="sidenav-trigger btn-floating btn-large waves-effect waves-light yellow"><i class="material-icons">chevron_right</i></a>
     <main>
         <div class=content>
             <ul class="collapsible">
@@ -160,6 +151,10 @@
                 </div> 
     
         </div>
+
+        <div class="parallax-container">
+          <div class="parallax"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Banana_leaf_close_up.jpg"></div>
+        </div>
       <div>
         <footer class="page-footer yellow accent-4">
           <div class="container">
@@ -170,7 +165,7 @@
                 </p>
               </div>
               <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Ever link goes to the same place</h5>
+                <h5 class="white-text">Every link goes to the same place</h5>
                 <ul>
                   <li><a class="grey-text text-lighten-3" href="yellow.html">Ba</a></li>
                   <li><a class="grey-text text-lighten-3" href="yellow.html">Bana</a></li>
@@ -180,6 +175,7 @@
               </div>
             </div>
           </div>
+          
           <div class="footer-copyright">
             <div class="container">
             © Bananas
@@ -208,6 +204,11 @@
             opacity: .6
         });
       };</script>
+    <script>document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.parallax');
+      var instances = M.Parallax.init(elems, {});
+    });</script>
+    
     
 </body>
 </html>

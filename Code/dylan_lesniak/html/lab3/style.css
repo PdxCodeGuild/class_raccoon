@@ -5,6 +5,7 @@
     font-size: 16px;
 }
 
+
 .brand-logo {
     max-height: 70px;
 }
@@ -26,9 +27,9 @@
 .tabs .indicator {
 	background-color:#009BAD;
 }
-#search{
+/* #search{
     padding: 20px 0px 0px 45px;
-}
+} */
 
 li > a{
     font-family: 'Saira Stencil One', cursive;

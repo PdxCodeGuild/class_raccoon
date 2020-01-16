@@ -1,0 +1,130 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+  }
+  
+  .nav {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  background-color: grey;
+}
+  .topnav {
+    overflow: hidden;
+    background-color: grey;
+  }
+
+  .topnav a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+
+  .topnav a.active {
+    background-color: #2196F3;
+    color: white;
+  }
+
+  .topnav .search-container {
+    float: right;
+  }
+
+  .topnav input[type=text] {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: none;
+  }
+
+  .topnav .search-container button {
+    float: right;
+    padding: 6px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .topnav .search-container button:hover {
+    background: #ccc;
+  }
+
+  @media screen and (max-width: 600px) {
+    .topnav .search-container {
+      float: none;
+    }
+    .topnav a, .topnav input[type=text], .topnav .search-container button {
+      float: none;
+      display: block;
+      text-align: left;
+      width: 100%;
+      margin: 0;
+      padding: 14px;
+    }
+    .topnav input[type=text] {
+      border: 1px solid #ccc;
+    }
+  }
+  .myanimation {
+    position: absolute;
+    top: 86%;
+    left: -200px;
+    z-index: 10;
+    background-color: white;
+    overflow: hidden;
+
+    animation-duration: 2s;
+    animation-name: goRight;
+    animation-iteration-count: infinite;
+
+    -moz-animation-duration: 8s;
+    -moz-animation-name: goRight;
+    -moz-animation-iteration-count: infinite;
+  }
+
+  @keyframes goRight {
+    from {
+      -webkit-transform: translate(0,0);
+    }
+    to {
+      -webkit-transform: translate(1920px,0);
+    }
+  }
+  @-moz-keyframes goRight {
+    from {
+      -moz-transform: translate(0,0);
+    }
+    to {
+      -moz-transform: translate(1920px,0);
+    }
+  }

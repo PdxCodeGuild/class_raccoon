@@ -1,0 +1,21 @@
+.hero img{
+  width: 100vw;
+}
+h1{
+  padding: 0.25em;
+}
+
+.paragraphs{
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 15px;
+}
+
+.flexbox{
+  display: flex;
+  flex-direction: row;
+}
+.lower hero{
+  width: 100vw
+}

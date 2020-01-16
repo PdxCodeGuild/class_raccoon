@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-size: 16px;
+  color: black;
 }
 body {
     margin: 0;
@@ -20,23 +21,44 @@ body {
     flex-direction: column;
     flex-basis: 100%;
     flex: 1;
+    }
+
+.left-column {
+  background-color: white;
+  flex: 2;
+  padding: 10px;
+  align-content: center;
+  align-items: center;
   }
-  
+.left-column img {
+  height: 100% auto;
+  width: 200px;
+  align-content: center;
+  align-items: center;
+  align-self: center;
+}
+.right-column {
+  background-color: #233237;
+  flex: 6;
+  padding: 10px;
+}
+
   .nav {
   display: flex;
   align-items: center;
   justify-content: right;
-  background-color: grey;
+  background-color: #233237;
+  padding: 5px;
 }
   .topnav {
     overflow: hidden;
-    background-color: grey;
+    background-color: #233237;
   }
 
   .topnav a {
     float: left;
     display: block;
-    color: black;
+    color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -93,38 +115,5 @@ body {
     }
     .topnav input[type=text] {
       border: 1px solid #ccc;
-    }
-  }
-  .myanimation {
-    position: absolute;
-    top: 86%;
-    left: -200px;
-    z-index: 10;
-    background-color: white;
-    overflow: hidden;
-
-    animation-duration: 2s;
-    animation-name: goRight;
-    animation-iteration-count: infinite;
-
-    -moz-animation-duration: 8s;
-    -moz-animation-name: goRight;
-    -moz-animation-iteration-count: infinite;
-  }
-
-  @keyframes goRight {
-    from {
-      -webkit-transform: translate(0,0);
-    }
-    to {
-      -webkit-transform: translate(1920px,0);
-    }
-  }
-  @-moz-keyframes goRight {
-    from {
-      -moz-transform: translate(0,0);
-    }
-    to {
-      -moz-transform: translate(1920px,0);
     }
   }

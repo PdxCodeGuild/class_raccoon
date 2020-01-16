@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css?family=Caveat+Brush|Raleway:500&display=swap');
+
+body {
+  background-color: rgb(169, 195, 184);
+}
+.container {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0;
+}
+.center{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+.maximage{
+  display: block;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: calc(90vw - 170px);
+  max-height: 80vw;
+}
+
+.sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 170px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: rgb(41, 189, 181); /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+  font-family: 'Raleway', sans-serif;
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: rgb(38, 47, 71);
+  display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: rgb(237, 237, 239);
+}
+
+.sidenav img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  border-radius: 100%;
+}
+
+.sidenav header {
+  margin: auto;
+  text-align: center;
+  font-family: 'Caveat Brush', cursive;
+  font-size: 1.3em;
+  color: rgb(237, 237, 239);
+}
+
+.sidenav > div {
+  margin-bottom: 10pt
+}
+
+.hero header {
+  width: calc(100vw - 170px);
+  position: absolute;
+  top: 3vw;
+  font-family: 'Caveat Brush', cursive;
+  font-size: 6vw;
+  color: rgb(38, 47, 71);
+  -webkit-animation: glow 1.5s ease-in-out infinite alternate;
+  -moz-animation: glow 1.5s ease-in-out infinite alternate;
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #ededef, 0 0 20px #ededef, 0 0 30px #29bdb5;
+  }
+
+  to {
+    text-shadow: 0 0 20px #ededef, 0 0 30px #36f5ea, 0 0 40px #36f5ea;
+  }
+}
+.hero img {
+  max-width: 100%;
+  min-width: 100%;
+}
+
+.hero {
+  width: calc(100vw - 170px);
+}
+
+/* Style page content */
+main {
+  margin: 0 0 0 170px;
+  width: 100%;
+  font-family: 'Raleway', sans-serif;
+  font-size: 16pt;
+}
+
+main a {
+  display: block;
+  text-decoration: none;
+  font-size: 25px;
+  color: rgb(38, 47, 71);
+  text-align: center;
+  margin-top: 20px;
+}
+
+main a:hover {
+  color: rgb(237, 237, 239);
+}
+
+.puppercenter{
+  display: block;
+  font-size: 20px;
+  color: rgb(38, 47, 71);
+  text-align: center;
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header {
+  font-size: 2em;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+p{
+  margin-top: .5em;
+  margin-left: 10px;
+}
+figure{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+figcaption{
+  margin-top: .5em;
+  font-size: .8em;
+  font-weight: 900;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}

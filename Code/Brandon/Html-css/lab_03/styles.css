@@ -120,6 +120,16 @@ nav ul li{
   margin-top: 20px;
   font-size: 20px;
 }
+.form-flex{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  
+}
 
 @media(max-width:900px){
   .container-flex {
@@ -142,6 +152,10 @@ nav ul li{
   .card{
     margin:20px;
   }
+}
+.contact{
+  background-color: white;
+  
 }
 
 

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <input type="text" placeholder="search..." title="enter a search term!"/>
+    <input type="text" disabled value="abc123llama"/>
+    <input type="password"/>
+    <textarea></textarea>
+    <input type="date"/>
+    <input type="time"/>
+    <input type="color"/>
+    <input type="radio" name="myradio" value="radio1"/><label>Radio 1</label>
+    <input type="radio" name="myradio" value="radio2"/><label>Radio 2</label>
+    <input type="radio" name="myradio" value="radio3"/><label>Radio 3</label>
+    <input type="checkbox"/>
+    <input type="checkbox"/>
+    <input type="checkbox"/>
+    <input type="file"/>
+    <input type="email"/>
+    <input type="range"/>
+    <select name="car">
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+      <option value="mercedes">Mercedes</option>
+      <option value="audi">Audi</option>
+    </select>
+
+    <select name="car" multiple>
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+      <option value="mercedes">Mercedes</option>
+      <option value="audi">Audi</option>
+    </select>
+
+    <br/><br/>
+    <form action="http://google.com/" method="post">
+        <input type="text" pattern="[a-z]{1,15}" title="username must be between 1 and 15 characters, all lowercase" required/>
+        <button type="submit">submit</button>
+    </form>
+  </body>
+</html>

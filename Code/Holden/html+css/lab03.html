@@ -92,12 +92,12 @@
         height: 18px;
         align-self: center center;
       }
+      #toggle{
+        display: none;
+      }
       @media (max-width: 640px){
         .normal{
           display: none
-        }
-        .mobile{
-          display: block;
         }
         nav{
           height: 36px;
@@ -109,7 +109,7 @@
         nav:hover h1{
           padding-top: 4.5px;
         }
-        nav:hover .normal{
+        #toggle:checked ~ .normal{
           display: block;
           text-decoration: none;
           align-self: right;
@@ -130,11 +130,14 @@
           justify-content: flex-start;
           display: block;
           text-align: right;
+          border-bottom: 0px;
         }
-        .dropdown:hover{
+        .dropdown:last-child:not(.dropdown){
           border-bottom: 1px solid grey;
         }
-
+        .mobile{
+          display: block;
+        }
       }
       @media (max-width: 425px){
         .sidebyside{
@@ -149,7 +152,8 @@
       <h1 style="padding-left:10px"><a href="#">? Ambiguous Industries</a></h1>
       <div class="spacer"></div>
       <div class="dropdown">
-        <div class="mobile"><img src="icons\inverse_hamburger.png" alt="Menu"></div>
+        <label for="toggle"><div class="mobile"><img src="icons\inverse_hamburger.png" alt="Menu"></div></label>
+        <input type="checkbox" id="toggle">
         <a class="normal" href="#AboutUs">About us</a>
         <a class="normal" href="https://theuselessweb.com/">Ambiguous link</a>
         <a class="normal" href="#FAQ">FAQ</a>

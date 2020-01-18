@@ -1,0 +1,61 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Raleway", regular;
+}
+
+header{
+  font-family: 'Gorditas', cursive;
+  font-size: 30px;
+  text-align: center;
+  background-color: #E6300B;
+  text-shadow: 0 0 5px #F5E40E;
+  padding: .5em;
+}
+
+h2{
+  font-size: 1.2em;
+}
+
+.left {
+  margin: 10px;
+  padding: 8px;
+  box-shadow: 0 0 3px 1px gray;
+  border-radius: 20px;
+}
+
+.left img{
+  text-align:center;
+  height: 200px;
+  border-radius: 20px;
+}
+
+main{
+    display: flex;
+}
+
+.mid {
+  flex-grow: 1;
+}
+
+.right {
+  padding: 8px;
+  margin: 10px;
+  box-shadow: 0 0 3px 1px gray;
+  border-radius: 20px;
+}
+
+.orderbutton {
+  border-radius: 5px;
+  background-color: lightblue;
+  padding: 5px;
+  text-align: center;
+  box-shadow: 0 2px 0 0 gray;
+  transition: all .1s;
+}
+
+.orderbutton:active{
+  box-shadow: 0 0 0 0;
+  transform: translateY(2px);
+}

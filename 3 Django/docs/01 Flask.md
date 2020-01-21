@@ -7,7 +7,7 @@ Flask is a light-weight web application framework written in Python. It performs
 
 Below is a minimal Flask application, it receives a request at localhost:5000/ and returns a response that simply contains "Hello World!"
 
-```
+```python
 from flask import Flask
 app = Flask(__name__)
 
@@ -23,6 +23,8 @@ You can run this application by running one the following commands:
 - Windows / PowerShell: `C:\path\to\app> $env:FLASK_APP = "hello.py"`
 
 Followed by `flask run` or `python -m flask run`
+
+To set the environment to "development", which will automatically restart the server when any file is changed `export FLASK_ENV=development`
 
 While developing your application, your computer will be bother the client and the server. When you deploy your application, a dedicated machine will have a public IP address and can send and receive requests from anyone on the web.
 

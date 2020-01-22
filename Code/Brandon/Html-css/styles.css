@@ -1,0 +1,71 @@
+/* global */
+body{
+  /* background-color: white; */
+  background-image: linear-gradient(to right top, #90a4ae, #aeb9c3, #90a4ae, #e6e7eb, #ffffff);
+}
+aside {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid;
+  width: 200px;
+  height:400px;
+  text-align: center;
+  margin-right: 6px;
+  margin-left: 10px;
+}
+article {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid;
+  width: 100%;
+  height:200px;
+}
+.contMain{
+  display:flex;
+  flex-direction: column;
+}
+
+.logo-img{
+  height: 100%;
+}
+.container-m{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: solid 1px black;
+  justify-content: center;
+  height: 400px;
+  width: 100%
+}
+.boxes-m {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero {
+  display: flex;
+  flex-direction: column;
+  background-image: url("https://dn9tckvz2rpxv.cloudfront.net/providence/img/locations/polson_banner.jpg");
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  height: 25%;
+  width: 100%;
+  text-align: center;
+}
+.hero-img {
+  text-align: center;
+  height: 200px;
+  border: none;
+  border-radius: 100px;
+  margin-top:10px;
+  box-shadow: 5px 5px 3px;
+}
+/* .resume {
+  display: flex;
+
+} */

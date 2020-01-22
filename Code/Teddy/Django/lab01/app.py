@@ -7,21 +7,25 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+######################### example3 ######################################
 @app.route('/example3/')
 def example3():
     name = 'Bill'
     temperature = 40
     return render_template('example3.html', name=name, temperature=temperature, text_color="green")
 
+######################### example4 ######################################
 @app.route('/example4/<int:temperature>/')
 def example4(temperature):
     return render_template('example4.html', temperature=temperature)
 
+######################### example5 ######################################
 @app.route('/example5/')
 def example5():
     nums = list(range(0, 100))
     return render_template('example5.html', nums=nums)
 
+######################### example6 ######################################
 @app.route('/example6/')
 def example6():
     contacts = [{
@@ -42,6 +46,7 @@ def example6():
     }]
     return render_template('example6.html', contacts=contacts)
 
+######################### example7 ######################################
 @app.route('/example7/', methods=['GET', 'POST'])
 def example7():
     response = ''
@@ -57,6 +62,7 @@ def example7():
             response = 'hot'
     return render_template('example7.html', temperature=temperature, response=response)
 
+######################### example8 ######################################
 @app.route('/example8/', methods=['GET', 'POST'])
 def example8():
     if request.method == 'POST':
@@ -65,6 +71,39 @@ def example8():
         mycheckbox1 = 'mycheckbox1' in response.form
 
     return render_template('example8.html')
+
+######################### Contact list ######################################
+import csv
+
+def read_database():
+    with open('database.csv') as file:
+        contacts = csv.DictReader(file)
+        contacts = list(contacts)
+    headers = list(contacts[0].keys())
+    return headers, contacts
+
+def write_database(headers, contacts):
+    with open('database.csv', 'w') as file:
+        writer = csv.DictWriter(file, fieldnames=headers)
+        writer.writeheader()
+        writer.writerows(contacts)
+
+@app.route('/contact_list/', methods=['GET', 'POST'])
+def contact_list():
+    headers, contacts = read_database()
+    if request.method == 'POST':
+        contact_name = request.form['contact_name']
+        contact_age = request.form['contact_age']
+        contact_email = request.form['contact_email']
+        contact_fav_color = request.form['contact_fav_color']
+        contact = {'name': contact_name,
+                    'age': contact_age,
+                    'email': contact_email,
+                    'favorite color': contact_fav_color}
+        contacts.append(contact)
+        write_database(headers, contacts)
+    return render_template('contact_list.html', headers=headers, contacts=contacts)
+
 
 ######################### Lab01 unit converter ######################################
 # Converse feet to meter
@@ -131,7 +170,7 @@ def unitConverter():
     num2=''
     unit1=''
     unit2=''
-    
+
     if request.method == 'POST':
 
         unit1 = request.form['mydropdown']

@@ -1,0 +1,28 @@
+body{
+    background-color: rgb(235, 96, 31);
+    color: black;
+}
+.flex{
+    background-color: beige;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 1000px;
+    margin: auto;
+    
+}
+.meter{
+    display: flex;
+    flex-direction: column;
+    background-color: beige;
+    margin: 40px;
+    max-width: 1000px;
+    justify-content: center;
+    align-items: center;
+    
+
+}
+.meter h1{
+    text-align: center;
+}

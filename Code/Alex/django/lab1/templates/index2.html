@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Password Generator v3</title>
+    </head>
+    <body>
+        <h1>Password Generator V3</h1>
+        <form action="/" method="post">
+            <h3>How many lowercase letters would you like in your password?</h3>
+            <input type="number" name="lowercase"/>
+            <h3>How many uppercase letters?</h3>
+            <input type="number" name="uppercase"/>
+            <h3>How many numbers?</h3>
+            <input type="number" name="nums"/>
+            <h3>How many special characters?</h3>
+            <input type="number" name="special_char"/>
+            <button type="submit">submit</button>
+        </form>
+        {% if password %}
+        <h3>{{password}}</h3>
+        {% endif %}
+    </body>
+</html>

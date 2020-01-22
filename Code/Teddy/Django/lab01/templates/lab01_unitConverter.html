@@ -11,67 +11,31 @@
     <title>Unit converter</title>
   </head>
   <body>
-    <body>
-      <h1>Unit Converter</h1>
-      <form action="/lab01_unitConverter/" method="post">
-        <input type="number" name="num1" placeholder="Input number">
-        <select name="mydropdown">
-          <option value="Feet">Feet</option>
-          <option value="Meters">Meters</option>
-          <option value="Miles">Miles</option>
-          <option value="Kilometers">Kilometers</option>
 
-        </select>
+    <h1>Unit Converter</h1>
+    <form action="/lab01_unitConverter/" method="post">
+      <input type="number" name="num1" placeholder="Input number">
+      <select name="mydropdown">
+        <option value="Feet">Feet</option>
+        <option value="Meters">Meters</option>
+        <option value="Miles">Miles</option>
+        <option value="Kilometers">Kilometers</option>
 
+      </select>
 
-        <select name="mydropdown2">
-          <p> to </p>
-          <option value="Feet">Feet</option>
-          <option value="Meters">Meters</option>
-          <option value="Miles">Miles</option>
-          <option value="Kilometers">Kilometers</option>
-        </select>
-        <button type="submit">submit</button>
-      </form>
+      <select name="mydropdown2">
+        <p> to </p>
+        <option value="Feet">Feet</option>
+        <option value="Meters">Meters</option>
+        <option value="Miles">Miles</option>
+        <option value="Kilometers">Kilometers</option>
+      </select>
+      <button type="submit">submit</button>
+    </form>
 
-      {% if num1 %}
-      <p>{{num1}} {{unit1}} equal {{num2}} {{unit2}}</p>
-      {% endif %}
-    </body>
-
-
-
-
-
-
-
-<!--
-    <div class="">
-      <p>Converse Foot to Meter</p>
-      <form action="/convertmeters/" method="post">
-        <input type="number" name="foot1" placeholder="How many foot?">
-        <button type="submit">submit</button>
-      </form>
-      {% if foot1 %}
-      <p>{{foot1}} feet is {{num}} meter</p>
-      {% endif %}
-      <hr>
-    </div>
-
-    <div class="">
-      <p>Converse Foot to Mile</p>
-      <form action="/convertmiles/" method="post">
-        <input type="number" name="foot2" placeholder="How many foot?">
-        <button type="submit">submit</button>
-      </form>
-      {% if foot2 %}
-      <p>{{foot2}} feet is {{mile}} miles</p>
-      {% endif %}
-      <hr>
-    </div> -->
-
-
-
+    {% if num1 %}
+    <p>{{num1}} {{unit1}} equal {{num2}} {{unit2}}</p>
+    {% endif %}
 
   </body>
 </html>

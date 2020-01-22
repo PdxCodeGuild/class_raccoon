@@ -1,3 +1,7 @@
+'''
+This lab is based off my python lab6_v2 file
+'''
+
 import random
 import string
 

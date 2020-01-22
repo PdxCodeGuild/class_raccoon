@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Password Generator</h1>
+      <form action="/" method="post">
+      <input type="number" name="password_length" placeholder="Enter a number..."/><br/>
+      <input type="checkbox" name="add_lower" value="lowercase" checked/>Lowercase Alphabet<br/>
+      <input type="checkbox" name="add_upper" value="uppercase"/>Uppercase Alphabet<br/>
+      <input type="checkbox" name="add_numbers" value="numbers"/>Numbers<br/>
+      <input type="checkbox" name="add_punctuations" value="punctuations"/>Punctuations<br/>
+      <button type="submit" value="Submit">Submit</button>
+        </form>
+
+      <p>
+      {% if password_length %}
+      The password is {{password_output}}.
+      {% endif %}
+      </p>
+  </body>
+</html>

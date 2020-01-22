@@ -14,17 +14,28 @@
 
     <style>
       .maindiv{
-        /* display: flex; */
+        display: flex;
+      }
+      .password{
+        display: flex;
+        flex-direction: column;
         margin: 50px, auto;
         max-width: 800px;
-        padding: 1em;
+        padding: 10px;
+      }
+      .rot_13{
+        display: flex;
+        flex-direction: column;
+        margin: 50px, auto;
+        max-width: 800px;
+        padding: 10px;
       }
     </style>
             
 </head>
 <body>
-  <div class="maindiv center-align">
-    
+  <div class="maindiv">
+      <div class="password center-align">
         <form action="" method="POST">
           <h3>PASSWORD GENERATOR</h3>
           <h4>Numbers:</h4>
@@ -46,12 +57,27 @@
 
           <button class="btn waves-effect waves-light" type="submit" name="action">Submit </button>
         </form>
-    {% if output %}
-    <p class= flow-text><h4>Your random password is:</h4> <h3>{{output}}</h3></p>
-    {% endif %}
-    <script>var array_of_dom_elements = document.querySelectorAll("input[type=range]");
-        M.Range.init(array_of_dom_elements);</script>
+      {% if output %}
+      <p class= flow-text><h4>Your random password is:</h4> <h3>{{output}}</h3></p>
+      {% endif %}
+    </div>
+    <div class="rot_13 center-align">
+      <h3>ROT 13</h3>
+      <form action="/rot" method="POST">
+        <P><input name="Phrase" type="text" class="validate">
+          <label for="Phrase">Phrase to encrypt</label></P>
+        <P><input name="Encrypt" type="number" class="validate">
+          <label for="Encrypt">Rotation</label></P>
+        
+          <button class="btn waves-effect waves-light" type="submit" name="action">Submit </button>
+      </form>
+      {% if encrypted_phrase %}
+      <p class= flow-text><h4>Your encrypted phrase:</h4> <h3>{{encrypted_phrase}}</h3></p>
+      {% endif %}
+    </div>
   </div>
+  <script>var array_of_dom_elements = document.querySelectorAll("input[type=range]");
+    M.Range.init(array_of_dom_elements);</script>
 </body>
 </html>
 

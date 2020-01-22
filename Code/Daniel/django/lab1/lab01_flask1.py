@@ -37,3 +37,19 @@ def password():
         output = "".join(outputstring_random)
         #print the final password
     return render_template("index.html", output = output)
+
+@app.route('/rot', methods=['GET', 'POST'])
+def rot_13():
+    rot_output = ""
+    if request.method == 'POST':
+        user_phrase = request.form['Phrase']
+        user_encrypt = int(request.form['Encrypt'])
+
+        alphabet = string.ascii_lowercase + string.digits + string.punctuation + " "
+    #encrypts user input by adding a user defined number to the index of every letter
+        encrypted_phrase = ""
+        for i in range(len(user_phrase)):
+            x = alphabet.find(user_phrase[i]) + user_encrypt
+            encrypted_digit = alphabet[x%(len(alphabet))]
+            encrypted_phrase += encrypted_digit
+    return render_template("index.html", encrypted_phrase=encrypted_phrase)

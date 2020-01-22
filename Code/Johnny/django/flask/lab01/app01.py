@@ -9,10 +9,13 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     password_length = ''
+    password_output = []
     if request.method == 'POST':
         password_length = request.form['password_length']
         password_length = int(password_length)
         for x in range(0, int(password_length)):
-            print(x)
+            output = random.choice(string.ascii_lowercase)
+            password_output.append(output)
+    password_output = ''.join(password_output)
     print(request.form)
-    return render_template('index.html', password_length=password_length)
+    return render_template('index.html', password_length=password_length, password_output=password_output)

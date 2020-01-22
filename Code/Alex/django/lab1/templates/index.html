@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <form action="/" method="post">
+            <h3>How many characters in the password?</h3>
+            <input type="number" name="nums"/>
+            <button type="submit">submit</button>
+        </form>
+        {% if password %}
+        <h3>{{password}}</h3>
+        {% endif %}
+    </body>
+</html>

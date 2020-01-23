@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Unit Converter V1</title>
+    </head>
+
+    <body>
+        <form action="/" method="post">
+            <h3>What measurement are we working with?</h3>
+            <input type="text" name="units" placeholder="ft, mi, m, km" required>
+            <h3>How many units?</h3>
+            <input type="number" name="distance" placeholder="number of units" required>
+            <div><button type="submit">submit</button></div>
+        </form>
+        {% if result %}
+        <p>{{distance}}{{units}} is {{result}}m</p>
+        {% endif %}
+    </body>
+</html>

@@ -5,7 +5,7 @@
 
 ## Part 1
 
-Create a folder called `lab01` to hold all the files for your lab. Inside that create `database.json` with the following content:
+Create a folder called `lab02` to hold all the files for your lab. Inside that create `database.json` and add the following content. You can add additional fields if you'd like to.
 
 ```json
 {
@@ -15,7 +15,7 @@ Create a folder called `lab01` to hold all the files for your lab. Inside that c
       "priority": "high"
     },{
       "text":"butter the cat",
-      "priority":"medium",
+      "priority":"medium"
     },{
       "text":"wash dishes",
       "priority":"low"
@@ -28,11 +28,23 @@ Create a flask app to load this data `with open...`, parse it using the `json` l
 
 ```python
 import json
+
+# demonstrating how to go between json and a python dictionary
 data = '{"name": "bob"}'
 data = json.loads(data) # json string -> python dictionary
 print(data['name']) # bob
 data = json.puts(data) # python dictionary -> json string
 print(data)
+
+# saving and loading the database
+def save_database(data):
+    with open('database.json', 'w') as file:
+        file.write(json.dumps(data))
+
+def load_database():
+    with open('database.json', 'r') as file:
+        data = json.loads(file.read())
+    return data
 ```
 
 The resulting HTML should look something like:
@@ -48,7 +60,7 @@ The resulting HTML should look something like:
 ## Part 2
 
 
-Using a `form`, allow the user to save data
+Using a `form`, allow the user to save a new todo item to the database.
 
 
 

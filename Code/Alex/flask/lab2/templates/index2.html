@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Lab 2 FLASK TODO</title>
+    </head>
+
+
+    <body>
+
+
+        <h1>Lab 2 FLASK TODO V2</h1>
+        {%for todos in data%}
+        <div class="todos">
+            <h3>{{todos['text']}}</h3>
+            <h4>{{todos['priority']}}</h4>
+        </div>
+        {%endfor%}
+
+
+        <form action="/" method="post">
+            <div class="add">
+                <h2>Add a TODO</h2>
+                <input type="text" name="add_text" placeholder="Your TODO" required>
+                <input type="text" name="add_priority" placeholder="Priority level" required>
+                <div><button type="submit">submit</button></div>
+            </div>
+        </form>
+
+
+    </body>
+</html>

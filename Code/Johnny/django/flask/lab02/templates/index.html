@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+  <ul>
+    {% for x in data['todos'] %}
+      <li>
+      {{x['text']}}
+      </li>
+    {% endfor %}
+  </ul>
+  </body>
+</html>

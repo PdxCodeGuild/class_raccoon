@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Password Generator</title>
+    <style media="screen">
+      form{
+        padding: 0.5em 0;
+      }
+      form input[type="number"]{
+        width: 3em;
+      }
+      form span{
+        border: 1px solid darkgrey;
+        padding: .5em;
+      }
+      textarea{
+        margin: 0.5em 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Password generator</h1>
+    <form action="" method="POST">
+      <span>number of lower case chars: <input type="number" name="lower" value="{% if lower %}{{lower}}{% endif %}"></span>
+      <span>number of upper case chars: <input type="number" name="caps" value="{% if caps %}{{caps}}{% endif %}"></span>
+      <span>number of special chars: <input type="number" name="punc" value="{% if punc %}{{punc}}{% endif %}"></span>
+      <span>number of digits: <input type="number" name="numbers" value="{% if numbers %}{{numbers}}{% endif %}"></span>
+      <span><input class="submit" type="submit"></span>
+    </form>
+    <textarea name="" readonly rows="1" cols="80" placeholder="Password Output">{% if password %}{{password}}{% endif %}{% if invalid %}input invalid{% endif %}</textarea>
+    <br>
+    <a href="/">Back to index</a>
+  </body>
+</html>

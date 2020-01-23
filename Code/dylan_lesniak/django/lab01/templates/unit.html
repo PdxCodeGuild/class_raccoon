@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <nav class="white">
+        <div class="nav-wrapper">
+            <a href="/" class="brand-logo cyan-text text-darken-1">LAB01</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a class="cyan-text text-darken-1" href="/rot/">Rot</a></li>
+                <li><a class="cyan-text text-darken-1" href="/password/">Password</a></li>
+                <li class="active cyan lighten-5"><a class="cyan-text text-darken-1" href="/unit/">Unit Conversion</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="rot">
+        <form action="/unit/" method="POST">
+            <div class="units row col s12">
+                <div class="input-field col s6">
+                    <select name="unit_from" required>
+                        <option value="" disabled selected>Choose your unit</option>
+                        <option value="Inches">Inches</option>
+                        <option value="Feet">Feet</option>
+                        <option value="Yards">Yards</option>
+                        <option value="Miles">Miles</option>
+                        <option value="Meters">Meters</option>
+                        <option value="Kilometers">Kilometers</option>
+                    </select>
+                    <label>Unit from: </label>
+                </div>
+                <div class="input-field col s6">
+                    <select name="unit_to" required>
+                        <option value="" disabled selected>Choose your unit</option>
+                        <option value="Inches">Inches</option>
+                        <option value="Feet">Feet</option>
+                        <option value="Yards">Yards</option>
+                        <option value="Miles">Miles</option>
+                        <option value="Meters">Meters</option>
+                        <option value="Kilometers">Kilometers</option>
+                    </select>
+                    <label>Unit to: </label>
+                </div>
+            </div>
+            <div class="row col s12">
+                <input type="number" name="amount_from" placeholder="Enter amount to be converted: " />
+            </div>
+            <button type="submit" class="btn cyan darken-1">submit</button>
+        </form>
+        {% if response %}
+        <p>{{amount_from}} {{unit_from}} is equal to {{amount_to}} {{unit_to}}.</p>
+        {% endif %}
+    </div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems, {});
+        });
+</script>
+</html>
+

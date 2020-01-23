@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Pyhost index</title>
+  </head>
+  <body>
+    <h3>Index of pyhost</h3>
+    <ul>
+      {% for path in path_list%}
+        <li><a href="{{path}}">pyhost{{path}}</a></li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

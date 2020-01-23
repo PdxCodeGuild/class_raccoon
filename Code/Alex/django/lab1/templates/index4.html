@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Unit Converter V1</title>
+    </head>
+
+    <body>
+        <form action="/" method="post">
+            <h3>Enter your conversion</h3>
+            <input type="text" name="units" placeholder="example: 5 miles to inches" required>
+            <div><button type="submit">submit</button></div>
+        </form>
+        {% if output_distance %}
+        <h3>{{distance}} {{input_units}} is {{output_distance}} {{output_units}}</h3>
+        {% endif %}
+    </body>
+</html>

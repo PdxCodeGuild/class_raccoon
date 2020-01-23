@@ -25,7 +25,7 @@
       .spacer{
         flex-grow: 1;
       }
-      nav > a{
+      .dropdown a{
         text-decoration: none;
         align-self: center;
         color: white;
@@ -77,20 +77,70 @@
       body{
         margin: 0;
       }
+      .dropdown{
+        display: flex;
+      }
       .mobile{
         height: 18px;
         display: none;
         align-self: center center;
+        padding: 4px;
+        border-radius: 3px;
+        margin: 5px;
       }
       .mobile img{
         height: 18px;
         align-self: center center;
       }
+      #toggle{
+        display: none;
+      }
       @media (max-width: 640px){
         .normal{
           display: none
         }
+        nav{
+          height: 36px;
+        }
+        nav:hover{
+          display: block;
+          align: center;
+        }
+        nav:hover h1{
+          padding-top: 4.5px;
+        }
+        #toggle:checked ~ .normal{
+          display: block;
+          text-decoration: none;
+          align-self: right;
+          color: white;
+          padding: 3px;
+          border-radius: 0;
+          border: 0;
+          border-top: 1px solid grey;
+          border-left: 1px solid grey;
+          margin: 0px;
+          background-color: rgb(60,60,60);
+        }
+        .dropdown{
+          position: fixed;
+          top: 0;
+          right: 0;
+          flex-direction: column;
+          justify-content: flex-start;
+          display: block;
+          text-align: right;
+          border-bottom: 0px;
+        }
+        .dropdown:last-child:not(.dropdown){
+          border-bottom: 1px solid grey;
+        }
         .mobile{
+          display: block;
+        }
+      }
+      @media (max-width: 425px){
+        .sidebyside{
           display: block;
         }
       }
@@ -101,11 +151,14 @@
 
       <h1 style="padding-left:10px"><a href="#">? Ambiguous Industries</a></h1>
       <div class="spacer"></div>
-      <a class="normal" href="#AboutUs">About us</a>
-      <a class="normal" href="https://theuselessweb.com/">Ambiguous link</a>
-      <a class="normal" href="#FAQ">FAQ</a>
-      <a class="normal" href="#">Useless clutter?</a>
-      <a class="mobile" href="#"><img src="icons\inverse_hamburger.png" alt="Menu"></a>
+      <div class="dropdown">
+        <label for="toggle"><div class="mobile"><img src="icons\inverse_hamburger.png" alt="Menu"></div></label>
+        <input type="checkbox" id="toggle">
+        <a class="normal" href="#AboutUs">About us</a>
+        <a class="normal" href="https://theuselessweb.com/">Ambiguous link</a>
+        <a class="normal" href="#FAQ">FAQ</a>
+        <a class="normal" href="#">Useless clutter?</a>
+      </div>
     </nav>
     <div class="sidebyside">
       <section>

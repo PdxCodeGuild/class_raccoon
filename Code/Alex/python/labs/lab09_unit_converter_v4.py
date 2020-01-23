@@ -59,7 +59,7 @@ units_dict = {
 while True:
     os.system("clear")
 
-    text = input('Enter your conversion (5 miles in inches): ')
+    text = input('Enter your conversion (5 miles to inches): ')
     text = text.split(' ')
     distance = text[0]
     input_units = text[1]
@@ -72,8 +72,7 @@ while True:
         print('invalid units')
         exit()
 
-    output_distance = distance*units[input_units]/units[output_units]
+    output_distance = distance*units_dict[input_units]/units_dict[output_units]
     output_distance = round(output_distance, 4)
     print(f'{distance} {input_units} is {output_distance} {output_units}')
 
-    

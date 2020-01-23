@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Compiled and minified CSS -->
+    
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+   
+
+    <!-- <style type="text/css">
+        nav ul li.active {
+            background-color: #e0f7fa;
+        }
+
+        nav ul li a.active{
+            color: black;
+        }
+    </style> -->
+    <title>Document</title>
+</head>
+
+<body>
+    <nav class="white">
+        <div class="nav-wrapper">
+            <a href="/" class="brand-logo cyan-text text-darken-1">LAB01</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li class="active cyan lighten-5"><a class="cyan-text text-darken-1" href="/rot/">Rot</a></li>
+                <li><a class="cyan-text text-darken-1" href="/password/">Password</a></li>
+                <li><a class="cyan-text text-darken-1" href="/unit/">Unit Conversion </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="rot">
+        <form action="/rot/" method="post">
+            <h3>Rot Cypher</h3>
+            <input type="text" name="cypher" placeholder="Enter text" required/>
+            <input type="number" name="rotations" placeholder="Enter number of rotations" required/>
+            <button type="submit" class="btn cyan darken-1">submit</button>
+        </form>
+        {% if response %}
+        <p>The encyrpted string is {{cypher}}.</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>

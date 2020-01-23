@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>RotN encoder/decoder</title>
+  </head>
+  <body>
+    <h1>Rot(N) encoder/decoder</h1>
+    <form action="" method="post">
+      <textarea name="textin" rows="8" cols="80" placeholder="{{textin}}"></textarea>
+      <br>
+      <input type="radio" name="encdec" value="encode" {% if encdec == 'encode' %}checked{% endif %}/>encode
+      <input type="radio" name="encdec" value="decode" {% if encdec == 'decode' %}checked{% endif %}/>decode
+      <input type="number" name="rotn" value="{{rot}}"> rotation number
+      <input type="submit" value="submit">
+    </form>
+    <br>
+    {% if textout %}
+      <h4>Output:</h4>
+      <textarea name="outputtxt" readonly rows="8" cols="80">{{textout}}</textarea>
+    {% endif %}
+    <br>
+    <a href="/">Back to index</a>
+  </body>
+</html>

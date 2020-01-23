@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Unit Converter</title>
+  </head>
+  <body>
+    <h1>Unit Converter</h1>
+    <form action="" method="POST">
+      <input type="text" name="distance" value="{% if distance != None %}{{distance}}{% endif %}" placeholder="number to convert">
+      <select name="unitin">
+        <option value="meters" {% if unitin == 'meters' %}selected{% endif %}>meters</option>
+        <option value="kilometers" {% if unitin == 'kilometers' %}selected{% endif %}>kilometers</option>
+        <option value="inches" {% if unitin == 'inches' %}selected{% endif %}>inches</option>
+        <option value="feet" {% if unitin == 'feet' %}selected{% endif %}>feet</option>
+        <option value="yards" {% if unitin == 'yards' %}selected{% endif %}>yards</option>
+        <option value="miles" {% if unitin == 'miles' %}selected{% endif %}>miles</option>
+      </select>
+      <br>
+      <h4>Output:</h4>
+      <textarea name="outputtxt" readonly rows="1" cols="80">{% if distout != None %}{{distout}} {{unitout}}{% endif %}{% if invalid %}Please input a valid number.{% endif %}</textarea>
+      <select name="unitout">
+        <option value="meters" {% if unitout == 'meters' %}selected{% endif %}>meters</option>
+        <option value="kilometers" {% if unitout == 'kilometers' %}selected{% endif %}>kilometers</option>
+        <option value="inches" {% if unitout == 'inches' %}selected{% endif %}>inches</option>
+        <option value="feet" {% if unitout == 'feet' %}selected{% endif %}>feet</option>
+        <option value="yards" {% if unitout == 'yards' %}selected{% endif %}>yards</option>
+        <option value="miles" {% if unitout == 'miles' %}selected{% endif %}>miles</option>
+      </select>
+      <br>
+      <input type="submit" value="Convert">
+      <br>
+      <a href="/">Back to index</a>
+    </form>
+  </body>
+</html>

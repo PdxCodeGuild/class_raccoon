@@ -1,0 +1,10 @@
+/* 100vh fills the screen vertically (so like, to have a couple of border columns.) */
+
+/* remember to test on mobile */
+
+/* bootstrap has cards */
+/* go to materialize.css and grab the part that you want. copy and paste that.  */
+
+nav ul li.active {
+  background-color: rgba(15, 57, 247, 0.1);
+}

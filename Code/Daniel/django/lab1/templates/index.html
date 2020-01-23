@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Index</title>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <style>
+      .maindiv{
+        display: flex;
+      }
+      .password{
+        display: flex;
+        flex-direction: column;
+        margin: 50px, auto;
+        max-width: 800px;
+        padding: 10px;
+      }
+      .rot_13{
+        display: flex;
+        flex-direction: column;
+        margin: 50px, auto;
+        max-width: 800px;
+        padding: 10px;
+      }
+    </style>
+            
+</head>
+<body>
+  <div class="maindiv">
+      <div class="password center-align">
+        <form action="" method="POST">
+          <h3>PASSWORD GENERATOR</h3>
+          <h4>Numbers:</h4>
+        <p class="range-field">
+            <input type="range" name="Numbers" min="0" max="10" />
+          </p>
+          <h4>Lowercase letters:</h4>
+          <p class="range-field">
+            <input type="range" name="Lowercase" min="0" max="10" />
+          </p>
+          <h4>Uppercase letters:</h4>
+          <p class="range-field">
+            <input type="range" name="Uppercase" min="0" max="10" />
+          </p>
+          <h4>Punctuation:</h4>
+          <p class="range-field">
+            <input type="range" name="Punctuation" min="0" max="10" />
+          </p>
+
+          <button class="btn waves-effect waves-light" type="submit" name="action">Submit </button>
+        </form>
+      {% if output %}
+      <p class= flow-text><h4>Your random password is:</h4> <h3>{{output}}</h3></p>
+      {% endif %}
+    </div>
+    <div class="rot_13 center-align">
+      <h3>ROT 13</h3>
+      <form action="/rot" method="POST">
+        <P><input name="Phrase" type="text" class="validate">
+          <label for="Phrase">Phrase to encrypt</label></P>
+        <P><input name="Encrypt" type="number" class="validate">
+          <label for="Encrypt">Rotation</label></P>
+        
+          <button class="btn waves-effect waves-light" type="submit" name="action">Submit </button>
+      </form>
+      {% if encrypted_phrase %}
+      <p class= flow-text><h4>Your encrypted phrase:</h4> <h3>{{encrypted_phrase}}</h3></p>
+      {% endif %}
+    </div>
+  </div>
+  <script>var array_of_dom_elements = document.querySelectorAll("input[type=range]");
+    M.Range.init(array_of_dom_elements);</script>
+</body>
+</html>
+
+

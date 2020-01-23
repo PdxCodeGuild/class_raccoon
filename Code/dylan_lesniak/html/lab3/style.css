@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+
+.brand-logo {
+    max-height: 70px;
+}
+
+.nav-links{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.tabs .tab a{
+    color: #ffc107;
+}
+.tabs .tab a:hover,.tabs .tab a.active {
+	background-color:transparent;
+	color:#424242;
+}
+
+.tabs .indicator {
+	background-color:#009BAD;
+}
+/* #search{
+    padding: 20px 0px 0px 45px;
+} */
+
+li > a{
+    font-family: 'Saira Stencil One', cursive;
+    font-size: 1.5em;
+    color: black;
+}
+
+.btn {
+    text-decoration: none;
+    margin: .5em 1em;
+    transition: all .3s ease-out;
+    color: black;
+}
+
+
+
+.paragraphs *{
+    margin: 10px;
+    min-height: 100%;
+    background-color: white;
+}

@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, redirect
 import rotn
 import unitconverter
+import passwordgenerator
 app = Flask(__name__)
 
-path_list = ["/", "/rotN/", "/UnitConvert/"]
+path_list = ["/", "/rotN/", "/UnitConvert/","/PassGen/"]
 
 @app.route('/')
 def index():
@@ -41,4 +42,18 @@ def uniconv():
 
 @app.route('/PassGen/', methods=['GET', 'POST'])
 def passgen():
-    return redirect('/')
+    password = None
+    caps = None
+    lower = None
+    punc = None
+    numbers = None
+    invalid = False
+    if request.method == 'POST':
+        caps = request.form['caps']
+        numbers = request.form['numbers']
+        lower = request.form['lower']
+        punc = request.form['punc']
+        password = passwordgenerator.passgen(caps, lower, punc, numbers)
+        if password == None:
+            invalid = True
+    return render_template('passgen.html', caps=caps, lower=lower, punc=punc, numbers=numbers, password=password, invalid=invalid)

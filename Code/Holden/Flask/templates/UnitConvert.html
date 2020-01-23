@@ -18,7 +18,7 @@
       </select>
       <br>
       <h4>Output:</h4>
-      <textarea name="outputtxt" readonly rows="8" cols="80">{% if distout != None %}{{distout}} {{unitout}}{% endif %}{% if invalid %}Please input a valid number.{% endif %}</textarea>
+      <textarea name="outputtxt" readonly rows="1" cols="80">{% if distout != None %}{{distout}} {{unitout}}{% endif %}{% if invalid %}Please input a valid number.{% endif %}</textarea>
       <select name="unitout">
         <option value="meters" {% if unitout == 'meters' %}selected{% endif %}>meters</option>
         <option value="kilometers" {% if unitout == 'kilometers' %}selected{% endif %}>kilometers</option>
@@ -29,6 +29,8 @@
       </select>
       <br>
       <input type="submit" value="Convert">
+      <br>
+      <a href="/">Back to index</a>
     </form>
   </body>
 </html>

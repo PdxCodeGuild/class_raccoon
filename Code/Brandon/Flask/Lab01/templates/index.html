@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lab01</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
+</head>
+<body>
+    <div class="flex">
+        <div class="meter">
+        <h1>Convert your measurement to meters...</h1>
+        <div class="row">
+            <form class="col s12" action="/" method="POST">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="Placeholder" id="first_name" type="number" name="measurement" >
+                    <label for="first_name">Value</label>
+                </div>
+                <!-- <div class="input-field col s6">
+                <input id="last_name" type="text" name="unit">
+                <label for="last_name">Current unit of measurement</label>
+                </div> -->
+                <div class="input-field col s12">
+                    <select name="unit">
+                    <option value="" disabled selected>Choose your Unit</option>
+                    <option value="feet">Feet</option>
+                    <option value="mile">Mile</option>
+                    <option value="kilometer">Kilometer</option>
+                    <option value="Meter">Meter</option>
+                    </select>
+                    <label>Unit to convert from</label>
+                </div>
+            </div>
+            <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <p> {{measurement}} {{unit}} = {{values}} meters.</p>
+ 
+    </div>   
+        
+
+    
+    
+</body>
+</html>

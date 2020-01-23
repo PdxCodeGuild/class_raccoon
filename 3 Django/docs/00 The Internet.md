@@ -105,3 +105,16 @@ The response to an HTTP request will have a **status code** which indicates whet
 | 3XX  | redirection  | 301 Moved Permanently |
 | 4XX  | client error | 403 Forbidden, 404 Not Found |
 | 5XX  | server error | 500 Internal Server Error |
+
+
+
+## Web Application Frameworks
+
+
+| Framework | Language |
+|--- |--- |
+| Django, Flask | Python |
+| Ruby on Rails | Ruby |
+| ASP.NET | C# |
+| Node.js | JavaScript |
+| Apache Struts | Java |

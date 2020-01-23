@@ -43,11 +43,11 @@ def path1():
 
 @app.route('/path2/')
 def path2():
-    return 'you\'re at path 1'
+    return 'you\'re at path 2'
 
 @app.route('/path3/')
 def path3():
-    return 'you\'re at path 1'
+    return 'you\'re at path 3'
 ```
 
 
@@ -59,12 +59,10 @@ app = Flask(__name__)
 
 @app.route('/user/<string:username>')
 def show_user_profile(username):
-    # show the user profile for that user
-    return f'Showing user with username {username}'
+    return f'Showing profile for {username}'
 
 @app.route('/post/<int:post_id>')
 def show_post(post_id):
-    # show the post with the given id, the id is an integer
     return f'Showing post with id {post_id}'
 
 ```

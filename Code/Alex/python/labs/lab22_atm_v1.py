@@ -15,28 +15,31 @@ import os
 import string
 
 
-# class Atm:
-#     def check_balance(self) #returns the account balance
-#
-#
-#     def deposit(self, amount) #deposits the given amount in the account
-#
-#
-#     def check_withdrawal(self, amount) #returns true if the withdrawn amount won't put the account in the negative
-#
-#
-#     def withdraw(self, amount) #withdraws the amount from the account and returns it
-#
-#
-#     def calc_interest(self) #returns the amount of interest calculated on the account
+class Atm:
+    def balance(self):
+        return self.current_account.balance
 
-#call ATM
+    def deposit(self, amount):
+        self.current_account.balance += amount #deposits the given amount in the account
+
+
+    def check_withdrawal(self, amount) #returns true if the withdrawn amount won't put the account in the negative
+
+
+    def withdraw(self, amount):
+        self.current_account.balance -= amount #withdraws the amount from the account and returns it
+
+
+    def calc_interest(self, interest=0.001):
+        self.interest = interest
+
+
 
 
 
 
 #implement teller or self serve
-
+atm = Atm()
 
 while True:
     os.system("clear")
@@ -53,7 +56,7 @@ while True:
             duty = input('\n\nOptions:\nCheck balance\nWithdraw\nDeposit\nCancel\n\n').lower()
 
             if duty == 'balance':
-                #print(f"Your current balance in your {account} account is ${}")
+                print(f"Your current balance in your {account} account is ${}")
 
             elif duty == 'withdraw':
                 amount = input('Please enter the amount you would like to withdraw\n$')
@@ -75,7 +78,7 @@ while True:
             duty = input('\n\nOptions:\nCheck balance\nWithdraw\nDeposit\nCancel\n\n').lower()
 
             if duty == 'balance':
-                #print(f"Your current balance in your {account} account is ${}")
+                print(f"Your current balance in your {account} account is ${}")
 
             elif duty == 'withdraw':
                 amount = input('Please enter the amount you would like to withdraw\n$')

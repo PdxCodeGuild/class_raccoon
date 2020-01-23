@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- Materialize CDN -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  </head>
+  <style>
+
+  .everything {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .rot13 {
+    padding: 1em;
+  }
+  .passgen {
+    padding: 1em;
+  }
+  .rotput {
+    font-size: 1.2em;
+  }
+  .btn {
+    margin:2em;
+  }
+
+  </style>
+  <body>
+
+    <div class="everything">
+      <nav>
+      <div class="nav-wrapper green">
+        <a href="#" class="brand-logo left"><img src="https://www.designfreelogoonline.com/wp-content/uploads/2015/05/00496-cat-logo-design-free-logomaker-01.png" alt="Cat" height="70px"></a>
+      </div>
+    </nav>
+      <div class="rot13">
+        <h2>Rot13</h2>
+        <form action="/" method="post">
+          <input type="text" name="user_text" placeholder="enter your text">
+          <button type='submit'>submit</button>
+        </form>
+      </div>
+      {% if user_text %}
+      <p class="rotput"> You're scrambled text is "{{output}}"</p>
+      {% endif %}
+      <div class="passgen">
+        <h2>Random Password Generator</h2>
+        <form action="/passgen" method="post">
+          <input type="number" name="passlength" placeholder="password length">
+          <button type='submit'>generate</button>
+        </form>
+      </div>
+      {% if passgen %}
+      <p class="password">You're password is "{{password}}"</p>
+      {% endif %}
+    <footer class="page-footer green">
+         <div class="container">
+           <div class="row">
+             <div class="col 10 s12">
+               <h5 class="white-text">Timmus Maximus Industries</h5>
+               <p class="grey-text text-lighten-4">Doing stuff with things for a long time. </p>
+             </div>
+           </div>
+         </div>
+         <div class="footer-copyright">
+           <div class="container">
+           © 2019 Copyright Timmus Maximus
+           </div>
+         </div>
+       </footer>
+     </div>
+  </body>
+</html>

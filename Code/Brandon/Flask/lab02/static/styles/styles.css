@@ -1,0 +1,13 @@
+body {
+    
+}
+.main_bod{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.todo_item{
+    
+    
+}

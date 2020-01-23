@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Lab 2</title>
+  </head>
+  <body>
+    <form action="" method="post">
+      Activity <input type="text" name="activity" value="">
+      priority
+      <select name="priority">
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+      <button type="submit">submit</button>
+    </form>
+
+    {% for todo in data %}
+    <p>{{todo['text']}}</p>
+    {% endfor %}
+
+  </body>
+</html>

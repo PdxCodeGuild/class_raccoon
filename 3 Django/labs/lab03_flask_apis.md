@@ -3,7 +3,7 @@
 
 # Lab 3 Flask APIs
 
-[link](../docs/01 Flask.md#1.6 APIs)
+[link]("../docs/01+Flask.md#1.6+APIs")
 
 - Use the [FavQs API](https://favqs.com/api) to get a random quote and display it, then allow the user to search for quotes and see a list of results, then maybe allow them to save their favorites to a database.
 

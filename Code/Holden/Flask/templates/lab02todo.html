@@ -44,6 +44,24 @@
         top: 24px;
         right: 38px;
       }
+      .high{
+        background-color: #ee0000;
+      }
+      .high:nth-of-type(even){
+        background-color: #ee3333;
+      }
+      .medium{
+        background-color: #d06000;
+      }
+      .medium:nth-of-type(even){
+        background-color: #e07033;
+      }
+      .low{
+        background-color: #dddd00;
+      }
+      .low:nth-of-type(even){
+        background-color: #eeee33;
+      }
     </style>
   </head>
   <body>
@@ -53,10 +71,15 @@
       <ul>
         <input id="delete" type="checkbox">
         {% for todo in todo_list %}
-        <li><span>{{todo}}</span><span class="del_span"><input class="delete_button" id="{{todo}}" type="checkbox" name="{{todo}}"><label class="delete_button" for="{{todo}}"> delete</label></span></li>
+        <li class="{{todo['priority']}}"><span>{{todo['text']}}</span><span class="del_span"><input class="delete_button" id="{{todo}}" type="checkbox" name="{{todo}}"><label class="delete_button" for="{{todo}}"> delete</label></span></li>
         {% endfor %}
       </ul>
-      <input type="text" name="new_todo" placeholder="New TODO">
+      <input type="text" name="new_todo" placeholder="New TODO"><select class="" name="new_priority">
+        <option class="defopt" value="">Priority</option>
+        <option value="high">high</option>
+        <option value="medium">medium</option>
+        <option value="low">low</option>
+      </select>
       <input type="submit" value="Save">
     </form>
   </body>

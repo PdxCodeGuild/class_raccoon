@@ -47,7 +47,8 @@
         </div>
   <div class="main_bod">
       <!-- ------This is the portion of the webpage that calls for the python magic and displays the data that is requested.--- -->
-  
+      {%if data%}
+      
       {%for todos in data%}
       <div class="col s12 m5">
         <div class="card-panel {{todos['priority']}} todo_item">
@@ -69,7 +70,16 @@
         </div>
       </div>
       {%endfor%}   
-      </div> 
+      </div>
+      
+      {%else%}
+      <div class="nothing">
+          <h1>You have nothing</h1>
+      </div>
+      {%endif%}
+     
+    
+
       
   
   

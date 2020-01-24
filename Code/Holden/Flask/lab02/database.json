@@ -5,12 +5,44 @@
       "priority": "high"
     },
     {
+      "text": "oh noes",
+      "priority": "high"
+    },
+    {
+      "text": "supa high",
+      "priority": "high"
+    },
+    {
       "text": "butter the cat",
+      "priority": "medium"
+    },
+    {
+      "text": "med",
+      "priority": "medium"
+    },
+    {
+      "text": "midi",
       "priority": "medium"
     },
     {
       "text": "wash dishes",
       "priority": "low"
+    },
+    {
+      "text": "low",
+      "priority": "low"
+    },
+    {
+      "text": "extra low",
+      "priority": "low"
+    },
+    {
+      "text": "no",
+      "priority": ""
+    },
+    {
+      "text": "nop",
+      "priority": ""
     }
   ]
 }

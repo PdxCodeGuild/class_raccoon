@@ -11,7 +11,6 @@ table{
     width: 100%; 
 }
 
-
 table tr:nth-child(even) {
   background-color: #eee;
 }
@@ -56,6 +55,7 @@ table tr:last-child th {
 }
 table tr th:last-child {
   border-right: 0;
+  background-color: white;
 }
 
 table tr:first-child td {
@@ -64,8 +64,14 @@ table tr:first-child td {
 table tr td:first-child {
   border-left: 0;
 }
+
+table tr td:nth-last-child(2) {
+  border-right: 0; 
+}
+
 table tr td:last-child {
-  border-right: 0;
+  border: none; 
+  background-color: white;
 }
 
 .data_title{

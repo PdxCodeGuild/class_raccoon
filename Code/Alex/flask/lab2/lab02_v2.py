@@ -23,13 +23,13 @@ def save_database(data):
 @app.route('/', methods=['GET', 'POST'])
 def index2():
     add_text = ''
-    add_priority = ''
+    add_intensity = ''
     data = load_database()
 
     if request.method == 'POST':
         add_text = request.form['add_text']
-        add_priority = request.form['add_priority']
-        data.append({'text':add_text, 'priority':add_priority})
+        add_intensity = request.form['add_intensity']
+        data.append({'text':add_text, 'intensity':add_intensity})
         save_database({"todos":data})
-    return render_template('index2.html', data=data, add_text=add_text, add_priority=add_priority)
+    return render_template('index2.html', data=data, add_text=add_text, add_intensity=add_intensity)
 

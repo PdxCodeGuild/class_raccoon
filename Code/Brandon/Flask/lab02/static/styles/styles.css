@@ -1,13 +1,65 @@
 body {
+    font-family: 'Ubuntu Mono', monospace;
+
     
+}
+body h1{
+    text-align: center;
+}
+.bodacious h4{
+    text-align: center;
+}
+.bodacious{
+    display: flex;
+    flex-direction: column;
 }
 .main_bod{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 .todo_item{
-    
-    
+
+    text-align: center;
+    min-width: 400px;
+    margin: 1.5rem;
+}
+.high {
+    background-color: #f23c06;
+
+}
+.medium {
+    background-color: #f89c12;
+}
+.low {
+    background-color: #fef764;
+}   
+.button_s{
+    text-align: center;
+}
+.row_flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-width: 500px;
+}
+.col_flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+}
+.drop{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0px;
+    padding: auto;
+    width: 500px;
+}
+.add_field{
+    width: 600px !important;
 }

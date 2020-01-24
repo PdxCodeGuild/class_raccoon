@@ -53,13 +53,14 @@ def index():
 
 @app.route('/delete/', methods=['POST'])
 def delete():
-    del_num = request.form['del_num']
+    del_num = int(request.form['del_num'])
     file = load_database()
     data = file['todos']
     temp_data = []
+    print(del_num)
     for task in data:
         if task['number'] == del_num:
-            break
+            continue
         else:
             temp_data.append(task)
     data = number_tasks(temp_data)

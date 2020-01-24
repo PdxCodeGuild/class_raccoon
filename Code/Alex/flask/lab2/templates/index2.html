@@ -2,13 +2,30 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title></title>
+        <title>Doin It</title>
+        <link rel="stylesheet" href="static/styles/styles.css" type="text/css">
     </head>
     <body>
-        <ul>
-            <li>walk the dog</li>
-            <li>butter the cat</li>
-            <li>wash dishes</li>
-        </ul>
+        <h1>To Do</h1>
+        <form action="/" method="post">
+            <div class="add">
+                <input type="text" name="add_text" placeholder="Task" required>
+                <input type="text" name="add_priority" placeholder="Priority level" required>
+                <button type="submit">Add</button>
+            </div>
+        </form>
+        <table>
+            <tr>
+                <th>To Do</th>
+                <th>Priority</th>
+            </tr>
+            {%for todos in data%}
+            <tr>
+                <td>{{todos['text']}}</td>
+                <td>{{todos['priority']}}</td>
+            </tr>
+            {%endfor%}
+        </table>
     </body>
 </html>
+

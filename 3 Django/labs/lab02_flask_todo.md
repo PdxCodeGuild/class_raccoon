@@ -7,7 +7,7 @@
 
 Create a folder called `lab02` to hold all the files for your lab. Inside that create `database.json` and add the following content. You can add additional fields if you'd like to.
 
-```json
+```javascript
 {
   "todos":[
     {
@@ -47,20 +47,20 @@ def load_database():
     return data
 ```
 
-The resulting HTML should look something like:
+The resulting HTML should look something like this, but feel free to use a `table` or `div`s instead.
 
 ```html
 <ul>
-  <li>walk the dog</li>
-  <li>butter the cat</li>
-  <li>wash dishes</li>
+  <li>walk the dog (high)</li>
+  <li>butter the cat (medium)</li>
+  <li>wash dishes (low)</li>
 </ul>
 ```
 
 ## Part 2
 
 
-Using a `form`, allow the user to save a new todo item to the database.
+Using a `form`, allow the user to save a new todo item to the database. This should include a `input` for text, a `select` for the priority, and a `button` for submitting the form.
 
 
 

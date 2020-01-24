@@ -6,26 +6,26 @@
         <link rel="stylesheet" href="static/styles/styles.css" type="text/css">
     </head>
     <body>
-        <h1>To Do</h1>
-        <form action="/" method="post">
-            <div class="add">
-                <input type="text" name="add_text" placeholder="Task" required>
-                <input type="text" name="add_priority" placeholder="Priority level" required>
-                <button type="submit">Add</button>
-            </div>
-        </form>
         <table>
             <tr>
-                <th>To Do</th>
-                <th>Priority</th>
+                <th>Do These Things</th>
+                <th>This Intensely</th>
             </tr>
             {%for todos in data%}
             <tr>
                 <td>{{todos['text']}}</td>
-                <td>{{todos['priority']}}</td>
+                <td class="{{todos['intensity']}}">{{todos['intensity']}}</td>
             </tr>
             {%endfor%}
         </table>
+        <div class="add_header"><h3>Oh, you want more?</h3></div>
+        <div class="add">
+            <form action="/" method="post">
+                <input type="text" name="add_text" placeholder="Task" required>
+                <input type="text" name="add_intensity" placeholder="Intensity level" required>
+                <button type="submit">Add</button>
+            </form>
+        </div>
     </body>
 </html>
 

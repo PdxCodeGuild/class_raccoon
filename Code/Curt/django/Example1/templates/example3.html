@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Hello {{name}}</h1>
+    {% if temperature < 60 %}
+      <p>cold</p>
+    {% elif temperature < 80 %}
+      <p>warm</p>
+    {% else %}
+      <p>hot</p>
+    {% endif %}
+  </body>
+</html>

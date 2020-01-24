@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <form action="/" method="post">
+      <h1>ROT13 Cipher</h1>
+      Please input the phrase you would like to encrypt:
+      <input type="text" name="keyphrase">
+    </form>
+    {% if passphrase %}
+      Your encrypted password is:
+      {{passphrase}}
+    {% endif %}
+    <form action="/" method="post">
+      <h1>Unit Conversion</h1>
+      What distance would you like to convert:<br>
+      <input type="number" name="dist">
+      <select name="unit">
+        <option value="" disabled selected>units</option>
+        <option value="inches">inches</option>
+        <option value="feet">feet</option>
+        <option value="yards">yards</option>
+        <option value="miles">miles</option>
+        <option value="meters">meters</option>
+        <option value="kilometers">kilometers</option>
+      </select>
+      <br>What unit would you like to convert to:
+      <select name="enunit">
+        <option value="" disabled selected>units</option>
+        <option value="inches">inches</option>
+        <option value="feet">feet</option>
+        <option value="yards">yards</option>
+        <option value="miles">miles</option>
+        <option value="meters">meters</option>
+        <option value="kilometers">kilometers</option>
+      </select>
+      <button type="submit">Submit</button>
+    </form>
+    {% if conversion %}
+      {{dist}} {{unit}} is<br>
+      {{conversion}} {{enunit}}
+    {% endif %}
+  </body>
+</html>

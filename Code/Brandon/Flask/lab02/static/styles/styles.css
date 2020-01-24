@@ -63,3 +63,19 @@ body h1{
 .add_field{
     width: 600px !important;
 }
+.head_block{
+    display: flex;
+    width: 100%;
+    background-color: #9cb806;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.bodie {
+    display: flex;
+    flex-direction: column;
+
+}
+.done {
+    background-color: white !important;
+}

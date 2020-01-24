@@ -103,7 +103,10 @@ def index(username):
 </ul>
 ```
 
-## 1.3 Forms
+## 1.3 Static Files
+
+
+## 1.4 Forms
 
 By default, routes only respond to GET requests, we can allow them to respond to requests using other methods by passing them to the `route`.
 
@@ -113,6 +116,45 @@ By default, routes only respond to GET requests, we can allow them to respond to
 ```
 
 
-## 1.4 Query Parameters
+## 1.5 Query Parameters
 
 
+Query parameters can be received by
+
+
+## 1.6 APIs
+
+Flask applications are just like regular python programs, and can make use of the `requests` library to send HTTP requests to APIs. It's possible to perform these requests when the user accesses a page, and then using the result of that call to render a template. The following example gets a random quote from the `favqs api` and displays it in an html page.
+
+
+##### random_quote.py
+```python
+from flask import Flask, render_template
+import requests
+import json
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    response = requests.get('https://favqs.com/api/qotd')
+    data = json.loads(response.text)
+    quote_author = data['quote']['author']
+    quote_text = data['quote']['body']
+    return render_template('random_quote.html', quote_author=quote_author, quote_text=quote_text)
+```
+
+##### templates/random_quote.html
+
+```html
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <p>"{{quote_text}}" - {{quote_author}}</p>
+  </body>
+</html>
+```

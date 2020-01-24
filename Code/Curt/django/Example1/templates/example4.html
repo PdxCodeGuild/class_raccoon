@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <p>The temperature is {{temperature}} which is
+      {% if temperature < 60 %}
+        cold
+      {% elif temperature < 80 %}
+        warm
+      {% else %}
+        hot
+      {% endif %}
+    </p>
+  </body>
+</html>

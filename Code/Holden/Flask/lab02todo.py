@@ -27,6 +27,6 @@ def database_save():
         if not_in_list and new_todo:
             dataout["todos"].append({"text": new_todo})
         file.seek(0)
-        file.write(json.dumps(dataout))
+        file.write(json.dumps(dataout, indent=2))
         file.truncate()
     return redirect('/')

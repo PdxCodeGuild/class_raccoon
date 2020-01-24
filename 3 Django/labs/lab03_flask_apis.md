@@ -3,13 +3,22 @@
 
 # Lab 3 Flask APIs
 
-[link](../docs/01%20Flask.md#16-apis)
+Let's build a front-end to an API by sending HTTP requests to the API from our own backend. Check out the [example in the docs](../docs/01%20Flask.md#16-apis).
 
-- Use the [FavQs API](https://favqs.com/api) to get a random quote and display it, then allow the user to search for quotes and see a list of results, then maybe allow them to save their favorites to a database.
+- **Version 1**: display text/graphics from the API.
+- **Version 2**: allow the user to search the API.
+- **Version 3**: allow the user to save "favorites" to a database.
 
-- Use the [OpenWeatherMap](https://openweathermap.org/api) API to show the current weather and a forecast for the week. You can use the [built-in icons](https://openweathermap.org/weather-conditions#Icon-list) or these [more minimal ones](https://websygen.github.io/owfont/).
 
--
+You can use one of the following APIs or [choose your own](https://github.com/public-apis/public-apis).
+
+- Random quote / search quotes: [FavQs](https://favqs.com/api)
+
+- Current weather / forecast: [OpenWeatherMap](https://openweathermap.org/api). You can use the [built-in icons](https://openweathermap.org/weather-conditions#Icon-list) or these [more minimal ones](https://websygen.github.io/owfont/).
+
+- Search books: [Open Library API](https://openlibrary.org/developers/api)
+
+- Search cats: [Cat API](https://docs.thecatapi.com/)
 
 
 

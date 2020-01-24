@@ -7,6 +7,7 @@ width = 40  # the width of the board
 height = 40  # the height of the board
 entity_list = []
 enemy_dict = {"҉":[10,0,1,1], "§":[80,12,18,4], "ß":[20,6,10,2], "ʘ":[40,30,40,10], "ˢ":[2, 2, 18, 2], "ѱ":[120,2,5,2]}
+name_list = {"҉":"tumbleweed", "§":"dragon", "ß":"skeleman", "ʘ":"floating eye" "ˢ":"lil snake", "ѱ":"cactus"}
 player = [100, 4, 8, 2]
 heal = "╬"
 
@@ -60,7 +61,7 @@ def collision(curr_ent, collided, collided_pos):
         curr_ent.map.update(curr_ent.type, [curr_ent.y, curr_ent.x], collided)
 
 class Entity:
-    def __init__(self, map, y = 0, x = 0, type="ß", hp=20, lo=6, hi=10, mov=2):
+    def __init__(self, map, y = 0, x = 0, type="ß", hp=20, lo=6, hi=10, mov=2, aggro=None):
         self.type = type
         self.hp = hp
         self.lo = lo
@@ -69,6 +70,7 @@ class Entity:
         self.y = y
         self.x = x
         self.map = map
+        self.aggro = aggro
         map.update(type,None,[y,x])
 
     def move(self, x, y):
@@ -91,18 +93,26 @@ def player_combat(player, enemy_pos):
         if enemy.x == enemy_pos[1] and enemy.y == enemy_pos[0]:
             enemy = ent
             break
-    uschoice = input("you encounter an enemy, what do you do (attack, defend)?").lower()
+    uschoice = input(f"you encounter a {name_list[enemy.type]}, what do you do (attack, defend)?").lower()
     if uschoice in ["attack", "a"]:
         atkroll == random.randint(player.lo, player.hi)
         if player_weapon == 1:
             atkroll += random.randint(6,10)
         enemy.hp -= atkroll
         if enemy.hp < 1:
+            player.x, player.y = enemy.x, enemy.y
             entity_list.remove(enemy)
             player.map.update(player.type, enemy_pos, [player.y, player.x])
-            input("you killed the enemy!")
+            input(f"you killed the {name_list[enemy.type]}!")
         else:
-            input("")
+            input(f"the {name_list[enemy.type]} has {enemy.hp} health left. The {name_list[enemy.type]} attacks!")
+            enemy.aggro = player
+            atkroll = random.randint(enemy.lo, enemy.hi) - (player_weapon * random.randint(1,4))
+            input(f"The {name_list[enemy.type]} has hit you for {atkroll}")
+            player.hp -= atkroll
+            if player.hp < 1:
+                pass
+
         print()
 def enemy_combat(attacker, def_pos):
     pass

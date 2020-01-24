@@ -5,16 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
 </head>
 <body>
-    <h1>hello world</h1>
-    {%for todos in data%}
-    <div class="todo_item">
-        <h3>{{todos['text']}}</h3>
-        <h4>{{todos['priority']}}</h4>
+    <!-- ---- This collects the data needed to run the additional python material ----- -->
+    <div class="bodie">
+    <div class="head_block">
+        <h1>To-Do List</h1>
     </div>
-    {%endfor%}
+    <div class="bodacious">
+        <h4>Add an item</h4>
+        <div class="row row_flex">
+            <form class="col s12 col_flex" action="/post/" method="POST">
+              <div class="row">
+                <div class="input-field col s6 add_field">
+                  <input placeholder="Placeholder" id="first_name" type="text" class="validate" name="add">
+                  <label for="first_name">Add</label>
+                </div>
+                  <!-- Dropdown Trigger -->
+                </div>
+                <div class="input-field col s12">
+                    <select name="priority">
+                      <option value="" disabled selected>Choose your Priority</option>
+                      <option value="high">High</option>
+                      <option value="medium">Medium</option>
+                      <option value="low">Low</option>
+                    </select>
+                    <label>Priority</label>
+                  </div>
+            <button class="btn waves-effect waves-light button_s" type="submit" name="action">
+              <i class="material-icons right">Submit</i>
+            </button>
+          </form>
+        </div>
+  <div class="main_bod">
+      <!-- ------This is the portion of the webpage that calls for the python magic and displays the data that is requested.--- -->
+  
+      {%for todos in data%}
+      <div class="col s12 m5">
+        <div class="card-panel {{todos['priority']}} todo_item">
+          <h4>Task: {{todos['text']}}</h4>
+          <p>Priority: {{todos['priority']}}</p>
+        <form action="/delete/" method="POST">
+        <div >
+            <input type="hidden" name="name" value="{{todos['text']}}">
+            <select name="remove">
+            <option value="" disabled selected>Completed?</option>
+            <option value="done">Complete</option>
+            <option value="remove">Delete</option>
+            </select>
+            <button class="btn waves-effect waves-light button_s" type="submit">
+                <i class="material-icons right">Submit</i>
+              </button>
+        </div>
+        </form>
+        </div>
+      </div>
+      {%endfor%}   
+      </div> 
+      
+  
+  
+      
+  </div>
+</div>
+  <script>
+        // -----JavaScript for the dropdown button. This will initialize.----
+        document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems, {});
+  });
+  
+  </script>
 
-</body>
-</html>
+
+  
+  </body>
+  </html>
+          
+
+                
+            
+             
+      
+    

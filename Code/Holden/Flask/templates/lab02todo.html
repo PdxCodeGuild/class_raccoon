@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>TODO</title>
+    <style type="text/css">
+      .trash{
+        height: 1em;
+        padding: 2px;
+        border-radius: 2px;
+        background-color: darkgrey;
+        border: 1px solid grey;
+      }
+      .delete_button{
+        align-self: flex-end;
+        display: none;
+      }
+      #delete{
+        display: none;
+      }
+      #delete:checked ~ li .delete_button{
+        display: inline-block;
+      }
+      .del_span{
+        padding-right: 1em;
+      }
+      ul{
+        width: 95%;
+        align-self: center;
+      }
+      li{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0.5em;
+        background-color: grey;
+        width: 100%;
+      }
+      li:nth-of-type(even){
+        background-color: darkgrey;
+      }
+      .trashlabel{
+        position: fixed;
+        top: 24px;
+        right: 38px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>TODO: </h3>
+    <label class="trashlabel" for="delete"><img class="trash" src="http://simpleicon.com/wp-content/uploads/trash.png" alt="trash"></label>
+    <form action="/save/" method="post">
+      <ul>
+        <input id="delete" type="checkbox">
+        {% for todo in todo_list %}
+        <li><span>{{todo}}</span><span class="del_span"><input class="delete_button" id="{{todo}}" type="checkbox" name="{{todo}}"><label class="delete_button" for="{{todo}}"> delete</label></span></li>
+        {% endfor %}
+      </ul>
+      <input type="text" name="new_todo" placeholder="New TODO">
+      <input type="submit" value="Save">
+    </form>
+  </body>
+</html>

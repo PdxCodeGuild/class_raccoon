@@ -40,6 +40,7 @@ while True:
         keyiter = 0
         if len(contacts) == 0:
             #do more here
+            contactdict = {}
             contactdict["name"] = input("Please input name: ")
             contactdict["email"] = input("Please input email: ")
             contacts.append(contactdict)

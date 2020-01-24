@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Favorite Color</th>
+      </tr>
+      {% for contact in contacts %}
+        <td>{{contact['name']}}</td>
+        <td>{{contact['age']}}</td>
+        <td>{{contact['email']}}</td>
+        <td>{{contact['color']}}</td>
+      {% endfor %}
+    </table>
+  </body>
+</html>

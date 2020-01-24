@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <!-- Compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+
+    <!-- Compiled and minified JavaScript -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+
+    <title>Unit converter</title>
+  </head>
+  <body>
+
+    <h1>Unit Converter</h1>
+    <form action="/lab01_unitConverter/" method="post">
+      <input type="number" name="num1" placeholder="Input number">
+      <select name="mydropdown">
+        <option value="Feet">Feet</option>
+        <option value="Meters">Meters</option>
+        <option value="Miles">Miles</option>
+        <option value="Kilometers">Kilometers</option>
+
+      </select>
+
+      <select name="mydropdown2">
+        <p> to </p>
+        <option value="Feet">Feet</option>
+        <option value="Meters">Meters</option>
+        <option value="Miles">Miles</option>
+        <option value="Kilometers">Kilometers</option>
+      </select>
+      <button type="submit">submit</button>
+    </form>
+
+    {% if num1 %}
+    <p>{{num1}} {{unit1}} equal {{num2}} {{unit2}}</p>
+    {% endif %}
+
+  </body>
+</html>

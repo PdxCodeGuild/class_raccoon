@@ -11,6 +11,14 @@
     {
       "text": "wash dishes",
       "priority": "low"
+    },
+    {
+      "text": "eat",
+      "priority": "high"
+    },
+    {
+      "text": "drink",
+      "priority": "high"
     }
   ]
 }

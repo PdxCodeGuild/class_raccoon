@@ -1,5 +1,4 @@
 
-
 from flask import Flask, render_template, request, redirect
 import json
 
@@ -19,11 +18,6 @@ def write_database(data):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     data = read_database()
-
-    # words = [('apple', 3), ('banana', 4), ('pineapple', 8)]
-    # priorities = {'1': 'high', '2': 'medium', '3': 'low'}
-    # data['todos'].sort(key=lambda x: x['priority'])
-
     return render_template('index.html', todos=data['todos'])
 
 
@@ -48,6 +42,3 @@ def deletetodo():
     data['todos'].pop(todo_index)
     write_database(data)
     return redirect('/')
-
-
-

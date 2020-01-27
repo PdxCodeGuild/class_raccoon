@@ -1,7 +1,7 @@
 
 # Routes
 
-Routes connect URLs to views. The routes are stored in a **urls.py** file, which can be found in both the project folder and in each of the apps' folders. You can read more about routes [here](https://docs.djangoproject.com/en/2.0/topics/http/urls/). Routes are evaluated **in order**: whichever route matches first is the one used.
+Routes connect URLs to views. The routes are stored in a **urls.py** file, which can be found in both the project folder and in each of the apps' folders. You can read more about routes [here](https://docs.djangoproject.com/en/2.2/topics/http/urls/). Routes are evaluated **in order**: whichever route matches first is the one used.
 
 
 ## Connecting an App's urls.py to a View

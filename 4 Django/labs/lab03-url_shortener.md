@@ -15,4 +15,4 @@ You *could* use the ID in the url, instead of some code, but that then exposes s
 Your app should contain the following:
 - one view that returns a page for entering in a url to be shortened, and possibly a list of entries (`localhost/urlshorten/index/`)
 - another view and view for receiving the `POST`ed url, generating a random string, and saving it to the database (`localhost/urlshorten/saveurl`)
-- a third view that performs the redirecting (`localhost/redirect/pEc4vt`), you should use [redirect](https://docs.djangoproject.com/en/2.0/topics/http/shortcuts/#redirect) instead of HttpResponseRedirect.
+- a third view that performs the redirecting (`localhost/redirect/pEc4vt`), you should use [redirect](https://docs.djangoproject.com/en/2.2/topics/http/shortcuts/#redirect) instead of HttpResponseRedirect.

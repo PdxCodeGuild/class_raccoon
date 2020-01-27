@@ -19,18 +19,6 @@
     {
       "text": "drink",
       "priority": "high"
-    },
-    {
-      "text": "play game",
-      "priority": "low"
-    },
-    {
-      "text": "eat",
-      "priority": "high"
-    },
-    {
-      "text": "eat",
-      "priority": "high"
     }
   ]
 }

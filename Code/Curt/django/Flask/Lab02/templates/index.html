@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+  </head>
+  <body>
+  <h1>To-Do List</h1>
+  <table border-radius = 0>
+    <thead>
+      <tr class = cyan>
+        <th>Task</th>
+        <th>Priority</th>
+      </tr>
+      {% for todo in todo_list %}
+        {% if todo['priority'] == 'high' %}
+          <tr class = "cyan accent-3">
+            <td>{{todo['text']}}</td>
+            <td>{{todo['priority']}}</td>
+          </tr>
+        {% elif todo['priority'] == 'medium' %}
+          <tr class = "cyan accent-2">
+            <td>{{todo['text']}}</td>
+            <td>{{todo['priority']}}</td>
+          </tr>
+        {% else %}
+          <tr class = "cyan accent-1">
+            <td>{{todo['text']}}</td>
+            <td>{{todo['priority']}}</td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+    </thead>
+  </table>
+
+  <h3>High Priority:</h2>
+  {% for todo in todo_list %}
+    {% if todo['priority'] == 'high' %}
+      <ul>
+        <li>{{todo["text"]}}</li>
+      </ul>
+    {% endif %}
+  {% endfor %}
+  <h3>Medium Priority:</h2>
+  {% for todo in todo_list %}
+    {% if todo['priority'] == 'medium' %}
+      <ul>
+        <li>{{todo["text"]}}</li>
+      </ul>
+    {% endif %}
+  {% endfor %}
+
+  <h3>Low Priority:</h2>
+  {% for todo in todo_list %}
+    {% if todo['priority'] == 'low' %}
+      <ul>
+        <li>{{todo["text"]}}</li>
+      </ul>
+    {% endif %}
+  {% endfor %}
+
+    <form action="/" method="post">
+      Please input a new task:
+      <input type="text" name="new_task">
+      <select name="priority">
+        <option value="" disabled selected>Priority</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+      <button type="submit">Submit</button>
+    </form>
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('select');
+  var instances = M.FormSelect.init(elems, {});
+  });
+</script>
+  </body>
+</html>

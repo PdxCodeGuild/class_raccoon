@@ -19,7 +19,7 @@
     </form>
 
     {% for todo in data %}
-    <p>{{todo['text']}}</p>
+    <p>{{todo['text']}} ({{todo['priority']}})</p>
     {% endfor %}
 
   </body>

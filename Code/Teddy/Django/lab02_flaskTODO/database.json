@@ -1,1 +1,36 @@
-{"todos": [{"text": "walk the dog", "priority": "high"}, {"text": "butter the cat", "priority": "medium"}, {"text": "wash dishes", "priority": "low"}, {"text": "eat", "priority": "high"}, {"text": "drink", "priority": "high"}, {"text": "drink", "priority": "high"}]}
+{
+  "todos": [
+    {
+      "text": "walk the dog",
+      "priority": "high"
+    },
+    {
+      "text": "butter the cat",
+      "priority": "medium"
+    },
+    {
+      "text": "wash dishes",
+      "priority": "low"
+    },
+    {
+      "text": "eat",
+      "priority": "high"
+    },
+    {
+      "text": "drink",
+      "priority": "high"
+    },
+    {
+      "text": "play game",
+      "priority": "low"
+    },
+    {
+      "text": "eat",
+      "priority": "high"
+    },
+    {
+      "text": "eat",
+      "priority": "high"
+    }
+  ]
+}

@@ -79,3 +79,9 @@ body h1{
 .done {
     background-color: white !important;
 }
+.nothing{
+    display: flex;
+    background-color: white;
+    color: yellowgreen;
+
+}

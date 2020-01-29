@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='lab03.css') }}">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <h1>API Picker</h1>
+        <form action="/" method="POST">
+            <p>Select the country and zip code you wish to search for. </p>
+            <div class="location">
+                <select name="country" id="">
+                    {% for key in countries_dict %}
+                        
+                        <option value="{{key}}">{{countries_dict[key]}}</option>
+                    {% endfor %}
+                </select>
+                <input type="text" name="zip_code" required>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+        {% if country  %}
+        <p>The current temperature is: {{temp}}.</p>
+        <p>The high today is {{max_temp}} with a low of {{min_temp}}.</p>
+        {% endif %}
+    </main>
+    
+</body>
+</html>

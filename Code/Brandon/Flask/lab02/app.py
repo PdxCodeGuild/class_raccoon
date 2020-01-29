@@ -50,17 +50,17 @@ def delete():
                 data[i]['priority'] = 'done'
                 save_database({"todos":data})
                 break
-
-
     elif request.form['remove'] == 'remove':
         for i in range(len(data)):
             if data[i]["text"] == request.form['name']:
                 data.pop(i)
                 save_database({"todos":data})
                 break
+    return redirect('/')
+
+
 
         
-    return redirect('/')
 
 
 

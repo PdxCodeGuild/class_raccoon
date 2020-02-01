@@ -56,11 +56,11 @@ def delete():
                 data.pop(i)
                 save_database({"todos":data})
                 break
+    return redirect('/')
 
 
 
         
-    return redirect('/')
 
 
 

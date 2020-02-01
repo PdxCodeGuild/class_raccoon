@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>The Weather</title>
+  </head>
+  <body>
+      <form action="/" method="post">
+          <input type="text" name="location">
+          <button type="submit" name="button">submit</button>
+      </form>
+      {{data['weather'][0][main]}}
+  </body>
+</html>

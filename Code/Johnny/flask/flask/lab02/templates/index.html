@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <!-- materialize -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+   <style type="text/css">
+    * {
+      padding: 0px;
+      margin: 5px;
+      line-height: 1.6;
+      max-width: 800px;
+      font-size: 16px;
+      border-radius: 1;
+      align-items: center;
+    }
+    .list {
+      background-color: grey;
+    }
+
+    </style>
+    <title></title>
+  </head>
+  <body>
+     <div class="container">
+       <div class="all">
+        <div class="row">
+          <div class="col s12">
+          <h1 class="list"> The List! </h1>
+          <hr/>
+        </div>
+      </div>
+      <ul>
+        {% for todo in data['todos'] %}
+        <li>
+          {{todo['text']}} ({{todo['priority']}})
+        </li>
+        {% endfor %}
+      </ul>
+
+    <br/>
+    <hr/>
+      <div class="row">
+        <form action="/" method="post">
+        Task to do: <input type="text" name="text" placeholder=">> "><br>
+        Priority level: <input type="text" name="priority" placeholder=">> "><br>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+  </body>
+</html>

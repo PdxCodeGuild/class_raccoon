@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>KITTEH</title>
+    <style media="screen">
+      body{
+        margin: 0 0;
+        background: url({{background}});
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+        background-color: grey;
+        width: 100%;
+      }
+      h1{
+        margin: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>CATS</h1>
+    <form class="" action="/search/" method="post">
+      <select class="" name="breed">
+        <option value="">breed</option>
+        {% for breed in breeds %}
+          <option value="{{breed[0]}}">{{breed[1]}}</option>
+        {% endfor %}
+      </select>
+      <select class="" name="category">
+        <option value="">category</option>
+        {% for cat in categories %}
+          <option value="{{cat[0]}}">{{cat[1]}}</option>
+        {% endfor %}
+      </select>
+      <select class="" multiple name="image_type">
+        <option value="">files</option>
+        <option value="gif">gif</option>
+        <option value="png">png</option>
+        <option value="jpg">jpg</option>
+      </select>
+      <input type="submit" value='Search'>
+      <input type="hidden" name="page" value="0">
+      <input type="hidden" name="limit" value="3">
+    </form>
+  </body>
+</html>

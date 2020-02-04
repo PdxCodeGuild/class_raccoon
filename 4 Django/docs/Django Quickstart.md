@@ -1,5 +1,5 @@
 
-# Django Quickstart 2
+# Django Quickstart
 
 ## 1) Project Setup
 

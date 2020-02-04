@@ -1,0 +1,26 @@
+
+
+{% extends 'todoapp/base.html' %}
+
+
+{% block title %}home{% endblock %}
+
+{% block page %}
+
+
+    <h1>{{title}}</h1>
+
+    <form action="{% url 'todoapp:savetodo' %}" method="post">
+      {% csrf_token %}
+      <input type="text" name="todo_text"/>
+      <button type="submit">submit</button>
+    </form>
+
+
+    <ul>
+      {% for todo_item in todo_items %}
+      <li>{{todo_item.text}}</li>
+      {% endfor %}
+    </ul>
+
+{% endblock %}

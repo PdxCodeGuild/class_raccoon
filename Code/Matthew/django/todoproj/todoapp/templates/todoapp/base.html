@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>todo app - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'todoapp/index.css' %}" type="text/css"/>
+  </head>
+  <body>
+    <header>header</header>
+    {% block page %}
+    {% endblock %}
+    {% include 'todoapp/footer.html' %}
+  </body>
+</html>

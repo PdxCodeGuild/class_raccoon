@@ -7,45 +7,17 @@ import json
 query = '''query ($title: String, $page: Int, $perPage: Int) {
     Page (page: $page, perPage: $perPage) {
         media (search: $title, type: ANIME) {
-            id
             title {
                 romaji
                 english
                 native
             }
-            type
-            format
-            status
-            description
-            startDate {
-                year
-                month
-                day
+            streamingEpisodes {
+                title
+                thumbnail
+                url
+                site
             }
-            endDate {
-                year
-                month
-                day
-            }
-            season
-            seasonYear
-            seasonInt
-            episodes
-            duration
-            chapters
-            volumes
-            countryOfOrigin
-            genres
-            isAdult
-            # recommendations {
-            #     nodes {
-            #         media{
-            #             title{
-            #                 english
-            #             }
-            #         }
-            #     }
-            # }
         }
     }
 }'''
@@ -57,7 +29,7 @@ userinput = input("Give the title of an anime: ")
 variables = {
     'title': userinput,
     'page': 1,
-    'perPage': 3
+    'perPage': 10
     }
 
 url = 'https://graphql.anilist.co'

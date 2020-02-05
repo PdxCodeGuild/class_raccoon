@@ -50,6 +50,13 @@
         align-items:center;
         font-size:20px;
       }
+      .collection-item .btns {
+        display:flex;
+        flex-direction:row;
+      }
+      .collection-item .btns > * {
+        margin-left:10px;
+      }
       .collection-item:nth-child(even) {
         background-color:whitesmoke;
       }
@@ -109,21 +116,27 @@
         {% for todo_item in todo_items %}
         <li class="collection-item {{ todo_item.priority.get_class_name }}">
           <span>{{todo_item.text}} ({{todo_item.priority.name}})</span>
-          <form action="{% url 'todoapp:completetodo' %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="todo_item_id" value="{{todo_item.id}}"/>
-            <button type="submit" class="btn blue"><i class="material-icons">check_box_outline_blank</i></button>
-          </form>
+          <div class="btns">
+            <a href="{% url 'todoapp:deletetodo' todo_item.id %}" class="btn orange"><i class="material-icons">clear</i></a>
+            <form action="{% url 'todoapp:completetodo' %}" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="todo_item_id" value="{{todo_item.id}}"/>
+              <button type="submit" class="btn blue"><i class="material-icons">check_box_outline_blank</i></button>
+            </form>
+          </div>
         </li>
         {% endfor %}
         {% for todo_item in completed_items %}
         <li class="collection-item completed">
           <span>{{todo_item.text}} ({{todo_item.priority.name}})</span>
-          <form action="{% url 'todoapp:completetodo' %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="todo_item_id" value="{{todo_item.id}}"/>
-            <button type="submit" class="btn blue"><i class="material-icons">check_box</i></button>
-          </form>
+          <div class="btns">
+            <a href="{% url 'todoapp:deletetodo' todo_item.id %}" class="btn orange"><i class="material-icons">clear</i></a>
+            <form action="{% url 'todoapp:completetodo' %}" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="todo_item_id" value="{{todo_item.id}}"/>
+              <button type="submit" class="btn blue"><i class="material-icons">check_box</i></button>
+            </form>
+          </div>
         </li>
         {% endfor %}
       </ul>

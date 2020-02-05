@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="{% static "todoapp/index.css" %}" type="text/css"/>
+  </head>
+  <body>
+
+    {% comment %}
+    <img src="{% static 'todoapp/myimage.jpg' %}"/>
+    <a href="{% static 'todoapp/mydoc.pdf' %}">Download</a>
+    {% endcomment %}
+
+    <h1>{{title}}</h1>
+
+    <form action="{% url 'todoapp:savetodo' %}" method="post">
+      {% csrf_token %}
+      <input type="text" name="todo_text"/>
+      <button type="submit">Submit</button>
+    </form>
+
+    <ul>
+      {% for todo_item in todo_items %}
+      <li>{{todo_item.text}}</li>
+      {% endfor %}
+    </ul>
+
+  </body>
+</html>

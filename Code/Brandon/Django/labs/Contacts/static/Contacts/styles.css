@@ -1,3 +1,9 @@
+body {
+    background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdata2.1freewallpapers.com%2Fdownload%2Fline-shape-texture-blue-gray.jpg&f=1&nofb=1') !important;
+}
+
+
+
 .contact_view{
     display: flex;
     flex-direction: column;
@@ -9,6 +15,7 @@
 .boxes{
     margin-top: 50px !important;
     width: 900px !important;
+    background-color: #7887ab !important;
 }
 
 .edit-button{
@@ -16,6 +23,7 @@
     margin-left: 20px;
 }
 .cont-box{
+    /* background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdata2.1freewallpapers.com%2Fdownload%2Fline-shape-texture-blue-gray.jpg&f=1&nofb=1')!important; */
     width: 900px !important;
 }
 .new-form{
@@ -23,3 +31,5 @@
     margin-bottom: 10px;
     padding: 15px;
 }
+
+

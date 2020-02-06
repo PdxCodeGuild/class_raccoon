@@ -29,3 +29,12 @@ def new_contact(request):
 def edit_contact(request):
     pass
 
+def delete_contact(request):
+    cont_id = request.POST['id']
+    contact = Contact.objects.get(id=contact_id)
+    contact.delete()
+    return redirect('Contacts:index')
+
+def documentation(request):
+    return render(request, 'Contacts/create.html')
+

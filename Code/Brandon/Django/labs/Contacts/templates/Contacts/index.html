@@ -12,7 +12,7 @@
     
 
 </head>
-<body>
+<body class="has-background-grey-lighter">
     <!-- NAV--- -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
@@ -27,7 +27,7 @@
         </div>
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
-            <a class="navbar-item">
+            <a class="navbar-item" href={{'Contacts:documentation'}}>
               Documentation
             </a>
         </div>
@@ -53,14 +53,11 @@
                             <button class="button is-success" type="submit">Save changes</button>
                         </form>
                       </section>
-                      <footer class="modal-card-foot">
-                        <button class="button is-success">Save changes</button>
-                        <button class="button" data-bulma-modal="close">Cancel</button>
-                      </footer>
+
                     </div>
                   </div>
                   
-                  <button id="btn" class="button is-primary">CREATE NEW</button>
+                  <button id="btn" class="button is-primary has-background-grey">CREATE NEW</button>
 
             </div>
           </div>
@@ -70,8 +67,8 @@
      <!-- END NAV----  -->
     <div class="contact_view">
         {% for contact in contacts%}
-        <div class="boxes">
-            <div class="box cont-box">
+        <div class="boxes has-background-info		">
+            <div class="box cont-box has-background-light	>
                 <article class="media">
                     <div class="media-content">
                         <div class="content">
@@ -85,12 +82,15 @@
                         </div>
                         <nav class="level is-mobile">
                         <div class="level-left change-buttons">
-                            <a class="button is-primary edit-button">
+                          <form action="{% url 'Contacts:delete_contact'%}" method="POST">
+                            {% csrf_token %}
+                            <button class="button is-info edit-button is-outlined mod-button" type="submit">
                                 <strong>Edit</strong>
-                            </a>
-                            <a class="button is-primary">
+                            </button>
+                            <button class="button is-info edit-button is-outlined" type="submit" name="delete">
                                 <strong>Delete</strong>
-                            </a>
+                            </button>
+                          </form>
                         </div>
                         </nav>
                     </div>
@@ -99,6 +99,9 @@
             </div>
             {% endfor %}
         </div>
+        <script type="text/javascript" src="{% static 'Contacts/main.js' %}"></script>   
+</body>
+</html>
 
         
       
@@ -107,6 +110,3 @@
 
 
   
-<script type="text/javascript" src="{% static 'Contacts/main.js' %}"></script>   
-</body>
-</html>

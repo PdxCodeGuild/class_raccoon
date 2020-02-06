@@ -1,0 +1,25 @@
+.contact_view{
+    display: flex;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center !important;
+    /* max-width: 700px; */
+}
+
+.boxes{
+    margin-top: 50px !important;
+    width: 900px !important;
+}
+
+.edit-button{
+    margin-right: 20px;
+    margin-left: 20px;
+}
+.cont-box{
+    width: 900px !important;
+}
+.new-form{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 15px;
+}

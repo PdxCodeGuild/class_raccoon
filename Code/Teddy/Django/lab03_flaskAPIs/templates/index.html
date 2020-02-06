@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <!-- Materialize -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <title>Quote</title>
+  </head>
+
+  <style type="text/css">
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    h-100 {
+      height: 100px;
+    }
+
+
+  </style>
+
+  <body>
+    <main>
+      <h1>Quote of the day</h1>
+      <div class="card-panel teal lighten-2">
+        <h4>"{{quote_text}}" - {{quote_author}}</h4>
+      </div>
+
+      <form action="/save/" method="post">
+        <input type="hidden" name="quote_text" value="{{quote_text}}"/>
+        <input type="hidden" name="quote_author" value="{{quote_author}}"/>
+        <button type="submit" class="btn">Save this quote</button>
+        <button type="" class="btn right">Next quote</button>
+      </form>
+
+      <table>
+        <tr>
+          <th>Quote</th>
+          <th>author</th>
+        </tr>
+        {% for quotes in data %}
+        <tr>
+          <td>{{quotes['body']}}</td>
+          <td>{{quotes['author']}}</td>
+          <td>
+            <form action="/delete/" method="post">
+              <input type="hidden" name="quote_index" value="{{loop.index0}}"/>
+              <button class="btn red right">delete</button>
+            </form>
+          </td>
+
+        </tr>
+        {% endfor %}
+      </table>
+    </main>
+
+  </body>
+</html>

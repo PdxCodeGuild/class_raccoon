@@ -11,19 +11,16 @@
     <link rel="stylesheet" type="text/css" href="{% static 'contacts/style.css' %}">
 </head>
 <body>
-    <h1>Contacts</h1>
+    <h1><a href="">Contacts</a></h1>
     <main>
-        <ul>
+        <div class="contact_list">
             {% for contact in contacts %}
-            <div class="contact_info">
-                <li><a href="{% url 'contacts:details' contact.id %}">{{ contact.first_name.title }} {{ contact.last_name.title }}</a></li>
-                
-            </div>
+                <a class="contact_info" href="{% url 'contacts:details' contact.id %}">{{ contact.first_name.title }} {{ contact.last_name.title }}</a>
             {% endfor %}
-            <div class="new_form">
-                <a href="{% url 'contacts:new_form' %}">Add Contact</a>
-            </div>
-        </ul>
+        </div>
+        <div class="new_form">
+            <a href="{% url 'contacts:new_form' %}">Add Contact</a>
+        </div>
     </main>
 </body>
-</html>
+</html> 

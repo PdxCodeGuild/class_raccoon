@@ -54,8 +54,11 @@ def save_new_form(request):
     person.save()
     return HttpResponseRedirect(reverse('contacts:index'))
 
+def delete(request, contact_id):
+    person = Contact.objects.get(id=contact_id)
+    person.delete()
 
-
+    return HttpResponseRedirect(reverse('contacts:index'))
 
 def format_phone(number_str):
     temp_num = ""

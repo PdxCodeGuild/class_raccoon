@@ -38,15 +38,15 @@
     </style>
   </head>
   <body>
-    <form class="" action="{% url 'contacts:write_new_contact' %}" method="post">
+    <form class="" action="{% url 'contacts:write_edit_contact' contact.id %}" method="post">
       {% csrf_token %}
-      <input class='smol' type="text" name="first_name" placeholder="first name">
-      <input class='smol' type="text" name="last_name" placeholder="last name" required>
-      <div class="smol">birthday: <input type="date" name="birthday"></div>
-      <input class='smol' type="text" name="phone_number" placeholder="phone number">
-      <div class="cellphone"><input id='cell_check' type="checkbox" name="is_cell"><label for="cell_check">cellphone</label></div>
+      <input class='smol' type="text" name="first_name" placeholder="first name" value="{{ contact.first_name }}">
+      <input class='smol' type="text" name="last_name" placeholder="last name" value="{{ contact.last_name }}" required>
+      <div class="smol">birthday: <input type="date" name="birthday" value="{{ birthday }}"></div>
+      <input class='smol' type="text" name="phone_number" placeholder="phone number" value="{{ contact.phone_number }}">
+      <div class="cellphone"><input id='cell_check' type="checkbox" name="is_cell" {% if contact.is_cell %}checked{% endif %}><label for="cell_check">cellphone</label></div>
       <input class="sub_btn" type="submit">
+      <a href="/contacts/">back to contacts list</a>
     </form>
-    <a href="/contacts/">back to contacts list</a>
   </body>
 </html>

@@ -5,13 +5,19 @@
     <title></title>
   </head>
   <body>
-    <p>{{ contact_data.first_name }} {{ contact_data.last_name }}</p>
+    <p>{{ contact.first_name }} {{ contact.last_name }}</p>
     <p>{{ birthday }}</p>
-    <p>{{ contact_data.phone_number }} {% if contact_data.is_cell %}(cell){% endif %}</p>
-    <form class="" action="/contacts/{{ contact_data.id }}/edit/" method="post">
+    <p>{{ contact.phone_number }} {% if contact.is_cell %}(cell){% endif %}</p>
+    <form class="" action="{% url 'contacts:edit_contact' contact.id %}" method="post">
       {% csrf_token %}
-      <input type="hidden" name="contact" value="{{contact_data.id}}">
+      <input type="hidden" name="contact" value="{{contact.id}}">
       <input type="submit" value="Edit">
     </form>
+    <form class="" action="{% url 'contacts:delete_contact' contact.id %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="contact" value="{{contact.id}}">
+      <input type="submit" value="Delete">
+    </form>
+    <a href="/contacts/">back to contacts list</a>
   </body>
 </html>

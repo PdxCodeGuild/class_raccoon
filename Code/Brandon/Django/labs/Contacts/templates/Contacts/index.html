@@ -14,6 +14,7 @@
 </head>
 <body class="has-background-grey-lighter">
     <!-- NAV--- -->
+    <div class="body-bg has-background-grey">
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <a class="navbar-item" href="index.html">
@@ -27,7 +28,7 @@
         </div>
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
-            <a class="navbar-item" href={{'Contacts:documentation'}}>
+            <a class="navbar-item" href="{% url 'Contacts:documentation' %}">
               Documentation
             </a>
         </div>
@@ -68,7 +69,7 @@
     <div class="contact_view">
         {% for contact in contacts%}
         <div class="boxes has-background-info		">
-            <div class="box cont-box has-background-light	>
+            <div class="box cont-box has-background-light">
                 <article class="media">
                     <div class="media-content">
                         <div class="content">
@@ -82,26 +83,29 @@
                         </div>
                         <nav class="level is-mobile">
                         <div class="level-left change-buttons">
-                          <form action="{% url 'Contacts:delete_contact'%}" method="POST">
-                            {% csrf_token %}
-                            <button class="button is-info edit-button is-outlined mod-button" type="submit">
-                                <strong>Edit</strong>
-                            </button>
-                            <button class="button is-info edit-button is-outlined" type="submit" name="delete">
-                                <strong>Delete</strong>
-                            </button>
-                          </form>
-                        </div>
-                        </nav>
-                    </div>
-                    </article>
+                          <a class="button is-info edit-button is-outlined" type="button" name="edit" href="{% url 'Contacts:contact_view' contact.id%}">
+                            <strong>Edit</strong>
+                        </a>
+                        <a class="button is-info edit-button is-outlined" type="button" name="delete" href="{% url 'Contacts:delete_contact' contact.id %}">
+                            <strong>Delete</strong>
+                        </a>
+                      </div>
+                    </nav>
                 </div>
+                </article>
             </div>
-            {% endfor %}
         </div>
-        <script type="text/javascript" src="{% static 'Contacts/main.js' %}"></script>   
+        {% endfor %}
+    </div>
+    <script type="text/javascript" src="{% static 'Contacts/main.js' %}"></script>   
+  </div>
 </body>
 </html>
+                          
+                        
+
+               
+                       
 
         
       

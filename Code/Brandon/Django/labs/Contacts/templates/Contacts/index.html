@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Contacts</title>
+    <!-- CDN---- -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    {% load static%}
+    <link rel="stylesheet" type="text/css" href="{% static 'Contacts/styles.css' %}">
+    
+
+</head>
+<body class="has-background-grey-lighter">
+    <!-- NAV--- -->
+    <div class="body-bg has-background-grey">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="index.html">
+         CONTACT APP
+          </a>
+          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" href="{% url 'Contacts:documentation' %}">
+              Documentation
+            </a>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+                
+                <div class="modal" id="myModal">
+                    <div class="modal-background"></div>
+                    <div class="modal-card">
+                      <header class="modal-card-head">
+                        <p class="modal-card-title">Modal title</p>
+                        <button class="delete" aria-label="close" data-bulma-modal="close"></button>
+                      </header>
+                      <section class="modal-card-body">
+                          <h1>Enter Your Contact Information</h1>
+                        <form action="{% url 'Contacts:new_contact'%}"class="new-form" method="POST">
+                            {% csrf_token %}
+                            <div class="new-form"><input class="input is-rounded" type="text" placeholder="First Name" name="first"></div>
+                            <div class="new-form"><input class="input is-rounded" type="text" placeholder="Last Name" name="last"></div>
+                            <div class="new-form"><input class="input is-rounded" type="date" placeholder="Birthday" name="birthday"></div>
+                            <div class="new-form"><input class="input is-rounded" type="text" placeholder="Phone Number" name="phone"></div>
+                            <button class="button is-success" type="submit">Save changes</button>
+                        </form>
+                      </section>
+
+                    </div>
+                  </div>
+                  
+                  <button id="btn" class="button is-primary has-background-grey">CREATE NEW</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+     <!-- END NAV----  -->
+    <div class="contact_view">
+        {% for contact in contacts%}
+        <div class="boxes has-background-info		">
+            <div class="box cont-box has-background-light">
+                <article class="media">
+                    <div class="media-content">
+                        <div class="content">
+                        <p>
+                            <strong>{{contact.first_name}} {{contact.last_name}}</strong> 
+                            <br>
+                            Birthday: {{contact.birthday}}
+                            <br>
+                            Phone: {{contact.phone_number}}
+                        </p>
+                        </div>
+                        <nav class="level is-mobile">
+                        <div class="level-left change-buttons">
+                          <a class="button is-info edit-button is-outlined" type="button" name="edit" href="{% url 'Contacts:contact_view' contact.id%}">
+                            <strong>Edit</strong>
+                        </a>
+                        <a class="button is-info edit-button is-outlined" type="button" name="delete" href="{% url 'Contacts:delete_contact' contact.id %}">
+                            <strong>Delete</strong>
+                        </a>
+                      </div>
+                    </nav>
+                </div>
+                </article>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <script type="text/javascript" src="{% static 'Contacts/main.js' %}"></script>   
+  </div>
+</body>
+</html>
+                          
+                        
+
+               
+                       
+
+        
+      
+      
+
+
+
+  

@@ -1,26 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Todo List</title>
+
+    <!-- Materialize.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
-{% extends 'todoapp/base.html' %}
+    <style type="text/css">
+      .super_high {
+        color:gold;
+        font-weight:bold;
+      }
+      .high {
+        color:red;
+      }
+      .medium {
+        color:orange;
+      }
+      .low {
+        color:blue;
+      }
+      main {
+        max-width:600px;
+        margin: 0 auto;
+        padding:10px;
+      }
+      .sorting_bts {
+        display:flex;
+        flex-direction:row;
+        justify-content:space-evenly;
+      }
+      @media (max-width:600px) {
+        .sorting_bts {
+          flex-direction:column;
+        }
+        .sorting_bts a {
+          margin:5px;
+        }
+      }
+      .collection-item {
+        display:flex;
+        flex-direction:row;
+        justify-content:space-between;
+        align-items:center;
+        font-size:20px;
+      }
+      .collection-item .btns {
+        display:flex;
+        flex-direction:row;
+      }
+      .collection-item .btns > * {
+        margin-left:10px;
+      }
+      .collection-item:nth-child(even) {
+        background-color:whitesmoke;
+      }
+      body {
+        background-color: #0F4C81;
+      }
+      main {
+        background-color:white;
+        min-height:100vh;
+      }
+      .completed {
+        color:grey;
+        text-decoration:line-through;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+
+      {% if error %}
+      <div style="color:red">{{error}}</div>
+      {% endif %}
+      <h1>{{ title }}</h1>
 
 
-{% block title %}home{% endblock %}
-
-{% block page %}
-
-
-    <h1>{{title}}</h1>
-
-    <form action="{% url 'todoapp:savetodo' %}" method="post">
-      {% csrf_token %}
-      <input type="text" name="todo_text"/>
-      <button type="submit">submit</button>
-    </form>
-
-
-    <ul>
-      {% for todo_item in todo_items %}
-      <li>{{todo_item.text}}</li>
-      {% endfor %}
-    </ul>
-
-{% endblock %}
+      <div class="row">
+        <form class="col s12" action="{% url 'todoapp:savetodo' %}" method="post">
+          {% csrf_token %}
+          <div class="row">
+            <div class="input-field col s12 m5">
+              <input id="todo_text" type="text" name="todo_text" class="validate" required/>
+              <label for="todo_text">Todo Text</label>
+            </div>
+            <div class="input-field col s12 m5">
+              <!-- priority select -->
+              <select id="todo_priority_id" name="todo_priority_id" required class="validate">
+                <option value="" selected disabled>Select a priority</option>
+                {% for priority in todo_priorities %}
+                <option value="{{ priority.id }}">{{ priority.name | title }}</option>
+                {% endfor %}
+              </select>
+              <label for="todo_priority_id">Priority</label>
+            </div>
+            <div class="input-field col s12 m2">
+              <button type="submit" class="btn">submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="sorting_bts">
+        <a href="?order=default" class="btn blue">default</a>
+        <a href="?order=alphabetical" class="btn blue">alphabetical</a>
+        <a href="?order=priority" class="btn blue">priority</a>
+        <a href="?order=random" class="btn blue">random</a>
+      </div>
+      <ul class="collection">
+        {% for todo_item in todo_items %}
+        <li class="collection-item {{ todo_item.priority.get_class_name }}">
+          <span>{{todo_item.text}} ({{todo_item.priority.name}})</span>
+          <div class="btns">
+            <a href="{% url 'todoapp:deletetodo' todo_item.id %}" class="btn orange"><i class="material-icons">clear</i></a>
+            <form action="{% url 'todoapp:completetodo' %}" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="todo_item_id" value="{{todo_item.id}}"/>
+              <button type="submit" class="btn blue"><i class="material-icons">check_box_outline_blank</i></button>
+            </form>
+          </div>
+        </li>
+        {% endfor %}
+        {% for todo_item in completed_items %}
+        <li class="collection-item completed">
+          <span>{{todo_item.text}} ({{todo_item.priority.name}})</span>
+          <div class="btns">
+            <a href="{% url 'todoapp:deletetodo' todo_item.id %}" class="btn orange"><i class="material-icons">clear</i></a>
+            <form action="{% url 'todoapp:completetodo' %}" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="todo_item_id" value="{{todo_item.id}}"/>
+              <button type="submit" class="btn blue"><i class="material-icons">check_box</i></button>
+            </form>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </main>
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems, {});
+      });
+    </script>
+  </body>
+</html>

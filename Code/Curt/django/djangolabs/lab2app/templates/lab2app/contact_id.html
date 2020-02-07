@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  </head>
+  <body>
+
+<ul class="collection with-header striped">
+  <li class="collection-header"><h4>{{contact_details.first_name}} {{contact_details.last_name}}</h4></li>
+  <h5><li class="collection-item">Birthdate: {{contact_details.birthday}}</li>
+  <li class="collection-item">Phone Number: {{contact_details.phone_number}}</li>
+  <li class="collection-item">Cellphone? {{contact_details.cellstat}}</li></h5>
+</ul>
+  <a class="waves-effect waves-light btn" style="margin-left:20px;" href="{% url 'lab2app:contacts' %}">Home</a>
+  </body>
+</html>

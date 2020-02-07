@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'contacts/style.css' %}">
+</head>
+
+<body>
+    <form action="{% url 'contacts:save_new_form' %}" method="POST">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td class="head"><strong> First Name: </strong></td class="head">
+                <td><input type="text" name="first_name" placeholder="First Name..."></td>
+            </tr>
+            <tr>
+                <td class="head"><strong> Last Name: </strong></td class="head">
+                <td><input type="text" name="last_name" placeholder="Last Name..."></td>
+            </tr>
+            <tr>
+                <td class="head"><strong> * Birthday: </strong></td>
+                <td><input type="date" name="birthday" required></td>
+            </tr>
+            <tr>
+                <td class="head"><strong>** Phone number: </strong></td class="head">
+                <td><input type="text" name="phone_number" placeholder=(xxx)xxx-xxxx></td>
+            </tr>
+            <tr>
+                <td style="text-align: right;"><i> * (Fields marked with '*' are required)
+                        <br>** (input numbers <strong>only</strong>)</i>
+                </td>
+
+                <td><button type="submit">Submit</button></td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

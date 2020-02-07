@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1> CONTACTS INDEX HTML</h1>
+    Here is your list of contacts.
+    <ul>
+      <!-- calling for the contact list models -->
+    {% for contact in contact_list %}
+     <!-- from contact list, searching for first_name or whatever field define in models -->
+    <li>{{ contact }}</li>
+    {% endfor %}
+  </ul>
+  </body>
+</html>

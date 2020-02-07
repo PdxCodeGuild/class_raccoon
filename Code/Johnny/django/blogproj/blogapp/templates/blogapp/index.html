@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <form action="/blogapp/savepost/" method="POST">
+      <input type="text" name="title" placeholder="title"/>
+      <input type="text" name="author" placeholder="author"/>
+      <textarea name="body" placeholder="blog post body"></textarea>
+      <select name="blog_post_type_id">
+        <option value="" disabled selected>Select a type...</option>
+        {% for blog_post_type in blog_post_types %}
+        <option value="{{blog_post_type.id}}">{{blog_post_type.name}}</option>
+        {% endfor %}
+        </select>
+        <button type="submit">Submit</button>
+
+      </form>
+
+    <ul>
+      {% for blog_post in blog_posts %}
+        <li>{{ blog_post.title }} - {{ blog_post.body }} ({{ blog_post.type.name }})</li>
+      {% endfor %}
+      </ul>
+  </body>
+</html>

@@ -63,3 +63,33 @@ table tr:nth-child(odd) {
   text-decoration: none;
   cursor: pointer;
 }
+
+a{
+    color: black;
+}
+
+
+.new_form a{
+    font-style: italic;
+}
+
+.contact_list{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.contact_list a, .contact_list a:visited {
+    border: 1px groove black;
+    border-radius: 8px;
+    padding: 20px 34px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+    color: black;
+    box-shadow: 5px 5px #a1a1a1;
+    }
+}

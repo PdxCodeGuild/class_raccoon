@@ -8,5 +8,6 @@ urlpatterns = [
   path('<int:contact_id>/edit/', views.edit, name="edit"),
   path('<int:contact_id>/edit/save_edit/', views.save_edit, name="save_edit"),
   path('new_form/', views.new_form, name="new_form"),
-  path('save_new/', views.save_new_form, name="save_new_form")
+  path('save_new/', views.save_new_form, name="save_new_form"),
+  path('delete/<int:contact_id>/', views.delete, name="delete"),
 ]

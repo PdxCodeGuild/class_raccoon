@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+      #cell_check + label{
+        text-decoration: line-through;
+
+      }
+      #cell_check:checked + label{
+        text-decoration: none;
+      }
+      form{
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        margin: auto;
+        background-color: grey;
+        padding: 4px;
+        min-height: 100vh;
+        box-sizing: border-box;
+      }
+      body{
+        margin: 0;
+      }
+      .smol{
+        width: 300px;
+        margin-bottom: 3px;
+      }
+      .sub_btn{
+        align-self: center;
+      }
+      .cellphone{
+        display: flex;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <form class="" action="{% url 'contacts:write_new_contact' %}" method="post">
+      {% csrf_token %}
+      <input class='smol' type="text" name="first_name" placeholder="first name">
+      <input class='smol' type="text" name="last_name" placeholder="last name" required>
+      <div class="smol">birthday: <input type="date" name="birthday"></div>
+      <input class='smol' type="text" name="phone_number" placeholder="phone number">
+      <div class="cellphone"><input id='cell_check' type="checkbox" name="is_cell"><label for="cell_check">cellphone</label></div>
+      <input class="sub_btn" type="submit">
+    </form>
+  </body>
+</html>

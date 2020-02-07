@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <p>{{ contact_data.first_name }} {{ contact_data.last_name }}</p>
+    <p>{{ birthday }}</p>
+    <p>{{ contact_data.phone_number }} {% if contact_data.is_cell %}(cell){% endif %}</p>
+    <form class="" action="/contacts/{{ contact_data.id }}/edit/" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="contact" value="{{contact_data.id}}">
+      <input type="submit" value="Edit">
+    </form>
+  </body>
+</html>

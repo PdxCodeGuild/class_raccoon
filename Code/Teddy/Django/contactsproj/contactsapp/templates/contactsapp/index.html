@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    <title>Contact</title>
+  </head>
+  
+  <style>
+
+  </style>
+
+  <body>
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center m-5">
+            {% if error %}
+            <div style="color:red">{{error}}</div>
+            {% endif %}
+            <h1>{{ title }}</h1>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <form class="" action="{% url 'contactsapp:savecontact' %}" method="post">
+            {% csrf_token %}
+
+            <div class="col-sm">
+              <h3>Add a new contact</h3>
+              <input id="firstname_text" type="text" name="firstname_text" class="validate" placeholder="first name" required/>
+              <input id="lastname_text" type="text" name="lastname_text" class="validate" placeholder="last name" required/>
+              <input id="birthdate_text" type="text" name="birthdate_text" class="validate" placeholder="birth date (YYYY/MM/DD)" required/>
+              <input id="phone_text" type="text" name="phone_text" class="validate" placeholder="phone number" required/>
+
+              <button type="submit" lass="btn btn-light">submit</button>
+
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+      <div class="container mt-5">
+        <div class="row">
+
+          <div class="col-12">
+            <h3>Your contacts</h3>
+
+            {% for contact in contacts %}
+            <div class="d-flex justify-content-between mt-3">
+              <p class="flex-grow-1">{{ contact.first_name }} {{ contact.last_name }}</p>
+              <a class="btn btn-light" href="{% url 'contactsapp:deletecontact' contact.id %}" method="post">DELETE</a>
+              <br>
+            </div>
+            {% endfor %}
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+
+
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

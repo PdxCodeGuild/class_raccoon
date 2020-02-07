@@ -120,7 +120,7 @@
           <td>{{ contact.birthday }}</td>
           <td>{{ contact.phone_number }}</td>
           <td>{{ contact.is_cell }}</td>
-          <td><i class="fa fa-pencil fa-2x" aria-hidden="true"></i>
+          <td><a href="{% url 'contactsapp:edit' contact.id %}"><i class="fa fa-pencil fa-2x" aria-hidden="true" name="edit"></i></a>
               <a href="{% url 'contactsapp:delete' contact.id %}"><i class="fa fa-ban fa-2x" aria-hidden="true" name="delete"></i></a>
           </td>
         </tr>
@@ -134,23 +134,18 @@
       <script>
       // Get the modal
       var modal = document.getElementById("myModal");
-
       // Get the button that opens the modal
       var btn = document.getElementById("myBtn");
-
       // Get the <span> element that closes the modal
       var span = document.getElementsByClassName("close")[0];
-
       // When the user clicks on the button, open the modal
       btn.onclick = function() {
         modal.style.display = "block";
       }
-
       // When the user clicks on <span> (x), close the modal
       span.onclick = function() {
         modal.style.display = "none";
       }
-
       // When the user clicks anywhere outside of the modal, close it
       window.onclick = function(event) {
         if (event.target == modal) {

@@ -39,3 +39,7 @@ def delete(request, contact_id):
     contact = ContactsList.objects.get(id=contact_id)
     contact.delete()
     return HttpResponseRedirect(reverse('contactsapp:index'))
+
+def edit(request, contact_id):
+    contact = ContactsList.objects.get(id=contact_id)
+    return HttpResponse(f'yay it works {contact}')

@@ -88,4 +88,13 @@ mdl.addEventListener("modal:close", function() {
 	console.log("closed")
 })
 
+// hide and show div for edit----
+function editdiv() {
+	var x = document.getElementById("myDIV");
+	if (x.style.display === "none") {
+	  x.style.display = "block";
+	} else {
+	  x.style.display = "none";
+	}
+  }
 

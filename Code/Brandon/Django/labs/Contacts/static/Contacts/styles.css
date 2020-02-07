@@ -1,7 +1,19 @@
-body {
+/* body {
     background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdata2.1freewallpapers.com%2Fdownload%2Fline-shape-texture-blue-gray.jpg&f=1&nofb=1') !important;
+    background-size: cover !important;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: -999;
+} */
+.body-bg{
+    background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdata2.1freewallpapers.com%2Fdownload%2Fline-shape-texture-blue-gray.jpg&f=1&nofb=1') !important;
+    height: 1000px !important;
 }
-
 
 
 .contact_view{
@@ -9,22 +21,24 @@ body {
     flex-direction: column;
     justify-content: center !important;
     align-items: center !important;
-    /* max-width: 700px; */
+    /* background-size: cover !important; */
+
 }
 
 .boxes{
     margin-top: 50px !important;
-    width: 900px !important;
-    background-color: #7887ab !important;
+    width: 600px !important;
+    border: none;
+    border-radius: 50px;
 }
 
 .edit-button{
     margin-right: 20px;
     margin-left: 20px;
 }
+
 .cont-box{
-    /* background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdata2.1freewallpapers.com%2Fdownload%2Fline-shape-texture-blue-gray.jpg&f=1&nofb=1')!important; */
-    width: 900px !important;
+    width: 600px !important;
 }
 .new-form{
     margin-top: 10px;
@@ -32,4 +46,23 @@ body {
     padding: 15px;
 }
 
+/* edit button--- */
+ /* always hide the checkbox */
+ .css-toggle-switch { display: none; }
 
+ /* update label text to reflect state */
+ .css-toggle-switch         + label:before { content: "Hide "; }
+ .css-toggle-switch:checked + label:before { content: "Show "; }
+ 
+  /* conditionally hide content when checked */
+ .css-toggle-switch:checked ~ .css-toggle-content  { display: none; }
+ 
+ /* make the label look clickable */
+ .css-toggle-switch + label {
+    cursor: pointer;
+   -webkit-touch-callout: none;
+     -webkit-user-select: none;
+        -moz-user-select: none;
+         -ms-user-select: none;
+             user-select: none;
+ }

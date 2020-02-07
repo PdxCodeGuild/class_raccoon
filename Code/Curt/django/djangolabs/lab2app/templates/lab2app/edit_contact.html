@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <h1>Edit Contact:</h1>
+    <form class="" action="{% url 'lab2app:update_contact' contact_details.id %}" method="post">
+    {% csrf_token %}
+      <ul class="collection striped">
+        <li class="collection-item"><div class="row"><h5>
+          <span>Name:</span><br>
+          <input type="text" name="first_name" value="{{contact_details.first_name}}" class="s5 col" style="margin-right:10px; font-size:20px">
+          <input type="text" name="last_name" value="{{contact_details.last_name}}" class="s5 col" style="font-size:20px">
+        </h5></div></li>
+        <li class="collection-item"><div class="row"><h5>
+          <span>Birthdate:</span><br>
+          <input type="text" name="birthday"  class="datepicker s5 col" style="font-size:20px">
+        </h5></div></li>
+        <li class="collection-item"><div class="row"><h5>
+          <span>Phone Number:</span><br>
+          <input type="text" name="phone_number" value="{{contact_details.phone_number}}" class="s5 col" style="font-size:20px">
+        </h5></div></li>
+        <li class="collection-item"><div class="row"><h5>
+
+          <label>
+            <input type="checkbox" {% if contact_details.is_cell %}checked{% endif %} name="is_cell"/>
+            <span style="color:black; font-size:1.64rem">Cell Phone</span>
+          </label>
+
+        </h5></div></li>
+      </ul>
+      <button type="submit" class="waves-effect waves-light btn" style="margin-left:20px;" href="{% url 'lab2app:update_contact' contact_details.id %}">Save</button>
+      <a class="waves-effect waves-light btn" style="margin-left:20px;" href="{% url 'lab2app:contacts' %}">Cancel</a>
+    </form>
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.datepicker');
+        var instances = M.Datepicker.init(elems, {
+          format:"yyyy/mm/dd",
+          defaultDate: new Date( "{{contact_details.formatted_birthday}}"),
+          setDefaultDate: true
+        });
+      });
+    </script>
+  </body>
+</html>

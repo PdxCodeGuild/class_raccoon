@@ -42,4 +42,7 @@ def delete(request, contact_id):
 
 def edit(request, contact_id):
     contact = ContactsList.objects.get(id=contact_id)
-    return HttpResponse(f'yay it works {contact}')
+    edit_contact = {
+        'contact': contact
+    }
+    return render(request, 'contactsapp/edit.html', edit_contact)

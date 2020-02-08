@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+      .button_link{
+        border-radius: 2px;
+        border: 1px solid grey;
+        padding: 2px;
+        background-color: whitesmoke;
+        text-decoration: none;
+        color: black;
+      }
+      .names{
+        color: black;
+      }
+
+    </style>
+  </head>
+  <body>
+    <h3>Contacts</h3>
+    {% if not contacts %}
+    <p>The contacts list is empty.</p>
+    {% endif %}
+    <ul>
+      {% for contact in contacts %}
+      <li><a class='names' href="/contacts/{{ contact.id }}">{{ contact.first_name }} {{ contact.last_name }}</a><form class="" action="{% url 'contacts:edit_contact' contact.id %}" method="post">{% csrf_token %}<input type="hidden" name="contact" value="{{ contact.id }}"><input type="submit" value="Edit"></form></li>
+      {% endfor %}
+    </ul>
+    <a class="button_link" href="{% url 'contacts:new_contact' %}">Create new contact</a>
+  </body>
+</html>

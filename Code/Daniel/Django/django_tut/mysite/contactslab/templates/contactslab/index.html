@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Contacts</title>
+
+    <style>
+      
+      .bigoldiv{
+        max-width: 800px;
+        margin: 20px
+      }
+
+      .contacts{
+        display: flex;
+        flex-direction: column;
+      }
+    
+      .form{
+        display: flex;
+        flex-direction: column;
+      }
+
+    </style>
+
+    <!-- Materialize -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+  <body>
+    <div class="bigoldiv">
+    <div>
+      <h1>Contacts</h1>
+    </div>
+    <div class="contacts">
+      <table>
+        <thead>
+          <tr>
+              <th>First</th>
+              <th>Last</th>
+              <th>Birthday</th>
+              <th>Phone</th>
+              <th>Phone Type</th>
+          </tr>
+        </thead>
+      </table>
+
+        
+          {% for contact in contacts %}
+          <table>
+          <tbody>
+          <tr>
+            <td>{{contact.first_name}}</td>
+            <td>{{contact.last_name}}</td>
+            <td>{{contact.birthday}}</td>
+            <td>{{contact.phone_number}}</td>
+            <td>{{contact.phone_type}}</td>
+            <td><a href="{% url 'contactslab:delete' contact.id %}">
+            <button  class="btn waves-effect waves-light" type="submit" name="action">delete 
+              <i class="material-icons right">delete_forever</i>
+            </button></a></td>
+          </tr>
+        </tbody>
+      </table>
+        <ul class="collapsible">
+          <li>
+            <div class="collapsible-header"><i class="material-icons">edit</i>Edit</div>
+            <div class="collapsible-body"><span>
+              
+              <form action="{% url 'contactslab:update' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="contactid" value={{contact.id}}>
+                <input type="text" name="firstname" placeholder="First Name" value="{{contact.first_name}}">
+                <input type="text" name="lastname" placeholder="Last Name" value="{{contact.last_name}}">
+                <input required type="text" class="datepicker" name= 'brthday' placeholder="Birthday" value="{{contact.birthday}}">
+                <input type="text" name="phnumber"placeholder="Phone Number" value="{{contact.phone_number}}">
+                
+                
+                
+                <div class="input-field col s12">
+                  <select required name='phonetype'>
+                    <option value="" disabled selected>Phone Type</option>
+                    {%for phone in phone_types%}
+                    
+                    <option  value="{{phone.id}}">{{phone.phone_type}} </option>
+
+                    {%endfor%}
+                    </select>
+                    <button class="btn waves-effect waves-light" type="submit" name="action">submit
+                      <i class="material-icons right">send</i>
+                    </button>
+                    </form>
+            </span></div>
+          </li></ul>
+          {% endfor %}
+        
+      
+  </div>
+  <div class="form">
+
+    <ul class="collapsible">
+      <li>
+        <div class="collapsible-header"><i class="material-icons">add_box</i>Add Contact</div>
+        <div class="collapsible-body"><span><form action="{% url 'contactslab:create' %}" method="POST">
+          {% csrf_token %}
+          <input type="text" name="firstname" placeholder="First Name">
+          <input type="text" name="lastname" placeholder="Last Name">
+          <input type="text" class="datepicker" name= brthday placeholder="Birthday">
+          <input type="text" name="phnumber"placeholder="Phone Number">
+          
+          <div class="input-field col s12">
+          <select name='phonetype'>
+            <option value="" disabled selected>Phone Type</option>
+            {%for phone in phone_types%}
+            <option value="{{phone.id}}">{{phone.phone_type}}</option>
+            {%endfor%}
+            </select>
+          <label>Phone Type</label>
+      </div>
+      <div class="submit">
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+          <i class="material-icons right">send</i>
+        </button>
+      </form></span></div>
+      </li>   
+</div>
+</div>
+  </body>
+
+  <script> document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems, {});
+  });</script>
+
+  <script>  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.datepicker');
+    var instances = M.Datepicker.init(elems, {format:'yyyy-mm-dd', parse});
+  });</script>
+
+  <script>document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems, {});
+  });</script>
+
+
+</html>

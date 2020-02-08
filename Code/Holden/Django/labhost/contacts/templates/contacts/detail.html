@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <p>{{ contact.first_name }} {{ contact.last_name }}</p>
+    <p>{{ birthday }}</p>
+    <p>{{ contact.phone_number }} {% if contact.is_cell %}(cell){% endif %}</p>
+    <form class="" action="{% url 'contacts:edit_contact' contact.id %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="contact" value="{{contact.id}}">
+      <input type="submit" value="Edit">
+    </form>
+    <form class="" action="{% url 'contacts:delete_contact' contact.id %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="contact" value="{{contact.id}}">
+      <input type="submit" value="Delete">
+    </form>
+    <a href="/contacts/">back to contacts list</a>
+  </body>
+</html>

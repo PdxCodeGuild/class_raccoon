@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- Materialize.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/lab2app/stylesheet.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  </head>
+  <body>
+      <h1 class=center-align>My Contacts</h1>
+      <table class="responsive-table striped center-align teal">
+        <thead>
+          <th>Name (First, Last)</th>
+          <th>Birthday</th>
+          <th>Phone Number</th>
+          <th>Cell Phone?</th>
+        </thead>
+
+        <tbody>
+          {% for contact_item in contact_list %}
+          <tr>
+            <td>{{contact_item.first_name}} {{contact_item.last_name}}</td>
+            <td>{{contact_item.birthday}}</td>
+            <td>{{contact_item.phone_number}}</td>
+            <td>{{contact_item.cellstat}}</td>
+            <td><div class="row">
+              <a class="waves-effect waves-light btn" href="{% url 'lab2app:contact_id' contact_item.id %}">View</a>
+              <a class="waves-effect waves-light btn" href="{% url 'lab2app:edit_contact' contact_item.id %}">Edit</a>
+              <a class="waves-effect waves-light btn" href="{% url 'lab2app:delete_contact' contact_item.id %}">Delete</a>
+            </div></td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <form class="" action="{% url 'lab2app:new_contact' %}" method="post">
+            {% csrf_token %}
+              <td><div class="row">
+                <input type="text" name="first_name" placeholder=" First Name" class="white s5 col" style="margin-right:10px!important;"/>
+                <input type="text" name="last_name" placeholder=" Last Name" class="white s5 col"/>
+              </div></td>
+              <td><div class="row">
+                <input type="text" name="birthday" placeholder=" Birthday" class="datepicker" style="background-color:white;">
+              </div></td>
+              <td><div class="row">
+                <input type="text" name="phone_number" placeholder=" Phone Number" class="white"/>
+              </div></td>
+              <td><div class="row">
+                <label>
+                  <input type="checkbox" name="is_cell"/>
+                  <span style="color:black">Cell Phone</span>
+                </label>
+                </div></td>
+              <td><div class="row">
+                  <button type="submit" class="waves-effect waves-light btn" style="margin-left:20px;" href="{% url 'lab2app:new_contact' %}">Save</button>
+              </div></td>
+            </form>
+
+          </tr>
+        </tbody>
+      </table>
+      <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+          var elems = document.querySelectorAll('.datepicker');
+          var instances = M.Datepicker.init(elems, {
+            format:"yyyy/mm/dd",
+            defaultDate: new Date( "{{contact_details.formatted_birthday}}"),
+            setDefaultDate: true
+          });
+        });
+      </script>
+  </body>
+</html>

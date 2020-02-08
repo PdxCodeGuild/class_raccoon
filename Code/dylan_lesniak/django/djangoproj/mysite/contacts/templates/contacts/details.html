@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="widtd=device-widtd, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'contacts/style.css' %}">
+</head>
+<body>
+    <h1><a href="{% url 'contacts:index' %}">Contacts</a></h1>
+    <table>
+        <tr>
+            <td class="head"><strong> First Name: </strong></td class="head">
+            <td>{{ person.first_name }}</td>
+        </tr>
+        <tr>
+            <td class="head"><strong> Last Name: </strong></td class="head">
+            <td>{{ person.last_name }}</td>
+        </tr>
+        <tr>
+            <td class="head"><strong> Birthday: </strong></td>
+            <td>{{ person.birthday }}</td>
+        </tr>
+        <tr>
+            <td class="head"><strong> Phone number: </strong></td class="head">
+            <td>{{ person.phone_number }}</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;"><a href="{% url 'contacts:edit' person.id %}"><button>Edit</button></a> </td>
+            <td><a id="myBtn"><button>Delete</button></a>
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close close_modal">&times;</span>
+                        <p>Are you sure you want to delete?</p>
+                        <div>
+                            <a href="{% url 'contacts:delete' person.id %}"><button>Yes</button></a>
+                            <button class="close_modal">No</button >
+                        </div>
+                    </div>
+                
+                </div>
+            </td>
+        </tr>
+    </table>
+    <script>
+        // Get the modal
+            var modal = document.getElementById("myModal")
+
+            // Get the button that opens the modal
+            var btn = document.getElementById("myBtn")
+
+            // Get the <span> element that closes the modal
+            let close_bts = document.querySelectorAll('.close_modal')
+            for (let i=0; i<close_bts.length; ++i) {
+                close_bts[i].addEventListener('click', function() {
+                    modal.style.display = "none"
+                })
+            }
+
+            // When the user clicks on the button, open the modal
+            btn.onclick = function () {
+                modal.style.display = "block";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+    </script>
+</body>
+</html>

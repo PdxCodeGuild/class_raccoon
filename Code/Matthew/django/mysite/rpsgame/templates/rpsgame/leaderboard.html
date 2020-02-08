@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Leaderboard</h1>
+    <table>
+      <tr>
+        <th>Player Name</th>
+        <th>Score</th>
+      </tr>
+      {% for score in scores %}
+      <tr>
+        <td>{{ score.0 }}</td>
+        <td>{{ score.1 }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

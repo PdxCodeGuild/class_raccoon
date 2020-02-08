@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  </head>
+  <body>
+    {{ result }}
+    <h1>Hello RPS World!</h1>
+    <h3>Wins: {{ winrecord }} / Losses: {{ loserecord }}</h3>
+    <a href="{% url 'rpsgame:scores' %}">Leaderboard</a>
+    <form action="{% url 'rpsgame:play' %}" method="POST">
+      {% csrf_token %}
+      <div class="input-field col s6">
+        <input id="playername" type="text" class="validate" name="playername" value="{{ playername }}" required>
+        <label for="playername">Player Name</label>
+      </div>
+      <p>
+        <label>
+          <input name="playerchoice" type="radio" value="Rock" required/>
+          <span>Rock</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input name="playerchoice" type="radio" value="Paper"/>
+          <span>Paper</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input name="playerchoice" type="radio" value="Scissors"/>
+          <span>Scissors</span>
+        </label>
+      </p>
+      <button type="submit" class="btn">Play</button>
+    </form>
+
+    <table>
+      <tr>
+        <th>Game Number</th>
+        <th>Player Name</th>
+        <th>Player Choice</th>
+        <th>Computer Choice</th>
+        <th>Win/Lose</th>
+      </tr>
+      {% for game in games %}
+        <tr>
+          <td>{{game.id}}</td>
+          <td>{{game.playername}}</td>
+          <td>{{game.playerchoice}}</td>
+          <td>{{game.compchoice}}</td>
+          {% if game.humanwin %}
+            <td>Win</td>
+          {% else %}
+            <td>Loss</td>
+          {% endif %}
+        </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

@@ -1,5 +1,7 @@
 
 
+.vscode
+
 secrets.py
 local_settings.py
 

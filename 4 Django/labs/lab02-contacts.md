@@ -7,19 +7,24 @@ Let's build a CRUD application for managing a contact list.
 
 Our `Contact` model will have the following fields:
 
-- `first_name` - `CharField`
-- `last_name` - `CharField`
-- `birthday` - `DateField`
-- `phone_number` - `CharField`
-- `is_cell` - `BooleanField`
+| field name | Django model field | html element |
+| ----       | --------           | ----------   |
+| `first_name` | `CharField` | `<input type="text"/>` |
+| `last_name` | `CharField` | `<input type="text"/>` |
+| `age` | `IntegerField` | `<input type="number"/>` |
+| `birthday` | `DateField` | `<input type="date"/>` |
+| `phone_number` | `CharField` | `<input type="text" pattern="?"/>`
+| `is_cell` | `BooleanField` | `<input type="checkbox"/>` |
+| `comments` | `TextField`| `<textarea></textarea>` |
 
 ## Pages
 
-The application will have the following pages:
+The application will have the following views:
 
-- `/contacts/` will show a list of contacts each with an `edit contact` button, and a button for `new contact`
+- `/contacts/` will render a template containing a `new contact` button, as well as a list of contacts each with a `view contact` button and an `edit contact` button
 - `/contacts/<id>/` will be a detail page for a contact with the given `id`
-- `/contacts/new/` will have a form for creating a new contact
+- `/contacts/new/` will render a template containing a form for creating a new contact
+- `/contacts/new/submit/` will receive the form submission from `/contacts/new/`, create a new contact in the database, and redirect to the detail page for the newly created contact
 - `/contacts/<id>/edit/` will have a form for editing a contact
 
 ## Steps
@@ -29,6 +34,6 @@ These are the recommended steps:
 1. Define the model in the app's `models.py`
 2. Register the model with the admin page, log in and create some records to make sure everything works
 3. Create the contact detail page, which displays the different fields and their values
-4. Create the the new contact page
+4. Create the new contact page
 5. Create the edit contact page
 

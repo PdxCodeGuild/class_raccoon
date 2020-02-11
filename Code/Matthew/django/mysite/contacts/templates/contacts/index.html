@@ -1,0 +1,58 @@
+{% extends 'contacts/base.html' %}
+
+{% block title %}Contacts App - Home{% endblock %}
+
+{% block content %}
+
+<form action="{% url 'contacts:savecontact' %}" method="post">
+  {% csrf_token %}
+  <fieldset>
+    <div class="container">
+      <div class="row">
+        <div class="column">
+          <label for="first_name">First Name</label>
+          <input type="text" placeholder="First Name" id="first_name" name="first_name">
+        </div>
+        <div class="column">
+          <label for="last_name">Last Name</label>
+          <input type="text" placeholder="Last Name" id="last_name" name="last_name">
+        </div>
+        <div class="column">
+          <label for="birthday">Birthday</label>
+          <input type="date" placeholder="Birthday" id="birthday" max="" name="birthday">
+        </div>
+        <div class="column">
+          <label for="phone_number">Phone Number</label>
+          <input type="text" placeholder="Phone Number" id="phone_number" name="phone_number">
+        </div>
+        <div class="column">
+          <label for="comments">Comments</label>
+          <input type="text" id="comments" name="comments"/>
+        </div>
+        <div class="column">
+          <label for="">&nbsp;</label>
+          <input class="button-primary" type="submit" value="Save">
+        </div>
+      </div>
+    </div>
+
+
+  </fieldset>
+</form>
+<div class="container">
+<table>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th></th>
+  </tr>
+  {% for contact in contacts %}
+  <tr>
+    <td>{{contact.first_name}}</td>
+    <td>{{contact.last_name}}</td>
+    <td><a href="{% url 'contacts:edit' contact.id %}" class="button-primary">Edit</a></td>
+  </tr>
+  {% endfor %}
+</table>
+</div>
+{% endblock %}

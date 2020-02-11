@@ -1,0 +1,45 @@
+{% extends 'contacts/base.html' %}
+
+
+{% block content %}
+<form action="{% url 'contacts:saveeditedcontact' %}" method="post">
+  {% csrf_token %}
+  <input type="hidden" name="contact_id" value="{{contact.id}}"/>
+  <fieldset>
+    <div class="container">
+      <div class="row">
+        <div class="column">
+          <label for="first_name">First Name</label>
+          <input type="text" placeholder="First Name" id="first_name" name="first_name" value="{{contact.first_name}}">
+        </div>
+        <div class="column">
+          <label for="last_name">Last Name</label>
+          <input type="text" placeholder="Last Name" id="last_name" name="last_name" value="{{contact.last_name}}">
+        </div>
+        <div class="column">
+          <label for="birthday">Birthday</label>
+          {% comment %}<input type="date" placeholder="Birthday" id="birthday" max="" name="birthday" value="{{contact.birthday.year}}-{{contact.birthday.month|stringformat:"02d"}}-{{contact.birthday.day|stringformat:"02d"}}">{% endcomment %}
+          <input type="date" placeholder="Birthday" id="birthday" max="" name="birthday" value="{{contact.formatted_birthday}}"/>
+        </div>
+        <div class="column">
+          <label for="phone_number">Phone Number</label>
+          <input type="text" placeholder="Phone Number" id="phone_number" name="phone_number" value="{{contact.phone_number}}">
+        </div>
+        <div class="column">
+          <label for="comments">Comments</label>
+          <input type="text" id="comments" name="comments" value="{{contact.comments}}"/>
+        </div>
+        <div class="column">
+          <label for="">&nbsp;</label>
+          <input class="button-primary" type="submit" value="Save">
+
+        </div>
+        <div class="column">
+          <label for="">&nbsp;</label>
+          <a href="{% url 'contacts:index' %}" class="button button-outline">Back</a>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</form>
+{% endblock %}

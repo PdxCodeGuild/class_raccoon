@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>URLs</title>
+
+    {% load static %}
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'contacts/style.css' %}">
+</head>
+<body>
+    <h1>URL List</h1>
+    <hr>
+    <form action="{% url 'shortener:new' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Url Name...">
+        <input type="text" name="longform" placeholder="Enter Url Here...">
+        <button type="submit">Submit</button> 
+    </form>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Shortform</th>
+            <th>Longform</th>
+        </tr>
+            {% for url in urls %}
+                <tr>
+                    <td>{{ url.name }}</td>
+                    <td><a href="{{ url.longform }}" target="_blank">{{ url.shortform }}</a></td> 
+                    <td title="{{url.longform}}"><a href="{{url.longform}}" target="_blank">{{ url.longform | truncatechars:20 }}</a></td>
+                </tr>
+            {% endfor %}
+        </table> 
+</body>
+</html>

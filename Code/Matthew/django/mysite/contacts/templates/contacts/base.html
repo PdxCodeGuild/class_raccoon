@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css" type="text/css">
+    <title>{% block title %}Contacts App{% endblock %}</title>
+    <style type="text/css">
+      footer {
+        text-align:center;
+      }
+      input[type="date"] {
+        background-color: transparent;
+        border: 0.1rem solid #d1d1d1;
+        border-radius: .4rem;
+        box-shadow: none;
+        box-sizing: inherit;
+        height: 3.8rem;
+        padding: .6rem 1.0rem;
+        width: 100%;
+      }
+      .row .column {
+        width: initial;
+      }
+    </style>
+  </head>
+  <body class="container">
+    <header>
+      <h1>Contacts App</h1>
+      <hr/>
+    </header>
+    {% block content %}
+    {% endblock %}
+    <footer>
+      <hr/>
+      <div>© Class Raccoon 2020</div>
+    </footer>
+  </body>
+</html>

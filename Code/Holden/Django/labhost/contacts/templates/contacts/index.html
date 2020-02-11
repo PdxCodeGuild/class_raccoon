@@ -25,7 +25,7 @@
     {% endif %}
     <ul>
       {% for contact in contacts %}
-      <li><a class='names' href="/contacts/{{ contact.id }}">{{ contact.first_name }} {{ contact.last_name }}</a><form class="" action="/contacts/{{ contact.id }}/edit/" method="post">{% csrf_token %}<input type="hidden" name="contact" value="{{ contact.id }}"><input type="submit" value="Edit"></form></li>
+      <li><a class='names' href="/contacts/{{ contact.id }}">{{ contact.first_name }} {{ contact.last_name }}</a><form class="" action="{% url 'contacts:edit_contact' contact.id %}" method="post">{% csrf_token %}<input type="hidden" name="contact" value="{{ contact.id }}"><input type="submit" value="Edit"></form></li>
       {% endfor %}
     </ul>
     <a class="button_link" href="{% url 'contacts:new_contact' %}">Create new contact</a>

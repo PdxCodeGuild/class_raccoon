@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('polls/', include('polls.urls')),
     path('contactsapp/', include('contactsapp.urls')),
+    path('urlshorten/', include('urlshorten.urls')),
 ]

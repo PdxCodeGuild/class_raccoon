@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    {% load static %}
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'contacts/style.css' %}">
+</head>
+<body>
+    <h1><a href="">Contacts</a></h1>
+    <main>
+        <div class="contact_list">
+            {% for contact in contacts %}
+                <a class="contact_info" href="{% url 'contacts:details' contact.id %}">{{ contact.first_name.title }} {{ contact.last_name.title }}</a>
+            {% endfor %}
+        </div>
+        <div class="new_form">
+            <a href="{% url 'contacts:new_form' %}">Add Contact</a>
+        </div>
+    </main>
+</body>
+</html> 

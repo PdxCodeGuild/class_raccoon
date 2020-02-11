@@ -12,9 +12,11 @@ query = '''query ($title: String, $page: Int, $perPage: Int) {
                 english
                 native
             }
+            coverImage {
+                large
+            }
             streamingEpisodes {
                 title
-                thumbnail
                 url
                 site
             }
@@ -36,5 +38,32 @@ url = 'https://graphql.anilist.co'
 response = requests.post(url, json={'query': query, 'variables': variables})
 response = json.loads(response.text)['data']['Page']['media']
 # [data][page][media]
+
+resultlist = []
 for i in response:
-    print(i)
+    if i['streamingEpisodes']:
+        sitelist = []
+        site_results = []
+        if i['coverImage']['large']:
+            cover_img = i['coverImage']['large']
+        else:
+            cover_img = noimage
+        for j in i['streamingEpisodes']:
+            if j['site'] not in sitelist:
+                sitelist.append(j['site'])
+                site_results.append((j['site'],j['url']))
+
+        if i['title']['english']:
+            title = i['title']['english']
+        if i['title']['romaji']:
+            if title:
+                title = title + " | " + i['title']['romaji']
+            else:
+                title = i['title']['romaji']
+        if i['title']['native']:
+            if title:
+                title = title + " | " + i['title']['native']
+            else:
+                title = i['title']['native']
+        resultlist.append({'Title':title,'Image':cover_img,'Sites':site_results})
+print(resultlist)

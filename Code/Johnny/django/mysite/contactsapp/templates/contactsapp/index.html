@@ -2,17 +2,157 @@
 <html lang="" dir="ltr">
   <head>
     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <!-- Miligram CSS -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css">
+    <!-- fontawesome 4 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title></title>
+    <style type="text/css">
+      * {
+        max-width: : 600px;
+        margin: 0 auto;
+        padding: 10px;
+      }
+      .button-small {
+        font-size: .8rem;
+        height: 2.8rem;
+        line-height: 2.8rem;
+        padding: 0 1.5rem;
+      }
+            /* The Modal (background) */
+      .modal {
+       display: none; /* Hidden by default */
+       position: fixed; /* Stay in place */
+       z-index: 1; /* Sit on top */
+       left: 0;
+       top: 0;
+       width: 100%; /* Full width */
+       height: 100%; /* Full height */
+       overflow: auto; /* Enable scroll if needed */
+       background-color: rgb(0,0,0); /* Fallback color */
+       background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      }
+
+      /* Modal Content/Box */
+      .modal-content {
+       background-color: #fefefe;
+       margin: 15% auto; /* 15% from the top and centered */
+       padding: 20px;
+       border: 1px solid #888;
+       width: 40%; /* Could be more or less, depending on screen size */
+      }
+
+      /* The Close Button */
+      .close {
+       color: #aaa;
+       float: right;
+       font-size: 28px;
+       font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+       color: black;
+       text-decoration: none;
+       cursor: pointer;
+      }
+
+    </style>
   </head>
   <body>
+    <div class="container">
     <h1> CONTACTS INDEX HTML</h1>
-    Here is your list of contacts.
-    <ul>
-      <!-- calling for the contact list models -->
-    {% for contact in contact_list %}
-     <!-- from contact list, searching for first_name or whatever field define in models -->
-    <li>{{ contact }}</li>
-    {% endfor %}
-  </ul>
+
+      <div class="row">
+        <!-- button col -->
+        <div class="column"><!--left blank --> </div>
+        </div>
+
+        <div class="column" align="right">
+          <!-- Trigger/Open The Modal -->
+         <button id="myBtn">Create Contact</button>
+         <!-- The Modal -->
+         <div id="myModal" class="modal">
+
+           <!-- Modal content -->
+           <div class="modal-content" align="left">
+             <span class="close">&times;</span>
+                <form action="{% url 'contactsapp:create' %}" method="POST">
+                  {% csrf_token %}
+                  <label>New Contact</label>
+                  <input type="text" placeholder="First Name" name="first_name">
+                  <input type="text" placeholder="Last Name" name="last_name">
+                  <div class="row">
+                    <div class="column">
+                      <input type="tel" placeholder="Phone Number" name="phone_number">
+                    </div>
+                    <div class="column">
+                      <input type="checkbox" name="is_cell">
+                      <label class="label-inline" for="confirmField">Cell</label>
+                    </div>
+                  </div>
+                  <input type="date" placeholder="Birthday" name="birthday">
+                  <div class="float-right">
+                  <input class="button-primary" type="submit" value="Sumbit"></submit>
+                  </div>
+                </form>
+           </div>
+          </div>
+
+
+    <!-- table start -->
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Birthday</th>
+          <th>Phone Number</th>
+          <th>Cell</th>
+          <th>Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for contact in contact_list %}
+        <tr>
+          <td>{{ contact.first_name }} {{ contact.last_name }}</td>
+          <td>{{ contact.birthday }}</td>
+          <td>{{ contact.phone_number }}</td>
+          <td>{{ contact.is_cell }}</td>
+          <td><a href="{% url 'contactsapp:edit' contact.id %}"><i class="fa fa-pencil fa-2x" aria-hidden="true" name="edit"></i></a>
+              <a href="{% url 'contactsapp:delete' contact.id %}"><i class="fa fa-ban fa-2x" aria-hidden="true" name="delete"></i></a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+
+
+<!-- java -->
+      <script>
+      // Get the modal
+      var modal = document.getElementById("myModal");
+      // Get the button that opens the modal
+      var btn = document.getElementById("myBtn");
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+      // When the user clicks on the button, open the modal
+      btn.onclick = function() {
+        modal.style.display = "block";
+      }
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+        modal.style.display = "none";
+      }
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+      </script>
   </body>
 </html>

@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('rps/', include('rpsgame.urls')),
     path('contacts/', include('contacts.urls')),
+    path('catapi/', include('catapi.urls'))
 ]

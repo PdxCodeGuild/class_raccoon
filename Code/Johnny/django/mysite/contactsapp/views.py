@@ -22,6 +22,9 @@ def create(request):
     create_birthday = request.POST['birthday']
     create_phone_number = request.POST['phone_number']
     create_is_cell = request.POST['is_cell']
+    # checks to see if is_cell is in dictionary of request.POST from forms.
+    # if is_cell in request.POST if/else statements
+
     if request.POST['is_cell'] == 'on':
         create_is_cell = True
     else:
@@ -39,6 +42,7 @@ def delete(request, contact_id):
     contact = ContactsList.objects.get(id=contact_id)
     contact.delete()
     return HttpResponseRedirect(reverse('contactsapp:index'))
+
 
 def edit(request, contact_id):
     contact = ContactsList.objects.get(id=contact_id)

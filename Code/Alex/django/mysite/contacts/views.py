@@ -20,7 +20,7 @@ def new_contact(request):
     birthday = request.POST['birthday']
     phone = request.POST['phone']
 
-    contact = Contact(first_name=first, last_name=last,birthday=birthday,phone_number=phone)
+    contact = Contact(first_name=first, last_name=last, birthday=birthday, phone_number=phone)
     contact.save()
 
     return redirect('contacts:index')

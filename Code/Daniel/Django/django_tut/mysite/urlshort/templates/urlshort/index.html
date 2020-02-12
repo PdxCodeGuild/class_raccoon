@@ -1,0 +1,43 @@
+
+{% extends 'urlshort/base.html' %}
+
+{% block content %}
+
+<form action="{% url 'urlshort:saveurl' %}" method="POST">
+    {% csrf_token %}
+
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+            <div class="input-field col s6">
+                <input placeholder="Site Name" id="site_name" type="text" class="validate" name="site_name">
+                <label for="site_name"></label>
+            </div>
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+            <div class="input-field col s6">
+                <input placeholder="URL" id="old_url" type="text" class="validate" name="old_url">
+                <label for="old_url"></label>
+            </div>
+
+    <button type="submit" class="waves-effect waves-light btn">Shortify</button>
+</form>
+
+{% for url in urls %}
+
+    <div class="card horizontal hoverable">
+      <div class="card-stacked">
+        <div class="card-content">
+            <h4>{{url.site_name}}</h4>
+          <p>Times clicked- {{url.click_count}}</p>
+        </div>
+        <div class="card-action">
+          <a target="_blank" href="{% url 'urlshort:sendit' url.short_url %}">{{url.site_name}}/{{url.short_url}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}

@@ -36,6 +36,10 @@
         </div>
         <div class="column">
           <label for="">&nbsp;</label>
+          <a href="{% url 'contacts:delete' contact.id %}" class="button" onclick="return confirm('Are you sure?')">Delete</a>
+        </div>
+        <div class="column">
+          <label for="">&nbsp;</label>
           <a href="{% url 'contacts:index' %}" class="button button-outline">Back</a>
         </div>
       </div>

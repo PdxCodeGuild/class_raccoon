@@ -23,4 +23,7 @@ class Contact(models.Model):
     def formatted_birthday(self):
         return self.birthday.strftime('%Y-%m-%d')
 
+    def formatted_phone_number(self):
+        return '(' + self.phone_number[:3] + ') ' + self.phone_number[3:6] + '-' + self.phone_number[6:]
+
 

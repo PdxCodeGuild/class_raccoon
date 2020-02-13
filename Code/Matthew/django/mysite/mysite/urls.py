@@ -18,8 +18,10 @@ from django.urls import path, include
 
 urlpatterns = [
     path('polls/', include('polls.urls')),
-    path('admin/', admin.site.urls),
+    path('badmin/', admin.site.urls),
     path('rps/', include('rpsgame.urls')),
     path('contacts/', include('contacts.urls')),
-    path('catapi/', include('catapi.urls'))
+    path('catapi/', include('catapi.urls')),
+    path('users/', include('users.urls')),
+    path('urlshortener/', include('urlshortener.urls')),
 ]

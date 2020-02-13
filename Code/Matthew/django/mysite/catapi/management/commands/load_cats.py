@@ -18,7 +18,7 @@ class Command(BaseCommand):
 
             # if CatImage.objects.get(url=url) is None:
             if not CatImage.objects.filter(url=url).exists():
-                cat_image = CatImage(cat_api_id=cat_api_id, url=url)
+                cat_image = CatImage(cat_api_id=cat_api_id, url=url, favorite=False)
                 cat_image.save()
 
             print(str(round(i/num_cats*100, 2))+'%')

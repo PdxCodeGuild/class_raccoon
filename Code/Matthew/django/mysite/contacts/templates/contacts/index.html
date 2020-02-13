@@ -1,0 +1,78 @@
+{% extends 'contacts/base.html' %}
+
+{% block title %}Contacts App - Home{% endblock %}
+
+{% block content %}
+
+<form action="{% url 'contacts:savecontact' %}" method="post">
+  {% csrf_token %}
+  <fieldset>
+    <div class="container">
+      <div class="row">
+        <div class="column">
+          <label for="first_name">First Name</label>
+          <input type="text" placeholder="First Name" id="first_name" name="first_name" required>
+        </div>
+        <div class="column">
+          <label for="last_name">Last Name</label>
+          <input type="text" placeholder="Last Name" id="last_name" name="last_name" required>
+        </div>
+        <div class="column">
+          <label for="birthday">Birthday</label>
+          <input type="date" placeholder="Birthday" id="birthday" max="" name="birthday" required>
+        </div>
+        <div class="column">
+          <label for="phone_number">Phone Number</label>
+          <input type="text" placeholder="Phone Number" id="phone_number" name="phone_number" required pattern="^\(?(\d{3})[)\- ]*(\d{3})[\- ]?(\d{4})$" title="phone number must be 10 digits">
+        </div>
+        <div class="column">
+          <label for="comments">Comments</label>
+          <input type="text" id="comments" name="comments" required/>
+        </div>
+        <div class="column">
+          <label for="">&nbsp;</label>
+          <input class="button-primary" type="submit" value="Save" title="save the contact">
+        </div>
+      </div>
+    </div>
+
+
+  </fieldset>
+</form>
+<div class="container">
+<table>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Age</th>
+    <th>Phone Number</th>
+    <th></th>
+    <th></th>
+  </tr>
+  {% for contact in contacts %}
+  <tr>
+    <td>{{contact.first_name}}</td>
+    <td>{{contact.last_name}}</td>
+    <td>{{contact.age}}</td>
+    <td>{{contact.formatted_phone_number}}</td>
+    <td><a href="{% url 'contacts:edit' contact.id %}" class="button-primary">Edit</a></td>
+    {% comment %}
+    <td><a href="{% url 'contacts:delete' contact.id %}" class="button-primary delete_bt">Delete</a></td>
+    {% endcomment %}
+    <td><a href="{% url 'contacts:delete' contact.id %}" class="button-primary" onclick="return confirm('Are you sure?')">Delete</a></td>
+  </tr>
+  {% endfor %}
+</table>
+</div>
+
+<!-- <script type="text/javascript">
+  let delete_bts = document.querySelectorAll('.delete_bt')
+  console.log(delete_bts)
+  for (let i=0; i<delete_bts.length; ++i) {
+    delete_bts[i].addEventListener('click', function() {
+      return confirm('Are you sure?')
+    })
+  }
+</script> -->
+
+{% endblock %}

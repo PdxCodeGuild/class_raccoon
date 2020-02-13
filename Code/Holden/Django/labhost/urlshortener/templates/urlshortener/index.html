@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Url shortener</title>
+    <style type='text/css'>
+      body{
+        margin: 0;
+      }
+      form{
+        padding: 10px;
+      }
+      .griddy{
+        display: grid;
+        grid-template-columns: 1fr 2fr 5fr 1fr;
+        grid-auto-rows: 36px;
+        align-items: stretch;
+      }
+      .flexy{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      .confirms{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+      }
+      input{
+        width: 90%;
+        margin: 0 4px;
+        padding: 4px;
+      }
+      #blocker{
+        display: none;
+        position: fixed;
+        align-items: center;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+      #modal{
+        background-color: whitesmoke;
+        margin: 0 auto;
+        padding: 8px;
+        border: 1px solid grey;
+        border-radius: 4px;
+      }
+      .inplaceedit{
+        margin: 0 0;
+        padding: 0 0;
+      }
+      .griddy div{
+        padding: 4px;
+        text-align: center;
+      }
+      .griddy div:nth-child(8n+1){
+        background-color: whitesmoke;
+      }
+      .griddy div:nth-child(8n+2){
+        background-color: whitesmoke;
+      }
+      .griddy div:nth-child(8n+3){
+        background-color: whitesmoke;
+      }
+      .griddy div:nth-child(8n+4){
+        background-color: whitesmoke;
+      }
+      .spacer{
+        border: 1px solid grey;
+        width: 100%;
+      }
+    </style>
+    <script type="text/javascript">
+      function newUrl() {
+        document.getElementById("blocker").style.display = "flex";
+        var long = document.getElementById('long_url').value;
+        document.getElementById("verify").innerHTML = 'are you sure you want to shorten ' + long + ' ?';
+        document.getElementById('savebtn').setAttribute( "onClick", "confirmSaveNew()" );
+      }
+      function editUrlConfirm(id) {
+        document.getElementById("blocker").style.display = "flex";
+        var long = document.getElementById('urlinput'+id).value;
+        document.getElementById("verify").innerHTML = 'are you sure you want to change this link to ' + long + ' ?';
+        document.getElementById('savebtn').setAttribute( "onClick", "confirmSaveEdit("+id+")" );
+      }
+      function closeModal() {
+        document.getElementById("blocker").style.display = "none";
+      }
+      function edit_url(id) {
+        var short_long = document.getElementById('link'+id).href;
+        var acturl = document.getElementById('newurlform').action;
+        document.getElementById('url'+id).innerHTML ='<form id="form' + id + '" class="inplaceedit" action="' + acturl + '" method="post">{% csrf_token %}<input type="hidden" name="short_id" value="' + id + '"><input id="urlinput'+id+'" type="url" name="long" value="' + short_long + '"></form>';
+        document.getElementById('edit'+id).innerHTML = '<button type="button" onclick="editUrlConfirm('+id+')">save</button>';
+      }
+      function confirmSaveEdit(id) {
+        document.getElementById('form' + id).submit();
+      }
+      function confirmSaveNew() {
+        document.getElementById("newurlform").submit();
+      }
+    </script>
+  </head>
+  <body>
+
+    <form id="newurlform" class="flexy" action="{% url 'urlshortener:saveurl' %}" method="post">
+      {% csrf_token %}
+      <!-- <input type="url" id="short_url" name="short" value="" placeholder="short url">
+      <button type="button" name="button">Randomize short url</button> -->
+      <input type="url" id='long_url' name="long" placeholder="long url" required>
+      <button type="button" onclick="newUrl()">submit</button>
+    </form>
+    <div class="spacer"></div>
+    <div class="griddy">
+      <div>Clicks</div>
+      <div>Code</div>
+      <div>Url</div>
+      <div>edit</div>
+      {% for short in short_list %}
+      <div id="counter{{short.id}}">{{ short.counter }}</div>
+      <div id="code{{short.id}}"><a href="{% url 'urlshortener:shortened' short.code %}" target='_blank'>{{ short.code }}</a></div>
+      <div id="url{{short.id}}"><a id="link{{short.id}}" href="{{ short.url }}" target='_blank'>{{short.url| truncatechars:60}}</a></div>
+      <div id="edit{{short.id}}"><button type="button" onclick="edit_url({{ short.id }})">edit</button></div>
+      {% endfor %}
+    </div>
+    <div id="blocker" style="">
+      <div id="modal">
+        <p id="verify">this is error text, it should never show up in general use.</p>
+        <div class="confirms">
+          <button id="savebtn" type="button" onclick="">Yes</button>
+          <button type="button" onclick="closeModal()">No</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

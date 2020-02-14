@@ -20,4 +20,5 @@ urlpatterns = [
     path('contacts/', include('Contacts.urls')),
     path('admin/', admin.site.urls),
     path('shorts/', include('shorts.urls')),
+    path('library/', include('library.urls'))
 ]

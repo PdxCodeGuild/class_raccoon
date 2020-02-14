@@ -15,4 +15,4 @@ class Book(models.Model):
     checked_out_by = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
 
     def __str__(self):
-        return self.title + ' - ' + self.author.name
+        return '\"' + self.title + '\"' + ' by ' + ', '.join([author.name for author in self.authors.all()])

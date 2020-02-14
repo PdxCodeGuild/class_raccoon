@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
 
 # Create your models here.
 
@@ -12,7 +13,7 @@ class Author(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=200)
-    publish_date = models.DateTimeField()
+    publish_date = models.DateField()
     author = models.ForeignKey(Author, on_delete=models.PROTECT, related_name='author')
     checked_out_by = models.ForeignKey(User, models.SET_NULL, blank=True, null=True)
 

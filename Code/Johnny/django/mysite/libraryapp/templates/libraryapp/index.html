@@ -5,6 +5,25 @@
     <title></title>
   </head>
   <body>
- <h1>{{message}}</h1>
+    <!-- listing all the books in the data -->
+    {% for book in books_data %}
+      Database ID: {{book.id}}<br/>
+      Book Title: {{book.title}}<br/>
+      Book Author: {{book.author}}<br/>
+      Book Date: {{book.publish_date}}<br/>
+      <!-- checks to see who's checked out the book by user -->
+      Checked Out: {% if books.checked_out_by != None %}{{book.User}}{% else %}{{book.checked_out_by}}{% endif %}<br/><br/>
+    {% endfor %}
+
+    <form action="" method="POST">
+      {% csrf_token %}
+        <label for="unchecked_books">Choose a book:</label><br/>
+          <select name="checkout">
+        {% for checkout in available_books %}
+         <option value="{{checkout.title}}">{{checkout.title}} ({{checkout.id}})</option>
+         {% endfor %}
+      </select>
+      <button type="submit">Checkout</button>
+    </form>
   </body>
 </html>

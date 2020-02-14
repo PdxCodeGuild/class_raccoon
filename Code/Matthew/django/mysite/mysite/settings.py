@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'contacts',
     'catapi',
     'users',
-    'urlshortener'
+    'urlshortener',
+    'library'
 ]
 
 MIDDLEWARE = [

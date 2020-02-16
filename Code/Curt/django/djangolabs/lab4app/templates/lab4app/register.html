@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Register</h1>
+    <form action="{% url 'lab4app:register_user' %}" method="post">
+      {% csrf_token %}
+      <input type="text" name="username" value="" placeholder="username">
+      <input type="email" name="email" value="" placeholder="email">
+      <input type="password" name="password" value="" placeholder="password">
+      <button type="submit">register</button>
+    </form>
+    <a href="{% url 'lab4app:login' %}">login</a>
+  </body>
+</html>

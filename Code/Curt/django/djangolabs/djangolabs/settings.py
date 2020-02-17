@@ -25,7 +25,7 @@ SECRET_KEY = '^xdt7^87xjm*z3oqy0tz+35sftrp4@82v2l%#e3cku7u0a316h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['lvh.me']
 
 
 # Application definition

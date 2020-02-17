@@ -1,0 +1,47 @@
+body {
+    font-family: 'Ubuntu', sans-serif;
+
+
+}
+.main-contain{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-cust{
+    height: 200px;
+    widows: 200px;
+    text-align: center;
+    margin: 20px;
+}
+.card-contain{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    
+}
+.search-bar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+
+
+}
+.search-inside{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 700px;
+    margin-top: 70px !important;
+
+}
+nav img {
+    height: 40px;
+    width: 40px;
+    border-radius: 100px;
+}

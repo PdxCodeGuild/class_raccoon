@@ -1,0 +1,51 @@
+{% extends 'library/base.html' %}
+{% block content%}
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1>Books Library</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <form class="row" action="" method="post">
+          {% csrf_token %}
+
+            <div class="col-sm-12 mt-3">
+              <label>Author name</label>
+              <input id="firstname_text" type="text" name="firstname_text" class="form-control" required/>
+            </div>
+
+            <div class="col-12 mt-3">
+              <button type="submit" class="btn btn-success">submit</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col">
+
+        {% for book in books %}
+          <article class="media content-section">
+            <div class="media-body">
+              <div class="article-metadata">
+                <p class="article-content">Book name: {{book.title}}</p>
+                <p class="article-content">Author name: {% for author in book.authors.all %}{{author.name}} {% endfor %}</p>
+                <p class="article-content">Published year: {{book.year_published}}</p>
+              </div>
+            </div>
+          </article>
+          <hr>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+
+
+{% endblock content %}

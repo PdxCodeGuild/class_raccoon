@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 import requests
 
 from . import secrets
-from .models import Author, Book
+from .models import Author, Book, Checkout
 
 @login_required()
 def index(request):
@@ -17,6 +17,22 @@ def index(request):
         'authors': authors,
     }
     return render(request, 'lab4app/index.html', context)
+
+@login_required()
+def togglecheckout(request, book_id):
+    book = Book.objects.get(id=book_id)
+    checkouts = book.checkouts.filter(checked_out=True)
+    if checkouts.exists(): # check back in
+        checkout = checkouts[0]
+        if checkout.checked_by == request.user:
+            checkout.checked_out = False
+            checkout.save()
+    else: # check out
+        # create a new checkout, and save it
+        checkout = Checkout(checked_out = True, book=book, checked_by = request.user)
+        checkout.save()
+
+    return HttpResponseRedirect(reverse('lab4app:index'))
 
 def register(request):
     return render(request, 'lab4app/register.html')

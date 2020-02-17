@@ -64,9 +64,11 @@
           <div class="card-body containcheck">
             <div class="card-body checkstat">
               {% if book.checked_out %}
-                <i onclick="checkon(this)" class="fa fa-check-square"></i>
+                <a href="{% url 'lab4app:togglecheckout' book.id %}"><i class="fa fa-check-square"></i></a>
+                <!-- <i onclick="checkbox(this)" class="fa fa-check-square"></i> -->
               {% else %}
-                <i onclick="checkoff(this)" class="fa fa-square"></i>
+                <a href="{% url 'lab4app:togglecheckout' book.id %}"><i class="fa fa-square"></i></a>
+                <!-- <i onclick="checkbox(this)" class="fa fa-square"></i> -->
               {% endif %}
             </div>
             <div class="card-body checkstat">
@@ -81,13 +83,18 @@
       {% endfor %}
     </div>
     <a href="{% url 'lab4app:logout' %}">logout</a>
-    <script type="text/javascript">
-      function checkon(x) {
-        x.classList.toggle("fa-square");
-      }
-      function checkoff(x) {
-        x.classList.toggle("fa-check-square");
-      }
-    </script>
+    <!-- <script type="text/javascript">
+      function checkbox(x) {
+        if (x.classList.contains('fa-check-square')) {
+          x.classList.remove('fa-check-square');
+          x.classList.add('fa-square');
+        }
+        else if (x.classList.contains('fa-square')) {
+          x.classList.remove('fa-square');
+          x.classList.add('fa-check-square');
+        }
+        else {
+        }
+    </script> -->
   </body>
 </html>

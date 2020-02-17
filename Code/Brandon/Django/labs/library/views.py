@@ -12,8 +12,9 @@ def index(request):
     context = {'books': books}
     return render(request,'library/index.html', context)
 
-def view_checked(request):
-    pass
+def view(request, selected):
+
+    book = Book.objects.get('')
 
 def register(request):
     username = request.POST['username']

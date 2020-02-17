@@ -1,0 +1,121 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #CB4332;
+    color: #FCEBCA;
+    font-family: 'Roboto', sans-serif;
+}
+
+.link{
+    text-align: right;
+}
+
+body{
+    background-color: #FCEBCA;
+}
+
+.content{  
+    padding: 10px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.bottom{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+footer{
+    padding: 20px;
+    /* position: fixed;
+    left: 0;
+    bottom: 0; */
+    background-color: #CB4332;
+    color: #FCEBCA;
+}
+
+a{
+    color: black;
+}
+
+header a{
+    border: 1px groove black;
+    border-radius: 8px;
+    padding: 10px 34px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+    color: #FCEBCA;
+    box-shadow: 5px 5px #a1a1a1;
+}
+
+header a:hover{
+    background-color: #a33729;
+}
+
+.pagelinks{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+
+}
+    
+.pagelinks a{
+    border: 1px groove black;
+    border-radius: 8px;
+    padding: 10px 34px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #CB4332;
+    box-shadow: 5px 5px #a1a1a1;
+    margin: 10px;
+}
+
+.pagelinks a:hover{
+    background-color: #CABCA2;
+}
+
+h3{
+    text-align: center;
+}
+
+table{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0 50px;
+    margin: 0 0 0 10px;
+    text-align: left;
+}
+
+.details tr th{
+    text-align: right;
+}
+
+.pagination{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.authors{
+    margin: 10px 0 50px;
+}
+
+.authors p{
+    text-align: center;
+    margin: 10px;
+}

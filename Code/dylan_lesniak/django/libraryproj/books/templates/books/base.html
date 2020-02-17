@@ -1,0 +1,27 @@
+{% load static %}
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'books/style.css' %}"/>
+</head>
+<body>
+     <header>
+        <h1>Portland Library</h1>
+        <div>
+            <a href="{% url 'books:index' %}">Home</a>
+            <a href="{% url 'books:title' %}">Books</a>
+            <a href="{% url 'books:author' %}">Authors</a>
+            <a href="{% url 'users:logout' %}" class="link">Logout</a>
+        </div>
+        
+    </header>
+    <h1>{% block title %}{% endblock %}</h1>
+    <hr/>
+    {% block content %}
+    {% endblock %}
+    <div class="bottom">
+        <hr/>
+        <footer>
+            (c) Dylan Incorporated, LLC. Inc.
+        </footer>
+    </div>
+</body>

@@ -14,13 +14,13 @@
       <!-- checks to see who's checked out the book by user -->
       Checked Out: {% if books.checked_out_by != None %}{{book.User}}{% else %}{{book.checked_out_by}}{% endif %}<br/><br/>
     {% endfor %}
-
-    <form action="" method="POST">
+    <!-- submit form to checkout view with checkout ID as param -->
+    <form action="{% url 'libraryapp:checkout' %}" method="POST">
       {% csrf_token %}
         <label for="unchecked_books">Choose a book:</label><br/>
           <select name="checkout">
         {% for checkout in available_books %}
-         <option value="{{checkout.title}}">{{checkout.title}} ({{checkout.id}})</option>
+         <option value="{{checkout.id}}">{{checkout.title}} ({{checkout.id}})</option>
          {% endfor %}
       </select>
       <button type="submit">Checkout</button>

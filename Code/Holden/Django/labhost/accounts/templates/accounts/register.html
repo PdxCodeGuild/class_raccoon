@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>register</title>
+
+    <style type="text/css">
+      form{
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Register</h1>
+    {% if message == 'invalid' %}
+    <p>The form submitted does not match with expected parameters, if you changed the site on your end please stop, if you did not, please report this issue to our support email.</p>
+    {% elif message == 'user_exists' %}
+    <p>This user already exists.</p>
+    {% endif %}
+    <form action="{% url 'accounts:save_user' %}{% if next %}next={{next}}{% endif %}" method="post">
+      {% csrf_token %}
+      <input id="userIn" type="text" name="username" value="" placeholder="username" required oninput="matchCheck()">
+      <input type="email" name="email" value="" placeholder="email">
+      <input id="password1" type="password" name="password" value="" placeholder="password" required oninput="matchCheck()">
+      <input id="password2" type="password" name="pass_check" value="" placeholder="password check" required oninput="matchCheck()">
+      <span id="noMatch"></span>
+      <span id="bugcheck"></span>
+      <button id="submitBtn" type="submit">register</button>
+    </form>
+    <a href="{% url 'accounts:login' %}">login</a>
+    <script type="text/javascript">
+      function matchCheck() {
+        var password1 = document.getElementById('password1').value;
+        var password2 = document.getElementById('password2').value;
+        if (password2 == '') {
+          passLenCheck();
+        } else if (password1 != password2) {
+          document.getElementById("submitBtn").disabled = true;
+          document.getElementById('password2').style.border = 'red';
+          document.getElementById("noMatch").innerHTML = '<p style="color:red">Passwords do not match</p>';
+        } else {
+          document.getElementById("noMatch").innerHTML = '';
+          document.getElementById('password2').style.border = '1px solid lightgrey';
+          passLenCheck();
+        }
+      }
+      function passLenCheck() {
+        var password= document.getElementById('password1').value;
+        var len = password.length;
+        var minlen = 8
+        var badpass= 'password'
+        var badpass2 = 'password123'
+        if (password== '') {
+          userLenCheck();
+        } else if (len < minlen) {
+          document.getElementById("submitBtn").disabled = true;
+          document.getElementById('password1').style.border = 'red';
+          document.getElementById("noMatch").innerHTML = '<p style="color:red">Password not long enough</p>';
+        } else if (password== badpass) {
+          document.getElementById("submitBtn").disabled = true;
+          document.getElementById("noMatch").innerHTML = '<p style="color:red">Really?</p>';
+          document.getElementById('password1').style.border = 'red';
+        } else {
+          document.getElementById("noMatch").innerHTML = '';
+          document.getElementById('password1').style.border = '1px solid lightgrey';
+          userLenCheck();
+        }
+      }
+      function userLenCheck() {
+        document.getElementById("noMatch").innerHTML = '<p style="color:red">ran ulenchk</p>';
+        var user = document.getElementById('userIn').value;
+        var len = user.length;
+        if (len < 6) {
+          document.getElementById("submitBtn").disabled = true;
+          document.getElementById("noMatch").innerHTML = '<p style="color:red">Username not long enough</p>';
+        } else {
+          document.getElementById("noMatch").innerHTML = '';
+          document.getElementById("submitBtn").disabled = false;
+        }
+      }
+
+    </script>
+  </body>
+</html>

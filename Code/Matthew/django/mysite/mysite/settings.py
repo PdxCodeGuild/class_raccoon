@@ -25,7 +25,7 @@ SECRET_KEY = '0d-46q2mb1ggop6r8n*a#v)qtj0qsii*n0yf@a&lb%yx7&hfd1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'lvh.me']
 
 
 # Application definition
@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'polls',
     'contacts',
+    'catapi',
+    'users',
+    'urlshortener',
+    'library'
 ]
 
 MIDDLEWARE = [
@@ -115,6 +119,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+LOGIN_URL = '/users/login/'
 
 
 # Static files (CSS, JavaScript, Images)

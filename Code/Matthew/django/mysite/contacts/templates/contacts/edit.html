@@ -2,7 +2,7 @@
 
 
 {% block content %}
-<form action="{% url 'contacts:saveeditedcontact' %}" method="post">
+<form action="{% url 'contacts:savecontact' %}" method="post">
   {% csrf_token %}
   <input type="hidden" name="contact_id" value="{{contact.id}}"/>
   <fieldset>
@@ -33,6 +33,10 @@
           <label for="">&nbsp;</label>
           <input class="button-primary" type="submit" value="Save">
 
+        </div>
+        <div class="column">
+          <label for="">&nbsp;</label>
+          <a href="{% url 'contacts:delete' contact.id %}" class="button" onclick="return confirm('Are you sure?')">Delete</a>
         </div>
         <div class="column">
           <label for="">&nbsp;</label>

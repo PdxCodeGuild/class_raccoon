@@ -1,0 +1,24 @@
+.main-bod{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    /* align-items: center; */
+    margin-top: 30px;
+
+}
+.card-bod{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.main-cards{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    background-color: grey;
+}
+.submit-card{
+    width: 300px;
+    height: 300px;
+}

@@ -1,0 +1,24 @@
+
+img {
+  width:100%;
+  text-align:center;
+}
+
+header {
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
+  align-items:center;
+  padding:30px;
+  text-align:center;
+}
+
+main {
+  max-width:800px;
+  margin:0 auto;
+}
+
+h1 {
+  margin: 0;
+  transform:translateY(-8px);
+}

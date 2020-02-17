@@ -19,7 +19,9 @@ from . import mainsite
 
 urlpatterns = [
     path('polls/', include('polls.urls')),
-    path('admin/', admin.site.urls),
+    path('admin/notrap/', admin.site.urls),
     path('', mainsite.index),
-    path('contacts/', include('contacts.urls'))
+    path('contacts/', include('contacts.urls')),
+    path('redir/', include('urlshortener.urls')),
+    path('accounts/', include('accounts.urls')),
 ]

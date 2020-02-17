@@ -10,7 +10,7 @@ urlpatterns = [
     path('<int:contact_id>/', views.detail, name='detail'),
     path('savecontact/', views.savecontact, name='savecontact'),
     path('edit/<int:contact_id>/', views.edit, name='edit'),
-    path('saveeditedcontact/', views.saveeditedcontact, name='saveeditedcontact')
+    path('delete/<int:contact_id>/', views.delete, name='delete'),
 ]
 
 

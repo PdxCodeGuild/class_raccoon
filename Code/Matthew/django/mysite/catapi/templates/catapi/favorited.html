@@ -1,0 +1,10 @@
+{% extends 'catapi/base.html' %}
+
+{% block title %}Favorited Cats{% endblock %}
+
+
+{% block content %}
+    {% for cat_image in cat_images %}
+    <a href="{% url 'catapi:detail' cat_image.id %}"><img src="{{cat_image.url}}"/></a>
+    {% endfor %}
+{% endblock %}

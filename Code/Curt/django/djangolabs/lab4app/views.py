@@ -8,11 +8,13 @@ import requests
 from . import secrets
 from .models import Author, Book
 
-@login_required(login_url='lab4app:login')
+@login_required()
 def index(request):
     books = Book.objects.all()
+    authors = Author.objects.all()
     context = {
-        'books': books
+        'books': books,
+        'authors': authors,
     }
     return render(request, 'lab4app/index.html', context)
 
@@ -71,10 +73,10 @@ def logout_user(request):
     logout(request)
     return HttpResponseRedirect(reverse('lab4app:login') + '?message=loggedout')
 
-@login_required(login_url='lab4app:login')
+@login_required()
 def home(request):
     return render(request, 'lab4app/home.html')
 
-@login_required(login_url='lab4app:login')
+@login_required()
 def profile(request):
     return render(request, 'lab4app/profile.html')

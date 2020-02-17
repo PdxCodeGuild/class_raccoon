@@ -6,16 +6,22 @@ from library.models import Book,Author
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        with open("/Desktop/class_raccoon/Code/Alex/django/mysite/library/management/commands/books.json", "r") as f:
+        with open("/Users/salamandersmith/Desktop/class_raccoon/Code/Alex/django/mysite/library/management/commands/books.json", "r") as f:
             books = json.loads(f.read())
         for book in books:
             author = book['author']
-            if not Author.objects.filter(author=author).exists():
-                author = Author(author=author)
+            if not Author.objects.filter(name=author).exists():
+                author = Author(name=author)
                 author.save()
             else:
-               author = Author.objects.get(author=author)
+               author = Author.objects.get(name=author)
+            #print(f"Author: {author.name}")
             title = book['title']
+            #print(f"Title: {title}")
             year_published = book['year']
-            book = Book(title=title, year_published=year_published,author=author)
+            #print(f"Year: {year_published}")
+            book = Book(title=title, year_published=year_published)
             book.save()
+            book.authors.add(author)
+            #print("Saving book")
+

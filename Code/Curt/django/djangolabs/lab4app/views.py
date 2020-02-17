@@ -10,7 +10,11 @@ from .models import Author, Book
 
 @login_required(login_url='lab4app:login')
 def index(request):
-    return render(request, 'lab4app/index.html')
+    books = Book.objects.all()
+    context = {
+        'books': books
+    }
+    return render(request, 'lab4app/index.html', context)
 
 def register(request):
     return render(request, 'lab4app/register.html')

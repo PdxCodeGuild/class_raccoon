@@ -2,9 +2,81 @@
 <html lang="" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Miligram CSS -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css">
+
+    <title>URL INDEX</title>
+    <style type="text/css">
+      * {
+        max-width: : 600px;
+        margin: 0 auto;
+        padding: 10px;
+      }
+      .button-small {
+        font-size: .8rem;
+        height: 2.8rem;
+        line-height: 2.8rem;
+        padding: 0 1.5rem;
+      }
+    </style>
   </head>
   <body>
- {{urlshort}}
-  </body>
-</html>
+<h1>URL SHORT INDEX </h1>
+
+    <form action="{% url 'urlshorten:createurl' %}" method="post">
+  {% csrf_token %}
+      <fieldset>
+        <div class="container">
+          <div class="row">
+            <div class="column">
+              <label for="user_name">Site Name</label>
+              <input type="text" placeholder="User Name" id="user" name="user">
+            </div>
+            <div class="column">
+              <label for="urltoshort">URL</label>
+              <input type="text" placeholder="URL" id="urltoshort" max="" name="urltoshort">
+            </div>
+            <div class="column">
+              <label for="">&nbsp;</label>
+              <input class="button-primary" type="submit" value="Save">
+            </div>
+          </div>
+        </div>
+
+      </fieldset>
+    </form>
+    <div class="container">
+
+        <!-- table start -->
+        <table>
+          <thead>
+            <tr>
+              <th>Site Name</th>
+              <th>Code</th>
+              <th>URL</th>
+              <th>Counter</th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in urlshort %}
+            <tr>
+
+              <td>{{data.id}} {{ data.user }}</td>
+              <!-- url shorten:visit goes to visit function and post ID or anything from database with print statement -->
+              <td><a href="{% url 'urlshorten:visit' data.id %}">{{ data.code }}</a></td>
+              <td>{{ data.urltoshort }}</td>
+              <td>{{ data.counter }}</td>
+              <td></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+
+      </div>
+    </body>
+  </html>

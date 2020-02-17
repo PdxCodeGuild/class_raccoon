@@ -39,7 +39,7 @@
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Site URL: {{url.site_url}}</li>
-          <li class="list-group-item">Short Key: {{url.short_url}}</li>
+          <li class="list-group-item">Short Key: <a href="{% url 'shorts:visit' url.short_url %}">{{url.short_url}}</a></li>
           <li class="list-group-item">Times visited: {{url.clicks}} </li>
           <li class="list-group-item"><a href="{% url 'shorts:delete' url.id %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Delete</a></li>
         </ul>

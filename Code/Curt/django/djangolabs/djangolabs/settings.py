@@ -25,13 +25,15 @@ SECRET_KEY = '^xdt7^87xjm*z3oqy0tz+35sftrp4@82v2l%#e3cku7u0a316h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['lvh.me', 'localhost']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'lab2app',
+    'lab3app',
+    'lab4app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

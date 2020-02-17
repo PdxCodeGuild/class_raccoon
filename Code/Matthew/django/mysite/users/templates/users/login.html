@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <title></title>
+  </head>
+  <body>
+    {% if message == 'failure' %}
+    <h3 style="color:red">That username and password do not match</h3>
+    {% elif message == 'loggedout' %}
+    <h3 style="color:blue">Successfully logged out</h3>
+    {% elif message == 'invalid_recaptcha' %}
+    <h3 style="color:yellow">Invalid reCAPTCHA</h3>
+    {% endif %}
+    <h1>Login</h1>
+    <form action="{% url 'users:login_user' %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{next}}"/>
+      <input type="text" name="username" value="" placeholder="username">
+      <input type="password" name="password" value="" placeholder="password">
+      <div class="g-recaptcha" data-sitekey="6LfLr9gUAAAAAJGyJjUrrPvCqCt2E2BG72wJ7ATg"></div>
+      <button type="submit">login</button>
+    </form>
+    <a href="{% url 'users:register' %}">register</a>
+
+
+  </body>
+</html>

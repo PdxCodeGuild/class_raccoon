@@ -1,6 +1,9 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.template import loader
+from django.shortcuts import render, reverse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
 from .models import Book, Author
 
 # Create your views here.
@@ -13,10 +16,27 @@ def view_checked(request):
     pass
 
 def register(request):
-    pass
+    username = request.POST['username']
+    email = request.POST['email']
+    password = request.POST['password']
+    user = User.objects.create_user(username, email, password)
+    login(request, user)
+
+    return HttpResponseRedirect(reverse('lab4app:home'))
 
 def login(request):
-    pass
+    username = request.POST['username']
+    password = request.POST['password']
+
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        if next != '':
+            return HttpResponseRedirect(next)
+        return HttpResponseRedirect(reverse('lab4app:home'))
+    if next == '':
+        return HttpResponseRedirect(reverse('library:login') + '?message=failure')
+    return HttpResponseRedirect(reverse('lab4app:login') + '?message=failure&next='+next)
 
 def logout(request):
     pass

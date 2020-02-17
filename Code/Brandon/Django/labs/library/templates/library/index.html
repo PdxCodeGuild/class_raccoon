@@ -41,15 +41,22 @@
       </nav>
     <!-- navbar----- -->
     <div class="main-contain">
+      <div class="hero">
     <div class="searchbar">
         <form>
             <div class="form-group search-inside">
               <label for="exampleInputEmail1">Search by Title or Author:</label>
               <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <select class="custom-select mr-sm-4 selector-search" id="inlineFormCustomSelect">
+                <option selected>Choose...</option>
+                <option value="1">Author</option>
+                <option value="2">Title</option>
+              </select>
+              <button type="submit" class="btn btn-primary">Search</button>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+        </form>
     </div>
+  </div>
     <div class="card-contain">
     {% for book in books %}
     <div class="card card-bod card-cust" style="width: 18rem;">
@@ -60,12 +67,14 @@
           <li class="list-group-item">Author(s): {{book.author}} </li>
           <li class="list-group-item">Year Published: {{book.year_published}} </li>
         </ul>
-    </div>
-    {% endfor %}
-    </div>
-</div>
-</body>
-</html>
+      </div>
+      <button type="button" class="btn btn-secondary btn-sm">Check Out</button>
+      {% endfor %}
+      </div>
+  </div>
+  </body>
+  </html>
+
         
 
 

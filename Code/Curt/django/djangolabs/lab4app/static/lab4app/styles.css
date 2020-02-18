@@ -1,0 +1,42 @@
+body{
+}
+
+.card_contain{
+  top: 0;
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  overflow: scroll;
+  height: 80vh;
+}
+
+.customcard{
+  margin-top: 30px;
+}
+
+
+.card-body:first-child {
+  padding-bottom: 0;
+}
+
+.containcheck{
+  display: flex;
+  flex-flow: row;
+}
+
+.checkstat{
+  padding: 0;
+}
+
+.fa {
+  font-size: 30px;
+  cursor: pointer;
+  user-select: none;
+  color: gray !important;
+}
+
+.fa:hover {
+  color: darkblue;
+}

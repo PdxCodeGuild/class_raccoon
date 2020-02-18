@@ -1,12 +1,46 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>{{ message }}</h1>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="{% static 'library/styles.css' %}">
+        <title>Library</title>
+    </head>
+    <body>
+        <h1>Library - Book Check Out</h1>
+        <form class="checked_out" action="{% url 'library:checked_out' %}" method="post">
+            <select name="book_id">
+                {% for book in books %}
+                    {% if not book.checked_out_by %}
+                        <option value="{{ book.id }}">{{ book.title }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            {% csrf_token %}
+            <button type="submit" name="">Check Out</button>
+        </form>
+        <table style="width:100%">
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Checked Out</th>
+            </tr>
+            {% for book in books %}
+            <tr>
+                <td><a href="{% url 'library:detail' book.id %}">{{ book }}</a></td>
+                {% for author in book.authors.all %}
+                    <td>{{author.name}}</td>
+                {% endfor %}
+                {% if book.checked_out_by %}
+                    <td>Unavailable</td>
+                {% endif %}
+                {% if not book.checked_out_by %}
+                    <td>Available</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
 </html>

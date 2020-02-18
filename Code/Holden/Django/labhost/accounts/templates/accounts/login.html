@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    {% if message == 'failure' %}
+    <h3 style="color:red">That username and password do not match</h3>
+    {% elif message == 'loggedout' %}
+    <h3 style="color:blue">Successfully logged out</h3>
+    {% endif %}
+    <h1>Login</h1>
+    <form action="{% url 'accounts:login_user' %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{next}}"/>
+      <input type="text" name="username" value="" placeholder="username">
+      <input type="password" name="password" value="" placeholder="password">
+      <button type="submit">login</button>
+    </form>
+    <a href="{% url 'accounts:register' %}">register</a>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'books/style.css' %}" />
+    <title></title>
+  </head>
+  <body>
+    {{user.username}}<br>{{user.email}}
+    <a href="{% url 'users:logout' %}">logout</a>
+  </body>
+</html>

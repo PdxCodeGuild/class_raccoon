@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <!-- boostrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <style type="text/css">
+      * {
+        max-width: 800px;
+        padding: 10px;
+        margin:0 auto;
+      }
+    </style>
+    <title></title>
+  </head>
+  <body>
+    <h1>Library Index</h1>
+    
+    <!-- listing all the books in the data -->
+    {% for book in books_data %}
+      Database ID: {{book.id}}<br/>
+      Book Title: <a href="{% url 'libraryapp:checkin' book.id %}">{{book.title}}</a><br/>
+      Book Author: {{book.author}}<br/>
+      Book Date: {{book.publish_date}}<br/>
+      <!-- checks to see who's checked out the book by user -->
+      Checked Out: {% if books.checked_out_by != None %}{{book.User}}{% else %}{{book.checked_out_by}}{% endif %}
+      <br/><br/>
+    {% endfor %}
+    <!-- submit form to checkout view with checkout ID as param -->
+    <form action="{% url 'libraryapp:checkout' %}" method="POST">
+      {% csrf_token %}
+        <label for="unchecked_books">Choose a book:</label><br/>
+          <select name="checkout">
+          {% for checkout in available_books %}
+          <option value="{{checkout.id}}">{{checkout.title}} ({{checkout.id}})</option>
+         {% endfor %}
+      </select>
+      <button type="submit" class="btn btn-primary">Checkout</button>
+    </form>
+  </body>
+</html>

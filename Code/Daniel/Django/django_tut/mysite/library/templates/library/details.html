@@ -1,0 +1,29 @@
+
+{% extends 'library/base.html'%}
+{% block content %}
+
+
+    <H1>{{user}}'s Books:</H1>
+    <div class="bigoldiv">
+    {% for book in books %}
+    <div class="col s12 m7">
+        <h3 class="header">{{book.title}}</h3>
+        <div class="card horizontal">
+          <div class="card-image">
+            <img src=>
+          </div>
+          <div class="card-stacked">
+            <div class="card-content">
+              <p>Author: {{book.author.author}}</p>
+            </div>
+            <div class="card-action">
+              <a href="{% url 'library:checkin' book.id %}">RETURN THE CHILD</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+
+{% endblock %}
+    
+</div>

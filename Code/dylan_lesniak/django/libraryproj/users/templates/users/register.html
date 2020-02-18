@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'books/style.css' %}" />
+    <title></title>
+  </head>
+  <body>
+    {% if message == 'exists' %}
+        <h3 style="color:red">Username already exists.</h3>
+    {% endif %}
+    <h1>Register</h1>
+    <form action="{% url 'users:register_user' %}" method="post">
+      {% csrf_token %}
+      <input type="text" name="username" value="" placeholder="username" required>
+      <input type="email" name="email" value="" placeholder="email" required>
+      <input type="password" name="password" value="" placeholder="password" required>
+      <button type="submit">register</button>
+    </form>
+    <a href="{% url 'users:login' %}">login</a>
+  </body>
+</html>

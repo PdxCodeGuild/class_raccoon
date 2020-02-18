@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'contacts',
     'urlshortener',
+    'accounts',
 ]
 
 MIDDLEWARE = [

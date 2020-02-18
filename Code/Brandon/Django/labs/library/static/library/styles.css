@@ -1,0 +1,75 @@
+body {
+    font-family: 'Ubuntu', sans-serif;
+
+
+}
+.main-contain{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-cust{
+    height: 300px;
+    width: 200px;
+    text-align: center;
+    margin: 20px;
+    transition: all .2s ease-in-out;
+}
+.card-cust:hover{
+    transform: scale(1.3);
+}
+.card-contain{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    overflow: scroll;
+    height: 100vh;
+    width: 75%;
+    
+}
+.search-bar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    
+
+
+}
+.hero{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 200px;
+    background-color: #c9c9c9;
+}
+.search-inside{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 900px;
+    margin-top: 70px !important;
+    padding-bottom: 20px;
+
+
+}
+.selector-search{
+    width: 100px !important;
+}
+nav img {
+    height: 40px;
+    width: 40px;
+    border-radius: 100px;
+}
+.title{
+    padding-top: 40px;
+    margin-top: 30px;
+}
+

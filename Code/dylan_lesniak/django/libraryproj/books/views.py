@@ -2,6 +2,7 @@ from django.shortcuts import render, reverse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.core.paginator import Paginator
+from django.utils import timezone
 from . import models
 import random
 
@@ -14,9 +15,10 @@ def index(request):
 def title(request):
 
     all_books = models.Book.objects.order_by('title')
-    for book in all_books:
-        if not book.checked_out_by:
-            available_books.append(book)
+
+    # for book in all_books:
+    #     if not book.checked_out_by:
+    #         available_books.append(book)
 
     paginator = Paginator(all_books, 10)
     page_number = request.GET.get('page')
@@ -24,7 +26,6 @@ def title(request):
 
     context = {
         'available_books_obj': available_books_obj
-
     }
     return render(request, 'books/title.html', context)
 
@@ -62,3 +63,12 @@ def book_details(request, book_id):
     }
     
     return render(request, 'books/book_details.html', context)
+
+@login_required
+def checkout(request, book_id):
+    user = request.user
+    book = models.Book.objects.get(id=book_id)
+    checkout_time = timezone.now()
+    new_check = models.BookCheckout(checked_out_by=user, book=book, checkout_date=checkout_time)
+    new_check.save()
+    return HttpResponseRedirect(reverse('books:title'))

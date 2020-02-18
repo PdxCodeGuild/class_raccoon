@@ -7,7 +7,7 @@
             <tr>
                 <th>Book Title</th>
                 <th>Author</th>
-                <th></th>
+                <th>Checked Out By</th>
             </tr>
             {% for book in available_books_obj %}
                 <tr>
@@ -17,7 +17,13 @@
                             <a href="{% url 'books:author_details' author.name %}">{{author.name}}</a>{% if not forloop.last %}, {% endif %}
                         {%endfor%}
                     </td>
-                    <td></td>
+                    <td>
+                        {% if not book.checked_out_by == None %}
+                            {{book.checked_out_by}}
+                        {% else %}
+                            <a href="{% url 'books:checkout' book.id'">Checkout</a>
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
         </table> 

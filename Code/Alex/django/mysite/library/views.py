@@ -52,3 +52,4 @@ def checked_in(request, book_id):
 
         return redirect(reverse('library:index'))
     return redirect(reverse('library:detail', kwargs={'book_id':book_id}))
+

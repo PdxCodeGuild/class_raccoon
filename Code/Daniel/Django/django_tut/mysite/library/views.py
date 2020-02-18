@@ -20,6 +20,20 @@ def index(request):
     }
     return render(request, 'library/index.html', context)
 
+def bookinfo(request, bookid):
+    print("Here's your nerd stuff, nerd")
+
+    book = Books.objects.get(id=bookid)
+    records = list(book.records.all())
+    author = Author.objects.all()
+
+    context = {
+        'book':book,
+        'records':records,
+        'author':author,
+    }
+    return render(request, 'library/bookinfo.html', context)
+
 @login_required
 def checkout(request, bookid):
     print("You checked out a book, good job nerd")

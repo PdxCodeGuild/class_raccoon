@@ -85,20 +85,32 @@ header a:hover{
 }
 
 .pagelinks a:hover{
-    background-color: #CABCA2;
+    background-color: #fbe2b2;
 }
 
 h3{
     text-align: center;
+    padding: 10px;
 }
 
 table{
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 0 50px;
+    padding: 10px 0 25px;
     margin: 0 0 0 10px;
     text-align: left;
+}
+
+
+.user_table *{
+    align-items: left;
+    justify-content: left;
+    text-align: left;
+}
+
+th, td{
+    padding: 15px;
 }
 
 .details tr th{
@@ -112,10 +124,28 @@ table{
 }
 
 .authors{
-    margin: 10px 0 50px;
+    margin: 10px 0 25px;
 }
 
 .authors p{
     text-align: center;
+    padding: 15px;
+}
+
+button {
+    background-color: #FCEBCA;
+    border: 1px groove black;
+    border-radius: 8px;
+    padding: 10px 34px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #CB4332;
+    box-shadow: 5px 5px #a1a1a1;
     margin: 10px;
+}
+
+button:hover {
+    background-color: #fbe2b2;
 }

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Create your models here.
 class Author(models.Model):
@@ -19,10 +20,23 @@ class Book(models.Model):
     # checked_out_by = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
 
     def checked_out_by(self):
-        checkouts = self.checkouts.filter(checkin_date__isnull=True)
+        checkouts = self.checkouts.filter(checkin_date__isnull=True) #gives us any checkouts that haven't been turned in yet. 
         if checkouts.exists():
             return checkouts[0].checked_out_by
         return None 
+
+    def checkout_date(self):
+        checkouts = self.checkouts.filter(checkin_date__isnull=True)
+        if checkouts.exists():
+            return checkouts[0].checkout_date
+        return None
+
+    def checkin(self):
+        checkouts = self.checkouts.filter(checkin_date__isnull=True)
+        checkout = checkouts[0]
+        checkout.checkin_date = timezone.now()
+        checkout.save()
+        
 
 
     class Meta:

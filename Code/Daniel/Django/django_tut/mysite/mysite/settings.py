@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'polls.apps.PollsConfig',
     'contactslab',
+    'urlshort',
+    'library',
+    'users',
     
 ]
 

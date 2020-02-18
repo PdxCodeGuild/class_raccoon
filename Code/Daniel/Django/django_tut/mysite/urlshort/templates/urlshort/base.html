@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Shorturl {% endblock %}</title>
+    <!-- Materialize-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body{
+            background-color: #78909c;
+        }
+        .bigoldiv{
+            max-width: 80vw;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .inputform{
+            width: 100vw;
+            background-color: #78909c;
+            z-index: 999;
+            margin: 0 auto;
+            position: fixed;
+            top: 0;
+            
+        }
+
+        .input{
+            max-width: 80vw;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header{
+            max-width: 80vw;
+            margin: 0 auto;
+        }
+        .blocker{
+            height: 300px;
+        }
+
+        .card horizontal hoverable{
+            color: #E3E3FF;
+        }
+    </style>
+</head>
+<body>
+    
+
+    {% block content %}
+    
+    {% endblock %}
+    
+</body>
+</html>

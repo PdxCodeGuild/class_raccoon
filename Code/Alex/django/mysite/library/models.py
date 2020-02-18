@@ -14,6 +14,13 @@ class Book(models.Model):
     authors = models.ManyToManyField(Author, related_name='books')
     checked_out_by = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
 
+    # def checked_out_by(self):
+    #     checkout = self.bookscheckedout_set.filter(checkin_date__isnull=True)
+    #     if checkout.exists():
+    #         return checkout[0].checked_out_by
+    #     return None
+
+
     def __str__(self):
         return '\"' + self.title + '\"' + ' by ' + ', '.join([author.name for author in self.authors.all()])
 

@@ -2,6 +2,7 @@ from django.shortcuts import render, reverse, redirect
 from .models import Author, Book, BooksCheckedOut
 import datetime
 from django.utils import timezone
+from django.http import HttpResponseRedirect
 
 
 def index(request):
@@ -41,11 +42,13 @@ def detail(request, book_id):
 
 def checked_in(request, book_id):
     book = Book.objects.get(id=book_id)
-    book.checked_out_by = None
-    book.save()
-    books_checked_out = list(BooksCheckedOut.objects.all().filter(book=book))[-1]
-    print(books_checked_out)
-    books_checked_out.checkin_date = timezone.now()
-    books_checked_out.save()
+    if book.checked_out_by:
+        book.checked_out_by = None
+        book.save()
+        books_checked_out = list(BooksCheckedOut.objects.all().filter(book=book))[-1]
+        print(books_checked_out)
+        books_checked_out.checkin_date = timezone.now()
+        books_checked_out.save()
 
-    return redirect(reverse('library:index'))
+        return redirect(reverse('library:index'))
+    return redirect(reverse('library:detail', kwargs={'book_id':book_id}))

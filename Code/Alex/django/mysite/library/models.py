@@ -13,6 +13,10 @@ class Book(models.Model):
     year_published = models.IntegerField()
     authors = models.ManyToManyField(Author, related_name='books')
     checked_out_by = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
+    pages = models.IntegerField()
+    country = models.CharField(max_length=50)
+    language = models.CharField(max_length=50)
+    link = models.TextField()
 
     # def checked_out_by(self):
     #     checkout = self.bookscheckedout_set.filter(checkin_date__isnull=True)

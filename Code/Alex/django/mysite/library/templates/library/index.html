@@ -29,7 +29,7 @@
             </tr>
             {% for book in books %}
             <tr>
-                <td><li><a href="{% url 'library:detail' book.id %}">{{ book }}</a></li></td>
+                <td><a href="{% url 'library:detail' book.id %}">{{ book }}</a></td>
                 {% for author in book.authors.all %}
                     <td>{{author.name}}</td>
                 {% endfor %}

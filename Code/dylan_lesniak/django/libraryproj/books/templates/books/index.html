@@ -1,0 +1,12 @@
+{% extends 'books/base.html' %}
+
+{% block content %}
+<div class="content">
+    <h3>Please select how you would like to view books:</h3>
+    <div class="pagelinks">
+        <a href="{% url 'books:title' %}">By Title</a>
+        <a href="{% url 'books:author' %}"">By Author</a>
+    </div>
+</div>
+
+{% endblock %}

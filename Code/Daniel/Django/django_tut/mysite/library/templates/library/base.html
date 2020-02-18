@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
+    <title>Home</title>
+
+    <style>
+        .bigoldiv{
+          margin: 0 auto;
+          display: flex;
+          max-width: 80vw;
+        }
+        .books{
+            display: flex;
+            flex-direction: column;
+            
+            
+        }
+        .checkout{
+          text-decoration: line-through;
+          color:#FFAB40;}
+    </style>
+</head>
+<body>
+
+    <div class="navbar-fixed">
+        <nav>
+          <div class="nav-wrapper">
+            <a href='{% url "library:index" %}' class="brand-logo">Fake Library</a>
+            <ul class="right hide-on-med-and-down">
+                {% if user.is_anonymous %}
+            <li><a href='{% url "users:login" %}'>Login</a></li>
+            <li><a href='{% url "users:register" %}'>Create User</a></li>
+                {% else %}
+            <li><a href='{% url "library:mybooks" %}'>Profile</a></li>
+            <li><a href='{% url "users:logout" %}'>Logout</a></li>
+                {% endif %}
+              
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      {% block content %}
+      {% endblock %}
+    </body>
+    </html>

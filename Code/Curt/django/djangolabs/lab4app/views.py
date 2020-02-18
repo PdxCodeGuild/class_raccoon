@@ -6,11 +6,33 @@ from django.contrib.auth.decorators import login_required
 import requests
 
 from . import secrets
-from .models import Author, Book
+from .models import Author, Book, Checkout
 
-@login_required(login_url='lab4app:login')
+@login_required()
 def index(request):
-    return render(request, 'lab4app/index.html')
+    books = Book.objects.all()
+    authors = Author.objects.all()
+    context = {
+        'books': books,
+        'authors': authors,
+    }
+    return render(request, 'lab4app/index.html', context)
+
+@login_required()
+def togglecheckout(request, book_id):
+    book = Book.objects.get(id=book_id)
+    checkouts = book.checkouts.filter(checked_out=True)
+    if checkouts.exists(): # check back in
+        checkout = checkouts[0]
+        if checkout.checked_by == request.user:
+            checkout.checked_out = False
+            checkout.save()
+    else: # check out
+        # create a new checkout, and save it
+        checkout = Checkout(checked_out = True, book=book, checked_by = request.user)
+        checkout.save()
+
+    return HttpResponseRedirect(reverse('lab4app:index'))
 
 def register(request):
     return render(request, 'lab4app/register.html')
@@ -67,10 +89,10 @@ def logout_user(request):
     logout(request)
     return HttpResponseRedirect(reverse('lab4app:login') + '?message=loggedout')
 
-@login_required(login_url='lab4app:login')
+@login_required()
 def home(request):
     return render(request, 'lab4app/home.html')
 
-@login_required(login_url='lab4app:login')
+@login_required()
 def profile(request):
     return render(request, 'lab4app/profile.html')

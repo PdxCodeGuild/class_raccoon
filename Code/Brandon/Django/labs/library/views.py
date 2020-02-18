@@ -13,13 +13,18 @@ def index(request):
     return render(request,'library/index.html', context)
 
 @login_required
-def view(request, selected):
-#    request.user.book_checkouts.all()
-    request.user.book_checkouts.filter(checkin_date__isnull=True)
+def view(request):
+##   request.user.book_checkouts.all()
+    books = BookCheckout.objects.all().filter(checked_out_by = request.user)
+    context={
+        'books':books
+    }
+
+    return render(request,'library/view.html',context)
 
 
 
-    book = Book.objects.get('')
+
 
 def register(request):
     if request.method == 'GET':

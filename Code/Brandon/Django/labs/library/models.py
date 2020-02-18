@@ -24,8 +24,8 @@ class BookCheckout(models.Model):
     checkout_date = models.DateTimeField()
     checkin_date = models.DateTimeField(null=True, blank=True, default=None)
 
-    def __str__(self):
-        return self.book + ' ' + self.checked_out_by
+#    def __str__(self):
+#        return self.
 
 
     

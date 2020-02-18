@@ -2,7 +2,7 @@
 
 
 {% block content %}
-<form action="{% url 'contacts:saveeditedcontact' %}" method="post">
+<form action="{% url 'contacts:savecontact' %}" method="post">
   {% csrf_token %}
   <input type="hidden" name="contact_id" value="{{contact.id}}"/>
   <fieldset>

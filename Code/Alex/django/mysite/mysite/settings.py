@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'contacts',
     'urlshortener',
+    'library',
+    'users',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,33 @@
+{% extends 'books/base.html' %}
+
+{% block content %}
+<div class="content">
+    <div class="authors">
+        <h3>Authors</h3>
+        {% for author in author_obj %}
+            <p><a href="{% url 'books:author_details' author.name %}">{{author.name}}</a></p>
+        {% endfor %}
+    </div>
+
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if author_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ author_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ author_obj.number }} of {{ author_obj.paginator.num_pages }}.
+            </span>
+
+            {% if author_obj.has_next %}
+            <a href="?page={{ author_obj.next_page_number }}">next</a>
+            <a href="?page={{ author_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+</div>
+
+{% endblock %}

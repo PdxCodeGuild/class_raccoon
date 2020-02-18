@@ -21,4 +21,5 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
     path('contactsapp/', include('contactsapp.urls')),
     path('urlshorten/', include('urlshorten.urls')),
+    path('libraryapp/', include('libraryapp.urls'))
 ]

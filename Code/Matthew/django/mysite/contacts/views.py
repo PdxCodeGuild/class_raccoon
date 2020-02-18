@@ -21,6 +21,7 @@ def detail(request, contact_id):
 def savecontact(request):
     # print(request.POST)
 
+    contact_id = request.POST.get('contact_id', '')
     first_name = request.POST['first_name']
     last_name = request.POST['last_name']
     birthday = request.POST['birthday']
@@ -36,31 +37,20 @@ def savecontact(request):
 
     birthday = datetime.datetime.strptime(birthday, '%Y-%m-%d').date() # this line is optional :O
 
-    new_contact = Contact(first_name=first_name, last_name=last_name, birthday=birthday, phone_number=phone_number, comments=comments)
-    new_contact.save()
-    return HttpResponseRedirect(reverse('contacts:index'))
-
-def saveeditedcontact(request):
-    # print(request.POST)
-    contact_id = request.POST['contact_id']
-    first_name = request.POST['first_name']
-    last_name = request.POST['last_name']
-    birthday = request.POST['birthday']
-    phone_number = request.POST['phone_number']
-    comments = request.POST['comments']
-
-    birthday = datetime.datetime.strptime(birthday, '%Y-%m-%d').date() # this line is optional :O
-
-    contact = Contact.objects.get(id=contact_id)
-    contact.first_name = first_name
-    contact.last_name = last_name
-    contact.birthday = birthday
-    contact.phone_number = phone_number
-    contact.comments = comments
-
-    contact.save()
+    if contact_id == '':
+        new_contact = Contact(first_name=first_name, last_name=last_name, birthday=birthday, phone_number=phone_number, comments=comments)
+        new_contact.save()
+    else:
+        contact = Contact.objects.get(id=contact_id)
+        contact.first_name = first_name
+        contact.last_name = last_name
+        contact.birthday = birthday
+        contact.phone_number = phone_number
+        contact.comments = comments
+        contact.save()
 
     return HttpResponseRedirect(reverse('contacts:index'))
+
 
 
 def edit(request, contact_id):

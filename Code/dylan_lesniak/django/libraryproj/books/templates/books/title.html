@@ -1,0 +1,47 @@
+{% extends 'books/base.html' %}
+
+{% block content %}
+<div class="content">
+    <div>
+        <table>   
+            <tr>
+                <th>Book Title</th>
+                <th>Author</th>
+                <th></th>
+            </tr>
+            {% for book in available_books_obj %}
+                <tr>
+                    <td><a href="{% url 'books:book_details' book.id %}">{{book.title | truncatechars:40}}</a></td>
+                    <td>
+                        {%for author in book.authors.all %}
+                            <a href="{% url 'books:author_details' author.name %}">{{author.name}}</a>{% if not forloop.last %}, {% endif %}
+                        {%endfor%}
+                    </td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+        </table> 
+    </div>
+
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if available_books_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ available_books_obj.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ available_books_obj.number }} of {{ available_books_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if available_books_obj.has_next %}
+            <a href="?page={{ available_books_obj.next_page_number }}">next</a>
+            <a href="?page={{ available_books_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    
+</div>
+
+{% endblock %}

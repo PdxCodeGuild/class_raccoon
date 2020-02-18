@@ -9,7 +9,7 @@ Let's create an application for representing a library. You should have two mode
   - title (string)
   - publish date (datetime)
   - author (foreign key)
-  - checked out (boolean)
+  - checked_out_by (nullable foreign key to User)
 - Author
   - name (string)
 
@@ -24,7 +24,7 @@ Let's create an application for representing a library. You should have two mode
 Add another model to keep track of who checked out a book and when. When a user checks a book back in, record that too. Add a text input on the 'checkout' page to record the name of who checked out the book. When a book is checked out, add a row to this table with the checkin date equal to null. When the book is checked back in, set the checkin date.
 
 - BookCheckout
-  - name (string, who checked it out)
+  - checked_out_by (foreign key to User, who checked it out)
   - book (foreign key)
   - checkout date (datetime)
   - checkin date (datetime, null until checked back in)

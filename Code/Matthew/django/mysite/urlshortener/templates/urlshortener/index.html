@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Welcome {{user.username}}</h1>
+    <a href="{% url 'users:logout' %}">logout</a>
+    <form action="{% url 'urlshortener:shorten' %}" method="post">
+      {% csrf_token %}
+      <input type="text" name="url" placeholder="url"/>
+      <button type="submit">shorten</button>
+    </form>
+    <table>
+      <tr>
+        <td>Link</td>
+        <td>Detail</td>
+        <td>Counter</td>
+        <td>Code</td>
+        <td>Url</td>
+      </tr>
+      {% for urlredirect in urlredirects %}
+      <tr>
+        <td><a href="{% url 'urlshortener:redirect' urlredirect.code %}">link</a></td>
+        <td><a href="{% url 'urlshortener:detail' urlredirect.id %}">detail</a></td>
+        <td>{{urlredirect.counter}}</td>
+        <td>{{urlredirect.code}}</td>
+        <td>{{urlredirect.url | truncatechars:20 }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

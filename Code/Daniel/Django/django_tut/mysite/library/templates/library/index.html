@@ -1,0 +1,33 @@
+{% extends 'library/base.html'%}
+{% block content %}
+<div class="bigoldiv">  
+<div class=books>
+    <h1>Books:</h1>
+    {% for book in books %}
+    <div class="col s12 m7">
+        <h3 class="header">{{book.title}}</h3>
+        <div class="card horizontal">
+          <div class="card-image">
+            <img src=>
+          </div>
+          <div class="card-stacked">
+            <div class="card-content">
+              <p>Author: {{book.author.author}}</p>
+            </div>
+            {% if book.checked_out %}
+            <div class="card-action">
+              <p class="checkout" disabled href="#">CHECK OUT</p>
+            </div>
+            {% else %}
+            <div class="card-action">
+              <a href="{% url 'library:checkout' book.id %}">Check Out</a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+
+</div> 
+{% endblock %}

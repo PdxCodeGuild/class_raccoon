@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'contactslab',
     'urlshort',
+    'library',
+    'users',
     
 ]
 

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab01</title>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
+
+
+    <style>
+        .bigdiv{
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            padding: 100px;
+        }
+        .rps{
+            display: flex;
+            flex-direction: column;
+            max-width: 80vw;
+            margin: 0 auto;
+            padding: 50px;
+        }
+        .buttons{
+            display: flex;
+            padding: 10px;
+        }
+        .eight_ball{
+            display: flex;
+            max-width: 80vw;
+            margin: 0 auto;
+            padding: 50px;
+            align-items: baseline;
+            flex-direction: column;
+        }
+        .eightball_selector{
+            display: flex;
+        }
+        .emoticon{
+            margin: 0 auto;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="bigdiv">
+    <!-- Rock paper scissors -->
+    <div class="rps">
+        <div class="buttons">
+        <label>
+        <input class="with-gap" name="rps_choice" type="radio" value="rock" />
+        <span>Rock</span>
+      </label>
+      <label>
+        <input class="with-gap" name="rps_choice" type="radio" value="paper" />
+        <span>Paper</span>
+      </label>
+      <label>
+        <input class="with-gap" name="rps_choice" type="radio" value="scissors" />
+        <span>Scissors</span>
+      </label>
+        
+        </div>
+    <button class="waves-effect waves-light btn" id="run">Shoot</button>
+    <h4><div class="rep_result" id="output_div"> &nbsp;</div></h4>
+    
+    <script type="text/javascript">
+        let user_choice = document.querySelector('#rps_choice');
+        let choices = ['rock', 'paper', 'scissors']
+        let comp_value = ''
+        let comp_choice = ''
+        let run = document.querySelector('#run');
+        let output_div = document.querySelector('#output_div')
+    
+    
+        function getSelectedRadioButton(name){
+            let radios = document.getElementsByName(name)
+            for(let i = 0; i < radios.length; ++i){
+                if(radios[i].checked){
+                    return radios[i].value
+                }
+    
+            }
+            return null
+        }
+    
+        run.onclick = function() {
+            let user_choice = getSelectedRadioButton('rps_choice')
+            let comp_value = Math.floor(Math.random()*choices.length)
+            let comp_choice = choices[comp_value]
+            if (comp_choice == user_choice){
+                output_div.innerText = 'Tie'
+            }
+            else if(user_choice == 'rock'){
+                if(comp_choice == 'paper'){output_div.innerText = 'You lose'}
+                else{output_div.innerText = 'You Win'}
+            }
+            else if(user_choice == 'paper'){
+                if(comp_choice == 'scissors'){output_div.innerText = 'You lose'}
+                else{output_div.innerText = 'You Win'}
+            }
+            else if(user_choice == 'scissors'){
+                if(comp_choice == 'rock'){output_div.innerText = 'You Lose'}
+                else{output_div.innerText = 'You Win'} 
+            }
+        }
+    </script>
+    </div>
+    
+    <!-- 8Ball -->
+    <div class="eight_ball">
+        <div class="eightball_selector">
+        <div class="row">
+            <div>
+              Magic 8 Ball:
+              <div class="input-field inline">
+                <input id="eight_ball_question" type="text" >
+                <label for="eight_ball_question">Question</label>
+              </div>
+            </div>
+          </div>
+        <button class="waves-effect waves-light btn" id="ask">ASK</button>
+        </div>
+        <h4><div class="answer" id="eight_ball_answer"> &nbsp; </div></h4>
+
+    <script type="text/javascript">
+    let ball_choices = ['Yes', 'No', 'Maybe', 'Does the pope shit in the woods?', 'No chance', 'How the hell should I know?', 'Probably', 'Give it a shot']
+    let ask = document.querySelector("#ask")
+    let eight_ball_answer = document.querySelector('#eight_ball_answer')
+
+    ask.onclick = function() {
+        let eight_ball_select = Math.floor(Math.random()*ball_choices.length)
+        let eight_ball_choice = ball_choices[eight_ball_select]
+        eight_ball_answer.innerText = eight_ball_choice
+    }
+    
+    </script>
+    </div>
+    <!-- emoticons -->
+
+    <div class="emoticon">
+        <button class="waves-effect waves-light btn" id="make_face">MAKE FACE</button> 
+        <h4><div class="emoticon" id="emoticon_output"> &nbsp; </div></h4>
+        
+    <script type="text/javascript">
+    let emoticon_left = ["(", "\\(", "¯\\_(", "ᕙ(", "(┛"]
+    let emoticon_right = [")", ")/", ")_/¯", ")╯ ┻━┻", "ᕗ", "ﾉ*:･ﾟ✧", ")┛"]
+    let emoticon_face = ["o.o", "uwu", "0_0", "O.o", "-_-", "ｏ`皿′ｏ", "ﾉ◕ヮ◕", "◉Д◉", "ಠ益ಠ"]
+    let emoticon = ""
+    let emoticon_output = document.querySelector('#emoticon_output')
+
+    make_face.onclick = function() {
+        let emo_left = Math.floor(Math.random()*emoticon_left.length)
+        let emo_left_choice = emoticon_left[emo_left]
+
+        let emo_face = Math.floor(Math.random()*emoticon_face.length)
+        let emo_face_choice = emoticon_face[emo_face]
+
+        let emo_right = Math.floor(Math.random()*emoticon_right.length)
+        let emo_right_choice = emoticon_right[emo_right]
+
+        emoticon = emo_left_choice + emo_face_choice +emo_right_choice
+        emoticon_output.innerText = emoticon
+    }
+
+    </script>
+
+
+
+    </div>
+</div>   
+</body>
+</html>
+
+
+
+
+
+
+

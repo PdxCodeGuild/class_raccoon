@@ -37,7 +37,8 @@
             </li>
           </ul>
         </div>
-        <h2>{{user}}</h2>
+        <h4>Welcome {{user}}</h4>
+        <a type="button" class="btn btn-secondary btnlgout" href="{% url 'library:logout' %}">Log Out</a>
       </nav>
     <!-- navbar----- -->
     <form action="{% url 'library:register' %}" method="post">

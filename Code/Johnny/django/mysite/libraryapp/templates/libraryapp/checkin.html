@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <!-- boostrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <style type="text/css">
+      * {
+        max-width: 800px;
+        padding: 10px;
+        margin:0 auto;
+      }
+    </style>
+    <title></title>
+  </head>
+  <body>
+      <h1>Book Details </h1>
+      {% for info in get_book %}
+      Database ID: {{info.id}}<br/>
+      Book Title: {{info.title}}<br/>
+      Book Author: {{info.author}}<br/>
+      Publish Date: {{info.publish_date}}<br/>
+      {% endfor %}
+      <a href="{% url 'libraryapp:index' %}">>> Return to Library</a>
+        <br/><br/>
+
+      <h3>History </h3>
+<!-- pull info from model BookCheckout from checkin views request -->
+      {% for info in book_details %}
+      Foreign Key ID: {{info.checkout_title_id}}<br/>
+      Book Title: {{info.checkout_title}}<br/>
+      Checked Out By: {{info.checkout_checked_out_by}}<br/>
+      Checkout Date: {{info.checkout_date}}<br/>
+      Checkin Date: {{info.checkin_date}}<br/>
+      {% endfor %}
+
+  </body>
+</html>

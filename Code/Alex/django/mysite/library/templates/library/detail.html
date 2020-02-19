@@ -1,21 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>{{book.title}}</h1>
-    {% for author in book.authors.all %}
-    <h1>{{author.name}}</h1>
-    {% endfor %}
-    <h1>{{book.year_published}}</h1>
-    <h1>{{book.checked_out_by}}</h1>
-    <a href="{% url 'library:checked_in' book.id %}">Check In</a></br>
-    {% for record in records %}
-    {{record.checked_out_by}} {{record.checkout_date}} {{record.checkin_date}} </br>
-    {% endfor %}
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+        <title>Book Detail</title>
+    </head>
+    <body>
+        <div class="detail_top">
+            <h1>"{{book.title}}" by {% for author in book.authors.all %}{{author.name}}{% endfor %}</h1>
+            <h6>Link to Book: <a href="{{book.link}}">{{book.title}}</a></h6>
+        </div>
+        <table style="width:100%">
+          <tr>
+            <th>Pages</th>
+            <th>Year Published</th>
+            <th>Country</th>
+            <th>Language(s)</th>
+            <th>Book Availability</th>
+          </tr>
+          <tr>
+            <td>{{book.pages}}</td>
+            <td>{{book.year_published}}</td>
+            <td>{{book.country}}</td>
+            <td>{{book.language}}</td>
+            {% if book.checked_out_by %}
+            <td>Book checked out by {{book.checked_out_by}}<a href="{% url 'library:checked_in' book.id %}">  Check In Book</a></td>
+            {% endif %}
+            {% if not book.checked_out_by %}
+            <td>Available to Checkout</td>
+            {% endif %}
+          </tr>
+        </table>
+        {% for record in records %}
+        {{record.checked_out_by}} {{record.checkout_date}} {{record.checkin_date}} </br>
+        {% endfor %}
+    </body>
 </html>

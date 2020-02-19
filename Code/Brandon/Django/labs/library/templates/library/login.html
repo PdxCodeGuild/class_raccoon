@@ -38,57 +38,21 @@
             </li>
           </ul>
         </div>
-        <h4>Welcome {{user}}</h4>
-        <a type="button" class="btn btn-secondary btnlgout" href="{% url 'library:logout' %}">Log Out</a>
       </nav>
-<!--      end nav------>
-   <div class="maincont">
-    <div class="card-contain2">
-        {% for book in books %}
-        <div class="card card-bod card-cust" style="width: 18rem;">
-            <div class="card-header">
-              Title: {{book.book.title}}
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Author(s): {{book.book.author}} </li>
-              <li class="list-group-item">Year Published: {{book.book.year_published}} </li>
-              <li class="list-group-item">Checkout Date: {{book.checkout_date}} </li>
-            </ul>
-          </div>
+    <!-- navbar----- -->
+    <form action="{% url 'library:login' %}" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <div class="form-group">
+        <label for="exampleInputEmail1">Username</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="username">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 
-          {% endfor %}
-        </div>
-
-        <div class="searchbar2">
-        <form action="" method="post">
-            {% csrf_token %}
-            <div class="form-group search-inside2">
-              <label for="exampleInputEmail1">Search by Title or Author:</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="search_text">
-              <select class="custom-select mr-sm-4 selector-search" id="inlineFormCustomSelect">
-                <option selected>Choose...</option>
-                <option value="1">Author</option>
-                <option value="2">Title</option>
-              </select>
-              <button type="submit" class="btn btn-primary">Search</button>
-            </div>
-        </form>
-        <div class="card-contain">
-            {% for book_view in book_views %}
-            <div class="card card-bod card-cust" style="width: 18rem;">
-                <div class="card-header">
-                  Title: {{book_view.title}}
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Author(s): {{book_view.author}} </li>
-                  <li class="list-group-item">Year Published: {{book_view.year_published}} </li>
-                </ul>
-              </div>
-              <a href="{% url 'library:checkout' book_view.id %}" class="btn btn-secondary btn-sm">Check Out</a>
-              {% endfor %}
-          </div>
-        </div>
-    </div>
-    
-</body>
-</html>
+  </body>
+  </html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JavaScript_Lab_1</title>
+</head>
+    <body>
+        <button type="button" id="button_submit">Generate Emoticon</button>
+        <span id="span_output"></span>
+
+        <script type="text/javascript">
+          let button_submit = document.querySelector("#button_submit")
+          let span_output = document.querySelector('#span_output')
+
+          button_submit.addEventListener('click', function(event){
+            let eyes = [':', 'B', '8', ';', 'x', 'X']
+            let noses = ['-', '>', '%']
+            let mouths = [')', 'D', 'p', '(', '3', 'P', '*', '^', 'v', 'V', 'd', '[', ']', '{', '}', '"', 'c', 'C', 'o', 'O', '0', '/', '\\']
+            let the_index1 = Math.floor(Math.random()*eyes.length)
+            let the_index2 = Math.floor(Math.random()*noses.length)
+            let the_index3 = Math.floor(Math.random()*mouths.length)
+            let emoticon = eyes[the_index1] + noses[the_index2] + mouths[the_index3]
+            span_output.innerText = emoticon
+          })
+        </script>
+    </body>
+</html>

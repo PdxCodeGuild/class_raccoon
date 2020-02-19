@@ -13,6 +13,7 @@ class Author(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=100)
     year_published = models.CharField(max_length=4)
+    url = models.CharField(max_length=200)
     author = models.ForeignKey(Author, on_delete=models.PROTECT)
 
     def __str__(self):
@@ -24,8 +25,8 @@ class BookCheckout(models.Model):
     checkout_date = models.DateTimeField()
     checkin_date = models.DateTimeField(null=True, blank=True, default=None)
 
-#    def __str__(self):
-#        return self.
+    def __str__(self):
+        return self.checked_out_by.username + ': ' + self.book.title
 
 
     

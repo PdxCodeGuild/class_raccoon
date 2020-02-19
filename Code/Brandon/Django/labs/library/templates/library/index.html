@@ -38,8 +38,8 @@
             </li>
           </ul>
         </div>
-        <h2>Welcome {{user}}</h2>
-        <a type="button" class="btn btn-secondary" href="{% url 'library:logout' %}">Log Out</a>
+        <h4>Welcome {{user}}</h4>
+        <a type="button" class="btn btn-secondary btnlgout" href="{% url 'library:logout' %}">Log Out</a>
       </nav>
     <!-- navbar----- -->
     <div class="main-contain">
@@ -71,7 +71,7 @@
           <li class="list-group-item">Year Published: {{book.year_published}} </li>
         </ul>
       </div>
-      <button type="button" class="btn btn-secondary btn-sm">Check Out</button>
+      <a href="{% url 'library:checkout' book.id %}" class="btn btn-secondary btn-sm">Check Out</a>
       {% endfor %}
       </div>
   </div>

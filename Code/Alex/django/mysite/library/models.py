@@ -26,7 +26,7 @@ class Book(models.Model):
 
 
     def __str__(self):
-        return '\"' + self.title + '\"' + ' by ' + ', '.join([author.name for author in self.authors.all()])
+        return '\"' + self.title + '\"'
 
 
 class BooksCheckedOut(models.Model):

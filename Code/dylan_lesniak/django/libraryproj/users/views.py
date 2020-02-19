@@ -8,16 +8,24 @@ import requests
 
 
 def register(request):
-    return render(request, 'users/register.html')
+    message = request.GET.get('message', '')
+    context = {
+        'message': message
+    }
+    return render(request, 'users/register.html', context)
 
 def register_user(request):
     username = request.POST['username']
     email = request.POST['email']
     password = request.POST['password']
+
+    if User.objects.filter(username=username).exists():
+        return HttpResponseRedirect(reverse('users:register') + '?message=exists')
+
     user = User.objects.create_user(username, email, password)
     login(request, user)
 
-    return HttpResponseRedirect(reverse('users:home'))
+    return HttpResponseRedirect(reverse('books:index'))
 
 
 def login_page(request):

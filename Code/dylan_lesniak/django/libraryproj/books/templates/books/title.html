@@ -8,8 +8,9 @@
                 <th>Book Title</th>
                 <th>Author</th>
                 <th>Checked Out By</th>
+                <th>Checkout Date</th>
             </tr>
-            {% for book in available_books_obj %}
+            {% for book in all_books %}
                 <tr>
                     <td><a href="{% url 'books:book_details' book.id %}">{{book.title | truncatechars:40}}</a></td>
                     <td>
@@ -21,7 +22,12 @@
                         {% if not book.checked_out_by == None %}
                             {{book.checked_out_by}}
                         {% else %}
-                            <a href="{% url 'books:checkout' book.id'">Checkout</a>
+                            <a href="{% url 'books:checkout' book.id %}">Checkout</a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not book.checked_out_by == None %}
+                            {{book.checkout_date}}
                         {% endif %}
                     </td>
                 </tr>
@@ -32,18 +38,18 @@
 
     <div class="pagination">
         <span class="step-links">
-            {% if available_books_obj.has_previous %}
+            {% if all_books.has_previous %}
             <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ available_books_obj.previous_page_number }}">previous</a>
+            <a href="?page={{ all_books.previous_page_number }}">previous</a>
             {% endif %}
     
             <span class="current">
-                Page {{ available_books_obj.number }} of {{ available_books_obj.paginator.num_pages }}.
+                Page {{ all_books.number }} of {{ all_books.paginator.num_pages }}.
             </span>
     
-            {% if available_books_obj.has_next %}
-            <a href="?page={{ available_books_obj.next_page_number }}">next</a>
-            <a href="?page={{ available_books_obj.paginator.num_pages }}">last &raquo;</a>
+            {% if all_books.has_next %}
+            <a href="?page={{ all_books.next_page_number }}">next</a>
+            <a href="?page={{ all_books.paginator.num_pages }}">last &raquo;</a>
             {% endif %}
         </span>
     </div>

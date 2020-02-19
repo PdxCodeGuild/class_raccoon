@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+      button {
+        background-color:blue;
+        transition: 1s all;
+        width:200px;
+        height:200px;
+      }
+    </style>
+    <!-- do not do this -->
+    <!-- <script type="text/javascript">
+      let input_name = document.querySelector('#input_name')
+      console.log(input_name)
+    </script> -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/6.6.0/math.min.js"></script>
+  </head>
+  <body>
+    <input type="text" id="input_name" placeholder="name"/>
+    <button id="bt_say_hello">click</button>
+    <span id="span_output"></span>
+
+    <script type="text/javascript">
+      // alert(math.simplify('3 + 2 / 4').toString())
+      
+      // let name = prompt('What is your name?')
+      // alert('Hello, ' + name)
+
+      let input_name = document.querySelector('#input_name')
+      let bt_say_hello = document.querySelector('#bt_say_hello')
+      let span_output = document.querySelector('#span_output')
+
+      function add(a, b) {
+        return a + b
+      }
+      alert(add(5,2,1))
+
+
+      bt_say_hello.addEventListener('click', function(event) {
+        // console.log(event.clientX + ', ' + event.clientY)
+        let r = Math.floor(Math.random()*256)
+        let g = Math.floor(Math.random()*256)
+        let b = Math.floor(Math.random()*256)
+        bt_say_hello.style.backgroundColor = 'rgb(' + r + ',' + g + ',' + b + ')'
+
+        let name = input_name.value
+        input_name.value = ''
+        span_output.innerText = 'Hello, ' + name
+
+
+      })
+
+
+
+    </script>
+  </body>
+</html>

@@ -67,14 +67,14 @@
 
       btn_blackjack.addEventListener('click', function () {
         let user_hand = prompt("Enter the card's total: ");
-          if (user_hand >= 1) {
-            document.getElementById('advice').innerHTML = user_hand + ": You should Hit!"
-          } else if (user_hand <= 20) {
+          if (user_hand >= 22) {
+            document.getElementById('advice').innerHTML = user_hand + ": Busted"
+          } else if (user_hand >= 17 && user_hand <= 20) {
             document.getElementById('advice').innerHTML = user_hand + ": STAY!"
           } else if (user_hand == 21) {
             document.getElementById('advice').innerHTML = user_hand + ": BLACKJACK!!!"
-          } else if (user_hand >= 22) {
-            document.getElementById('advice').innerHTML = user_hand + ": Busted."
+          } else if (user_hand >= 1) {
+            document.getElementById('advice').innerHTML = user_hand + ": You should hit."
           }
         });
 

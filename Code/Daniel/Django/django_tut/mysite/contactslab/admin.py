@@ -4,3 +4,4 @@ from .models import PhoneType, ContactInfo
 
 admin.site.register(PhoneType)
 admin.site.register(ContactInfo)
+

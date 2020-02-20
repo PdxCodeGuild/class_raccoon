@@ -1,0 +1,26 @@
+{% extends 'books/base.html' %}
+
+{% block content %}
+<h1>Hello {{user | title}}</h1>
+<div class="user_table">
+    <h3>Checked Out Books</h3>
+    <table>
+        <tr>
+            <th>Book Title</th>
+            <th>Checkout Date</th>
+            <th></th>
+        </tr>
+        {% for book in users_books %}
+        <tr>
+            <td><a href="{% url 'books:book_details' book.id %}">{{book.title | truncatechars:40}}</a></td>
+            <td>{{book.checkout_date}}</td>
+            <form action="{% url 'books:checkin' %}" method="POST">
+                {% csrf_token %}
+                <td><button type="submit" name="book_id" value="{{book.id}}">Check in Book</button></td>
+            </form>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+    
+{% endblock %}

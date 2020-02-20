@@ -1,0 +1,36 @@
+{% extends 'books/base.html' %}
+
+{% block content %}
+<div class="content">
+    <div>
+        <table class="details">
+            <tr>
+                <th>Title: </th>
+                <td>{{book.title}}</td>
+            </tr>
+            <tr>
+                <th>Year Published:</th>
+                <td>{{book.year_published}}</td>
+            </tr>
+            <tr>
+                <th>Author(s): </th>
+                <td>
+                    {% for author in book.authors.all %}
+                    <a href="{% url 'books:author_details' author.name %}">{{author.name}}</a> {% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Checked Out By: </th>
+                <td>{% if not book.checked_out_by == None %}
+                    {{book.checked_out_by}}
+                {% else %}
+                    <a href="{% url 'books:checkout' book.id %}">Checkout</a>
+                {% endif %}</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

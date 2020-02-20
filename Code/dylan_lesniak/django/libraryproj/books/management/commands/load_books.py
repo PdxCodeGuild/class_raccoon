@@ -1,0 +1,37 @@
+from django.core.management.base import BaseCommand
+from books.models import Book, Author
+import json
+import requests
+import random
+
+class Command(BaseCommand):
+    def handle(self, *args, **options):
+        with open('./books/management/commands/words.txt','r') as file:
+            words = file.read()
+        words = words.split('\n')
+        for i in range(40):
+            random_word = random.choice(words)
+            print(f"Searching for book: {random_word}.")
+            response = requests.get('http://openlibrary.org/search.json?q=' + random_word)
+            data = json.loads(response.text)
+            if len(data['docs']) == 0:
+                continue
+            book_data = random.choice(data['docs'])
+            title = book_data['title']
+            if 'first_publish_year' not in book_data:
+                continue
+            year_published = book_data['first_publish_year']
+
+            authors = book_data.get('author_name',['No Author']) #get or create for this.
+
+            if Book.objects.filter(title=title, year_published=year_published).exists():
+                continue
+
+            book = Book(title=title, year_published=year_published)
+            book.save()
+
+            for author in authors:
+                author, created = Author.objects.get_or_create(name=author)
+                book.authors.add(author)
+
+            print(str(round(i/40*100, 2))+'%')

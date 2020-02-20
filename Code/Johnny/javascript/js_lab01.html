@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <style type="text/css">
+      * {
+        box-sizing: border-box;
+        padding: 10px;
+        margin: 0 auto;
+      }
+      h1 {
+        text-align: center;
+      }
+
+      /* Create three equal columns that floats next to each other */
+      .column {
+        float: left;
+        width: 33.33%;
+        padding: 10px;
+        height: 300px; /* Should be removed. Only for demonstration */
+      }
+
+      /* Clear floats after the columns */
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      </style>
+  </head>
+  <body>
+    <h1>Javascript LAB 01-03</h1>
+    <div class="row">
+      <div class="column left">
+      <!-- 8ball -->
+      <input type="text" id="question" placeholder=">> Ask a question" required></input>
+      <button id="btn_8ball">8-Ball</button>
+      </div>
+
+      <div class="column middle">
+      <!-- Blackjack Advice -->
+      <button id="btn_blackjack">Blackjack Advice</button>
+      <p id="advice"></p>
+    </div>
+
+      <!-- Guess the number -->
+        <div class="column right">
+        <button id="btn_guessnumber">Guess a number</button>
+        <p id="numberbox"></p>
+        </div>
+
+  </div>
+    <!-- begin javascript -->
+    <script type="text/javascript">
+      let btn_8ball = document.querySelector('#btn_8ball');
+      let btn_blackjack = document.querySelector('#btn_blackjack');
+      let btn_guessnumber =  document.querySelector('#btn_guessnumber');
+
+      btn_8ball.addEventListener('click', function () {
+        let answers = ['Yes', 'Lucky you!', 'Try Again', 'Maybe', 'No', 'Stay Clear!', 'Move on', '...'];
+        let index = [Math.floor(Math.random() * answers.length)];
+        console.log(answers[index]);
+        alert(answers[index]);
+      });
+
+      btn_blackjack.addEventListener('click', function () {
+        let user_hand = prompt("Enter the card's total: ");
+          if (user_hand >= 1) {
+            document.getElementById('advice').innerHTML = user_hand + ": You should Hit!"
+          } else if (user_hand <= 20) {
+            document.getElementById('advice').innerHTML = user_hand + ": STAY!"
+          } else if (user_hand == 21) {
+            document.getElementById('advice').innerHTML = user_hand + ": BLACKJACK!!!"
+          } else if (user_hand >= 22) {
+            document.getElementById('advice').innerHTML = user_hand + ": Busted."
+          }
+        });
+
+      btn_guessnumber.addEventListener('click', function() {
+        let i=0;
+        let somenumber = 3
+        while (i < 10) {
+          console.log(i);
+          ++i;
+          let input_number = prompt('Guess again');
+            if (input_number === null) { break
+            } else if (input_number == somenumber) {document.getElementById('numberbox').innerHTML = "Correct!!" + somenumber; break
+          } else if (i === 10) {document.getElementById('numberbox').innerHTML = "<h2>Failed</h2>"}
+        };
+      });
+
+    </script>
+  </body>
+</html>

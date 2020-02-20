@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h3>Ask the magic 8 ball a question</h3>
+    <input type="text" name="" value=""><button type="button" onclick="shake()" name="button">shake the 8 ball</button><br>
+    <span id="span_output" style="color: purple"></span>
+    <script type="text/javascript">
+      let span_output = document.querySelector('#span_output')
+      let answer=["It is certain","It is decidedly so","Without a doubt","Yes definitely","You may rely on it","As I see it, yes","Most likely","Outlook good","Yes","Signs point to yes","Reply hazy try again","Ask again later","Better not tell you now","Cannot predict now","Concentrate and ask again","Don't count on it","My reply is no","My sources say no","Outlook not so good","Very doubtful"]
+      function shake(){
+        i = Math.floor(Math.random()*answer.length)
+        span_output.innerText = answer[i]
+      }
+    </script>
+  </body>
+</html>

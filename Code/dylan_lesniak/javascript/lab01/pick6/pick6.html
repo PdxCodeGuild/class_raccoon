@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="loop_times" placeholder="Number of times to run: ">
+    <button id="btn_submit">Submit</button>
+    <pre id="display_profit"></pre>
+
+    <script type="text/javascript">
+        let loop_times = document.querySelector("#loop_times")
+        let btn_submit = document.querySelector("#btn_submit")
+        let display_profit = document.querySelector("#display_profit")
+        console.log("allo")
+        btn_submit.addEventListener("click", function(event) {
+            loop_times = loop_times.value
+            console.log("hello")
+            let matchVals = {"0":0, "1":4, "2":7, "3":100, "4":50000, "5":1000000, "6":25000000}
+            let profits = 0
+
+            function pick6(){
+                sixNums = []
+                for (let i=0; i<6; ++i){
+                    sixNums.push(Math.floor(Math.random*100))
+                }
+                return sixNums
+            }
+            
+            for (let i=0; i<loop_times; ++i){
+                let compTicket = pick6()
+                let userTicket = pick6()
+                profits -= 2
+
+                let matches = 0 
+
+                for (let i=0; i<6; ++i){
+                    if (compTicket[i] == userTicket){
+                        matches += 1
+                    }
+                }
+            profits += matchVals[matches]
+            console.log(profits)
+            
+        }
+            display_profit.innerText = profits
+        })
+        
+    </script>
+</body>
+</html>

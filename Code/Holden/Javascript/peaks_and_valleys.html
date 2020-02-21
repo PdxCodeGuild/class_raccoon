@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>peaks and valleys</title>
+    <style type="text/css">
+      td{
+        width: 25px;
+        height: 25px;
+      }
+      .air{
+        background-color: skyblue;
+      }
+      .mountain{
+        background-color: dimgrey;
+      }
+      .water{
+        background-color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <label for="table_width">width:</label><input type="range" id="table_width" min="0" max="60" value='20' onchange="modifyWidth()"><span id="range_label_width">20</span>
+    <label for="table_height">height:</label><input type="range" id="table_height" min="5" max="25" value='10'onchange="modifyHeight()"><span id="range_label_height">10</span>
+    <input type="checkbox" id="check_smoothing"><label for="check_smoothing">Smoothing</label>
+    <table id="display" cellspacing="0" cellpadding="0">
+
+    </table>
+    <button type="button" onclick='addWater()'>Add water</button><span id="water_display"></span>
+    <script type="text/javascript">
+      let table_width = document.querySelector('#table_width')
+      let range_label_width = document.querySelector('#range_label_width')
+      let table_height = document.querySelector('#table_height')
+      let range_label_height = document.querySelector('#range_label_height')
+      let check_smoothing = document.querySelector('#check_smoothing')
+      let display = document.querySelector('#display')
+      let water_display = document.querySelector('#water_display')
+      let pva = []
+      function randInt(start, end){
+        return Math.floor(start + (end - start + 1)*Math.random())
+      }
+      function generateData(){
+        pva = []
+        for (let i = 0; i < table_width.value; ++i){
+          pva.push(randInt(0, table_height.value - 1))
+        }
+      }
+      function modifyHeight(){
+        for (let i = 0; i < table_width.value; ++i){
+          if (pva[i] > table_height.value){
+            pva[i] = table_height.value
+          }
+        }
+        range_label_height.innerText = table_height.value
+        updateDisplay()
+      }
+      function modifyWidth(){
+        if (pva.length > table_width.value){
+          let iter = pva.length - table_width.value
+          while (iter > 0){
+            pva.pop()
+            --iter
+          }
+        } else if (pva.length < table_width.value) {
+          let iter = table_width.value -  pva.length
+          while (iter > 0){
+            pva.push(randInt(0, table_height.value - 1))
+            --iter
+          }
+        }
+        updateDisplay()
+        range_label_width.innerText = table_width.value
+      }
+      function editValue(across, high){
+        if (check_smoothing.checked){
+          if (pva[across] > high){
+            let i_f = across
+            let i_b = across -1
+            let high_f = high
+            let high_b = high +1
+            while (pva[i_f] > high_f){
+              pva[i_f] = high_f
+              i_f += 1
+              high_f += 1
+            }
+            while (pva[i_b] > high_b){
+              pva[i_b] = high_b
+              i_b -= 1
+              high_b += 1
+            }
+          } else {
+            let i_f = across
+            let i_b = across -1
+            let high_f = high
+            let high_b = high -1
+            while (pva[i_f] < high_f){
+              pva[i_f] = high_f
+              i_f += 1
+              high_f -= 1
+            }
+            while (pva[i_b] < high_b){
+              pva[i_b] = high_b
+              i_b -= 1
+              high_b -= 1
+            }
+          }
+          updateDisplay()
+        } else {
+          pva[across] = high
+          updateDisplay()
+        }
+      }
+      generateData()
+      function updateDisplay(){
+        let output = ''
+        for (let i = table_height.value-1; i >= 0; --i){
+          output += '<tr>'
+          for (let j = 0; j < table_width.value; ++j){
+            let colorclass = 'air'
+            if (i <= pva[j]){
+              colorclass = 'mountain'
+            }
+            output += '<td id="row'+i+'column'+j+'" class="' + colorclass + '" onclick="editValue('+ j +','+ i +')"></td>'
+          }
+          output += '</tr>'
+        }
+        display.innerHTML = output
+      }
+      function addWater(){
+        let water_amount = 0
+        let highest_peak = 0
+        for (let i = 0; i < pva.length; ++i){
+          if (pva[highest_peak] < pva[i]){
+            highest_peak = i
+          }
+        }
+        let curr_height = pva[0]
+        for (let i = 0; i < highest_peak; ++i){
+          if (curr_height <= pva[i]){
+            curr_height = pva[i]
+            console.log(curr_height)
+            continue
+          }
+          for (let j = pva[i]+1; j <= curr_height; ++j){
+            let current_cell = document.querySelector('#row'+j+'column'+i)
+            console.log(current_cell)
+            current_cell.className = "water"
+            water_amount++
+          }
+        }
+        curr_height = pva[pva.length-1]
+        for (let i = pva.length-1; i > highest_peak; --i){
+          if (curr_height <= pva[i]){
+            curr_height = pva[i]
+            console.log(curr_height)
+            continue
+          }
+          for (let j = pva[i]+1; j <= curr_height; ++j){
+            let current_cell = document.querySelector('#row'+j+'column'+i)
+            console.log(current_cell)
+            current_cell.className = "water"
+            water_amount++
+          }
+        }
+        water_display.innerText = water_amount + 'units of water'
+      }
+      updateDisplay()
+    </script>
+  </body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body style="padding: 20px;">
+    <h1>Fortune for a quarter? I love quarters!</h1>
+    <h2>Ask me a yes or no question:</h2>
+    <input type="text" id="ask_question" placeholder="Ask a question">
+    <button type="button" id="fortune_submit">Ask</button>
+
+    <h3><span id="span_fortune"></span></h3>
+
+    <h1>Let's play Rock, Paper, Scissors</h1>
+    <h2>Pick one:</h2>
+    <div>
+      <label>
+        <input type="radio" id="rock" name="rps_choice" value="rock">
+        Rock
+      </label>
+      <label>
+        <input type="radio" id="paper" name="rps_choice" value="paper">
+        Paper
+      </label>
+      <label>
+        <input type="radio" id="scissors" name="rps_choice" value="scissors">
+        Scissors
+      </label>
+      <button type="button" id="play_rps">Play</button>
+    </div>
+
+    <h3><span id="rps_results"></span></h3>
+
+    <h1>Emoticon Generator</h1>
+    <h2>Which type would you like to create?</h2>
+    <div>
+      <label>
+        <input type="radio" id="vertical" name="emo_choice" value="vertical">Vertical
+      </label>
+      <label>
+        <input type="radio" id="horizontal" name="emo_choice" value="horizontal">Horizontal
+      </label>
+      <button type="button" id="emo_gen">Generate</button>
+    </div>
+
+    <h3><span id="emo_result" onclick="copy(this)"></span>
+    </h3>
+    <h4><span id="copy_info"></span></h4>
+
+    <script type="text/javascript">
+      let fortune = [
+        "NOOOOOPE!",
+        "All signs point to maybe.",
+        "Stranger things have happened!",
+        "Yes, definitely.",
+        "Ask me again when I'm not on 'me' time.",
+        "HAHAHAHAHAHAHAHA...no.",
+        "Eh, sure.",
+        "Dude, don't be gross."
+      ];
+
+      let fortune_submit = document.querySelector("#fortune_submit");
+
+      fortune_submit.addEventListener('click', function() {
+        getFortune = fortune[Math.floor(Math.random()*fortune.length)];
+
+        span_fortune.innerText = getFortune
+      })
+
+      let play_rps = document.querySelector("#play_rps");
+      var rps_choice = document.getElementsByName('rps_choice');
+      console.log(rps_choice);
+      let result = ''
+      let result_str = ''
+
+      play_rps.addEventListener('click', function() {
+
+        for (var i = 0, length = rps_choice.length; i < length; i++) {
+          if (rps_choice[i].checked) {
+            comp_choice = rps_choice[Math.floor(Math.random()*rps_choice.length)]
+            console.log(rps_choice[i].value)
+            console.log(comp_choice.value)
+            if (rps_choice[i].value == comp_choice.value) {
+                result = 'tie';
+            } else if (rps_choice[i].value == 'rock') {
+              if (comp_choice.value == 'scissors') {
+                result = 'win';
+              } else {
+                result = 'lose';
+              }
+            } else if (rps_choice[i].value == 'paper') {
+              if (comp_choice.value == 'rock') {
+                result = 'win';
+              } else {
+                result = 'lose';
+              }
+            } else {
+              if (comp_choice.value == 'paper') {
+                result = 'win';
+              } else {
+                result = 'lose';
+              }
+            }
+            console.log(result)
+            if (result == 'win') {
+              result_str = rps_choice[i].value + " beats " + comp_choice.value + ". You win!"
+            } else if (result == 'lose') {
+              result_str = comp_choice.value + " beats " + rps_choice[i].value + ". You lose!"
+            } else {
+              result_str = "We both chose " + rps_choice[i].value + ". It's a tie!"
+            }
+            rps_results.innerText = result_str.replace(/^\w/, c => c.toUpperCase());
+            break;
+          }
+        }
+      })
+
+      let emo_gen = document.querySelector("#emo_gen")
+      var emo_choice = document.getElementsByName('emo_choice')
+
+      emo_gen.addEventListener('click', function() {
+        for (var i = 0, length = emo_choice.length; i < length; i++) {
+          if (emo_choice[i].checked) {
+            if (emo_choice[i].value == 'vertical') {
+              let eyes = [':', 'B', ';', '=', '8', 'X', '>:', 'O:']
+              let nose = ['', '-', 'o', 'c', '^', ]
+              let mouth = [')', ']', '/', 'D', '[', '<', '>', 'O', 'o', 'P', 'p', 'L', 'S', '$', '3', 'J']
+              emo_result.innerText = eyes[Math.floor(Math.random()*eyes.length)] + nose[Math.floor(Math.random()*nose.length)] + mouth[Math.floor(Math.random()*mouth.length)];
+            } else {
+              let lt_e = ["┌∩┐","╭∩╮","¯\\_","(ง","༼ つ ","(づ","┬┴┬┴┤ ","ヾ","\\ ","ᕙ","ᕦ","☜","╚"]
+              let md_e = ["(◣_◢)","(Ο_Ο)","( * O * )","ô¿ô","( ͡° ͜ʖ ͡°)","(ツ)","ʕ•ᴥ•ʔ","ಠ_ಠ","◕_◕","｡◕‿‿◕｡","(ಥ﹏ಥ)","(⌐■_■)","◉_◉","(•◡•)","(⇀‸↼‶)","(ò_óˇ)","⚆ _ ⚆","ಥ_ಥ","(˚▽˚)","(°ロ°)","( ಠ ͜ʖರೃ)","(ಠ_ಠ)"]
+              let rt_e = ["┌∩┐","╭∩╮","_/¯",")ง"," ༽つ",")づ"," ├┬┴┬┴","ノ♪"," /","ᕗ","ᕤ","☞","☝","=┐"]
+              emo_result.innerText = lt_e[Math.floor(Math.random()*lt_e.length)] + md_e[Math.floor(Math.random()*md_e.length)] + rt_e[Math.floor(Math.random()*rt_e.length)];
+            }
+          }
+        }
+        copy_info.innerText = "Click on emoticon to automatically copy it to your clipboard!"
+      })
+      function copy(element){
+        var inp = document.createElement('input');
+        document.body.appendChild(inp)
+        inp.value = element.textContent
+        inp.select();
+        document.execCommand('copy',false);
+        inp.remove();
+      }
+    </script>
+  </body>
+</html>

@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from datetime import date
 import requests
 
 from . import secrets
@@ -26,13 +27,25 @@ def togglecheckout(request, book_id):
         checkout = checkouts[0]
         if checkout.checked_by == request.user:
             checkout.checked_out = False
+            checkout.checkin_date = date.today()
             checkout.save()
     else: # check out
         # create a new checkout, and save it
-        checkout = Checkout(checked_out = True, book=book, checked_by = request.user)
+        checked_date = date.today()
+        checkout = Checkout(checked_out = True, book = book, checked_by = request.user, checked_date = checked_date)
         checkout.save()
 
     return HttpResponseRedirect(reverse('lab4app:index'))
+
+@login_required()
+def bookview(request, book_id):
+    book = Book.objects.get(id=book_id)
+    authors = Author.objects.all()
+    context = {
+        'book':book,
+        'authors':authors,
+    }
+    return render(request, 'lab4app/book.html', context)
 
 def register(request):
     return render(request, 'lab4app/register.html')

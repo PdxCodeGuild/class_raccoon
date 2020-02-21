@@ -6,45 +6,44 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="number" id="loop_times" placeholder="Number of times to run: ">
+    <input type="number" id="loop_times" placeholder="Number of times to run: " value="100">
     <button id="btn_submit">Submit</button>
     <pre id="display_profit"></pre>
 
     <script type="text/javascript">
-        let loop_times = document.querySelector("#loop_times")
+        function pick6() {
+            let sixNums = []
+            for (let i = 0; i < 6; ++i) {
+                sixNums.push(Math.floor(Math.random() * 100))
+            }
+            return sixNums
+        }
+
+        let input_loop_times = document.querySelector("#loop_times")
         let btn_submit = document.querySelector("#btn_submit")
         let display_profit = document.querySelector("#display_profit")
-        console.log("allo")
         btn_submit.addEventListener("click", function(event) {
-            loop_times = loop_times.value
-            console.log("hello")
-            let matchVals = {"0":0, "1":4, "2":7, "3":100, "4":50000, "5":1000000, "6":25000000}
+            let loop_times = input_loop_times.value
+            let matchVals = {0:0, 1:4, 2:7, 3:100, 4:50000, 5:1000000, 6:25000000}
             let profits = 0
-
-            function pick6(){
-                sixNums = []
-                for (let i=0; i<6; ++i){
-                    sixNums.push(Math.floor(Math.random*100))
-                }
-                return sixNums
-            }
+            let compTicket = pick6()
+            
             
             for (let i=0; i<loop_times; ++i){
-                let compTicket = pick6()
+                
                 let userTicket = pick6()
                 profits -= 2
 
                 let matches = 0 
-
                 for (let i=0; i<6; ++i){
-                    if (compTicket[i] == userTicket){
+                    if (compTicket[i] == userTicket[i]){
                         matches += 1
                     }
                 }
-            profits += matchVals[matches]
-            console.log(profits)
+                profits += matchVals[matches]
             
-        }
+            }
+            profits = "$" + String(profits)
             display_profit.innerText = profits
         })
         

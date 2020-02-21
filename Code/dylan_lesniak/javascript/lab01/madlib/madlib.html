@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .input_fields {
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+        }
+
+        input {
+            padding: 10px;
+        }
+
+        .contents {
+            display: flex;
+            flex-direction: row;
+        }
+
+        pre {
+            text-align: center;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contents">
+        <div class="input_fields">
+            <input id="input1" type="text" placeholder="NOUN">
+            <input id="input2" type="text" placeholder="VERB">
+            <input id="input3" type="text" placeholder="NOUN">
+            <input id="input4" type="text" placeholder="NOUN (Plural)">
+            <input id="input5" type="text" placeholder="FOOD">
+            <input id="input6" type="text" placeholder="VERB ENDING IN 'ING'">
+            <input id="input7" type="text" placeholder="BODY PART">
+            <input id="input8" type="text" placeholder="ADJECTIVE">
+            <input id="input9" type="text" placeholder="ADJECTIVE">
+            <input id="input10" type="text" placeholder="OCCUPATION">
+            <input id="input11" type="text" placeholder="ADJECTIVE">
+            <input id="input12" type="text" placeholder="ADJECTIVE">
+            <input id="input13" type="text" placeholder="ADJECTIVE">
+            <input id="input14" type="text" placeholder="ADJECTIVE">
+            <input id="input15" type="text" placeholder="VERB ENDING IN 'ED'">
+            <input id="input16" type="text" placeholder="VERB ENDING IN 'ED'">
+            <button type="button" id="button_submit">Make Mad Lib</button>
+        </div>
+        <pre id="output"></pre>
+    </div>
+    <script type="text/javascript">
+        let inputWords = []
+        for (let i = 1; i <= 16; ++i) {
+            let inputElement = document.querySelector("#input" + i)
+            inputWords.push(inputElement)
+        }
+        let button_submit = document.querySelector("#button_submit")
+        let output = document.querySelector("#output")
+
+        button_submit.addEventListener("click", function () {
+            let valuesArray = []
+            inputWords.forEach(element => {
+                valuesArray.push(element.value)
+            });
+            let lib = `Oh Larry 0 , we need you now.\nTo show the way, to 1 the day, to 1 the town.\nNow from the 2 , the 3 squeal.\nAnd to the rescue comes the 4 of Steel.\nOh Larry 0 , we need you here.\n
+So won't you come and lend your super- 5 6. \nLarry 0 , you're dynamite.\nFighting what is 7 , standing up for what is 8 ...\n\n'cuz what the world needs now is a 9 \nOne that's 10 and 11 and 12 and 13 .\nIf you haven't 14 yet then it's time you know...\n'cuz what the world needs now is a 9\n One that's 10 and 11 and 12 and 13 .\n If you haven't 15 yet then it's time you know...\n(time you knooooow)\nYeah, he is that 9 ...\n\nLarry 0 : I AM THAT 9 !!! `
+            let indices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+            lib = lib.split(" ")
+            
+            for (let i = 0; i < lib.length; ++i) {
+                idx = Number(lib[i])
+                if (idx in indices) {
+                    lib[i] = valuesArray[idx]
+
+                }
+            }
+            lib = lib.join(" ")
+            output.innerText = lib
+        })
+    </script>
+</body>
+
+</html>

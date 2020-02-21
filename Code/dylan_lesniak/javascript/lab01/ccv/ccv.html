@@ -8,14 +8,48 @@
 <body>
     <input type="number" placeholder="Credit Card..." id="input_cc_num">
     <button id="btn_submit">Submit</button>
+    <pre id="isvalid"></pre>
 
     <script>
+        // functions
+        function arrayInts(cc_num){
+            return [...cc_num + ""].map(Number) 
+            // gives us an array of ints from our original cc number
+        }
+
+        // variables
         let input_cc_num = document.querySelector("#input_cc_num")
         let btn_submit = document.querySelector("#btn_submit")
+        let isvalid = document.querySelector("#isvalid")
 
+        // actions on event
         btn_submit.addEventListener("click", function() {
             let cc_num = input_cc_num.value
-            
+            let cc_numArray = arrayInts(cc_num)
+            let checkNum = cc_numArray.pop()
+
+            x = 0
+            for (let i=cc_numArray.length-1;i>=0;i-=1){
+                if (x % 2 == 0){
+                    cc_numArray[i] = cc_numArray[i] * 2
+                }
+                if (cc_numArray[i] > 9){
+                    cc_numArray[i] -= 9
+                }
+                x += 1
+            }
+
+            sum = 0 
+            for (let i=0; i<cc_numArray.length; ++i){
+                sum += cc_numArray[i]
+            }
+
+            sumArray = arrayInts(sum)
+            if (sumArray[1] == checkNum){
+                isvalid.innerText = "Credit Card Number is Valid."
+            } else {
+                isvalid.innerText = "Invalid Credit Card Number!"
+            }
 
         })
     </script>

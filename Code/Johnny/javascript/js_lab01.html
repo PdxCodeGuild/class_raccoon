@@ -16,38 +16,39 @@
 
       /* Create three equal columns that floats next to each other */
       .column {
-        float: left;
+        float: center;
         width: 33.33%;
-        padding: 10px;
-        height: 300px; /* Should be removed. Only for demonstration */
+        padding: 15px;
       }
 
-      /* Clear floats after the columns */
-      .row:after {
-        content: "";
-        display: table;
-        clear: both;
-      }
+
+    /* Use a media query to add a breakpoint at 800px: */
+    @media screen and (max-width: 800px) {
+     .left, .main, .right {
+       width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+     }
+    }
+
       </style>
   </head>
   <body>
     <h1>Javascript LAB 01-03</h1>
     <div class="row">
-      <div class="column left">
+      <div class="column">
       <!-- 8ball -->
       <input type="text" id="question" placeholder=">> Ask a question" required></input>
       <button id="btn_8ball">8-Ball</button>
       </div>
 
-      <div class="column middle">
+      <div class="column">
       <!-- Blackjack Advice -->
       <button id="btn_blackjack">Blackjack Advice</button>
       <p id="advice"></p>
     </div>
 
       <!-- Guess the number -->
-        <div class="column right">
-        <button id="btn_guessnumber">Guess a number</button>
+        <div class="column">
+        <button id="btn_guessnumber">Guess a number between 1-10</button>
         <p id="numberbox"></p>
         </div>
 
@@ -80,13 +81,13 @@
 
       btn_guessnumber.addEventListener('click', function() {
         let i=0;
-        let somenumber = 3
+        let somenumber = Math.floor(Math.random() * 10);
         while (i < 10) {
           console.log(i);
           ++i;
           let input_number = prompt('Guess again');
             if (input_number === null) { break
-            } else if (input_number == somenumber) {document.getElementById('numberbox').innerHTML = "Correct!!" + somenumber; break
+            } else if (input_number == somenumber) {document.getElementById('numberbox').innerHTML = "Correct!! " + somenumber; break
           } else if (i === 10) {document.getElementById('numberbox').innerHTML = "<h2>Failed</h2>"}
         };
       });

@@ -26,6 +26,7 @@
             max-width: 80vw;
             margin: 0 auto;
             padding: 50px;
+            align-items: center;
         }
         .buttons{
             display: flex;
@@ -38,17 +39,34 @@
             padding: 50px;
             align-items: baseline;
             flex-direction: column;
+            align-items: center;
         }
         .eightball_selector{
             display: flex;
         }
         .emoticon{
+            display: flex;
+            flex-direction: column;
             margin: 0 auto;
+            align-items: center;
         }
+        #bad_idea{
+            position:absolute;
+            top: 0;
+            left:0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 100; 
+        }
+        #more_faces{
+            z-index: 200;
+        }
+        
         
     </style>
 </head>
 <body>
+    <div id="bad_idea"></div>
     <div class="bigdiv">
     <!-- Rock paper scissors -->
     <div class="rps">
@@ -147,13 +165,16 @@
     <div class="emoticon">
         <button class="waves-effect waves-light btn" id="make_face">MAKE FACE</button> 
         <h4><div class="emoticon" id="emoticon_output"> &nbsp; </div></h4>
+        <button class="waves-effect waves-light btn" id="more_faces" value="true">MORE FACES</button> 
         
     <script type="text/javascript">
-    let emoticon_left = ["(", "\\(", "¯\\_(", "ᕙ(", "(┛"]
-    let emoticon_right = [")", ")/", ")_/¯", ")╯ ┻━┻", "ᕗ", "ﾉ*:･ﾟ✧", ")┛"]
-    let emoticon_face = ["o.o", "uwu", "0_0", "O.o", "-_-", "ｏ`皿′ｏ", "ﾉ◕ヮ◕", "◉Д◉", "ಠ益ಠ"]
+    let emoticon_left = ["(", "\\(", "¯\\_(", "ᕙ(", "(┛", "ʕ"]
+    let emoticon_right = [")", ")/", ")_/¯", ")╯ ┻━┻", "ᕗ", ")ﾉ*:･ﾟ✧", ")┛", "ʔ"]
+    let emoticon_face = ["o.o", "uwu", "0_0", "O.o", "-_-", "ｏ`皿′ｏ", "ﾉ◕ヮ◕", "◉Д◉", "ಠ益ಠ", "⊙ᴥ⊙", "⊙＿⊙", "￣ェ￣;", "･ｪ･"]
     let emoticon = ""
     let emoticon_output = document.querySelector('#emoticon_output')
+    let bad_idea = document.querySelector('#bad_idea')
+    let more_faces = document.querySelector('#more_faces')
 
     make_face.onclick = function() {
         let emo_left = Math.floor(Math.random()*emoticon_left.length)
@@ -167,6 +188,35 @@
 
         emoticon = emo_left_choice + emo_face_choice +emo_right_choice
         emoticon_output.innerText = emoticon
+    }
+
+    function moreFaces(){
+        let emo_left = Math.floor(Math.random()*emoticon_left.length)
+        let emo_left_choice = emoticon_left[emo_left]
+
+        let emo_face = Math.floor(Math.random()*emoticon_face.length)
+        let emo_face_choice = emoticon_face[emo_face]
+
+        let emo_right = Math.floor(Math.random()*emoticon_right.length)
+        let emo_right_choice = emoticon_right[emo_right]
+
+        emoticon = emo_left_choice + emo_face_choice +emo_right_choice
+        bad_idea.innerText += emoticon 
+    }
+
+    more_faces.onclick = function(){
+        console.log('FACES')
+        more_faces.value = !more_faces.value
+        if (more_faces.value){
+            // for (let i=0; i<1500; ++i) {moreFaces()}
+            setInterval(function() {
+                moreFaces()
+            }, 50)
+        }
+        else{
+            bad_idea.innerText = ""
+        }
+        
     }
 
     </script>

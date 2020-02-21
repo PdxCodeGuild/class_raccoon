@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>JavaScript Lab 2</title>
+    </head>
+    <body>
+
+
+        <input type="text" name="input_operand1" value="" id="input_operand1">
+        <select name="math_select" id="math_select"></select>
+        <input type="text" name="input_operand2" value="" id="input_operand2">
+        <button id='bt'>Calculate</button>
+        <span id="span_output"></span>
+
+
+        <script type="text/javascript">
+            let input_operand1 = document.querySelector('#input_operand1')
+            let math_select = document.querySelector('#math_select')
+            let input_operand2 = document.querySelector('#input_operand2')
+            let bt = document.querySelector("#bt")
+            let span_output = document.querySelector('#span_output')
+            let math_choices = ['+', '-', '*', '/']
+            for (let i=0; i<math_choices.length; ++i){
+                let option = document.createElement('option')
+                option.innerText = math_choices[i]
+                math_select.appendChild(option)
+            }
+
+            bt.addEventListener('click', function(event){
+
+                // alert('!!!')
+                let math = ['+', '-', '*', '/']
+                let operand1 = parseFloat(input_operand1.value)
+                let operand2 = parseFloat(input_operand2.value)
+                let operator = math_select.value
+
+                let answer = ''
+
+                if (operator == '+') {
+                    answer = operand1 + operand2
+                } else if (operator == '-') {
+                    answer = operand1 - operand2
+                } else if (operator == '*') {
+                    answer = operand1 * operand2
+                } else if (operator == '/') {
+                    answer = operand1 / operand2
+                }
+
+                span_output.innerText = answer
+
+                // Optional, Less Code
+                // let operations = {
+                //     '+': function (a, b) { return a + b }
+                //     '-': function (a, b) { return a - b }
+                // }
+                // span_output.innerText = operations[operation.value](parseFloat(operand1.value), parseFloat(operand2.value))
+            })
+        </script>
+    </body>
+</html>
+

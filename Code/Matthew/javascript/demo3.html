@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+
+      setTimeout(function() {
+        alert('hi')
+      }, 1000)
+
+      // button.addEventListener('click', function() {
+      //   alert('clicked')
+      // })
+
+
+      let add1 = (a, b) => {
+        console.log('arrow -----')
+        console.log(this)
+        console.log('-----------')
+        return a + b
+      }
+      let add2 = function(a, b) {
+        console.log('regular ---')
+        console.log(this)
+        console.log('-----------')
+        return a + b
+      }
+
+      setTimeout(add1, 1000)
+      setTimeout(add2, 1100)
+
+
+      // add1(5, 2)
+      // add2(5, 2)
+
+
+      function add(a, b) {
+        return a + b
+      }
+    </script>
+  </body>
+</html>

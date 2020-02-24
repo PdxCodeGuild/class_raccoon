@@ -33,7 +33,7 @@
   </div>
   <script type="text/javascript">
     let btn_add_todo = document.querySelector('#btn_add_todo');
-    let todo_array = [] // empty array/list
+
 
     btn_add_todo.addEventListener('click', function() {
       let add_list = prompt('Add a task: ') // prompt user to add to list on btn click
@@ -44,6 +44,7 @@
         li.innerText = todo_array[i]
         li.innerHTML = "<b>" + todo_array[i] + "</b>"
         ul_todo.appendChild(li)
+        return todo_array
       } // this is creating li to list all the todo_arrays
     });
   </script>

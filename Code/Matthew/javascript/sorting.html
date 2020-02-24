@@ -83,7 +83,7 @@
         for (let i=0; i<numsArray.length; ++i) {
           let currentDiv = document.createElement("div")
           // bt_say_hello.style.backgroundColor = 'rgb(' + r + ',' + g + ',' + b + ')'
-          // let hue = numsArray[i] * 3.6
+          // let hue = numsArray[i] * 3.6 ;
           let hue = numsArray[i]
           currentDiv.style.backgroundColor = "hsl(" + hue + ", 100%, 50%)"
           currentDiv.style.flexGrow = 1
@@ -103,14 +103,15 @@
               let t = numsArray[i]
               numsArray[i] = numsArray[i+1]
               numsArray[i+1] = t
+              draw(numsArray)
+              await sleep(0)
 
             }
             if (stop) {
               return
             }
           }
-          draw(numsArray)
-          await sleep(0)
+
         }
 
       }
@@ -122,13 +123,14 @@
             while (j>= 0 && key < numsArray[j]) {
               numsArray[j+1] = numsArray[j]
               j -= 1
+              draw(numsArray)
+              await sleep(0)
+              if (stop) {
+                return
+              }
             }
             numsArray[j+1] = key
-            draw(numsArray)
-            await sleep(0)
-            if (stop) {
-              return
-            }
+
           }
       }
 

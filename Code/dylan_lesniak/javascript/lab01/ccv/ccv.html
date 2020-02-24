@@ -13,8 +13,13 @@
     <script>
         // functions
         function arrayInts(cc_num){
-            return [...cc_num + ""].map(Number) 
+            return [...cc_num + ""].map(Number)
             // gives us an array of ints from our original cc number
+            r = []
+            for (let i=0; i<cc_num.length; ++i) {
+              r.push(parseInt(cc_num[i]))
+            }
+            return r
         }
 
         // variables
@@ -39,7 +44,7 @@
                 x += 1
             }
 
-            sum = 0 
+            sum = 0
             for (let i=0; i<cc_numArray.length; ++i){
                 sum += cc_numArray[i]
             }

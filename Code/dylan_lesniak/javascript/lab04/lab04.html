@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        table,
-        td {
+        table th, table td{
             border: 1px solid black;
+        }
+
+        table *{
+            text-transform: capitalize;
         }
     </style>
 </head>
@@ -20,35 +23,104 @@
         <option value="low">Low</option>
     </select>
     <button id="btn_submit">Submit</button>
+    <button id="btn_clear">Clear</button>
 
     <table id="todo_table">
         <tr>
             <th>Task</th>
             <th>Priority</th>
-            <th></th>
+            <th hidden></th>
         </tr>
         
     </table>
 
     <script type="text/javascript">
-        {/* variables */}
+        // variables 
         let input_task = document.querySelector("#input_task")
         let select_priority = document.querySelector("#select_priority")
         let btn_submit = document.querySelector("#btn_submit")
         let todo_table = document.querySelector("#todo_table")
+        let btn_clear = document.querySelector("#btn_clear")
+        let taskId = 0
+        let todoArr = []
+        if (window.localStorage.getItem("task_obj_arr")) {
+            todoArr = JSON.parse(window.localStorage.getItem("task_obj_arr"))
+            for (let i = 0; i < todoArr.length; ++i) {
+                drawRow(todoArr[i].task, todoArr[i].priority, todoArr[i].id)
+            }
+        }
 
-        btn_submit.addEventListener("click", function(event) {
-            let task = input_task.value
-            let priority = select_priority.value
+        // functions
+        function storeObject(task, priority, id) {
+            let task_obj = {
+                task: task,
+                priority: priority,
+                id: taskId
+            }
+            todoArr.push(task_obj)
+            window.localStorage.setItem("task_obj_arr", JSON.stringify(todoArr))
+         }
 
+        function deleteObj(rowId) {
+            console.log(todoArr.length)
+            for (let i=0; i < todoArr.length; ++i) {
+                
+                if (todoArr[i].id == rowId) {
+                    todoArr.splice(i, 1)
+                    window.localStorage.setItem("task_obj_arr", JSON.stringify(todoArr))
+                    todo_table.deleteRow(i + 1)
+                }
+            }
+            console.log(todoArr.length)
+            console.log()
+        }
+
+        function drawRow(task, priority, id) {
             let table_row = todo_table.insertRow(-1)
             let task_cell = table_row.insertCell(0)
             let priority_cell = table_row.insertCell(1)
-            let delete_btn_cell = table_row.insertCell(2)   
+            let delete_btn_cell = table_row.insertCell(2)
+            let delete_btn = document.createElement("BUTTON")
+            let delete_btn_txt = document.createTextNode("Delete")
+            let rowId = taskId
 
+            delete_btn.appendChild(delete_btn_txt)
+            table_row.setAttribute("id", rowId)
             task_cell.innerHTML = task
             priority_cell.innerHTML = priority
-            delete_btn_cell.innerHTML = "HI IM DELETE"
+            delete_btn_cell.appendChild(delete_btn)
+            delete_btn.addEventListener("click", function(event) {
+                deleteObj(rowId)
+            })
+
+            taskId += 1
+        }
+
+        
+        // events
+        btn_submit.addEventListener("click", function(event) {
+            let task = input_task.value
+            let priority = select_priority.value
+            let id = taskId
+
+            storeObject(task,priority, id)
+            drawRow(task, priority)
+        })
+
+        input_task.addEventListener("keypress", function(event) {
+            if (event.key == "Enter") {
+                let task = input_task.value
+                let priority = select_priority.value
+                let id = taskId
+
+                storeObject(task, priority, id)
+                drawRow(task, priority)
+            }
+        })
+
+        btn_clear.addEventListener("click", function(event) {
+            window.localStorage.clear()
+            location.reload()
         })
     </script>
 </body>

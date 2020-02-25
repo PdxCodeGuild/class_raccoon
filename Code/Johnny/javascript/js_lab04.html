@@ -13,7 +13,7 @@
 
     .column {
       float: left;
-      width: 33.33%;
+      width: 50%;
     }
   </style>
   <title></title>
@@ -29,23 +29,24 @@
     </div>
     <div class="column" id="todo_middle_col">
       <button id="btn_add_todo">Add to list</button></div>
-    <div class="column" id="todo_right_col">right</div>
   </div>
   <script type="text/javascript">
     let btn_add_todo = document.querySelector('#btn_add_todo');
-
+    let todo_array = []
 
     btn_add_todo.addEventListener('click', function() {
-      let add_list = prompt('Add a task: ') // prompt user to add to list on btn click
-      todo_array.push(add_list) // appends to list
-      console.log(todo_array) // print/error checking to see if list is appending
-      for (let i = 0; i < todo_array.length; ++i) {
-        let li = document.createElement('li')
-        li.innerText = todo_array[i]
-        li.innerHTML = "<b>" + todo_array[i] + "</b>"
-        ul_todo.appendChild(li)
-        return todo_array
-      } // this is creating li to list all the todo_arrays
+      let add_list = prompt('Add a task: ') // prompt user to add to array  on btn click
+      todo_array.push(add_list) // appends to array
+      console.log(todo_array) // print/error checking
+      let li = document.createElement('li')
+        for (i = 0; i < todo_array.length; i++) {
+          li.innerText = todo_array[i]
+          li.innerHTML = todo_array[i] + ' (edit) ' + '(remove)'
+        }
+      ul_todo.appendChild(li)
+
+
+      // this is creating li to list all the todo_arrays
     });
   </script>
 </body>

@@ -46,6 +46,8 @@
     <div class="card-contain2">
         {% for book in books %}
         <div class="card card-bod card-cust" style="width: 18rem;">
+           
+           
             <div class="card-header">
               Title: {{book.book.title}}
             </div>
@@ -61,7 +63,8 @@
 
         <div class="searchbar2">
         <form action="" method="post">
-            {% csrf_token %}
+            {% csrf_token %
+            }
             <div class="form-group search-inside2">
               <label for="exampleInputEmail1">Search by Title or Author:</label>
               <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="search_text">

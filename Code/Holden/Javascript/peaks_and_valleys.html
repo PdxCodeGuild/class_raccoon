@@ -21,7 +21,7 @@
   </head>
   <body>
     <label for="table_width">width:</label><input type="range" id="table_width" min="0" max="60" value='20' onchange="modifyWidth()"><span id="range_label_width">20</span>
-    <label for="table_height">height:</label><input type="range" id="table_height" min="5" max="25" value='10'onchange="modifyHeight()"><span id="range_label_height">10</span>
+    <label for="table_height">height:</label><input type="range" id="table_height" min="5" max="25" value='10' onchange="modifyHeight()"><span id="range_label_height">10</span>
     <input type="checkbox" id="check_smoothing"><label for="check_smoothing">Smoothing</label>
     <table id="display" cellspacing="0" cellpadding="0">
 
@@ -127,6 +127,7 @@
         display.innerHTML = output
       }
       function addWater(){
+        console.log(this)
         let water_amount = 0
         let highest_peak = 0
         for (let i = 0; i < pva.length; ++i){
@@ -138,12 +139,10 @@
         for (let i = 0; i < highest_peak; ++i){
           if (curr_height <= pva[i]){
             curr_height = pva[i]
-            console.log(curr_height)
             continue
           }
           for (let j = pva[i]+1; j <= curr_height; ++j){
             let current_cell = document.querySelector('#row'+j+'column'+i)
-            console.log(current_cell)
             current_cell.className = "water"
             water_amount++
           }
@@ -152,12 +151,10 @@
         for (let i = pva.length-1; i > highest_peak; --i){
           if (curr_height <= pva[i]){
             curr_height = pva[i]
-            console.log(curr_height)
             continue
           }
           for (let j = pva[i]+1; j <= curr_height; ++j){
             let current_cell = document.querySelector('#row'+j+'column'+i)
-            console.log(current_cell)
             current_cell.className = "water"
             water_amount++
           }

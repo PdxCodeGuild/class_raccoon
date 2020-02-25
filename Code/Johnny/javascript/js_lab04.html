@@ -13,7 +13,7 @@
 
     .column {
       float: left;
-      width: 33.33%;
+      width: 50%;
     }
   </style>
   <title></title>
@@ -22,30 +22,34 @@
 <body>
   <h1> To do list index </h1>
   <div class="row">
-    <div class="column" id="todo_left_col">left
+    <div class="column" id="todo_left_col">left col
       <ul id="ul_todo">
 
       </ul>
     </div>
     <div class="column" id="todo_middle_col">
       <button id="btn_add_todo">Add to list</button></div>
-    <div class="column" id="todo_right_col">right</div>
   </div>
   <script type="text/javascript">
-    let btn_add_todo = document.querySelector('#btn_add_todo');
-    let todo_array = [] // empty array/list
+    let btn_add_todo = document.querySelector('#btn_add_todo')
+    let todo_array = []
+
 
     btn_add_todo.addEventListener('click', function() {
-      let add_list = prompt('Add a task: ') // prompt user to add to list on btn click
-      todo_array.push(add_list) // appends to list
-      console.log(todo_array) // print/error checking to see if list is appending
-      for (let i = 0; i < todo_array.length; ++i) {
-        let li = document.createElement('li')
-        li.innerText = todo_array[i]
-        li.innerHTML = "<b>" + todo_array[i] + "</b>"
-        ul_todo.appendChild(li)
-      } // this is creating li to list all the todo_arrays
+      let add_list = prompt('Add a task: ') // prompt user to add to array  on btn click
+      if (add_list == null || add_list == "") {
+        return;
+      } else {
+        todo_array.push(add_list)
+      } // appends to array
+      console.log(todo_array) // print/error checking
+      let li = document.createElement('li')
+      for (i = 0; i < todo_array.length; i++) {
+        li.innerHTML = todo_array[i] + " [edit] " + " <button id=btn_remove" + todo_array[i] + ")>remove</button>"
+      }
+      ul_todo.appendChild(li)
     });
+
   </script>
 </body>
 

@@ -10,11 +10,11 @@ You can access the elements of the DOM from JavaScript using several functions. 
 
 | function | description |
 | ---      | ---         |
+| `document.querySelector(selector)` | get an element that matches the given CSS selector |
+| `document.querySelectorAll(selector)` | get all elements that match the given CSS selector |
 | `document.getElementById(id)` | get an element with the given id |
 | `document.getElementsByTagName(tag)` | get all elements of the given tag |
 | `document.getElementsByName(name)` | get all elements with the given name |
-| `document.querySelector(selector)` | get an element that matches the given CSS selector |
-| `document.querySelectorAll(pattern)` | get all elements that match the given CSS selector |
 
 The following code demonstrates how each of these are used:
 
@@ -58,7 +58,7 @@ This renders the following:
 <div id="div2"><p><b>Hello World!</b></p></div>
 ```
 
-## Editing Attributes and Style
+## Editing Style
 
 You can assign attributes to elements just as you'd assign attributes to objects.
 
@@ -78,18 +78,58 @@ This renders the following:
 <div id="demo_div" style="font-size:24px" name="demo_div">Hello World!</div>
 ```
 
-Additionally, you may use these functions on the element to manipulate the attributes. These are necessary if you're attempting to edit 'non-standard' attributes.
+## Editing Classes
 
+HTML elements have a special [classList](https://developer.mozilla.org/en-US/docs/Web/API/Element/classList) property can be used to add or remove CSS classes.
+
+
+
+```javascript
+// <div id="mydiv"></div>
+mydiv.classList.add("class1");
+// <div id="mydiv" class="class1"></div>
+mydiv.classList.add("class2");
+// <div id="mydiv" class="class1 class2"></div>
+mydiv.classList.remove("class1");
+// <div id="mydiv" class="class2"></div>
+mydiv.classList.replace("class2", "class2");
+// <div id="mydiv" class="class1"></div>
+mydiv.classList.toggle("class1");
+// <div id="mydiv" class=""></div>
+mydiv.classList.toggle("class1");
+// <div id="mydiv" class="class1"></div>
+```
+
+## Setting Data
+
+HTML elements have a [dataset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOrForeignElement/dataset) property for storing and retrieving pieces of data.
+
+
+
+
+## Editing Attributes
+
+"Standard" attributes can be edited directly as properties
+
+```javascript
+// <button id="btn">click</button>
+let btn = document.querySelector('#btn')
+btn.disabled = 'disabled'
+```
+
+Non-standard attributes can be changed through various methods. You can read more about the difference [here](https://stackoverflow.com/questions/3919291/when-to-use-setattribute-vs-attribute-in-javascript).
 
 - `element.setAttribute(attribute_name, value)`
 - `element.getAttribute(attribute_name)`
 - `element.hasAttribute(attribute_name)`
 - `element.removeAttribute(attribute_name)`
 
-
 ## Input Fields
 
 Input elements allow the user to input their information [more info](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input). The various input types may look different on different browsers.
+
+
+### Text Input
 
 ```html
 <input id="user_input" type="text"/>
@@ -125,14 +165,12 @@ If radio buttons are given the same `name` attribute, only allow one among them 
 </script>
 ```
 
-
-
 ### Dropdown Lists
 
 A `select` tag defines a dropdown list. Each `option` defines an option of that dropdown list. Note that the `value` attribute differs from the inner text. The inner text servers human interests, the `value` serves the code's interests.
 
 ```html
-<select>
+<select id="ddl">
   <option value="volvo">Volvo</option>
   <option value="saab">Saab</option>
   <option value="mercedes">Mercedes</option>
@@ -140,10 +178,15 @@ A `select` tag defines a dropdown list. Each `option` defines an option of that 
 </select>
 ```
 
+```javascript
+let ddl = document.querySelector('#ddl')
+console.log(ddl.value)
+console.log(ddl.options[ddl.selectedIndex].value) // alternatively
+```
+
 ## Creating and Adding Elements
 
-
-We can also create elements from scratch.
+We can also create elements and add them to other elements.
 
 | function | description |
 | ----     | ----        |
@@ -151,19 +194,26 @@ We can also create elements from scratch.
 | `document.createTextNode(text)` | create a text node containing the given text |
 | `element.appendChild(child)` | append a child element to a parent element |
 | `element.removeChild(child)` | remove a child element from a parent element |
-| `element.hasChild(child)` | indicated whether the parent has a particular child |
+| `element.hasChild(child)` | indicates whether the parent has a particular child |
 | `element.replaceChild(child)` | replaces a child |
-
 
 
 ```html
 <div id="container_div"></div>
 <script>
+    let container_div = document.querySelector('#container_div');
+
     let btn = document.createElement("button");
     btn.style.backgroundColor = "lightblue";
     btn.style.border = "1px solid white";
     btn.innerText = 'click';
-    let container_div = document.getElementById('container_div');
+
     container_div.appendChild(btn);
 </script>
+```
+
+```html
+<div id="container_div">
+  <button style="background-color:lightblue;border:1px solid white">click</button>
+</div>
 ```

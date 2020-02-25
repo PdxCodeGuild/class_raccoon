@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>AppHost Library</title>
+    <style type="text/css">
+      .bookcard{
+        border-radius: 4px;
+        border: 1px solid darkgrey;
+        padding: 5px;
+        margin: 2px;
+        text-align: center;
+        background-color: white;
+        transition: all 0.2s;
+      }
+      .bookcard:hover{
+        background-color: whitesmoke;
+      }
+      .mainbody{
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .books{
+        display: flex;
+        flex-direction: column;
+      }
+      .checkedin:nth-child(2) p{
+        text-decoration: line-through;
+      }
+      nav{
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: row;
+        width: 100%;
+      }
+      nav>*{
+        margin: 3px 8px;
+        color: black;
+      }
+      #foot{
+        margin-top: 20px;
+      }
+      .books div{
+        border: 1px solid grey;
+        margin: 2px 0;
+        padding: 2px;
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <b>{{user.username}}</b>
+      <a href="{% url 'accounts:logout' %}">logout</a>
+    </nav>
+    <div class="mainbody">
+      <h3>book index</h3>
+      <div class='books'>
+        {% for checkout in books %}
+        <div id="checkout{{ checkout.id }}">
+          <p><b>{{ checkout.book.title }}</b></p>
+          <p>{{ checkout.checkout_date }}</p>
+          <button type="button" id="btn_checkin{{ checkout.id }}" onclick="checkin({{ checkout.id }})">Return</button>
+        </div>
+        {% endfor %}
+      </div>
+      <div id="foot">
+        <a href="{% url 'library:index' %}">Library Homepage</a>
+      </div>
+    </div>
+    <script type="text/javascript">
+    function checkin(id) {
+      let button = document.querySelector("#btn_checkin" + id)
+      button.setAttribute('disabled', '')
+      button.setAttribute('onclick', '')
+      let xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+          button.style.backgroundColor = 'dimgrey'
+          button.innerText = 'Returned'
+          button.style.color = 'white'
+        }
+        if (this.readyState === 4 && this.status === 404) {
+          button.style.backgroundColor = 'red'
+          button.innerText = 'Error'
+          button.style.color = 'black'
+        }
+      };
+      xhttp.open("GET", "/library/checkin/" + id);
+      xhttp.send();
+    }
+    </script>
+  </body>
+</html>

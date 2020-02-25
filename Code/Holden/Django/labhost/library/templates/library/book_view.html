@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{{book.title}}</title>
+    <style media="screen">
+      nav{
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: row;
+        width: 100%;
+      }
+      nav>*{
+        margin: 3px 8px;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="{% url 'library:user_checkouts' %}">{{user.username}}</a>
+      <a href="{% url 'accounts:logout' %}">logout</a>
+    </nav>
+    {% if message == checkout_error %}
+    <h3>Sorry, the last copy of the book you were attempting to check out was already checked out</h3>
+    {% endif %}
+    <div class="sideflex">
+      <div class="">
+        <p><b>{{ book.title }}</b></p>
+        <p>year published: {{book.year_published}}</p>
+        <p>authors: {{ book.authorlist }}</p>
+      </div>
+      <div class="">
+        {% if unchecked %}
+          <a href="{% url 'library:book_checkout' book.id %}">Check out this book</a>
+        {% endif %}
+        {% if checked %}
+          <p>{{ checked }} out of {{copies}} are currently checked out</p>
+        {% elif copies %}
+          <p>{%if copies > 1 %}All {{copies}} copies are{% else %}The copy is{% endif %} available</p>
+        {% endif %}
+      </div>
+    </div>
+  </body>
+</html>

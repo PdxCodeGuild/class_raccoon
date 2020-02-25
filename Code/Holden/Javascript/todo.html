@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+      div{
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>todo list</h3>
+    <input type="text" id="input_todo" value="">
+    <button id="add_todo">Add todo</button>
+    <ul id="todo_container">
+    </ul>
+    <h3>completed</h3>
+    <ul id="completed">
+    </ul>
+    <script type="text/javascript">
+      let input_todo = document.querySelector('#input_todo')
+      let add_todo = document.querySelector('#add_todo')
+      let todo_container = document.querySelector('#todo_container')
+      let completed = document.querySelector('#completed')
+      add_todo.addEventListener('click', function(){
+        if (input_todo.value) {
+          let newTodo = document.createElement("li")
+          newTodo.innerText = input_todo.value
+          let newDeleteBtn = document.createElement("button")
+          newDeleteBtn.innerText = 'delete'
+          newDeleteBtn.addEventListener('click', function(){
+            newTodo.remove()
+          })
+          newTodo.appendChild(newDeleteBtn)
+          let newCompleteBtn = document.createElement("button")
+          newCompleteBtn.innerText = 'complete'
+          newCompleteBtn.addEventListener('click', function(){
+            if (todo_container.contains(newTodo)) {
+              completed.appendChild(newTodo)
+              newCompleteBtn.innerText = 'uncomplete'
+            } else {
+              todo_container.appendChild(newTodo)
+              newCompleteBtn.innerText = 'complete'
+            }
+          })
+          newTodo.appendChild(newCompleteBtn)
+          todo_container.appendChild(newTodo)
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -8,6 +8,9 @@
         display: flex;
         flex-direction: column;
       }
+      li button{
+        margin-left: 8px;
+      }
     </style>
   </head>
   <body>
@@ -24,14 +27,34 @@
       let add_todo = document.querySelector('#add_todo')
       let todo_container = document.querySelector('#todo_container')
       let completed = document.querySelector('#completed')
-      add_todo.addEventListener('click', function(){
-        if (input_todo.value) {
+      let saveJSON = localStorage.getItem('todo_saves')
+      let saved = {}
+      if (saveJSON) {
+        saved = JSON.parse(saveJSON)
+      }
+      let todolist = []
+      if (saved) {
+        todolist = Object.keys(saved)
+      }
+      for (let i = 0; i < todolist.length; ++i) {
+        if (saved[todolist[i]] == 'todo') {
+          newTodo(todolist[i], todo_container)
+        } else {
+          newTodo(todolist[i], completed)
+        }
+      }
+
+
+      function newTodo(newTodoText, currParent) {
+        if (newTodoText) {
           let newTodo = document.createElement("li")
-          newTodo.innerText = input_todo.value
+          newTodo.innerText = newTodoText
           let newDeleteBtn = document.createElement("button")
           newDeleteBtn.innerText = 'delete'
           newDeleteBtn.addEventListener('click', function(){
+            delete saved[newTodoText]
             newTodo.remove()
+            saveTodos()
           })
           newTodo.appendChild(newDeleteBtn)
           let newCompleteBtn = document.createElement("button")
@@ -40,15 +63,39 @@
             if (todo_container.contains(newTodo)) {
               completed.appendChild(newTodo)
               newCompleteBtn.innerText = 'uncomplete'
+              saved[newTodoText] = 'done'
+              saveTodos()
+
             } else {
               todo_container.appendChild(newTodo)
               newCompleteBtn.innerText = 'complete'
+              saved[newTodoText] = 'todo'
+              saveTodos()
             }
           })
           newTodo.appendChild(newCompleteBtn)
-          todo_container.appendChild(newTodo)
+          currParent.appendChild(newTodo)
+        }
+      }
+
+      add_todo.addEventListener('click', function(){
+        newTodo(input_todo.value, todo_container)
+        saved[input_todo.value] = 'todo'
+        saveTodos()
+      })
+
+
+      input_todo.addEventListener("keypress", function(event){
+        if (event.key == "Enter") {
+          newTodo(input_todo.value, todo_container)
+          saved[input_todo.value] = 'todo'
+          saveTodos()
         }
       })
+      function saveTodos() {
+          saveJSON = JSON.stringify(saved)
+          localStorage.setItem('todo_saves' , saveJSON)
+      }
     </script>
   </body>
 </html>

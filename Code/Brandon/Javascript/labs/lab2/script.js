@@ -5,6 +5,7 @@ let submit_todo = document.querySelector("#submit_todo")
 let current = document.querySelector("#current")
 let completed = document.querySelector("#completed")
 let todo_list = document.querySelector("#todo_list")
+let completed_list = document.querySelector("#completed_list")
 let user_input = ""
 let todos = []
 
@@ -32,14 +33,17 @@ submit_todo.addEventListener("click", function(){
 
 function complete_todo(){
     let li = this.parentNode
+    completed_list.appendChild(li)
     this.style.backgroundColor = 'green'
+    console.log(li)
+    alert("way to go!")
     
     
 }
 
 function delete_todo(){
     let li = this.parentNode
-    todo_list.removeChild(li)
+    li.parentNode.removeChild(li)
     console.log(li)
 
 

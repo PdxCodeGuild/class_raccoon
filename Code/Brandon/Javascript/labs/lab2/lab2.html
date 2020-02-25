@@ -12,14 +12,16 @@
             
 </head>
 <body>
+  <div class="add-bar">
   <input type="text" id="input_todo" class="input_field">
   <button id="submit_todo">Submit</button>
+  </div>
 <!--
   <div id="current">
       <ul id="todo_list"></ul>
   </div>
 -->
-  <div id="completed"></div>
+  <div class="main-con">
    <!-- Input box, button to save todo item
    ** divs to display todo items
    ** button to complete items
@@ -27,13 +29,24 @@
    ** button to delete items -->
     <div class="row">
     <div class="col s12 m6">
-      <div class="card blue-grey ">
+      <div class="card blue-grey card-main">
         <div class="card-content white-text">
           <span class="card-title">Current Todos</span>
               <ul id="todo_list"></ul>          
         </div>
       </div>
     </div>
+    </div>
+    <div class="row">
+      <div class="col s12 m6">
+        <div class="card blue-grey card-main ">
+          <div class="card-content white-text">
+            <span class="card-title">Deleted Todos</span>
+                <ul id="completed_list"></ul>          
+          </div>
+        </div>
+      </div>
+      </div>
     </div>
            
     

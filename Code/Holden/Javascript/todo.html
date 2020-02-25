@@ -29,11 +29,9 @@
       let completed = document.querySelector('#completed')
       let saveJSON = localStorage.getItem('todo_saves')
       let saved = {}
+      let todolist = []
       if (saveJSON) {
         saved = JSON.parse(saveJSON)
-      }
-      let todolist = []
-      if (saved) {
         todolist = Object.keys(saved)
       }
       for (let i = 0; i < todolist.length; ++i) {

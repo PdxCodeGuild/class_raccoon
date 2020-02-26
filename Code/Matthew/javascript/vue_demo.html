@@ -30,7 +30,7 @@
   </head>
   <body>
     <div id="app">
-      <input type="text" v-model="input_todo"/>
+      <input type="text" v-model="input_todo" placeholder="todo item"/>
       <select v-model="input_priority">
         <option v-for="priority in priorities" v-bind:value="priority">{{ priority }}</option>
       </select>
@@ -52,7 +52,7 @@
         data: {
           input_todo: '',
           input_priority: 'medium',
-          priorities: ['high', 'medium', 'low'],
+          priorities: ['ultra', 'high', 'medium', 'low'],
           todos: []
         },
         methods: {
@@ -70,7 +70,9 @@
             this.saveTodos()
           },
           completeTodo: function(index) {
-            this.todos[index].completed = true
+            // this.todos[index].completed = true
+            this.todos[index].completed = !this.todos[index].completed
+            this.saveTodos()
           },
           saveTodos: function() {
             localStorage.setItem('todos', JSON.stringify(this.todos))

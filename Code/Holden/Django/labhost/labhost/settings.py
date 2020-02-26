@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'contacts',
     'urlshortener',
     'accounts',
+    'library',
 ]
 
 MIDDLEWARE = [

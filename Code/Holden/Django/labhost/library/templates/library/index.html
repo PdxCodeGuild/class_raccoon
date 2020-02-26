@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>AppHost Library</title>
+    <style type="text/css">
+      .booklink{
+        text-decoration: none;
+        color: inherit;
+        width: 100%;
+      }
+      .bookcard{
+        border-radius: 4px;
+        border: 1px solid darkgrey;
+        padding: 5px;
+        margin: 2px;
+        text-align: center;
+        background-color: white;
+        transition: all 0.2s;
+      }
+      .booklink:hover .bookcard{
+        background-color: whitesmoke;
+      }
+      .booklink:active .bookcard{
+        background-color: lightgrey;
+      }
+      .mainbody{
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .books{
+        display: flex;
+        flex-direction: column;
+      }
+      nav{
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: row;
+        width: 100%;
+      }
+      nav>*{
+        margin: 3px 8px;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="{% url 'library:user_checkouts' %}">{{user.username}}</a>
+      <a href="{% url 'accounts:logout' %}">logout</a>
+    </nav>
+    <div class="mainbody">
+      <h3>book index</h3>
+      <div class='books'>
+        {% for book in books %}
+        <a class='booklink' href="{% url 'library:book_view' book.id %}"><div class="bookcard">
+          <p><b>{{ book.title }}</b></p>
+          <p>year published: {{book.year_published}}</p>
+          <p>authors: {{ book.authorlist }}</p>
+        </div></a>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>

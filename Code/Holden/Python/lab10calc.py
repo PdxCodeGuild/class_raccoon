@@ -29,7 +29,7 @@ while True:
                 break
             elif op == "/":
                 if int(usin[splt+1:]) == 0:
-                    print("infinity")
+                    print("Error")
                     break
                 print(int(usin[:splt])/int(usin[splt+1:]))
                 break

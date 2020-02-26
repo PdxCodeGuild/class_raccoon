@@ -26,8 +26,8 @@ def save_user(request):
         if 150 < len(username) or len(username) < 6 or password != password2:
             return redirect(reverse('accounts:register') + '?message=invalid')
 
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
+
+        if User.objects.exists(username=username):
             return redirect(reverse('accounts:register') + '?message=user_exists')
         user = User.objects.create_user(username, email, password)
         login(request, user)

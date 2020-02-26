@@ -50,11 +50,12 @@
         </form>
       </div>
     </nav>
+
     <div class="card_contain">
       {% for book in books %}
-        <div class="card customcard" style="width: 18rem;">
+        <div class="card customcard">
           <div class="card-body">
-            <h5 class="card-title">{{book}}</h5>
+            <h5 class="card-title custom_card_title"><a href="{% url 'lab4app:bookview' book.id %}">{{book}}</a></h5>
             <p class="card-text custom_card_text">
               {% for author in book.authors.all %}
                 {{author.name}}{% if not forloop.last %}, {% endif %}
@@ -64,8 +65,12 @@
           <div class="card-body containcheck">
             <div class="card-body checkstat">
               {% if book.checked_out %}
-                <a href="{% url 'lab4app:togglecheckout' book.id %}"><i class="fa fa-check-square"></i></a>
-                <!-- <i onclick="checkbox(this)" class="fa fa-check-square"></i> -->
+                {% if book.checked_by == request.user.username %}
+                  <a href="{% url 'lab4app:togglecheckout' book.id %}"><i class="fa fa-check-square"></i></a>
+                  <!-- <i onclick="checkbox(this)" class="fa fa-check-square"></i> -->
+                {% else %}
+                  <i class="fa fa-check-square" style="color:lightgray !important;"></i>
+                {% endif %}
               {% else %}
                 <a href="{% url 'lab4app:togglecheckout' book.id %}"><i class="fa fa-square"></i></a>
                 <!-- <i onclick="checkbox(this)" class="fa fa-square"></i> -->
@@ -75,8 +80,19 @@
               {% if book.checked_out %}
               Checked out by:
               <br>
-              {% endif %}
               {{book.checked_by}}
+              {% endif %}
+            </div>
+            <div class="card-body checkstat">
+              {% if book.checked_out %}
+              Checkout date:
+              <br>
+              {{book.checked_date}}
+              {% elif book.checkin_date %}
+              Last checked out:
+              <br>
+              {{book.checkin_date}}
+              {% endif %}
             </div>
           </div>
         </div>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" SameSite=None>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style type="text/css">
+      #div_container {
+        align-items: center;
+      }
+      #new_item_row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+    <h1 style="text-align:center;">To Do List</h1>
+    </div>
+    <div class="container">
+      <!-- iterate through list -->
+      <div id="todos"></div>
+      <div id="complete_todos"></div>
+    </div>
+    <!-- allow input of new entry on list -->
+
+    <div class="container">
+      <div id="new_item_row">
+        <div class="col">
+          <input type="text" class="form-control form-control-lg" id="new_item" placeholder="Add a new to do item...">
+          <span id ="no_entry"> </span>
+        </div>
+        <div class="col">
+          <button type="button" class="btn btn-primary btn-lg" id="new_item_btn">Add Item</button>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      let new_item = document.querySelector("#new_item")
+      let todo_array = ["kiss a fish","eat a horse"]
+      let todos = document.querySelector("#todos")
+      let complete_todos = document.querySelector("#complete_todos")
+      let new_item_btn = document.querySelector("#new_item_btn")
+
+      let new_item_row = document.querySelector("#new_item_row")
+      new_item_row.className = "py-md-2"
+      new_item_row.id = "new_item_row"
+
+      new_item.addEventListener('keypress', function(event){
+        if (event.key == "Enter") {
+          newTodo()
+        }
+      })
+      new_item_btn.addEventListener('click', function() {
+        newTodo()
+      })
+
+      // window.addEventListener('resize', function() {
+      //   let btn_icons = document.querySelectorAll('#todos i')
+      //   let icon_size = (window.innerWidth < 700)? 'fa-3x': 'fa-2x'
+      //
+      //   for (let i=0; i<btn_icons.length; ++i) {
+      //     delete_bts[i].width = button_size
+      //     btn_icons.className =
+      //
+      //   }
+      // })
+
+      function modifyTodo(todo_text) {
+        let div_container = document.createElement("div")
+        div_container.className = "row mx-md-n5 py-md-2 border border-dark"
+        div_container.id = "div_container"
+
+        let input_cb = document.createElement('input')
+        input_cb.setAttribute('type', 'checkbox')
+
+        let ck_img = document.createElement('i')
+        if (input_cb.checked) {
+          ck_img.className = "fa fa-check-square fa-2x"
+          ck_img.width = 40
+        } else {
+          ck_img.className = "fa fa-square fa-2x"
+          ck_img.width = 40
+        }
+        console.log(ck_img)
+        // {% if book.checked_out %}
+        //   {% if book.checked_by == request.user.username %}
+        //     <a href="{% url 'lab4app:togglecheckout' book.id %}"><i class="fa fa-check-square"></i></a>
+        //     <!-- <i onclick="checkbox(this)" class="fa fa-check-square"></i> -->
+        //   {% else %}
+        //     <i class="fa fa-check-square" style="color:lightgray !important;"></i>
+        //   {% endif %}
+
+        let div_text = document.createElement('div')
+        div_text.innerText = todo_text
+        div_text.className = "col h2 mb-0"
+
+        let delete_btn = document.createElement('i')
+        delete_btn.className = "fa fa-times-circle fa-2x"
+        delete_btn.style = "color:red"
+        // delete_btn.height = 20
+        // delete_btn.style.display = 'block'
+        // delete_btn.className = "col-sm-auto"
+
+        let cb_div = document.createElement('div')
+        cb_div.className = "col-sm-auto px-md-2"
+        cb_div.appendChild(ck_img)
+
+        let del_btn_div = document.createElement('div')
+        del_btn_div.className = "col-sm-auto"
+        del_btn_div.appendChild(delete_btn)
+
+        ck_img.addEventListener( 'click', function(){
+          input_cb.checked = !input_cb.checked
+          if (input_cb.checked) {
+            ck_img.className = "fa fa-check-square fa-2x"
+            div_text.style.textDecoration = "line-through"
+            complete_todos.appendChild(div_container)
+          } else {
+            ck_img.className = "fa fa-square fa-2x"
+            div_text.style.textDecoration = "none"
+            todos.appendChild(div_container)
+          }
+        })
+
+        div_container.appendChild(cb_div)
+        div_container.appendChild(div_text)
+        div_container.appendChild(del_btn_div)
+
+        // input_cb.addEventListener( 'change', function(){
+        //   if(this.checked) {
+        //     div_text.style.textDecoration = "line-through"
+        //     complete_todos.appendChild(div_container)
+        //   } else {
+        //     div_text.style.textDecoration = "none"
+        //     todos.appendChild(div_container)
+        //   }
+        // })
+
+        todos.appendChild(div_container)
+
+        delete_btn.addEventListener( 'click', function(){
+          if(input_cb.checked) {
+            complete_todos.removeChild(div_container)
+          } else {
+            todos.removeChild(div_container)
+          }
+        })
+  
+      }
+
+      for (let i=0; i < todo_array.length; i++){
+        // todos.innerText += todo_array[i]
+        modifyTodo(todo_array[i])
+      }
+
+
+      function newTodo() {
+        let x, text;
+
+        x = new_item.value;
+        if (x) {
+          todo_array.push(x)
+          text = ""
+          modifyTodo(x)
+          new_item.value = ""
+        } else {
+          text = "Please input an item"
+        }
+        document.getElementById("no_entry").innerHTML = text
+      }
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

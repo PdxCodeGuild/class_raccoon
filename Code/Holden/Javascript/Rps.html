@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Rock paper scissors spock</title>
+  </head>
+  <body>
+    <span id="player_select">
+    </span><br>
+    <span id='outcome'></span>
+    <script type="text/javascript">
+      let player_select = document.querySelector('#player_select')
+      let outcome = document.querySelector('#outcome')
+      let rpsarray=["rock", "paper", "scissors", "spock", "lizard"]
+      let options = ''
+      let wins = 0
+      let losses = 0
+      let ties = 0
+      rpsarray.forEach(function(choice){
+        options += '<button type="button" onclick="play(\''+choice+'\')">'+choice+'</button>'
+      });
+      player_select.innerHTML = options
+      function outcome_print(message){
+        outcome.innerHTML = message + '<br>' + wins + ' wins, ' + ties + ' ties, ' + losses + ' losses.'
+      }
+      function play(player_choice){
+        let i = Math.floor(Math.random()*rpsarray.length)
+        let comp = rpsarray[i]
+        console.log(comp)
+        let opposingarray = []
+        opposingarray = opposingarray.concat(rpsarray)
+        if (player_choice == comp){
+          ties += 1
+          outcome_print('I chose ' + comp + ', we tied.')
+          return
+        }
+        i = opposingarray.indexOf(player_choice)
+        opposingarray.splice(i,1)
+        let comp_i = opposingarray.indexOf(comp)
+        if ( i%2 == comp_i%2 ){
+          losses += 1
+          outcome_print('I chose ' + comp + ', you lost.')
+        } else {
+          wins += 1
+          outcome_print('I chose ' + comp + ', you won.')
+        }
+      }
+    </script>
+  </body>
+</html>

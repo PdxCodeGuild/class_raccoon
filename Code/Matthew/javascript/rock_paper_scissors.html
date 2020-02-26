@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style >
+      html,body{
+        margin: 0;
+        height: 100%;
+      }
+      #button_container{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-evenly;
+        height: 100%;
+      }
+      #player_buttons{
+        display: flex;
+        flex-direction: column;
+      }
+      #comp_buttons{
+        display: flex;
+        flex-direction: column;
+      }
+      button{
+        font-size: 6rem;
+        height: 8rem;
+        width: 9rem;
+      }
+      #battle_buttons{
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      h1{
+        font-size: 4rem;
+        text-align: center;
+      }
+      h2{
+        text-align: center;
+      }
+      @media (max-width:800px) {
+        html {
+            font-size: 10px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div id="button_container">
+
+      <div id="player_buttons">
+
+      </div>
+      <div id="middle_id">
+        <h1 id="battle_result"></h1>
+        <div id="battle_buttons">
+          <button id="player_battle">🤏</button>
+          <button id="comp_battle">🤏</button>
+        </div>
+        <h2 id="scoreboard">0 | 0 | 0</h2>
+      </div>
+      <div id="comp_buttons">
+
+      </div>
+    </div>
+
+    <!-- ✊✋✌🖖🤏 -->
+    <script type="text/javascript">
+      let rpsls=['✊','✋','✌️','🖖','🤏']
+      // let rpsls=['✊','✋','✌️','🖖','🤏','👉','🤙']
+      let button_container = document.querySelector('#button_container')
+      let player_buttons = document.querySelector('#player_buttons')
+      let battle_buttons = document.querySelector('#battle_buttons')
+      let comp_buttons = document.querySelector('#comp_buttons')
+      let player_battle = document.querySelector('#player_battle')
+      let comp_battle = document.querySelector('#comp_battle')
+      let battle_result = document.querySelector('#battle_result')
+      let scoreboard = document.querySelector('#scoreboard')
+      let player_buttons_array = []
+      let comp_buttons_array = []
+      let wins = 0
+      let ties = 0
+      let loss = 0
+
+
+      for (let i=0; i<rpsls.length; ++i) {
+        let button = document.createElement('button')
+        button.innerText = rpsls[i]
+        button.dataset.index = i
+        player_buttons.appendChild(button)
+        // target = button
+        button.addEventListener('click', function(event){
+          let index = event.target.dataset.index
+          play(index)
+        })
+        player_buttons_array.push(button)
+
+
+        let button2 = document.createElement('button')
+        button2.innerText = rpsls[i]
+        comp_buttons.appendChild(button2)
+        comp_buttons_array.push(button2)
+
+      }
+      function play(player_index){
+        let comp_index = Math.floor(Math.random()*rpsls.length)
+        for (let i=0; i<player_buttons_array.length; ++i){
+          if (i == player_index){
+            player_buttons_array[i].style.opacity='0.2'
+          } else {
+            player_buttons_array[i].style.opacity='1'
+          }
+          if (i == comp_index){
+            comp_buttons_array[i].style.opacity='0.2'
+          } else {
+            comp_buttons_array[i].style.opacity='1'
+          }
+          player_buttons_array[i].setAttribute('disabled', '')
+          comp_buttons_array[i].setAttribute('disabled', '')
+        }
+
+
+        player_battle.innerText = rpsls[player_index]
+        comp_battle.innerText = rpsls[comp_index]
+        if (player_index == comp_index){
+          ties += 1
+          updateDisplay('tie')
+        } else {
+          if (comp_index > player_index){
+            comp_index--
+          }
+          if (player_index % 2 == comp_index % 2){
+            loss++
+            updateDisplay('loss')
+          } else {
+            wins++
+            updateDisplay('win')
+          }
+        }
+
+
+        setTimeout(function(){
+          for (let i=0; i<player_buttons_array.length; ++i){
+            player_buttons_array[i].style.opacity='1'
+            comp_buttons_array[i].style.opacity='1'
+            player_buttons_array[i].removeAttribute('disabled')
+            comp_buttons_array[i].removeAttribute('disabled')
+          }
+        }, 1000)
+      }
+      function updateDisplay(result){
+        battle_result.innerText = result.replace(/^\w/, c => c.toUpperCase())
+        scoreboard.innerText = wins + ' | ' + ties + ' | ' + loss
+      }
+      // for (let i=0; i<100000; ++i){
+      //   play(0)
+      // }
+    </script>
+  </body>
+</html>

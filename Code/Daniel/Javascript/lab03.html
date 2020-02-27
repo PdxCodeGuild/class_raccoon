@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Matieralize -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css" type="text/css">
+            
+    <title>The Quizening</title>
+</head>
+<body>
+
+<div id="app">
+    <div class="hero">
+            <div class="col s12 m6 dropdown_container">
+              <div class="card blue-grey darken-1" id="options">
+                <div class="card-content white-text ">
+                  <span class="card-title">Quiz Setup</span>
+                  <div class="">
+                  <div class="input-field col s12 ddown">
+                    <select v-model="input_amount">
+                      <option value="" disabled selected>Number of Questions</option>
+                      <option value="10">10 Questions</option>
+                      <option value="15">15 Questions</option>
+                      <option value="20">20 Questions</option>
+                    </select>
+                  </div>
+                  <div class="input-field col s12">
+                    <select v-model="category">
+                      <option value="" disabled selected>Category</option>
+                      <option value="23">History</option>
+                      <option value="18">Computers</option>
+                      <option value="20">Mythology</option>
+                    </select>
+                  </div>
+                  <div class="input-field col s12">
+                    <select v-model="difficulty">
+                      <option value="" disabled selected>Dificulty</option>
+                      <option value="easy">Easy</option>
+                      <option value="medium">Medium</option>
+                      <option value="hard">Hard</option>
+                    </select>
+                  </div>
+                  <button v-on:click="startQuiz" class="btn waves-effect waves-light" type="submit" name="action">start
+                    <i class="material-icons right">send</i>
+                  </button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main_question">
+        <div class="row">
+            <div class="col s12 m6">
+            <div class="card blue-grey darken-1 question_card">
+                <div class="card-content white-text">
+                <span class="card-title">Question number</span>
+                <p v-for="question in questions">{{question.question}}</p>
+                </div>
+                <div class="collection">
+                    <a href="#!" class="collection-item">Question1</a>
+                    <a href="#!" class="collection-item">Question2</a>
+                    <a href="#!" class="collection-item">Question3</a>
+                    <a href="#!" class="collection-item">Question4</a>
+                </div>
+                
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems, {});
+  });
+
+    // End vanilla JS
+
+    let app = new Vue({
+        el: '#app',
+        data: {
+            input_amount: '',
+            category: '',
+            difficulty: '',
+            questions: []
+        },
+        methods: {
+        startQuiz: function() {
+            axios({
+            method: 'get',
+            url: 'https://opentdb.com/api.php',
+            params: {
+                amount: this.input_amount,
+                category: this.category,
+                difficulty: this.difficulty
+            }
+            }).then((response) => {
+            this.questions = response.data.results
+            })
+        }
+        }
+        
+    })
+  
+</script>
+    
+</body>
+</html>

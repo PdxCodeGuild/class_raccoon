@@ -2,9 +2,9 @@
 {% extends 'library/base.html'%}
 {% block content %}
 
-
+<div class="bigoldiv">
     <H1>{{user}}'s Books:</H1>
-    <div class="bigoldiv">
+    <div class="bookinfo">
     {% for book in books %}
     <div class="col s12 m7">
         <h3 class="header">{{book.title}}</h3>
@@ -21,8 +21,9 @@
           </div>
         </div>
       </div>
+    </div>
     {% endfor %}
-
+  </div>
 
 {% endblock %}
     

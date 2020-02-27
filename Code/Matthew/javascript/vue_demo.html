@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style type="text/css">
+      .todo_list {
+        width:400px;
+      }
+      .todo_item {
+        display:flex;
+        flex-direction:row;
+        justify-content:space-between;
+      }
+      .high {
+        color:red;
+      }
+      .medium {
+        color:orange;
+      }
+      .low {
+        color:blue;
+      }
+      .completed {
+        color:grey;
+        text-decoration:line-through;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="input_todo" placeholder="todo item"/>
+      <select v-model="input_priority">
+        <option v-for="priority in priorities" v-bind:value="priority">{{ priority }}</option>
+      </select>
+      <button v-on:click="addTodo">add</button>
+      <ul class="todo_list">
+        <li v-for="(todo, index) in todos">
+          <div class="todo_item">
+            <span v-bind:class="{completed: todo.completed}">{{ todo.text }}</span>
+            <span v-bind:class="todo.priority">{{ todo.priority }}</span>
+            <span><button v-on:click="completeTodo(index)">complete</button></span>
+            <span><button v-on:click="deleteTodo(index)">delete</button></span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <script type="text/javascript">
+      var app = new Vue({
+        el: '#app',
+        data: {
+          input_todo: '',
+          input_priority: 'medium',
+          priorities: ['ultra', 'high', 'medium', 'low'],
+          todos: []
+        },
+        methods: {
+          addTodo: function() {
+            this.todos.push({
+              text: this.input_todo,
+              priority: this.input_priority,
+              completed: false
+            })
+            this.input_todo = ''
+            this.saveTodos()
+          },
+          deleteTodo: function(index) {
+            this.todos.splice(index, 1)
+            this.saveTodos()
+          },
+          completeTodo: function(index) {
+            // this.todos[index].completed = true
+            this.todos[index].completed = !this.todos[index].completed
+            this.saveTodos()
+          },
+          saveTodos: function() {
+            localStorage.setItem('todos', JSON.stringify(this.todos))
+          }
+        },
+        created: function() {
+          let todos = localStorage.getItem('todos')
+          console.log(todos)
+          if (todos) {
+            this.todos = JSON.parse(todos)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

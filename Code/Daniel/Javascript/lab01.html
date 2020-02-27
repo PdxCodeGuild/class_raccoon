@@ -61,6 +61,10 @@
         #more_faces{
             z-index: 200;
         }
+        #make_it_stop{
+            z-index: 200;
+            
+        }
         
         
     </style>
@@ -166,7 +170,7 @@
         <button class="waves-effect waves-light btn" id="make_face">MAKE FACE</button> 
         <h4><div class="emoticon" id="emoticon_output"> &nbsp; </div></h4>
         <button class="waves-effect waves-light btn" id="more_faces" value="true">MORE FACES</button> 
-        
+        <button class="waves-effect waves-light btn" id="make_it_stop" value="true" style="display:none">MAKE IT STOP</button> 
     <script type="text/javascript">
     let emoticon_left = ["(", "\\(", "¯\\_(", "ᕙ(", "(┛", "ʕ"]
     let emoticon_right = [")", ")/", ")_/¯", ")╯ ┻━┻", "ᕗ", ")ﾉ*:･ﾟ✧", ")┛", "ʔ"]
@@ -175,6 +179,8 @@
     let emoticon_output = document.querySelector('#emoticon_output')
     let bad_idea = document.querySelector('#bad_idea')
     let more_faces = document.querySelector('#more_faces')
+    let make_it_stop = document.querySelector('#make_it_stop')
+
 
     make_face.onclick = function() {
         let emo_left = Math.floor(Math.random()*emoticon_left.length)
@@ -206,18 +212,22 @@
 
     more_faces.onclick = function(){
         console.log('FACES')
-        more_faces.value = !more_faces.value
-        if (more_faces.value){
-            // for (let i=0; i<1500; ++i) {moreFaces()}
-            setInterval(function() {
-                moreFaces()
-            }, 50)
-        }
-        else{
-            bad_idea.innerText = ""
+        setInterval(function() {
+            moreFaces()
+        }, 50)
+        toggle_visibility(function)
         }
         
-    }
+        
+    
+
+    function toggle_visibility(id) {
+           var e = document.getElementById(id);
+           if(e.style.display == 'block')
+              e.style.display = 'none';
+           else
+              e.style.display = 'block';
+        }
 
     </script>
 

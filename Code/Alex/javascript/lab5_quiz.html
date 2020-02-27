@@ -6,6 +6,9 @@
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <style type="text/css">
+            h1 {
+
+            }
             .incorrect:checked + label{
                 background-color: red;
             }
@@ -16,6 +19,8 @@
     </head>
     <body>
         <div id="app">
+            <h1>Computer Science Quiz</h1>
+            <p>Choose number of questions and difficulty level</p>
             <input type="number" v-model="input_amount"/>
             <select v-model="difficulty">
                 <option value="easy">easy</option>
@@ -31,8 +36,8 @@
                     <label :for="answer" v-html="answer"></label>
                 </div>
             </div>
-            <button v-on:click="endQuiz">Done</button>
-            <div v-if="finished">score: {{ score }}/{{questions.length}}</div>
+            <button v-on:click="endQuiz" v-if="!finished">Done</button>
+            <div v-if="finished && first">score: {{ score }}/{{questions.length}}</div>
         </div>
         <script type="text/javascript">
             let app = new Vue({
@@ -41,12 +46,14 @@
                     input_amount: 4,
                     questions: [],
                     score: 0,
-                    finished: false,
+                    finished: true,
                     difficulty: "easy",
+                    first: false,
                 },
                 methods: {
                     startQuiz: function() {
                         this.finished = false
+                        this.first = true
                         axios({
                             method: 'get',
                             url: 'https://opentdb.com/api.php',

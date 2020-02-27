@@ -1,0 +1,19 @@
+{% extends 'library/base.html'%}
+
+{% block content %}
+
+<div class="bookinfo">
+
+<h1>{{book}}</h1>
+<h2>{{book.author.author}}</h2>
+<h3>Checkout History:</h3>
+{% for record in records %}
+<ul>
+    <li>
+        <h4>{{record.checked_out_by}} : {{record.checkout_date}}</h4>
+    </li>
+</ul>
+{% endfor %}
+
+</div>
+{% endblock %}

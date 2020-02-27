@@ -34,22 +34,23 @@
     let btn_add_todo = document.querySelector('#btn_add_todo')
     let todo_array = []
 
-
     btn_add_todo.addEventListener('click', function() {
       let add_list = prompt('Add a task: ') // prompt user to add to array  on btn click
       if (add_list == null || add_list == "") {
         return;
       } else {
         todo_array.push(add_list)
-      } // appends to array
+      }; // appends to array
       console.log(todo_array) // print/error checking
-      let li = document.createElement('li')
+
+
+      let li = document.createElement('li') // create li in ul
       for (i = 0; i < todo_array.length; i++) {
-        li.innerHTML = todo_array[i] + " [edit] " + " <button id=btn_remove" + todo_array[i] + ")>remove</button>"
+        li.setAttribute('id', todo_array[i])
+        li.innerHTML = todo_array[i] + " [edit] " + "<button onclick='removeItem()'>remove</button>"
       }
       ul_todo.appendChild(li)
     });
-
   </script>
 </body>
 

@@ -1,0 +1,25 @@
+.hero{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#options{
+    width: 500px;
+}
+.ddown{
+    margin-top: 70px;
+}
+.dropdown_container{
+    background-color: #546e7a !important;     
+}
+.main_question{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.question_card{
+    margin-top: 100px;
+    width: 700px;
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+        <select v-model="input_category" >
+            <option value="" disabled selected hidden>Categories</option>
+            <option v-for="category in category_name">{{ category }}</option>
+        </select>
+        <select v-model="input_difficulty">
+            <option value=""disabled selected hidden>Difficulty</option>
+            <option value="">easy</option>
+            <option value="">medium</option>
+            <option value="">hard</option>
+        </select>
+      <input type="number" v-model="input_amount" placeholder="# of questions"/>
+      <button v-on:click="startQuiz">Start</button>
+      <div v-for="(question, i) in questions">
+          <span>{{i + 1}}) </span><span v-html="question.question"></span> </br>
+          <span v-for="answer in question.incorrect_answers" v-html="answer"></span>
+      </div>
+    </div>
+    <script type="text/javascript">
+      let app = new Vue({
+        el: '#app',
+        data: {
+          input_amount: "",  
+          input_category: "",   
+          input_difficulty: "",
+          questions: [],
+        //   holden sliced the correct answer into the incorrect answer array. 
+          answers: {},
+          category_name: ["Animals", "Comics", "Music", "Musicals"],
+          categories: {Animals: 27, Comics: 29, Music: 12, Musicals: 13},
+        },
+        methods: {
+          startQuiz: function() {
+            axios({
+              method: 'get',
+              url: 'https://opentdb.com/api.php',
+              params: {
+                amount: this.input_amount,
+                category: this.categories[this.input_category],
+                difficulty: this.input_difficulty,
+              }
+            }).then((response) => {
+                this.answers = {}
+                this.questions = response.data.results
+                // for (let i=0; i<this.questions.length; ++i) {
+                //     let question = this.questions[i]
+                //     this.answers[question.question] = [question.correct_answer]
+                //     let incorrect_answers = question.incorrect_answers
+                    
+                    
+                //     incorrect_answers.forEach(function(answer) {
+                //         this.answers[question.question].push(answer)
+                //     })
+                // }
+            console.log(this.questions)
+            })
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

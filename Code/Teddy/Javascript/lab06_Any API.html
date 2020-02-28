@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Any API</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="secrets.js"></script>
+</head>
+<body>
+
+  '''
+  Now build an interface around any API of your choosing. You can find a list of free public APIS here, here, and here. Below are some recommendations.
+
+    - Look at the documentation, find out the endpoints and general capabilities
+    - Find a url and if possible, enter it into your browser and see if you can get JSON
+    - Look into authentication, might have to register an account to get an API key
+    - Send the request through Python, look at the format of the response
+    - Copy the data into a JSON viewer
+    - Write code to extract the relevant data and display it
+  '''
+
+  <script type="text/javascript">
+
+    axios({
+      method: 'get',
+      url: 'https://api.nasa.gov/planetary/apod',
+      params: {
+        api_key: nasa_api_key
+      }
+    }).then((response) => {
+      console.log(response.data)
+    })
+
+
+  </script>
+
+</body>
+</html>

@@ -2,8 +2,18 @@ from django.shortcuts import render, reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Contact
 
+import random
+
 def index(request):
+
     contacts = Contact.objects.all()
+    order = request.GET.get('order', 'alphabetical')
+
+    if order == 'alphabetical':
+        contacts = contacts.order_by('first_name')
+    elif order == 'random':
+        contacts = list(contacts)
+        random.shuffle(contacts)
 
     context = {
         'title': 'Contacts List ',

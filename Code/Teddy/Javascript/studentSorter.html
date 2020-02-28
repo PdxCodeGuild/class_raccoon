@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://raw.githack.com/PdxCodeGuild/class_raccoon/master/Code/Matthew/javascript/utilities.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="input_student" placeholder="NAME!!!" v-on:keypress.enter="addStudent"/>
+      <button v-on:click="addStudent">Add</button>
+      <button v-on:click="clearStudents">Clear!</button>
+      {{ input_student }}
+      <div v-if="students.length>0">
+        <input type="number" v-model="input_group" placeholder="Number of Groups" min="1" v-bind:max="students.length"/>
+        <button v-on:click="createGroups">Engage</button>
+        <button v-on:click="groups=[]">Divorce</button>
+        {{ students.length / input_group }}
+      </div>
+      <ul>
+        <li v-for="student in students">{{ student }}</li>
+      </ul>
+      <ol>
+        <li v-for="group in groups">
+          <ul>
+            <span v-for="student in group">{{ student }}<br></span>
+          </ul>
+        </li>
+      </ol>
+    </div>
+    <script type="text/javascript">
+      let app = new Vue({
+        el: '#app',
+        data: {
+          input_student: '',
+          input_group: '1',
+          students: ['Bob','Carl','Melvyn','Kurt','Brandoon','Anthonio'],
+          groups: [],
+        },
+        methods: {
+          addStudent: function(event) {
+            if (this.input_student.trim() != '') {
+              this.students.push(this.input_student.trim())
+            }
+            this.input_student = ''
+          },
+          createGroups: function() {
+            this.groups = []
+            for (let i=0; i<this.input_group; i++) {
+              this.groups.push([])
+            }
+            let sh_students = this.students.slice()
+            shuffle(sh_students)
+            for (let i=0; i<sh_students.length; i++) {
+              this.groups[i%this.groups.length].push(sh_students[i])
+            }
+          },
+          clearStudents: function() {
+            this.students = []
+          },
+        }
+      })
+    </script>
+  </body>
+</html>

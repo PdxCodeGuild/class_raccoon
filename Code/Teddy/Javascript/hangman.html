@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+      canvas {
+        border: 1px solid black;
+      }
+      #letter_container span {
+        margin: 10px;
+        font-size: 30px;
+        height: 35px;
+      }
+      #guess_container {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="cnv" width="600" height="550"></canvas><br>
+    <input type="password" id="input_word_choice">
+    <button id="btn_start_game">Start Game</button>
+    <div id="letter_container">&nbsp;</div>
+    <div id="guess_container"></div>
+    <!-- to do , add key listener and make ability to have spaces in words -->
+    <script type="text/javascript">
+      // get elements out of page
+      let cnv = document.querySelector('#cnv')
+      let ctx = cnv.getContext('2d') // drawing context
+      let input_word_choice = document.querySelector("#input_word_choice")
+      let btn_start_game = document.querySelector("#btn_start_game")
+      let letter_container = document.querySelector("#letter_container")
+      let guess_container = document.querySelector("#guess_container")
+
+      let alphabet = "abcdefghijklmnopqrstuvwxyz"
+      let word = ""
+      let incorrect = 0
+
+      // generate alphabet buttons
+      for (let i=0; i < alphabet.length; ++i){
+        let alpha_btn = document.createElement("button")
+        alpha_btn.innerText = alphabet[i]
+        guess_container.appendChild(alpha_btn)
+        alpha_btn.addEventListener("click", function() {
+          let letter = alpha_btn.innerText
+          let match = false
+          for (let i=0; i < word.length; ++i) {
+            if (letter == word[i]) {
+              letter_container.children[i].innerText = letter
+              match = true
+            }
+          }
+          if (match == false) {
+            incorrect ++
+            drawMan()
+          }
+          alpha_btn.setAttribute("disabled","")
+          //console.log(hasWon())
+          if (hasWon()) {
+            setTimeout(function() {
+              alert('You Won!')
+              resetGame()
+            }, 500)
+          }
+          if (incorrect > 5) {
+            setTimeout(function() {
+              showWord()
+              alert('You Lose')
+              resetGame()
+            }, 500)
+          }
+        })
+      }
+
+      function showWord() {
+        for (let i=0; i<letter_container.children.length; ++i) {
+          if (letter_container.children[i].innerText == '_') {
+            letter_container.children[i].innerText = word[i]
+            letter_container.children[i].style.color = 'red'
+          }
+        }
+      }
+
+      function resetGame() {
+        for (let i=0; i<guess_container.children.length; ++i) {
+          guess_container.children[i].removeAttribute('disabled')
+          guess_container.style.display = 'none'
+        }
+        letter_container.innerHTML = ''
+        btn_start_game.removeAttribute('disabled')
+        incorrect = 0
+        input_word_choice.value = ''
+        drawMan()
+      }
+
+      input_word_choice.addEventListener('input', function() {
+        if (/^[a-zA-Z]+$/.test(input_word_choice.value)) {
+          btn_start_game.removeAttribute('disabled')
+        } else {
+          btn_start_game.setAttribute('disabled', '')
+        }
+      })
+
+      btn_start_game.addEventListener("click", function() {
+        word = input_word_choice.value.toLowerCase()
+
+        for (let i = 0; i < word.length; ++i) {
+          let span = document.createElement("span")
+          span.innerText = "_"
+          letter_container.appendChild(span)
+        }
+        btn_start_game.setAttribute("disabled","")
+        guess_container.style.display = 'block'
+      })
+
+      function hasWon() {
+        for (let i=0; i < word.length; ++i) {
+          if (letter_container.children[i].innerText == '_') {
+            return false
+          }
+        }
+        return true
+      }
+
+      function drawLine(color, x1, y1, x2, y2, width, ctx) {
+        ctx.strokeStyle = color
+        ctx.lineWidth = width
+        ctx.beginPath()
+        ctx.moveTo(x1, y1)
+        ctx.lineTo(x2, y2)
+        ctx.stroke()
+      }
+
+      function drawCircle(color, x, y, radius, ctx) {
+        ctx.beginPath()
+        ctx.arc(x, y, radius, 0, 2 * Math.PI)
+        ctx.strokeStyle = color
+        ctx.stroke()
+      }
+      function drawMan() {
+        ctx.clearRect(0, 0, cnv.width, cnv.height)
+        // gallows
+        drawLine('black', 50, 500, 550, 500, 10, ctx)
+        drawLine('black', 450, 500, 450, 50, 10, ctx)
+        drawLine('black', 455, 50, 250, 50, 10, ctx)
+        drawLine('black', 250, 45, 250, 120, 10, ctx)
+        // start guy
+        if (incorrect > 0) {
+          // head
+          drawCircle('black', 250, 150, 30, ctx)
+        }
+        if (incorrect > 1) {
+          // body
+          drawLine('black', 250, 180, 250, 310, 10, ctx)
+        }
+        if (incorrect > 2) {
+          // left legs
+          drawLine('black', 250, 305, 210, 380, 10, ctx)
+        }
+        if (incorrect > 3) {
+          // right leg
+          drawLine('black', 250, 305, 290, 380, 10, ctx)
+        }
+        if (incorrect > 4) {
+          // left arm
+          drawLine('black', 250, 205, 210, 280, 10, ctx)
+        }
+        if (incorrect > 5) {
+          // right arm
+          drawLine('black', 250, 205, 290, 280, 10, ctx)
+        }
+
+      }
+      drawMan()
+
+    </script>
+  </body>
+</html>

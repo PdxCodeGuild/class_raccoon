@@ -68,7 +68,7 @@ Adding a key-value pair to the request header is done by invoking `setRequestHea
 let xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
   if (this.readyState === 1) {
-    xhttp.setRequestHeader('Authorization', 'Token token="<api kep here>"')
+    xhttp.setRequestHeader('Authorization', 'Token token="a1b2c3"')
   } else if (this.readyState === 4 && this.status === 200) {
     let data = JSON.parse(xhttp.responseText);
     // do something with data
@@ -103,39 +103,71 @@ http_get("https://api.ipify.org/?format=json", function(data) {
 
 ### AJAX in Axios
 
-Axios is a JavaScript library which handles AJAX more succinctly. Ultimately it's built upon the Vanilla JavaScript form of AJAX, so it doesn't offer anything you can't otherwise do with Vanilla.
+Axios is a JavaScript library which handles AJAX more succinctly. Ultimately it's built upon vanilla JavaScript, so it doesn't offer anything you can't otherwise do with vanilla JS.
 
-```javascript
-axios.get(url)
-.then(function (response) {
+```es6
+axios({
+  method: 'get',
+  url: 'https://favqs.com/api/qotd'
+}).then((response) => {
   console.log(response.data)
 })
 ```
 
+#### Setting Query Parameters
+
+You can set query parameters using string concatenation or by setting the `params` property. Just remember that if you use string concatenation, you may have to use `encodeURIComponent` if the value has special characters in it. If you use `params` with Axios, it will automatically encode your parameters for you.
+
 ```javascript
-let config = {
-  headers: {
-    'x-api-key': api_key
+let business_name = 'Schmitt & Associates'
+let url1 = "http://example.com/?business=" + business_name
+let url2 = "http://example.com/?business=" + encodeURIComponent(business_name)
+console.log(url1) // INVALID: http://example.com/?business=Schmitt & Associates
+console.log(url2) // VALID: http://example.com/?business=Schmitt%20%26%20Associates
+```
+
+
+```javascript
+axios({
+  method: 'get',
+  url: 'https://opentdb.com/api.php',
+  params: {
+    amount: 10,
+    category: 18,
+    difficulty: 'easy'
   }
-}
-axios.get(url, config)
-.then(function (response) {
+}).then((response) => {
+  this.questions = response.data.results
+})
+```
+
+#### Setting Custom Request Headers
+
+Depending on the API specification, you may need to put an API key inside the headers of the request.
+
+```javascript
+axios({
+  method: 'get',
+  url: 'https://favqs.com/api/qotd',
+  headers: {
+    'x-api-key': 'api_key'
+  }
+}).then((response) => {
   console.log(response.data)
 })
 ```
 
+#### Sending Data
+
 ```javascript
-let data = {
-  'key': 'value'
-  'data': 'to send'
-}
-let config = {
-  headers: {
-    'header name': 'header value'
+axios({
+  method: 'post',
+  url: 'https://favqs.com/api/qotd',
+  data: {
+    name: 'joe',
+    age: '34'
   }
-}
-axios.post(url, data, config)
-.then(function(response) {
+}).then((response) => {
   console.log(response.data)
 })
 ```
@@ -202,7 +234,3 @@ If you receive the response "No 'Access-Control-Allow-Origin' header is present 
 JSONP (short for "JSON with Padding") is an additional security feature some APIs offer or require. You can read more about JSONP [here](https://stackoverflow.com/questions/3839966/can-anyone-explain-what-jsonp-is-in-layman-terms) and [here](https://stackoverflow.com/questions/16097763/jsonp-callback-function).
 
 
-## Free Public APIs
-
-- [a list on github](https://github.com/toddmotto/public-apis)
-- [list on data.gov](https://catalog.data.gov/dataset?q=-aapi+api+OR++res_format%3Aapi#topic=developers_navigation)

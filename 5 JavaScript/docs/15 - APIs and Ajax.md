@@ -1,7 +1,7 @@
 
 # APIs and AJAX
 
-See also: [The Internet](../../0 Intro/The Internet.md)
+See also: [The Internet](../../0%20Intro/The%20Internet.md)
 
 ## API
 

@@ -7,16 +7,21 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <title>Vue Unit Converter</title>
     </head>
     <body>
         <div id="app">
             <h1>Unit Converter</h1>
-            <input type="number" v-model="input_num"/>
-            <select v-for="unit in units_dict">
-                <option value="unit"></option>
+            <input type="number" v-model="input_num" v-on:input="calculate">
+            <select v-model="input_mult">
+                <option :value="unit.value" v-for="unit in units_array">{{unit.name}}</option>
             </select>
-            <span v-model="output_num.value+output_unit.value"></span>
+            <p>to</p>
+            <select v-model="output_mult">
+                <option :value="unit.value" v-for="unit in units_array">{{unit.name}}</option>
+            </select>
+            <span>{{output_num}} {{output_unit}}</span>
         </div>
         <script type="text/javascript">
             let app = new Vue({
@@ -24,8 +29,8 @@
 
                 data: {
                     input_num: 1,
-                    input_unit: "m",
-                    units_dict = [
+                    input_mult: 1,
+                    units_array: [
                         {"name":"feet", "value":0.3048},
                         {"name":"miles", "value":1609.34},
                         {"name":"meters", "value":1},
@@ -34,12 +39,37 @@
                         {"name":"inches", "value":0.0254},
                     ],
                     output_num: '',
+                    output_mult: 0.3048,
                     output_unit: ''
                 },
 
                 methods: {
+                    calculate: function() {
+                        let inStr = this.input_num.toString()
+                        let decimal = inStr.indexOf(".")
+                        inStr = inStr.replace(".","")
+                        if (decimal == -1) {
+                            while (inStr[inStr.length-1] == 0) {
+                                inStr = inStr.slice(0, -1)
+                            }
+                        }
+                        let precision = inStr.length
+                        if (precision < 4) {
+                            precision = 4
+                        }
 
+                        let unrounded = this.input_num*this.input_mult/this.output_mult
+                        this.output_num = Number.parseFloat(unrounded).toPrecision(precision)
+                        console.log(unrounded);
+                        this.units_array.forEach((unit, i) => {
+                            if (unit.value == this.output_mult) {
+                                this.output_unit = unit.name
+                            }
+                        })
+
+                    }
                 }
+            })
         </script>
     </body>
 </html>

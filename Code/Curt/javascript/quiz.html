@@ -153,24 +153,17 @@
             this.user_ans = this.quiz_ans[this.question_counter][1]
           },
 
-
-          // store default values for resetting game
-          defaultValues: function() {
-            return {
-              input_amount: 10,
-              question_counter: 0,
-              questions: [],
-              user_ans: '',
-              quiz_ans: [],
-              results: [],
-              right_counter: 0,
-              cat_choice: '',
-              diff_choice: '',
-            }
-          },
           // reset data to default values to start over
           playAgain: function() {
-             return this.defaultValues();
+            this.input_amount = 10
+            this.question_counter = 0
+            this.questions = []
+            this.user_ans = ''
+            this.quiz_ans = []
+            this.results = []
+            this.right_counter = 0
+            this.cat_choice = ''
+            this.diff_choice = ''
           },
         }
       })

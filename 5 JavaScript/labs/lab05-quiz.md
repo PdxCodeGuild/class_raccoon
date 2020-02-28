@@ -1,3 +1,14 @@
+
+
+# Lab: Quiz
+
+Using the code below, construct a GUI for the quiz.
+- Show controls for picking the quiz parameters and a button for starting the quiz
+- Allow the user to select answers and go to the previous/next question
+- At the end, show the user's score
+- (optional) Highlight the correct answer and the incorrect answer the user selected
+
+```html
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -38,3 +49,4 @@
     </script>
   </body>
 </html>
+```

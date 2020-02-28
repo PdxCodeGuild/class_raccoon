@@ -63,9 +63,3 @@ print(new_char)
 
 
 print(type(user_input))
-
-
-
-
-# print(chr(65))
-# print(ord('A'))

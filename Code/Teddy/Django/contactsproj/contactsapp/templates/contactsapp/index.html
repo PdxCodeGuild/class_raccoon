@@ -5,19 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-
     <title>Contact</title>
   </head>
-  
+
   <style>
 
   </style>
 
   <body>
-    <main>
+    <main class="mb-5">
       <div class="container">
         <div class="row">
-          <div class="col-md-12 text-center m-5">
+          <div class="col-md-12 my-5">
             {% if error %}
             <div style="color:red">{{error}}</div>
             {% endif %}
@@ -29,61 +28,91 @@
 
       <div class="container">
         <div class="row">
-          <form class="" action="{% url 'contactsapp:savecontact' %}" method="post">
-            {% csrf_token %}
+          <div class="col">
+            <h3>Add a new contact</h3>
+          </div>
+        </div>
 
-            <div class="col-sm">
-              <h3>Add a new contact</h3>
-              <input id="firstname_text" type="text" name="firstname_text" class="validate" placeholder="first name" required/>
-              <input id="lastname_text" type="text" name="lastname_text" class="validate" placeholder="last name" required/>
-              <input id="birthdate_text" type="text" name="birthdate_text" class="validate" placeholder="birth date (YYYY/MM/DD)" required/>
-              <input id="phone_text" type="text" name="phone_text" class="validate" placeholder="phone number" required/>
+        <div class="row">
+          <div class="col">
+            <form class="row" action="{% url 'contactsapp:savecontact' %}" method="post">
+              {% csrf_token %}
 
-              <button type="submit" lass="btn btn-light">submit</button>
+                <div class="col-sm-12 col-md-6 col-lg-3 mt-3">
+                  <label>First name</label>
+                  <input id="firstname_text" type="text" name="firstname_text" class="form-control" required/>
+                </div>
 
-            </div>
+                <div class="col-sm-12 col-md-6 col-lg-3 mt-3">
+                  <label>Last name</label>
+                  <input id="lastname_text" type="text" name="lastname_text" class="form-control" required/>
+                </div>
 
-          </form>
+                <div class="col-sm-12 col-md-6 col-lg-3 mt-3">
+                  <label>Birth date</label>
+                  <input id="birthdate_text" type="date" name="birthdate_text" class="form-control" required/>
+                </div>
+
+                <div class="col-sm-12 col-md-6 col-lg-3 mt-3">
+                  <label>Phone number (xxx-xxx-xxxx)</label>
+                  <input id="phone_text" type="tel" name="phone_text" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required title='Phone number have to be 10 digits'/>
+
+                </div>
+
+                <div class="col-12 mt-3">
+                  <button type="submit" class="btn btn-success">submit</button>
+                </div>
+            </form>
+          </div>
         </div>
       </div>
 
       <div class="container mt-5">
         <div class="row">
-
-          <div class="col-12">
+          <div class="col">
             <h3>Your contacts</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col mt-3">
 
-            {% for contact in contacts %}
-            <div class="d-flex justify-content-between mt-3">
-              <p class="flex-grow-1">{{ contact.first_name }} {{ contact.last_name }}</p>
-              <a class="btn btn-light" href="{% url 'contactsapp:deletecontact' contact.id %}" method="post">DELETE</a>
-              <br>
-            </div>
-            {% endfor %}
+            <a class="btn btn-success mr-2" href="?order=default">default</a>
+            <a class="btn btn-success mr-2" href="?order=alphabetical">alphabetical</a>
+            <a class="btn btn-success mr-2" href="?order=random">random</a>
 
           </div>
-
         </div>
-
       </div>
+
+      <div class="container mt-3">
+        <div class="row">
+          <div class="col-12">
+            <table class="table">
+              <tr>
+                <th scope="col">First name</th>
+                <th scope="col">Last name</th>
+                <th scope="col">Phone number</th>
+                <th scope="col"></th>
+              </tr>
+              {% for contact in contacts %}
+              <tr>
+                <td>{{ contact.first_name }}</td>
+                <td>{{ contact.last_name }}</td>
+                <td>{{ contact.phone_number }}</td>
+                <td class="d-flex flex-row-reverse"><a class="btn btn-danger" href="{% url 'contactsapp:deletecontact' contact.id %}" method="post">delete</a></td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+      </div>
+
 
 
 
 
 
     </main>
-
-
-
-
-
-
-
-
-
-
-
-
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

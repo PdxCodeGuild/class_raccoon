@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+      #container{
+        display: flex;
+        align-items: flex-end;
+        width: 100%;
+        height: 700px;
+      }
+
+      #container div{
+
+      }
+    </style>
+  </head>
+  <body>
+    <button id="btn_bubbleSort">Bubble Sort!</button>
+    <button id="btn_insertionSort">Insertion Sort!</button>
+    <button id="btn_mergeSort">Merge Sort!</button>
+    <button id="btn_stop">STOP!!!</button>
+    <div id="container"></div>
+
+    <script type="text/javascript">
+      // generate array of 100 nums
+      // take array, build divs and another div to visualize
+      // call update display every time we move something
+
+      let btn_bubbleSort = document.querySelector("#btn_bubbleSort")
+      let btn_insertionSort = document.querySelector("#btn_insertionSort")
+      let btn_mergeSort = document.querySelector('#btn_mergeSort')
+
+      let btn_stop = document.querySelector("#btn_stop")
+      let container = document.querySelector("#container")
+      let stop = false
+      btn_bubbleSort.addEventListener("click", function() {
+        stop = false
+        bubbleSort(numsArray)
+      })
+
+      btn_insertionSort.addEventListener("click", function() {
+        stop = false
+        insertionSort(numsArray)
+      })
+
+      btn_mergeSort.addEventListener('click', function() {
+        stop = false
+        mergeSort(numsArray)
+      })
+
+      btn_stop.addEventListener("click", function() {
+        stop = true
+      })
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      function shuffle(a) {
+        var j, x, i;
+        for (i = a.length - 1; i > 0; i--) {
+          j = Math.floor(Math.random() * (i + 1));
+          x = a[i];
+          a[i] = a[j];
+          a[j] = x;
+        }
+        return a;
+      }
+
+      function generateNums(len) {
+        let numsArray = []
+        for (let i=0; i<len; ++i) {
+          // numsArray.push(Math.floor(Math.random() * 100)+1)
+          numsArray.push(i)
+        }
+        shuffle(numsArray)
+        return numsArray
+      }
+
+      function draw(numsArray) {
+        container.innerHTML = ""
+        for (let i=0; i<numsArray.length; ++i) {
+          let currentDiv = document.createElement("div")
+          // bt_say_hello.style.backgroundColor = 'rgb(' + r + ',' + g + ',' + b + ')'
+          // let hue = numsArray[i] * 3.6 ;
+          let hue = numsArray[i]
+          currentDiv.style.backgroundColor = "hsl(" + hue + ", 100%, 50%)"
+          currentDiv.style.flexGrow = 1
+          currentDiv.style.height = numsArray[i] / 3.6 + "%"
+          container.appendChild(currentDiv)
+        }
+      }
+
+      async function bubbleSort(numsArray) {
+        let unsorted = true
+
+        while (unsorted) {
+          unsorted = false
+          for (let i=0; i<numsArray.length-1; ++i) {
+            if (numsArray[i] > numsArray[i+1]){
+              unsorted = true
+              let t = numsArray[i]
+              numsArray[i] = numsArray[i+1]
+              numsArray[i+1] = t
+              draw(numsArray)
+              await sleep(0)
+
+            }
+            if (stop) {
+              return
+            }
+          }
+
+        }
+
+      }
+
+      async function insertionSort(numsArray) {
+          for (let i=1; i<numsArray.length; ++i) {
+            let key = numsArray[i]
+            let j = i - 1
+            while (j>= 0 && key < numsArray[j]) {
+              numsArray[j+1] = numsArray[j]
+              j -= 1
+              draw(numsArray)
+              await sleep(0)
+              if (stop) {
+                return
+              }
+            }
+            numsArray[j+1] = key
+
+          }
+      }
+
+      async function merge(left, right) {
+        let arr = []
+
+        while (left.length && right.length) {
+          if (left[0] < right[0]) {
+            arr.push(left.shift())
+          } else {
+            arr.push(right.shift())
+          }
+        }
+        result = arr.concat(left.slice().concat(right.slice()))
+
+
+        return result
+      }
+
+      async function mergeSort(arr) {
+        if (arr.length < 2) {
+          return arr
+        }
+
+        const middle = Math.floor(arr.length / 2)
+        const left = arr.slice(0, middle)
+        const right = arr.slice(middle)
+
+        return await merge(await mergeSort(left), await mergeSort(right))
+      }
+
+      let numsArray = generateNums(360)
+      draw(numsArray)
+    </script>
+  </body>
+</html>
+

@@ -106,12 +106,14 @@
           </div>
         </form>
       </div>
+
       <div class="sorting_bts">
         <a href="?order=default" class="btn blue">default</a>
         <a href="?order=alphabetical" class="btn blue">alphabetical</a>
         <a href="?order=priority" class="btn blue">priority</a>
         <a href="?order=random" class="btn blue">random</a>
       </div>
+
       <ul class="collection">
         {% for todo_item in todo_items %}
         <li class="collection-item {{ todo_item.priority.get_class_name }}">
@@ -126,6 +128,7 @@
           </div>
         </li>
         {% endfor %}
+
         {% for todo_item in completed_items %}
         <li class="collection-item completed">
           <span>{{todo_item.text}} ({{todo_item.priority.name}})</span>
@@ -140,6 +143,7 @@
         </li>
         {% endfor %}
       </ul>
+
     </main>
     <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', function() {

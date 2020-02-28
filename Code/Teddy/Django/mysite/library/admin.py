@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Book, Author
+from .models import Book, Author, BookCheckout
 
 class AuthorshipInline(admin.TabularInline):
     model = Book.authors.through
@@ -12,3 +12,4 @@ class AuthorAdmin(admin.ModelAdmin):
 
 admin.site.register(Book)
 admin.site.register(Author, AuthorAdmin)
+admin.site.register(BookCheckout)

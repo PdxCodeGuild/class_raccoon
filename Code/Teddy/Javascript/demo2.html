@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <ul id="ul_fruits">
+    </ul>
+    <button id="bt">click</button>
+    <button id="bt2">disable</button>
+    <script type="text/javascript">
+
+      // 2*Math.random()-1 // random number  between -1 and 1
+      function randint(a, b) {
+        // multiply or divide - stretch or shrink
+        // add or substract - shift left or right
+        return Math.floor(a + (b - a + 1)*Math.random())
+      }
+      function randomChoice(array) {
+        return array[Math.floor(Math.random()*array.length)]
+      }
+
+      let fruits_array = ['apples', 'bananas', 'pears']
+      for (let i=0; i<100; ++i) {
+        console.log(randint(5, 10))
+        console.log(randomChoice(fruits_array))
+      }
+
+
+      let ul_fruits = document.querySelector('#ul_fruits')
+      let bt = document.querySelector('#bt')
+      let bt2 = document.querySelector('#bt2')
+
+      bt.addEventListener('click', function() {
+        alert('clicked!')
+      })
+      bt2.addEventListener('click', function() {
+        if (bt.hasAttribute('disabled')) {
+          bt.removeAttribute('disabled')
+          bt2.innerText = 'disable'
+        } else {
+          bt.setAttribute('disabled', '')
+          bt2.innerText = 'enable'
+        }
+      })
+
+
+      let fruits = ['apples', 'bananas', 'pears']
+      for (let i=0; i<fruits.length; ++i) {
+        let li = document.createElement('li')
+        li.innerText = fruits[i]
+        li.innerHTML = '<b>' + fruits[i] + '</b>'
+        ul_fruits.appendChild(li)
+      }
+
+      // for fruit in fruits:
+      fruits.forEach(function(fruit) {
+        console.log(fruit)
+      })
+
+
+
+      // for (let i=0; i<10; ++i) {}
+      // let i = 0
+      // while (i < 10) {
+      //   ++i
+      // }
+
+
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- import shuffle function -->
+    <script src="https://raw.githack.com/PdxCodeGuild/class_raccoon/master/Code/Matthew/javascript/utilities.js"></script>
+    <!-- import Vue framework -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- import Axios client for data pull from API -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Initializing view - displays only until the questions array is populated by startQuiz function -->
+      <div v-if="questions.length<=0">
+        <!-- Numerical input specifying the number of questions user wants -->
+        <label for="input_amount">Select number of questions:</label>
+        <input type="number" v-model="input_amount" id="input_amount"/><br>
+        <!-- Display drop-down of all categories available in opentdb API - No selection defaults to all -->
+        <select v-model="cat_choice">
+          <option disabled value="">Select a category</option>
+          <option v-for="category in categories" v-bind:value="category[0]" v-html="category[1]"></option>
+        </select>
+        <!-- Display drop-down of all difficulties available in opentdb API - No selection defaults to all -->
+        <select v-model="diff_choice">
+          <option disabled value="">Select a difficulty</option>
+          <option v-for="difficulty in difficulties" v-bind:value="difficulty[0]">{{ difficulty[1] }}</option>
+        </select>
+        <!-- Initialize startQuiz function using selected options -->
+        <button v-on:click="startQuiz">start</button>
+      </div>
+
+      <!-- Question view - displays once questions array is populated, hides when results array is populated -->
+      <div v-if="questions.length>0 && results.length<=0">
+        <!-- Header for question -->
+        Question {{ question_counter+ 1}} of {{ questions.length }}:
+        <!-- Display current question, using question_counter to specify the current index location in questions array -->
+        <div v-html="questions[question_counter].question"></div>
+        <!-- Displays radios for all answer options -->
+        <div v-for="(answer, i) in questions[question_counter].all_answers">
+          <!-- 'radio'+i ids create unique ids for each radio button that allow the labels to be clicked to select an answer instead of clicking on the radio button -->
+          <input type="radio" v-model="user_ans" v-bind:value="answer" v-bind:id="'radio'+i">
+          <label v-html="answer" v-bind:for="'radio'+i"></label>
+        </div>
+        <!-- Previous button only displays for question 2's view on; initializes goBack function -->
+        <button v-if="question_counter>0" v-on:click="goBack">Previous</button>
+        <!-- Next button displays for all question views except the last one; initializes subAns function -->
+        <button v-if="question_counter<(questions.length-1) && user_ans" type="submit" v-on:click="subAns">Next</button>
+        <!-- Submit button only displays on the last question's view; initializes subQuiz function -->
+        <button v-if="question_counter==(questions.length-1) && user_ans" type="submit" v-on:click="subQuiz">Submit</button>
+        <!-- <div v-for="question in questions" v-html="question"></div> -->
+      </div>
+
+      <!-- Results view - displays once results array is populated by subQuiz function -->
+      <div v-if="results.length>0">
+        <div v-for="(result, i) in results">
+          {{i+1}})
+          <span v-html="quiz_ans[i][0]"></span>
+          <div v-if="!result">
+            <span style="color:red; text-decoration:line-through" v-html="quiz_ans[i][1]"></span>
+          </div>
+          <span  style="color:green" v-html="quiz_ans[i][2]"></span>
+        </div>
+        <div>
+          {{right_counter}} of {{quiz_ans.length}} Correct!
+        </div>
+        <div>
+          <button type="submit" v-on:click="playAgain">Play again!</button>
+        </div>
+      </div>
+
+    </div>
+
+    <script type="text/javascript">
+      let app = new Vue({
+        el: '#app',
+        data: {
+          input_amount: 10, //sets default number of questions
+          question_counter: 0, //starts question index at 0
+          questions: [], //questions array, to be populated by data pull from opentdb API
+          user_ans: '', //string for storing user's answer to the currently-displayed question
+          quiz_ans: [], //array for storing user's answers to all questions
+          results: [], //array for storing correct answers as a boolean
+          right_counter: 0, //tally of number of correct answers
+          cat_choice: '', //string for storing user's chosen question category
+          diff_choice: '', //string for storing user's chosen difficulty
+          // array of categories recognized by opentdb API; first value is the ID used by API query, second value is the category name provided by API
+          categories: [["","Any Category"],["9","General Knowledge"],["10","Entertainment: Books"],["11","Entertainment: Film"],["12","Entertainment: Music"],["13","Entertainment: Musicals &amp; Theatres"],["14","Entertainment: Television"],["15","Entertainment: Video Games"],["16","Entertainment: Board Games"],["17","Science &amp; Nature"],["18","Science: Computers"],["19","Science: Mathematics"],["20","Mythology"],["21","Sports"],["22","Geography"],["23","History"],["24","Politics"],["25","Art"],["26","Celebrities"],["27","Animals"],["28","Vehicles"],["29","Entertainment: Comics"],["30","Science: Gadgets"],["31","Entertainment: Japanese Anime &amp; Manga"],["32","Entertainment: Cartoon &amp; Animations"]],
+          // array of difficulties recognized by opentdb API; first value is the ID used by API query, second value is the difficulty name provided by API
+          difficulties: [["","Any Difficulty"],["easy","Easy"],["medium","Medium"],["hard","Hard"]],
+        },
+        methods: {
+          // generate questions array from user-selected options
+          startQuiz: function() {
+            //use axios to pull array form opentdb API
+            axios({
+              method: 'get',
+              url: 'https://opentdb.com/api.php',
+              params: {
+                amount: this.input_amount, //number of questions
+                category: this.cat_choice,
+                difficulty: this.diff_choice,
+                // Optional: un-comment the below line if you want to allow the user to specify multiple choice (type: "multiple") or true/false (type: "boolean")
+                // type: "boolean",
+              }
+            }).then((response) => {
+              this.questions = response.data.results //store data pull as array of objects
+
+              //combines API object "correct_answer" and "incorrect_answers" values into an "all_answers" array
+              for (let i=0; i<this.questions.length; ++i) {
+                let question = this.questions[i]
+                this.quiz_ans.push([])
+                question.all_answers = [question.correct_answer]
+                for (let j=0; j<question.incorrect_answers.length; ++j) {
+                  let answer = this.questions[i].incorrect_answers[j]
+                  question.all_answers.push(answer)
+                }
+                shuffle(question.all_answers) //randomizes order of answers
+              }
+            })
+          },
+
+          // store user's answer in an array of answers
+          subAns: function() {
+            this.quiz_ans[this.question_counter] = [this.questions[this.question_counter].question, this.user_ans, this.questions[this.question_counter].correct_answer] // creates array for the current question, storing [question text, user's answer, correct answer]
+            this.question_counter++ //increments index value
+            if (this.question_counter < this.questions.length) {
+              this.user_ans = this.quiz_ans[this.question_counter][1]
+            } //remember's user's answer to the next question, if it's already been answered; does not apply if last question displayed
+          },
+
+          // submit quiz for grading
+          subQuiz: function() {
+            this.subAns() //store answer to final question
+
+            for (let i=0; i<this.quiz_ans.length; ++i){
+              let answer = this.quiz_ans[i]
+
+              //store correct answers as a boolean
+              this.results.push(answer[1] == answer[2])
+
+              //increment correct answers
+              if (answer[1] == answer[2]) {
+              this.right_counter++
+              }
+            }
+          },
+
+          // pull information on user's answers to the previous question from quiz_ans array and display
+          goBack: function() {
+            this.question_counter--
+            this.user_ans = this.quiz_ans[this.question_counter][1]
+          },
+
+          // reset data to default values to start over
+          playAgain: function() {
+            this.input_amount = 10
+            this.question_counter = 0
+            this.questions = []
+            this.user_ans = ''
+            this.quiz_ans = []
+            this.results = []
+            this.right_counter = 0
+            this.cat_choice = ''
+            this.diff_choice = ''
+          },
+        }
+      })
+    </script>
+  </body>
+</html>

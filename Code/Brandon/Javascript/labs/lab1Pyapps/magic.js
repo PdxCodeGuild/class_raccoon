@@ -50,4 +50,9 @@ var answers = ["It is certain",
     }
     });
     // end 8 ball----
-   
+
+
+
+
+
+

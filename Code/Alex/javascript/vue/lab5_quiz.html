@@ -19,41 +19,44 @@
     </head>
     <body>
         <div id="app">
-            <h1>Computer Science Quiz</h1>
-            <p>Choose number of questions and difficulty level</p>
-            <input type="number" v-model="input_amount"/>
-            <select v-model="difficulty">
-                <option value="easy">easy</option>
-                <option value="medium">medium</option>
-                <option value="hard">hard</option>
-                <option value="">any</option>
-            </select>
-            <button v-on:click="startQuiz">start</button>
-            <div v-for="question in questions">
-                <div v-html="question.question"></div>
-                <div v-for="answer in question.incorrect_answers">
-                    <input type="radio" v-html="answer" :class="{correct:question.correct_answer == answer && finished, incorrect:question.correct_answer != answer && finished}" :value="answer" :id="answer" :name="question.question" v-model="question.userAnswer" :disabled="finished"/>
-                    <label :for="answer" v-html="answer"></label>
-                </div>
-            </div>
-            <button v-on:click="endQuiz" v-if="!finished">Done</button>
-            <div v-if="finished && first">score: {{ score }}/{{questions.length}}</div>
+          <h1>Computer Science Quiz</h1>
+          <p>Choose number of questions and difficulty level</p>
+          <input type="number" v-model="input_amount"/>
+          <select v-model="difficulty">
+              <option value="easy">easy</option>
+              <option value="medium">medium</option>
+              <option value="hard">hard</option>
+              <option value="">any</option>
+          </select>
+          <button v-on:click="startQuiz">start</button>
+          <div v-for="question in questions">
+              <div v-html="question.question"></div>
+              <div v-for="answer in question.incorrect_answers">
+                  <input type="radio" v-html="answer" :class="{correct:question.correct_answer == answer && finished, incorrect:question.correct_answer != answer && finished}" :value="answer" :id="answer" :name="question.question" v-model="question.userAnswer" :disabled="finished"/>
+                  <label :for="answer" v-html="answer"></label>
+              </div>
+          </div>
+          <button v-on:click="endQuiz" v-if="!finished">Done</button>
+          <span v-if="finished && first">score: {{ score }}/{{questions.length}}</span>
+          <div v-if="first">total: {{points}}/{{total}}</div>
         </div>
         <script type="text/javascript">
             let app = new Vue({
                 el: '#app',
                 data: {
-                    input_amount: 4,
+                    input_amount: 10,
                     questions: [],
                     score: 0,
+                    points: 0,
+                    total: 0,
                     finished: true,
                     difficulty: "easy",
                     first: false,
                 },
                 methods: {
                     startQuiz: function() {
+                        this.score = 0
                         this.finished = false
-                        this.first = true
                         axios({
                             method: 'get',
                             url: 'https://opentdb.com/api.php',
@@ -69,20 +72,23 @@
                                 respArray[i].userAnswer = ''
                             }
                             this.questions = respArray
-                            console.log(respArray)
                         })
                     },
                     endQuiz: function() {
                         this.questions.forEach((question, i) => {
                             if (question.userAnswer == question.correct_answer) {
-                                console.log(question);
                                 this.score++
+                                this.points++
                             }
-                            this.finished = true
                         })
+                        this.finished = true
+                        this.first = true
+                        this.total += this.questions.length
                     }
                 }
             })
         </script>
+    </body>
+</html>
     </body>
 </html>

@@ -59,16 +59,14 @@
         newTodo()
       })
 
-      // window.addEventListener('resize', function() {
-      //   let btn_icons = document.querySelectorAll('#todos i')
-      //   let icon_size = (window.innerWidth < 700)? 'fa-3x': 'fa-2x'
-      //
-      //   for (let i=0; i<btn_icons.length; ++i) {
-      //     delete_bts[i].width = button_size
-      //     btn_icons.className =
-      //
-      //   }
-      // })
+      window.addEventListener('resize', function() {
+        let btn_icons = document.querySelectorAll('#todos i')
+        let icon_size = (window.innerWidth < 700)? '3em': '2em'
+
+        for (let i=0; i<btn_icons.length; ++i) {
+          btn_icons[i].style.fontSize = icon_size
+        }
+      })
 
       function modifyTodo(todo_text) {
         let div_container = document.createElement("div")
@@ -80,11 +78,13 @@
 
         let ck_img = document.createElement('i')
         if (input_cb.checked) {
-          ck_img.className = "fa fa-check-square fa-2x"
+          ck_img.className = "fa fa-check-square"
           ck_img.width = 40
+          ck_img.style = "font-size: 2em"
         } else {
-          ck_img.className = "fa fa-square fa-2x"
+          ck_img.className = "fa fa-square"
           ck_img.width = 40
+          ck_img.style = "font-size: 2em"
         }
         console.log(ck_img)
         // {% if book.checked_out %}
@@ -100,28 +100,30 @@
         div_text.className = "col h2 mb-0"
 
         let delete_btn = document.createElement('i')
-        delete_btn.className = "fa fa-times-circle fa-2x"
-        delete_btn.style = "color:red"
+        delete_btn.className = "fa fa-times-circle"
+        delete_btn.style = "color:red; font-size: 2em;"
         // delete_btn.height = 20
         // delete_btn.style.display = 'block'
         // delete_btn.className = "col-sm-auto"
 
         let cb_div = document.createElement('div')
-        cb_div.className = "col-sm-auto px-md-2"
+        cb_div.className = "col-sm px-md-2"
         cb_div.appendChild(ck_img)
 
         let del_btn_div = document.createElement('div')
-        del_btn_div.className = "col-sm-auto"
+        del_btn_div.className = "col-sm"
         del_btn_div.appendChild(delete_btn)
 
         ck_img.addEventListener( 'click', function(){
           input_cb.checked = !input_cb.checked
           if (input_cb.checked) {
-            ck_img.className = "fa fa-check-square fa-2x"
+            ck_img.className = "fa fa-check-square"
+            ck_img.style = "font-size: 2em"
             div_text.style.textDecoration = "line-through"
             complete_todos.appendChild(div_container)
           } else {
-            ck_img.className = "fa fa-square fa-2x"
+            ck_img.className = "fa fa-square"
+            ck_img.style = "font-size: 2em"
             div_text.style.textDecoration = "none"
             todos.appendChild(div_container)
           }
@@ -150,7 +152,7 @@
             todos.removeChild(div_container)
           }
         })
-  
+
       }
 
       for (let i=0; i < todo_array.length; i++){

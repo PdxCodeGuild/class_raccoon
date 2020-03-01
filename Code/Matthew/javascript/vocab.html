@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style type="text/css">
+      #app {
+        display:flex;
+        flex-direction:row;
+      }
+      #word_list {
+        display:flex;
+        flex-direction:column;
+      }
+      #word_list span {
+        user-select:none;
+        cursor:pointer;
+      }
+      #word_list span:nth-child(odd) {
+        background-color:lightgrey;
+      }
+      #word_display {
+        flex-grow:1;
+      }
+      .selected_word {
+        background-color:blue !important;
+        color:white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div id="word_list">
+        <input type="text" v-model="search_text"/>
+        <span v-bind:class="{selected_word: word == pinned_word}" v-for="word in sorted_words" v-on:mouseover="selected_word = word" v-on:mouseleave="selected_word = null" v-on:click="pinned_word = word">{{word.word}}</span>
+      </div>
+      <word-view v-bind:word="shown_word"></word-view>
+    </div>
+    <script type="text/javascript">
+      Vue.component('word-view', {
+        props: ['word'],
+        template: `<div>
+        <h1>{{word.word}}</h1>
+        <p>{{word.definition}}</p>
+        <div>
+          <span v-for="synonym in word.synonyms">{{synonym}}</span>
+        </div>
+        </div>`
+      })
+      var app = new Vue({
+        el: '#app',
+        data: {
+          search_text: '',
+          selected_word: {
+            word: '',
+            definition: '',
+            synonyms: []
+          },
+          pinned_word: {
+            word: '',
+            definition: '',
+            synonyms: []
+          },
+          words: [{
+            word: 'Earth',
+            definition: 'A really cool planet',
+            synonyms: ['world', 'planet']
+          },{
+            word: 'Onomatopoeia',
+            definition: 'when a word sounds like the thing that it is',
+            synonyms: []
+          },{
+            word: 'Llama',
+            definition: 'Matthew',
+            synonyms: ['Alpacas', 'mammal']
+          },{
+            word: 'Water',
+            definition: 'a liquid',
+            synonyms: ['wet', 'not dry']
+          },{
+            word: 'Bird',
+            definition: 'implanted surveillance device',
+            synonyms: []
+          }]
+        },
+        methods: {
+        },
+        computed: {
+          sorted_words: function() {
+            let words = this.words.sort((word1, word2) => word1.word.localeCompare(word2.word))
+            if (this.search_text != '') {
+              words = words.filter(word => word.word.toLowerCase().includes(this.search_text.toLowerCase()))
+            }
+            return words
+          },
+          shown_word: function() {
+            if (this.selected_word) {
+              return this.selected_word
+            }
+            return this.pinned_word
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+Ghibli API
+
+Has 5 endpoints. Each endpoint will give you all of the options, and you can get more specific ids from there. 
+    Films  
+    People
+    Locations
+    Species
+    Vehicles 
+
+So, you can get a list of all the films, with specific ids. 
+Each category goes, category/<id> 
+Might be smart to make a drop-down list of object properties and see if in the five list above. If they are, they can be dipslayed as an option to get. 
+
+    Films has info for: 
+        People, locations, and Species
+        (as well as other categories)
+
+    People has info for:
+        Films, Species

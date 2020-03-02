@@ -42,9 +42,9 @@
                 <span v-if="result.hwi.prs"> | {{result.hwi.prs[0].mw}}</span>
               </h2></div>
               <div style="fontStyle:italic;"><h3>{{ result.fl }}</h3></div>
-              <ul v-for="short in result.shortdef">
+              <h3><ul v-for="short in result.shortdef">
                 <li>{{ short }}</li>
-              </ul>
+              </ul></h3>
             </div>
           </div>
           <div v-if="resource_choice=='thesaurus'">
@@ -56,7 +56,7 @@
                 <li><h3>{{ short }}</h3></li>
                 <ul>
                   <li>
-                    <span v-for="(word, index2) in result.meta.syns[index]">{{ word }}<span v-if="index2 < (result.meta.syns[index].length-1)">, </span></span>
+                    <h3><span v-for="(word, index2) in result.meta.syns[index]">{{ word }}<span v-if="index2 < (result.meta.syns[index].length-1)">, </span></span></h3>
                   </li>
                 </ul>
               </div>

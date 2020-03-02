@@ -20,8 +20,10 @@
                 <input type="text"v-model='drinkName'>
                 <button class="search-btn" v-on:click='startFind'>Search</button>
             </div>
-            <div class="results">
-                <p>{{drinkResults}}</p>
+            <div class="results" v-for="drink in drinkResults">
+                <p>{{drink.name}}</p>
+                <p>{{drink.instructions}}</p>
+                <p v-for='ingredient in drink.ingredients'>{{ingredient.name}} {{ingredient.amount}}</p>
             </div>
         </div>
     </main>

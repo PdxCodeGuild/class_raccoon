@@ -2,13 +2,122 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Dictionary/Thesaurus Layout</title>
     <!-- import Vue framework -->
+    <script src="./secrets.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <!-- import Axios client for data pull from API -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css">
+    <link rel="stylesheet" href="lab6_layout.css">
   </head>
-  <body>
 
+  <body>
+    <div id="app" class="pure-g">
+      <div class="sidebar pure-u-1 pure-u-md-1-4">
+        <div class="header">
+          <h1 class="brand-title">Just Words</h1>
+          <h2 class="brand-tagline">A clean Merriam-Webster Dictionary / Thesaurus Interface</h2>
+          <div class="sidebar-box">
+            <input type="text" placeholder="Look up a word" v-model="user_word" v-on:keypress.enter="queryMWeb">
+            <div class="sidebar-input">
+              <select v-model="resource_choice">
+                <option value="dictionary">Dictionary</option>
+                <option value="thesaurus">Thesaurus</option>
+              </select>
+              <button v-on:click="queryMWeb" class="pure-button">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content pure-u-1 pure-u-md-3-4">
+        <div v-if="dict_results.length>0">
+          <div v-if="resource_choice=='dictionary'">
+            <h1>{{submitted_word}}</h1>
+            <div v-for="result in dict_results">
+              <div><h2>
+                <span>{{result.hwi.hw}}</span>
+                <span v-if="result.hwi.prs"> | {{result.hwi.prs[0].mw}}</span>
+              </h2></div>
+              <div style="fontStyle:italic;"><h3>{{ result.fl }}</h3></div>
+              <h3><ul v-for="short in result.shortdef">
+                <li>{{ short }}</li>
+              </ul></h3>
+            </div>
+          </div>
+          <div v-if="resource_choice=='thesaurus'">
+            <h1>{{submitted_word}}</h1>
+            <div v-for="result in thes_results">
+              <div style="fontStyle:italic;"><h3>{{ result.fl }}</h3></div>
+            <ol>
+              <div v-for="(short, index) in result.shortdef">
+                <li><h3>{{ short }}</h3></li>
+                <ul>
+                  <li>
+                    <h3><span v-for="(word, index2) in result.meta.syns[index]">{{ word }}<span v-if="index2 < (result.meta.syns[index].length-1)">, </span></span></h3>
+                  </li>
+                </ul>
+              </div>
+            </ol>
+            </div>
+          </div>
+        </div>
+        <div v-if="dict_results.length==0 && submitted">
+          <h1>No such entry!</h1>
+        </div>
+      </div>
+    </div>
+
+
+    <script type="text/javascript">
+      let app = new Vue({
+        el: '#app',
+        data: {
+          user_word: '',
+          submitted_word: '',
+          submitted: false,
+          resource_choice: 'dictionary',
+          dict_results: {},
+          thes_results: {},
+          json_url : '',
+        },
+        methods: {
+            queryMWeb: function() {
+              console.log(this.resource_choice)
+              this.submitted_word = this.user_word
+              this.submitted = true
+              this.json_url = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/' + this.user_word
+              this.dictQuery()
+              this.json_url = 'https://www.dictionaryapi.com/api/v3/references/thesaurus/json/' + this.user_word
+              this.thesQuery()
+            },
+            dictQuery: function() {
+              console.log(this.json_url)
+              axios({
+                method: 'get',
+                url: this.json_url,
+                params: {
+                  key: dict_key,
+                }
+              }).then((response) => {
+                this.dict_results = response.data
+              })
+            },
+            thesQuery: function() {
+              axios({
+                method: 'get',
+                url: this.json_url,
+                params: {
+                  key: thes_key,
+                }
+              }).then((response) => {
+                this.thes_results = response.data
+              })
+            },
+        }
+      })
+    </script>
   </body>
 </html>

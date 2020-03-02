@@ -1,8 +1,14 @@
 main {
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
 }
 .container {
-    height: 600px;
-    width: 600px;
+    height: 800px;
+    width:800px;
     border: 1px solid black;
+    text-align: center;
+
 }

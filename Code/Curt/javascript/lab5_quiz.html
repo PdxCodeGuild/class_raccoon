@@ -49,7 +49,6 @@
         <button v-if="question_counter<(questions.length-1) && user_ans" type="submit" v-on:click="subAns">Next</button>
         <!-- Submit button only displays on the last question's view; initializes subQuiz function -->
         <button v-if="question_counter==(questions.length-1) && user_ans" type="submit" v-on:click="subQuiz">Submit</button>
-        <!-- <div v-for="question in questions" v-html="question"></div> -->
       </div>
 
       <!-- Results view - displays once results array is populated by subQuiz function -->
@@ -93,7 +92,7 @@
         methods: {
           // generate questions array from user-selected options
           startQuiz: function() {
-            //use axios to pull array form opentdb API
+            //use axios to pull array from opentdb API
             axios({
               method: 'get',
               url: 'https://opentdb.com/api.php',
@@ -102,12 +101,12 @@
                 category: this.cat_choice,
                 difficulty: this.diff_choice,
                 // Optional: un-comment the below line if you want to allow the user to specify multiple choice (type: "multiple") or true/false (type: "boolean")
-                // type: "boolean",
+                // type: this.type_choice,
               }
             }).then((response) => {
               this.questions = response.data.results //store data pull as array of objects
 
-              //combines API object "correct_answer" and "incorrect_answers" values into an "all_answers" array
+              //combines this.questions' "correct_answer" and "incorrect_answers" values into an "all_answers" array
               for (let i=0; i<this.questions.length; ++i) {
                 let question = this.questions[i]
                 this.quiz_ans.push([])

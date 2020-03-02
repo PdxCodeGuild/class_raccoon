@@ -68,7 +68,7 @@
               <!-- displays list of links to similar words -->
               <h3><ul>
                 <div v-for="result in dict_results">
-                    <li><a v-on:click="user_word = result; queryMWeb()">{{result}}</a></li>
+                    <a v-on:click="user_word = result; queryMWeb()"><li>{{result}}</li></a>
                 </div>
               </ul></h3>
             </div>
@@ -100,9 +100,11 @@
               <h1>No thesaurus entry for {{submitted_word}}</h1>
               <h2>Similar words:</h2>
               <!-- displays list of links to similar words -->
-              <div v-for="result in thes_results">
-                <h3><a v-on:click="user_word = result; queryMWeb()">{{result}}</a></h3>
-              </div>
+              <h3><ul>
+                <div v-for="result in thes_results">
+                  <a v-on:click="user_word = result; queryMWeb()"><li>{{result}}</li></a>
+                </div>
+              </h3><ul>
             </div>
           </div>
         <!-- displays if selected resource (dictionary or thesaurus) returns no results after submission -->

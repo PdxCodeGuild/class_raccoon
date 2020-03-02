@@ -10,7 +10,8 @@ a {
 }
 a:hover,
 a:focus {
-    text-decoration: underline;
+    color: rgb(213, 238, 255);
+    cursor: pointer;
 }
 
 h3 {

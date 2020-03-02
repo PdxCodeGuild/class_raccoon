@@ -27,12 +27,12 @@
           <!-- create search box -->
           <div class="sidebar-box">
             <!-- text input accepts enter key to submit form -->
-            <input type="text" placeholder="Look up a word" v-model="user_word" v-on:keypress.enter="queryMWeb">
+            <input type="text" placeholder="Look up a word" v-model="user_word" v-on:keypress.enter="queryMWeb" class="sidebar-input">
             <!-- div aligns drop-down and submit buttons in same row -->
-            <div class="sidebar-input">
-              <select v-model="resource_choice">
-                <option value="dictionary">Dictionary</option>
-                <option value="thesaurus">Thesaurus</option>
+            <div class="sidebar-query">
+              <select v-model="resource_choice" class="sidebar-input">
+                <option value="dictionary" class="sidebar-input">Dictionary</option>
+                <option value="thesaurus" class="sidebar-inputb">Thesaurus</option>
               </select>
               <button v-on:click="queryMWeb" class="pure-button">Submit</button>
             </div>
@@ -101,7 +101,7 @@
               <h2>Similar words:</h2>
               <!-- displays list of links to similar words -->
               <div v-for="result in thes_results">
-                <a v-on:click="user_word = result; queryMWeb()">{{result}}</a>
+                <h3><a v-on:click="user_word = result; queryMWeb()">{{result}}</a></h3>
               </div>
             </div>
           </div>

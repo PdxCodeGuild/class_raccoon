@@ -4,6 +4,7 @@ let app = new Vue({
     data: {
         drinkName:'',
         drinkResults:[],
+        drinkResults2:[],
 
     },
     methods: {
@@ -51,19 +52,53 @@ let app = new Vue({
                         image: drink_data[i].strDrinkThumb,
                     })
                 }
-                // console.log(this.drinkResults)
 
             })
-        }
+        },
+		advancedFind: function(nameChoice){
+			axios({
+                method: 'get',
+                url: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?',
+                params: {
+                    s: nameChoice,
+                }
+            })
+            .then((response) => {
+                let drink_data2 = response.data.drinks
+                this.drinkResults2 = []
+                for (let i=0; i<drink_data2.length; ++i) {
+                    this.drinkResults2.push({
+                        name: drink_data2[i].strDrink,
+                        instructions: drink_data2[i].strInstructions,
+                        ingredients: this.mergeIngredients(drink_data2[i]),
+                        image: drink_data2[i].strDrinkThumb,
+                    })
+                }
+
+            })
+		
+    },
+        // showCard: function(cardHide){
+        //     cardHide.setAttribute("class", "card1")
+        // },
     }
 })
 
 // endvue--
 function showCard()
 {
-    document.getElementById('cardId').setAttribute("class", "card1");
+    document.getElementById('cardHide').setAttribute("class", "card1");
 }
 
+<!--
+//     function toggle_visibility(id) {
+//        var e = document.getElementById(id);
+//        if(e.style.display == 'block')
+//           e.style.display = 'none';
+//        else
+//           e.style.display = 'block';
+//     }
+// //-->
 
 
 

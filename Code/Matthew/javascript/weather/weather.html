@@ -4,14 +4,25 @@
     <meta charset="utf-8">
     <title></title>
 
+    <!-- Materialize -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
+    <!-- Chart.js -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+    <!-- OpenWeatherMap Icons -->
     <link href="owfont-regular.css" rel="stylesheet" type="text/css">
 
+    <!-- Vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- Axios -->
     <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- API Keys -->
     <script type="text/javascript" src="secrets.js"></script>
+
     <style type="text/css">
       .othercolor {
         background-color:whitesmoke;
@@ -20,10 +31,18 @@
         font-size:28px !important;
         transform:translateY(9px) !important;
       }
+      .chart_container {
+        height:400px;
+        /* width:1000px !important; */
+        /* height:600px !important; */
+
+      }
     </style>
   </head>
   <body>
-
+    <div class="chart_container">
+      <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
     <div id="app">
       <table>
         <tr>
@@ -31,7 +50,8 @@
           <th>Temperature</th>
           <th>Weather</th>
         </tr>
-        <tr v-for="(row, i) in forecast_data" v-bind:class="{othercolor: Math.floor((i+1)/8)%2 != 0}">
+        <!-- does not work -->
+        <tr v-for="(row, i) in forecast_data" v-bind:class="{othercolor: row.datetime.getDate()%2 != 0}">
           <td>{{row.datetime.toLocaleDateString('en-US') + ' ' + row.datetime.toLocaleTimeString('en-US')}}</td>
           <!-- <td>{{row.datetime}}</td> -->
           <td>{{row.temperature}}</td>
@@ -49,6 +69,8 @@
           forecast_data: []
         },
         created: function() {
+
+
           axios({
             method: 'get',
             url: 'https://api.ipify.org/',
@@ -80,15 +102,61 @@
                 console.log(response.data)
                 this.forecast_data = []
                 let api_data = response.data.list
+
+                let chart_data = []
+                let chart_labels = []
+
+
                 for (let i=0; i<api_data.length; ++i) {
+                  let datetime = new Date(api_data[i].dt_txt)
+                  console.log(datetime.getTimezoneOffset())
+                  datetime.setHours(datetime.getHours()-datetime.getTimezoneOffset()/60)
+                  // datetime = new Date(datetime.toLocaleString("en-US", {timeZone: "US/Pacific"}));
+                  let temperature = (api_data[i].main.temp - 273.15).toFixed(2)
+                  // let temperature = api_data[i].main.temp
+                  chart_data.push({
+                    t: datetime,
+                    y: temperature
+                  })
+                  chart_labels.push(datetime.toLocaleString())
                   this.forecast_data.push({
-                    datetime: new Date(api_data[i].dt_txt),
-                    temperature: ((api_data[i].main.temp - 273.15)*(9/5) + 32).toFixed(2),
+                    datetime: datetime,
+                    temperature: temperature,
                     weather_description: api_data[i].weather[0].description,
                     weather_id: api_data[i].weather[0].id
                   })
                 }
                 console.log(this.forecast_data)
+
+                console.log(chart_data)
+
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                  type: 'line',
+                  data: {
+                    labels: chart_labels,
+                    datasets: [{
+                      label: 'Temperature',
+                      data: chart_data,
+                      backgroundColor: 'lightblue',
+                      borderColor: 'orange',
+                      borderWidth: 1
+                    }]
+                  },
+                  options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                  }
+                });
+
+
+                // var ctx = document.getElementById('myChart').getContext('2d');
+                // var myLineChart = new Chart(ctx, {
+                //   type: 'line',
+                //   data: chart_data,
+                //   options: {}
+                // });
+
               })
             })
           })

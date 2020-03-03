@@ -47,7 +47,8 @@ let app = new Vue({
                     this.drinkResults.push({
                         name: drink_data[i].strDrink,
                         instructions: drink_data[i].strInstructions,
-                        ingredients: this.mergeIngredients(drink_data[i])
+                        ingredients: this.mergeIngredients(drink_data[i]),
+                        image: drink_data[i].strDrinkThumb,
                     })
                 }
                 // console.log(this.drinkResults)
@@ -56,6 +57,12 @@ let app = new Vue({
         }
     }
 })
+
+// endvue--
+function showCard()
+{
+    document.getElementById('cardId').setAttribute("class", "card1");
+}
 
 
 

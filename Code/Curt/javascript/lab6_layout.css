@@ -10,14 +10,20 @@ a {
 }
 a:hover,
 a:focus {
-    text-decoration: underline;
+    color: rgb(213, 238, 255);
+    cursor: pointer;
 }
 
 h3 {
     font-weight: 100;
 }
 
+body {
+  background-color: rgb(44, 57, 66);
+}
+
 /* LAYOUT CSS */
+
 .pure-img-responsive {
     max-width: 100%;
     height: auto;
@@ -35,7 +41,7 @@ h3 {
 
 .sidebar {
     background: rgb(61, 79, 93);
-    color: #fff;
+    color: rgb(230, 241, 215);
 }
 
 .brand-title,
@@ -58,9 +64,13 @@ h3 {
 }
 
 .sidebar-input {
+  background: rgb(230, 241, 215);
+}
+
+.sidebar-query {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
   margin-top: 1em;
 }
 
@@ -76,6 +86,8 @@ h3 {
 
 .content {
     padding: 2em 1em 0;
+    background: rgb(44, 57, 66);
+    color: rgb(213, 238, 255);
 }
 
 .footer {

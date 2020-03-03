@@ -12,6 +12,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- import Pure CSS framework -->
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" SameSite=None>
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css">
     <!-- import custom stylesheet -->
     <link rel="stylesheet" href="lab6_layout.css">
@@ -49,9 +50,19 @@
               <div v-for="result in dict_results">
                 <div><h2>
                   <!-- displays syllabic breakdown of word -->
-                  <span>{{result.hwi.hw}}</span>
+                  <span>{{result.hwi.hw}} </span>
                   <!-- displays word pronunciation guide, if it exists -->
-                  <span v-if="result.hwi.prs"> | {{result.hwi.prs[0].mw}}</span>
+                  <span v-if="result.hwi.prs">
+                    <span v-for="pronounce in result.hwi.prs">
+                      <!-- filters out {sc}word{/sc} results, which are redirects, not pronunciations -->
+                      <span v-if="pronounce.mw.includes('{sc}')"></span>
+                      <span v-else>
+                        <span> | {{pronounce.mw}}</span>
+                        <!-- creates audio pronunciation button, if audio guide exists; finishes construction of audio_url string -->
+                        <span v-if="pronounce.sound"><button @click.prevent="playSound(audio_url+pronounce.sound.audio+'.wav')" class="audio_button"> <span class="fa fa-volume-up"></span></button></span>
+                      </span>
+                    </span>
+                  </span>
                 </h2></div>
                 <!-- displays word class -->
                 <div style="fontStyle:italic;"><h3>{{ result.fl }}</h3></div>
@@ -125,17 +136,20 @@
           resource_choice: 'dictionary',
           dict_results: {}, // object for storing dictionary API results
           thes_results: {}, // object for storing thesaurus API results
-          json_url : '', // temporary value for concactinating JSON url for dictionary and thesaurus APIs
+          json_url: '', // temporary value for concactinating JSON url for dictionary and thesaurus APIs
+          audio_url: '' // blank string for creating URL to audio pronunciation guide
         },
         methods: {
             queryMWeb: function() {
               console.log(this.resource_choice)
               if (this.user_word) { //prevents running if user submits a blank string
-                this.submitted_word = this.user_word
+                this.submitted_word = this.user_word //stores user_word as a fixed value upon submission
+                this.audio_url = 'https://media.merriam-webster.com/soundc11/'+this.submitted_word.slice(0,1)+'/' //builds audio pronunciation url string per API documentation
+                console.log(this.audio_url)
                 this.submitted = true
-                this.json_url = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/' + this.user_word
+                this.json_url = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/' + this.user_word //builds dictionary API path, which contains the requested user_word
                 this.dictQuery()
-                this.json_url = 'https://www.dictionaryapi.com/api/v3/references/thesaurus/json/' + this.user_word
+                this.json_url = 'https://www.dictionaryapi.com/api/v3/references/thesaurus/json/' + this.user_word //builds thesaurus API path, which contains the requested user_word
                 this.thesQuery()
               }
             },
@@ -162,6 +176,14 @@
                 this.thes_results = response.data
               })
             },
+            // function for playing the audio pronunciation
+            playSound: function(sound) {
+              console.log(sound)
+              if(sound) {
+                var audio = new Audio(sound);
+                audio.play();
+              }
+            }
         }
       })
     </script>

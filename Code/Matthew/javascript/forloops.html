@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      let fruits = ['apples', 'bananas', 'pears', 'cherries', 'avocado', 'kiwi', 'tomato', 'starfruit', 'cucumbers']
+
+      /*
+      let i=0;
+      while (i < fruits.length) {
+        console.log(fruits[i])
+        ++i
+      }
+      console.log()
+
+      for (let i=0; i<fruits.length; ++i) {
+        console.log(fruits[i])
+      }
+
+      for (let i=0, j=0; i<fruits.length && j != 4; ++i, j += (fruits[i].includes('a'))? 1: 0) console.log(fruits[i])
+      */
+
+      fruits.forEach((element, i) => {
+        console.log(i + ' ' + element)
+      })
+      fruits.forEach(function(element, i) {
+        console.log(i + ' ' + element)
+      })
+
+      for (fruit of fruits) {
+        console.log(fruit)
+      }
+
+      // fruits.name = 'joe'
+      // console.log(fruits)
+
+      let obj = {
+        name: 'joe',
+        age: '34',
+        fav_color: 'blue',
+        '0': 'apples',
+        '1': 'bananas'
+      }
+      console.log('----' + obj[0])
+      //obj.name // object with property
+      //obj['name'] // dictionary with keys and values
+      for (property in obj) {
+        console.log(property + ': ' + obj[property])
+      }
+
+
+
+
+
+
+
+    </script>
+  </body>
+</html>

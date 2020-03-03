@@ -6,9 +6,32 @@ main {
 
 }
 .container {
-    height: 800px;
-    width:800px;
-    border: 1px solid black;
+/*
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+*/
+    height: 100%;
+    width: 600px !important;
     text-align: center;
 
+}
+/*
+.jumbotron {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	justify-content: center;
+}
+*/
+.dpdn {
+	margin-top: 20px;
+}
+.card {
+	visibility: hidden;
+}
+.card1 {
+    visibility: visible !important;
+	
 }

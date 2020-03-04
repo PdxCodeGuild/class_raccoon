@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div id="mydiv" style="width:100px;height:100px">
+    </div>
+    <script type="text/javascript">
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+      async function demo() {
+        let mydiv = document.querySelector('#mydiv')
+
+        colors = ['red', 'green', 'blue', 'yellow', 'black']
+        for (let i = 0; i < colors.length; i++) {
+          mydiv.style.backgroundColor = colors[i]
+          await sleep(2000);
+        }
+      }
+      demo();
+    </script>
+  </body>
+</html>

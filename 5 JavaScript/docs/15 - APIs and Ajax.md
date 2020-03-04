@@ -1,43 +1,90 @@
 
 # APIs and AJAX
 
+See also: [The Internet](../../0%20Intro/The%20Internet.md)
+
 ## API
 
 API stands for "application programming interface", it's a standardized way to send and receive data from a web service via HTTP requests (GET, POST, PUT, DELETE). For example, try executing this url in your browser `http://api.forismatic.com/api/1.0/?method=getQuote&key=457653&format=json&lang=en`. This is an api for random inspiration quotes. Note the query parameters which specify a key, format, and language. When you enter it in your browser, you execute an HTTP GET request. You can do the same thing from JavaScript, then process the result and control how it's displayed to the user. Websites are for people, APIs are for programs.
 
 There are many free and open APIs available on the internet that can provide many different forms of data. You can find some public APIs [here](https://github.com/toddmotto/public-apis) and [here](https://catalog.data.gov/dataset?q=-aapi+api+OR++res_format%3Aapi#topic=developers_navigation). When trying to access a url, remember the [parts of a url](https://doepud.co.uk/images/blogs/complex_url.png). APIs can receive parameters through query parameters and headers. You can see query parameters in the example url.
 
-
-
-### HTTP Methods
-
-HTTP requests include a **method**, which indicates what the intention of the request is. These methods are conventional. You could use `GET` to delete an entry in the database, but you shouldn't. You can find more info [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods), [here](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods). The most common HTTP methods parallel the CRUD operations we discussed in Python.
-
-| Method | Equivalent |
-| ---    | ---        |
-| POST   | Create     |
-| GET    | Retrieve   |
-| PUT    | Update     |
-| DELETE | DELETE     |
-
-
-### HTTP Status Codes
-
-The response to an HTTP request will have a **status code** which indicates whether the request was successful or not, and what the error was. You can find a more thorough list of status codes [here](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
-
-| Code | Description  |
-| ---  | ---          |
-| 1XX  | information  |
-| 2XX  | success      |
-| 3XX  | redirection  |
-| 4XX  | client error |
-| 5XX  | server error |
-
-
 ## AJAX
 
 AJAX stands for "asynchronous javascript and XML", and allows you to execute HTTP requests from JavaScript. You can read more about AJAX [here](https://developer.mozilla.org/en-US/docs/AJAX/Getting_Started), [here](https://developer.mozilla.org/en-US/docs/AJAX) and [here](https://www.w3schools.com/xml/ajax_intro.asp).
 
+
+
+### AJAX in Axios
+
+Axios is a JavaScript library which handles AJAX more succinctly. Ultimately it's built upon vanilla JavaScript, so it doesn't offer anything you can't otherwise do with vanilla JS.
+
+```es6
+axios({
+  method: 'get',
+  url: 'https://favqs.com/api/qotd'
+}).then((response) => {
+  console.log(response.data)
+})
+```
+
+#### Setting Query Parameters
+
+You can set query parameters using string concatenation or by setting the `params` property. Just remember that if you use string concatenation, you may have to use `encodeURIComponent` if the value has special characters in it. If you use `params` with Axios, it will automatically encode your parameters for you.
+
+```javascript
+let business_name = 'Schmitt & Associates'
+let url1 = "http://example.com/?business=" + business_name
+let url2 = "http://example.com/?business=" + encodeURIComponent(business_name)
+console.log(url1) // INVALID: http://example.com/?business=Schmitt & Associates
+console.log(url2) // VALID: http://example.com/?business=Schmitt%20%26%20Associates
+```
+
+
+```javascript
+axios({
+  method: 'get',
+  url: 'https://opentdb.com/api.php',
+  params: {
+    amount: 10,
+    category: 18,
+    difficulty: 'easy'
+  }
+}).then((response) => {
+  this.questions = response.data.results
+})
+```
+
+#### Setting Custom Request Headers
+
+Depending on the API specification, you may need to put an API key inside the headers of the request.
+
+```javascript
+axios({
+  method: 'get',
+  url: 'https://favqs.com/api/qotd',
+  headers: {
+    'x-api-key': 'api_key'
+  }
+}).then((response) => {
+  console.log(response.data)
+})
+```
+
+#### Sending Data
+
+```javascript
+axios({
+  method: 'post',
+  url: 'https://favqs.com/api/qotd',
+  data: {
+    name: 'joe',
+    age: '34'
+  }
+}).then((response) => {
+  console.log(response.data)
+})
+```
 
 ### AJAX in Vanilla JavaScript
 
@@ -68,7 +115,7 @@ Adding a key-value pair to the request header is done by invoking `setRequestHea
 let xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
   if (this.readyState === 1) {
-    xhttp.setRequestHeader('Authorization', 'Token token="<api kep here>"')
+    xhttp.setRequestHeader('Authorization', 'Token token="a1b2c3"')
   } else if (this.readyState === 4 && this.status === 200) {
     let data = JSON.parse(xhttp.responseText);
     // do something with data
@@ -99,45 +146,6 @@ function http_get(url, success) {
 http_get("https://api.ipify.org/?format=json", function(data) {
     console.log(data);
 });
-```
-
-### AJAX in Axios
-
-Axios is a JavaScript library which handles AJAX more succinctly. Ultimately it's built upon the Vanilla JavaScript form of AJAX, so it doesn't offer anything you can't otherwise do with Vanilla.
-
-```javascript
-axios.get(url)
-.then(function (response) {
-  console.log(response.data)
-})
-```
-
-```javascript
-let config = {
-  headers: {
-    'x-api-key': api_key
-  }
-}
-axios.get(url, config)
-.then(function (response) {
-  console.log(response.data)
-})
-```
-
-```javascript
-let data = {
-  'key': 'value'
-  'data': 'to send'
-}
-let config = {
-  headers: {
-    'header name': 'header value'
-  }
-}
-axios.post(url, data, config)
-.then(function(response) {
-  console.log(response.data)
-})
 ```
 
 
@@ -202,7 +210,3 @@ If you receive the response "No 'Access-Control-Allow-Origin' header is present 
 JSONP (short for "JSON with Padding") is an additional security feature some APIs offer or require. You can read more about JSONP [here](https://stackoverflow.com/questions/3839966/can-anyone-explain-what-jsonp-is-in-layman-terms) and [here](https://stackoverflow.com/questions/16097763/jsonp-callback-function).
 
 
-## Free Public APIs
-
-- [a list on github](https://github.com/toddmotto/public-apis)
-- [list on data.gov](https://catalog.data.gov/dataset?q=-aapi+api+OR++res_format%3Aapi#topic=developers_navigation)

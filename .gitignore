@@ -1,10 +1,13 @@
 
 
 .vscode
-
+secrets.js
 secrets.py
 local_settings.py
 
+
+secrets.js
+local_settings.js
 
 
 .DS_Store

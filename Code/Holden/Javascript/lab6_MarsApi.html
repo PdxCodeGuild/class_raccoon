@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="secrets.js">
+
+    </script>
+    <style media="screen">
+      body{
+        margin: 0;
+      }
+      .mainBod{
+        width: 100vw;
+        min-height: 100vh;
+        background-size: 100% auto;
+        background-repeat: repeat-y;
+      }
+      #solSelector{
+        width: 70%;
+      }
+      select{
+        width: 10%;
+      }
+      #solDisp{
+        width: 10%;
+      }
+      .imgGrid{
+        margin: 1px auto;
+        width:95%;
+        display: grid;
+        grid-template-columns: 20% 20% 20% 20% 20%;
+      }
+      .marsImgs{
+        padding: 1%;
+        width: 98%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="mainBod" :style="'background-image: url(' + backgroundUrl + ')'" >
+        <select v-model="rover" v-on:change="newRover">
+          <option v-for="roverData in roverList" :value="roverData.name">{{roverData.name}}</option>
+        </select>
+        <select v-model="camera">
+          <option value="">all</option>
+          <option v-for="cam in cameraList" :value="cam.name">{{cam.name}} - {{cam.full_name}}</option>
+        </select>
+        <input id="solSelector" type="range" v-model="sol" min="1" :max="maxSol" v-on:change="slider"><span id="solDisp">{{sol}}</span><br>
+        <div v-if="currImgArray" class="imgGrid">
+          <a v-for="photo in currImgArray" :href="photo.img_src"><img class="marsImgs" :src="photo.img_src" alt="" :title="photo.rover.name + '-' + photo.camera.full_name + ' sol:' + photo.sol+' earth date:'+photo.earth_date"></a>
+        </div>
+
+      </div>
+    </div>
+    <script type="text/javascript">
+    let app = new Vue({
+      el: '#app',
+      data: {
+        backgroundUrl: "https://en.es-static.us/upl/2015/08/albireo-Tom-Wildoner-July-2015-cp-e1470155481438.jpg",
+        sol: 1,
+        rover: "curiosity",
+        roverList: [],
+        camera: "",
+        maxSol: 20,
+        cameraList: [],
+        currImgArray: [],
+      },
+      methods: {
+        newRover: function() {
+          this.roverList.forEach((rover, i) => {
+            if (rover.name.toLowerCase() == this.rover.toLowerCase()) {
+              console.log(rover.cameras)
+              this.cameraList = rover.cameras
+              this.camera = ""
+            }
+          })
+        },
+        paginator: function(event) {
+          let activeElement = document.activeElement;
+          let inputs = ['input', 'select', 'button', 'textarea'];
+          if (activeElement && inputs.indexOf(activeElement.tagName.toLowerCase()) !== -1) {
+              return
+          }
+          if (event.key=='ArrowLeft' && this.sol > 1) {
+            this.sol--
+            this.getPhotoList()
+          }
+          if (event.key=='ArrowRight' && this.sol < this.maxSol) {
+            this.sol++
+            this.getPhotoList()
+          }
+        },
+        slider: function() {
+          if (this.sol >= this.maxSol && this.sol <= 1) {
+            if (this.sol <= 1) {
+              this.sol = 1
+            } else {
+              this.sol = this.maxSol
+            }
+          }
+          this.notLast = true
+          console.log("calling for sol ", this.sol)
+          this.getPhotoList()
+
+        },
+        getPhotoList: function() {
+          let modParams = {
+            sol: this.sol
+          }
+          if (this.camera) {
+            modParams.camera = this.camera
+          }
+          axios({
+            method: 'get',
+            url: 'https://mars-photos.herokuapp.com/api/v1/rovers/' + this.rover + "/photos",
+            params: modParams
+          }).then((response) => {
+            let resp = response.data
+            if (!resp) {
+              return false
+            }
+            console.log(resp)
+            this.currImgArray = resp.photos
+          })
+        }
+      },
+      created: function() {
+        axios({
+          method: 'get',
+          url: 'https://api.nasa.gov/planetary/apod',
+          params: {
+            api_key: nasaKey
+          }
+        }).then((response) => {
+          let resp = response.data
+          console.log(resp)
+          if (resp.hdurl) {
+            this.backgroundUrl = resp.hdurl
+          }
+        })
+        axios({
+          method: 'get',
+          url: 'https://mars-photos.herokuapp.com/api/v1/rovers/',
+        }).then((response) => {
+          let resp = response.data
+          console.log(resp)
+          this.roverList = resp.rovers
+          this.rover = this.roverList[0].name
+          this.cameraList = this.roverList[0].cameras
+          this.maxSol = this.roverList[0].max_sol
+        })
+        window.addEventListener('keydown', (ev) => {
+          this.paginator(ev); // declared in your component methods
+        })
+      }
+    })
+    </script>
+  </body>
+</html>

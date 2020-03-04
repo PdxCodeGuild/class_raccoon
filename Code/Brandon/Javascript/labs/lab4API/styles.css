@@ -46,6 +46,7 @@ td {
 	flex-wrap: wrap !important;
 	width: 600px;
 	margin-top: 40px;
+	overflow: scroll;
 }
 /* card holders-- */
 .card-contain {

@@ -36,7 +36,7 @@ let app = new Vue({
         startFind: function(){
             axios({
                 method: 'get',
-                url: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?',
+                url: 'https://www.thecocktaildb.com/api/json/v1/1/search.php',
                 params: {
                     s: this.drinkName,
                 }
@@ -58,7 +58,7 @@ let app = new Vue({
 		advancedFind: function(nameChoice){
 			axios({
                 method: 'get',
-                url: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?',
+                url: 'https://www.thecocktaildb.com/api/json/v1/1/search.php',
                 params: {
                     s: nameChoice,
                 }

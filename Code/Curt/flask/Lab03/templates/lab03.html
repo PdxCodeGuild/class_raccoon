@@ -5,6 +5,19 @@
     <title></title>
   </head>
   <body>
-
+    <h1>Anime Streamfinder</h1>
+    <h2>Find out where to stream your favorite anime</h2>
+    <form action="/" method="post">
+      Search for a show:
+      <input type="text" name="user_input">
+      <button type="submit">Submit</button>
+    </form>
+    {% if result_list %}
+      {% for result in result_list %}
+          {{result}}<br>
+      {% endfor %}
+    {% else %}
+      No results!
+    {% endif %}
   </body>
 </html>

@@ -13,14 +13,28 @@ def index(request):
 def listtodos(request):
     todos = ListItem.objects.all()
     data = []
+    priorities = ItemPriority.objects.all()
+    priority_data = []
     for todo in todos:
         data.append({
             'todoitem': todo.to_do_item,
             'priority': str(todo.priority)
         })
-    return JsonResponse({'data': data})
+    for priority in priorities:
+        priority_data.append({
+            'priority': priority.priority,
+        })
+    return JsonResponse({'data': data, 'priorities':priority_data})
 
 
 
 def addtodos(request):
-    pass
+    data = json.loads(request.body)
+    to_do_item = data['item']
+    priority = data['priority']
+    if to_do_item == '' or priority == '':
+        return HttpResponse('error')
+    priority = ItemPriority.objects.get(priority=priority['priority']['priority'])
+    todo_post = ListItem(to_do_item=to_do_item, priority=priority)
+    todo_post.save()
+    return HttpResponse('Item Saved')

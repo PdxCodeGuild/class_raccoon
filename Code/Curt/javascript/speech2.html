@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+  <div>
+    <input type="text" id="new_word">
+    <button type="button" id="new_word_btn">Speak!</button>
+  </div>
+  <script type="text/javascript">
+    new_word.addEventListener('keypress', function(event){
+      if (event.key == "Enter"){
+        saySomething()
+      }
+    })
+    new_word_btn.addEventListener('click', function() {
+      saySomething()
+    })
+    function saySomething() {
+      let word;
+      word = new_word.value;
+      var msg = new SpeechSynthesisUtterance(word);
+      var voices = window.speechSynthesis.getVoices();
+      msg.pitch = 0
+      speechSynthesis.getVoices().forEach(function(voice) {
+  console.log(voice.name, voice.default ? voice.default :'');
+});
+      window.speechSynthesis.speak(msg);
+    }
+  </script>
+  </body>
+</html>

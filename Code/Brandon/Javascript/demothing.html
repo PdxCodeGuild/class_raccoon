@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let ingredients = {
+            'ingredient1': 'apples',
+            ingredient2: 'bananas',
+            ingredient3: 'pears',
+            ingredient4: null
+        }
+        output = []
+        // ingredients.ingredient1 = ...
+        // ingredients['ingredient1']
+        for (let i=1; i<5; ++i) {
+            let ing = ingredients['ingredient' + i]
+            if (ing != null) {
+                output.push(ing)
+            }
+            // console.log(ingredients['ingredient' + i])
+        }
+        console.log(output)
+
+        output = []
+
+        for (key in ingredients) {
+            if (key.includes('Ingredient') && ingredients[key] != null) {
+                output.push(ingredients[key])
+            }
+        }
+        console.log(output)
+
+
+    </script>
+</body>
+</html>

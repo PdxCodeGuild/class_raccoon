@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>To Do List 4</title>
+        <!-- Vue -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <!-- Axios -->
+        <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h1>Do this shit</h1>
+            <ul>
+                <li v-for="todo in todos">[[todo.todoitem]] - [[todo.priority]]</li>
+            </ul>
+        </div>
+        <script type="text/javascript">
+            let app = new Vue ({
+                el: '#app',
+                delimiters: ['[[', ']]'],
+                data: {
+                    todos: []
+                },
+                methods: {
+                    getToDos: function() {
+                        axios({
+                            method: 'get',
+                            url: '{% url 'todolist:listtodos' %}',
+                        }).then(response => {
+                            console.log(response.data)
+                            this.todos = response.data.data
+                        })
+                    }
+                },
+                created: function () {
+                    this.getToDos()
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,35 @@
+body {
+    font-family: 'Ubuntu Mono', monospace;
+    background-image: url("https://storage.needpix.com/rsynced_images/typewriter-3899285_1280.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+.nav ul li {
+    color: white;
+}
+.logo {
+    color: white;
+
+}
+.hero {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+/*    background-image: url("https://storage.needpix.com/rsynced_images/typewriter-3899285_1280.jpg");*/
+/*    background-repeat: no-repeat;*/
+/*    background-size: cover;*/
+/*}*/
+.container-small {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px;
+    height: 200px;
+    width: 200px;
+}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ListItems, ItemPriority
+from .models import ListItem, ItemPriority
 
-admin.site.register(ListItems)
+admin.site.register(ListItem)
 admin.site.register(ItemPriority)

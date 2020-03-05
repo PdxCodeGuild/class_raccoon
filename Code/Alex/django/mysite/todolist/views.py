@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 import json
-from .models import ListItems, ItemPriority
+from .models import ListItem, ItemPriority
 
 
 
@@ -10,29 +10,17 @@ def index(request):
 
 
 
-def posts(request):
-    posts = ToDoList.objects.order_by('-created_date')
-    paginator = Paginator(posts, 10)
-    page = request.GET.get('page', 1)
-    posts = paginator.get_page(page)
+def listtodos(request):
+    todos = ListItem.objects.all()
     data = []
-    for post in posts:
+    for todo in todos:
         data.append({
-            'id': post.id,
-            'title': post.title,
-            'body': post.body,
-            'created_date': post.created_date.strftime('%m/%d/%Y')
+            'todoitem': todo.to_do_item,
+            'priority': str(todo.priority)
         })
-    return JsonResponse({'num_pages': paginator.num_pages, 'blog_posts': data})
+    return JsonResponse({'data': data})
 
 
 
-def create_post(request):
-    data = json.loads(request.body)
-    title = data['title']
-    body = data['body']
-    if title == '' or body == '':
-        return HttpResponse('not ok')
-    blog_post = BlogPost(title=title, body=body, created_date=timezone.now())
-    blog_post.save()
-    return HttpResponse('ok')
+def addtodos(request):
+    pass

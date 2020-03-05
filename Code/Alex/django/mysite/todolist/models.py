@@ -10,7 +10,7 @@ class ItemPriority(models.Model):
 
 
 
-class ListItems(models.Model):
+class ListItem(models.Model):
     to_do_item = models.CharField(max_length=200)
     priority = models.ForeignKey(ItemPriority, on_delete=models.PROTECT)
 

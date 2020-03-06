@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'contactsapp',
     'urlshorten',
     'libraryapp',
+    'vuetodo',
 ]
 
 MIDDLEWARE = [

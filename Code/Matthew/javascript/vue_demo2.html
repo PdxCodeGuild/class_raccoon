@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <select v-model="current_page">
+        <option value="form">Form</option>
+        <option value="list" v-if="submitted">List</option>
+        <option value="hello" v-if="submitted">Hello World</option>
+      </select>
+      <div v-if="current_page == 'form'">
+        <select v-model="form.fruit">
+          <option v-for="fruit in fruits" :value="fruit">{{fruit | title}}</option>
+        </select>
+        <div v-for="(vegetable, i) in vegetables">
+          <input type="radio" :value="vegetable" :id="'vegetable' + i" name="radio_vegetable" v-model="form.vegetable"/>
+          <label :for="'vegetable' + i">{{vegetable | title}}</label>
+        </div>
+        <div v-for="(grain, i) in grains">
+          <input type="checkbox" :value="grain" :id="'grain' + i" name="check_grain" v-model="form.grains[grain]"/>
+          <label :for="'grain' + i">{{grain | title}}</label>
+        </div>
+        <button @click="save">save</button>
+      </div>
+      <div v-if="current_page == 'list'">
+        <ul>
+          <li>A</li>
+          <li>B</li>
+          <li>C</li>
+        </ul>
+      </div>
+      <div v-if="current_page == 'hello'">
+        <h1>Hello World!</h1>
+      </div>
+    </div>
+    <script type="text/javascript">
+      let app = new Vue({
+        el: '#app',
+        data: {
+          submitted: false,
+          current_page: 'form',
+          fruits: ['apples', 'bananas', 'pears', 'cherries', 'avocados', 'cucumbers'],
+          vegetables: ['cucumber', 'eggplant', 'carrot', 'potato', 'tree'],
+          grains: ['rice', 'quinoa', 'millet', 'buckwheat', 'amaranth'],
+          form: {
+            fruit: '',
+            vegetable: '',
+            grains: {}
+          }
+
+        },
+        methods: {
+          save: function() {
+            console.log({...this.form})
+            this.submitted = true
+            this.current_page = 'list'
+          }
+        },
+        filters: {
+          title: function(v) {
+            return v.charAt(0).toUpperCase() + v.slice(1)
+          }
+        },
+        created() {
+          for (grain of this.grains) {
+            this.form.grains[grain] = false
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -5,8 +5,10 @@ from .models import Priority, TodoThing
 
 def index(request):
     posts = TodoThing.objects.all()
+    priority = Priority.objects.all()
     context = {
-    'posts': posts
+    'posts': posts,
+    'priority': priority,
     }
     return render(request, 'vuetodo/index.html', context)
 
@@ -24,10 +26,11 @@ def posts(request):
 
 def create_post(request):
     data = json.loads(request.body)
-    title = data['title']
-    body = data['body']
-    if title == '' or body == '':
+    print(data)
+    things = data['new_post_things']
+    plevel = data['new_post_level']
+    if things == '':
         return HttpResponse('not ok')
-    blog_post = BlogPost(title=title, body=body, created_date=timezone.now())
-    blog_post.save()
+    todo_posts = TodoThing(things=things, plevel=Priority.objects.get(plevel=plevel))
+    todo_posts.save()
     return HttpResponse('ok')

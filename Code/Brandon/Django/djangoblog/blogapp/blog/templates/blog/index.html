@@ -11,32 +11,74 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'blog/styles.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
-    <script src="{% static 'blog/script.js' %}" defer></script>
+    {#    <script src="{% static 'blog/script.js' %}" defer></script>#}
+    {#    Modal Template#}
+    <script type="text/x-template" id="modal-template">
 
-
+    </script>
 </head>
 <body>
-    <div class="main" id="app">
-        <div class="hero">
-            <div class="nav">
-                <div class="logo">
-                    <img src="https://cdn2.iconfinder.com/data/icons/social-media-black-white-1/1024/bw-4-512.png" alt="" height="80px" width="80px">
-                </div>
-                <div class="navbar">
-                    <ul>
-                        <li>Posts</li>
-                        <li>login</li>
-                    </ul>
-                </div>
+<div class="main" id="app">
+    <div class="hero">
+        <div class="nav">
+            <div class="logo">
+                <img src="https://cdn2.iconfinder.com/data/icons/social-media-black-white-1/1024/bw-4-512.png" alt=""
+                     height="80px" width="80px">
             </div>
-
+            <div class="navbar">
+                <ul>
+                    <li>Posts</li>
+                    <li>login</li>
+                </ul>
+            </div>
+        </div>
+        <div class="hero-main">
             <div class="container-small">
-                <button>Create New</button>
+                <div class="hero-head">
+                    <h2>The Blog</h2>
+                </div>
+                <div class="hero-btn">
+                    <button id="show-modal" @click="showModal = true">Create New</button>
+                    <!-- bind component data to parent data and component methods ($emit) to parent method -->
+{#                    <modal  @close="" v-on:updateTitle="new_post_title" v-on:updateBody="new_post_body" v-on:savepost="savePost">#}
+
+                                <transition name="modal" v-if="showModal">
+                    <div class="modal-mask">
+                        <div class="modal-wrapper">
+                            <div class="modal-container">
+                                <div class="modal-header">
+                                    <slot name="header">
+                                        <input type="text" placeholder="title" v-model="new_post_title"/>
+                                    </slot>
+                                </div>
+                                <div class="modal-body">
+                                    <slot name="body">
+                                        <textarea placeholder="body" v-model="new_post_body"></textarea>
+                                    </slot>
+                                </div>
+                                <div class="modal-footer">
+                                    <slot name="footer">
+                                        Date
+                                        <button class="modal-default-button" @click="showModal = false">
+                                            Close
+                                        </button>
+
+                                    </slot>
+                                </div>
+                                <button v-on:click="savePost">save</button>
+                            </div>
+                        </div>
+                    </div>
+                </transition>
+                </div>
                 <button>View Posts</button>
             </div>
         </div>
-        <div class="content">
-        <div class="blogcard" v-for = 'post in blog_posts'>
+    </div>
+
+
+    <div class="content">
+        <div class="blogcard" v-for='post in blog_posts'>
             <h2>[[post.title]]</h2>
             <p>[[post.content]]</p>
             <p>Date Created: [[post.date]]</p>
@@ -44,38 +86,70 @@
     </div>
 
 
-
-    </div>
-
+</div>
 
 
-    {#    vue app ---#}
-    <script >
-        let app = new Vue({
+{#    vue app ---#}
+<script>
+    // register modal component
+    Vue.component("modal", {
+        props: ['new_post_title', 'new_post_body'],
+        template: "#modal-template"
+    });
+
+    let app = new Vue({
         el: '#app',
         delimiters: ['[[', ']]'],
         data: {
-          blog_posts: [],
-          current_view: 'list',
-          new_post_title: '',
-          new_post_body: ''
+            blog_posts: [],
+            current_view: 'list',
+            new_post_title: '',
+            new_post_body: '',
+            showModal: false,
         },
         methods: {
-          getPosts: function() {
-            axios({
-              method: 'get',
-              url: '{% url 'blog:posts' %}',
-
-            }).then(response => {
-                this.blog_posts = response.data.blog_posts
-
-            })
-          },
-        },
-            created: function () {
-                this.getPosts()
+            getPosts: function () {
+                axios({
+                    method: 'get',
+                    url: '{% url 'blog:posts' %}',
+                }).then(response => {
+                    this.blog_posts = response.data.blog_posts
+                })
             },
-      })
-    </script>
+
+            savePost: function () {
+                console.log("saving todo")
+                console.log(this.new_post_title)
+                console.log(this.new_post_body)
+                if (this.new_post_title == '' || this.new_post_body == '') {
+                    alert('please enter a title and body for the blog post')
+                    return
+                }
+                axios({
+                    method: 'post',
+                    url: '{% url 'blog:create_post' %}',
+                    headers: {
+                        'X-CSRFToken': '{{csrf_token}}'
+                    },
+                    data: {
+                        title: this.new_post_title,
+                        content: this.new_post_body
+                    }
+                }).then(response => {
+                    console.log(response)
+                    if (response.data == 'not ok') {
+                        alert('enter a title and body')
+                    }
+                    this.new_post_title = ''
+                    this.new_post_body = ''
+                    this.getPosts()
+                })
+            }
+        },
+        created: function () {
+            this.getPosts()
+        },
+    })
+</script>
 </body>
 </html>

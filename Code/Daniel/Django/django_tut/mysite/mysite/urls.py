@@ -22,5 +22,6 @@ urlpatterns = [
     path('contacts/', include('contactslab.urls')),
     path('urlshort/', include('urlshort.urls')),
     path('library/', include('library.urls')),
-    path('users/', include('users.urls'))
+    path('users/', include('users.urls')),
+    path('todo/', include('todo.urls')),
 ]

@@ -1,0 +1,115 @@
+<!--
+1) Show a random cat image, buttons to pet or not
+2) list of cats that we pet, local storage??
+3) Materialize carousel
+-->
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+    <!-- Materialize -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- Axios -->
+    <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <head>
+    <meta charset="utf-8">
+    <title>Cat Tinder (It's not what you think)</title>
+    <style type="text/css">
+      .carousel .carousel-item > img {
+        width: initial;
+      }
+      img {
+        height:100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="carousel carousel-slider center">
+        <div class="carousel-fixed-item center">
+          <a class="btn waves-effect white grey-text darken-text-2" v-on:click="pet">Pet</a>
+          <span v-if="catsArray.length>0">{{catsArray[currentCatIndex].pet}}</span>
+          <a class="btn waves-effect white grey-text darken-text-2" v-on:click="dontPet">Don't Pet</a>
+        </div>
+        <div v-for="(cat,i) in catsArray" class="carousel-item blue light-6 white-text" v-bind:href="'#'+i+'!'">
+          <h2>{{cat.name}}</h2>
+          <img v-bind:src="cat.url" v-bind:width="cat.width" v-bind:height="cat.height"/>
+        </div>
+      </div>
+      <ol>
+        <li v-for="cat in sortedCats" >{{cat.pet}} {{cat.name}}</li>
+      </ol>
+    </div>
+    <script type="text/javascript">
+
+      let app= new Vue({
+        el: "#app",
+        data: {
+          catsArray:[],
+          currentCatIndex:0,
+          carousel:null,
+        },
+        methods:{
+          pet: function(){
+            this.catsArray[this.currentCatIndex].pet++
+            this.currentCatIndex=(this.currentCatIndex+1)%this.catsArray.length
+            this.carousel.next()
+          },
+          dontPet: function(){
+            this.currentCatIndex=(this.currentCatIndex+1)%this.catsArray.length
+            this.carousel.next()
+          },
+          cuteNameGen: function(){
+            let prefixes = ['Mr', 'Mrs', 'Ms', 'Colonel', 'Sir', 'Madam', '', 'General']
+            let names = ['Squiggles', 'Tubbs', 'Roger', 'Trash Gremlin', 'Booplesnoots', 'Kenneth']
+            let name = this.randomChoice(prefixes) + " " + this.randomChoice(names)
+            return name
+
+          },
+          randomChoice: function (array) {
+             return array[Math.floor(Math.random()*array.length)]
+          }
+        },
+        computed: {
+          sortedCats: function() {
+            let cats = this.catsArray.sort((cat1, cat2)=>cat2.pet-cat1.pet)
+            return cats
+          }
+        },
+        created:function(){
+          axios({
+            method: "get",
+            url: "https://api.thecatapi.com/v1/images/search?limit=20",
+            params: {}
+          }).then((response) => {
+            console.log(response.data)
+            this.catsArray = []
+            for (let i=0; i<response.data.length; ++i){
+              this.catsArray.push({
+                url:response.data[i].url,
+                width:response.data[i].width,
+                height:response.data[i].height,
+                pet:0,
+                name:this.cuteNameGen()
+              })
+            }
+            setTimeout(()=> {
+              var elems = document.querySelector('.carousel');
+              var instances = M.Carousel.init(elems, {fullWidth:true});
+              this.carousel=instances
+            }, 50)
+          })
+        }
+      })
+    </script>
+
+
+
+  </body>
+</html>

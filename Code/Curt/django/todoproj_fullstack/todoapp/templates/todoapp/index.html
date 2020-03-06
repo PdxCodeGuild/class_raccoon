@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Axios -->
+    <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{title}}</h1>
+      <div v-if="">
+
+      </div>
+      <!-- <form action="{% url 'todoapp:savetodo' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="todo_text">
+        <button type="submit">Submit</button>
+      </form> -->
+      <input type="text" placeholder="Add an entry..." v-model="todo_text" v-on:keypress.enter="addEntry"/>
+      <button v-on:click="addEntry">Submit</button>
+      <div v-if="no_entry">Please input a value!</div>
+      <ul>
+        {% for todo_item in todo_items %}
+        <li>{{todo_item.text}}</li>
+        {% endfor %}
+      </ul>
+      <script type="text/javascript">
+        let app = new Vue({
+          el: '#app',
+          delimiters: ['[[',']]'],
+          data: {
+            todo_text: '',
+            no_entry: false,
+          },
+          methods: {
+            addEntry: function() {
+              if (this.todo_text) {
+                this.no_entry = false
+                }  else {
+                this.no_entry = true
+              }
+            }
+          }
+        })
+      </script>
+    </div>
+  </body>
+</html>

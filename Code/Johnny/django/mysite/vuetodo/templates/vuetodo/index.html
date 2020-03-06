@@ -2,40 +2,88 @@
 <html lang="en" dir="ltr">
 
 <head>
-  <meta charset="utf-8">
-  <title></title>
-  <!-- Vue -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- Vue/Axios -->
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <!-- Axios -->
   <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
   <!-- Materialize -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <style>
-    html {
-      scroll-behavior: smooth;
+
+  <style type="text/css">
+    * {
+      padding: 10px;
+      margin: 0 auto;
     }
   </style>
 </head>
 
 <body>
 
-<div id="app">
-<h1>WEB TODO</h1>
-
-</div>
+  <div id="app">
+    <h1>WEB TODO</h1>
 
 
-  <script type="text/javascript">
+    <div>
+      ------------
+    </div>
+    <div class="container-small">
+      <button>Create New Task</button>
+    </div>
+    <div class="blogcard" v-for='post in todo_posts'>
+      <h2>Thing to do: [[post.things]]</h2>
+      <p>ID: [[post.id]]</p>
+      <p>Priority level: [[post.plevel]]</p>
+      <p>Finished task: <button>Complete</button>
+        [[post.done]]</p>
+    </div>
+  </div>
+
+
+  <script>
     let app = new Vue({
       el: '#app',
       delimiters: ['[[', ']]'],
       data: {
+        todo_posts: [],
+        current_view: 'list',
+        new_post_things: '',
+        new_post_level: '',
+        new_post_done: '',
       },
-      methods: {},
+      methods: {
+        getPosts: function() {
+          axios({
+            method: 'get',
+            url: "{% url 'vuetodo:posts' %}",
+          }).then(response => {
+            this.todo_posts = response.data.todo_posts
+          })
+        },
+        savePost: function() {
+          axios({
+            method: 'post',
+            url: "{% url 'vuetodo:create_post' %}",
+            headers: {
+              'X-CSRFToken': '{{csrf_token}}'
+            },
+            data: {
+            }
+          }).then(response => {
+            console.log(response.data)
+          })
+        }
+      },
+      created: function() {
+        this.getPosts()
+      },
     })
   </script>
+
+
 </body>
 
 </html>

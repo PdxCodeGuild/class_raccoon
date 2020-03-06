@@ -1,34 +1,33 @@
 from django.shortcuts import render, reverse
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 import json
 from .models import Priority, TodoThing
 
 def index(request):
-    tasks = TodoThing.objects.all()
+    posts = TodoThing.objects.all()
     context = {
-    'tasks': tasks
+    'posts': posts
     }
     return render(request, 'vuetodo/index.html', context)
 
-def create_post(request):
-    data = json.loads(request.body)
-    things = data['things']
-    plevel = data['plevel']
-    if things == '' or plevel == '':
-        return HttpResponse('not ok')
-    todo_post = TodoThing(things=things, plevel=plevel)
-    todo_post.save()
-    return HttpResponse('ok')
-
-
-def post(request):
-    tasks = TodoThing.objects.all()
+def posts(request):
+    posts = TodoThing.objects.order_by('-id')
     data = []
-    for task in tasks:
+    for post in posts:
         data.append({
             'id': post.id,
             'things': post.things,
-            'plevel': post.plevel,
-            'done': post.done,
+            'plevel': str(post.plevel),
+            'done': post.done
         })
-    return JsonResponse({data})
+    return JsonResponse({'todo_posts': data})
+
+def create_post(request):
+    data = json.loads(request.body)
+    title = data['title']
+    body = data['body']
+    if title == '' or body == '':
+        return HttpResponse('not ok')
+    blog_post = BlogPost(title=title, body=body, created_date=timezone.now())
+    blog_post.save()
+    return HttpResponse('ok')

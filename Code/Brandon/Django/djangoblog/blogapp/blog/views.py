@@ -5,11 +5,11 @@ import json
 
 from .models import blogPost
 
-
+# Main view for single page app
 def index(request):
-
     return render(request,'blog/index.html')
 
+# Fetches the posts continuously or when ever called
 def posts(request):
     posts = blogPost.objects.order_by('-date')
     data = []
@@ -22,6 +22,7 @@ def posts(request):
         })
     return JsonResponse({'blog_posts': data})
 
+# Creates and saves a new post to the blog
 def create_post(request):
     print("hello")
     data = json.loads(request.body)

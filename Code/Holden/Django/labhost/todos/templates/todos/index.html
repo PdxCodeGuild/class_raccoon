@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>todos</title>
+    <style type="text/css">
+      .cardHolder{
+        display: flex;
+        flex-direction: column;
+      }
+      li button{
+        margin-left: 8px;
+      }
+      nav{
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: row;
+        width: 100%;
+      }
+      nav>*{
+        margin: 3px 8px;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <span>{{user.username}}</span>
+      <a href="{% url 'accounts:logout' %}">logout</a>
+    </nav>
+    <div id="app">
+      <div v-if="errorMessage">[[errorMessage]]</div>
+      <input type="text" v-model="newTodo" placeholder="new todo"><button @click='saveTodo'>save</button>
+      <h3>todo</h3>
+      <ul>
+        <li v-for="todo in todoList">[[todo.todo]]<button v-on:click="completeTodo(todo)">completed</button></li>
+      </ul>
+      <h3>completed</h3>
+      <ul>
+        <li v-for="todo in completedList">[[todo.todo]]<button v-on:click="uncompleteTodo(todo)">completed</button><button v-on:click="deleteTodo(todo)">delete</button></li>
+      </ul>
+    </div>
+    <script type="text/javascript">
+      let app = new Vue({
+        el: '#app',
+        delimiters: ['[[',']]'],
+        data: {
+          todoList: {{initialTodos|safe}},
+          completedList: {{initialCompleted|safe}},
+          newTodo: '',
+          errorMessage: '',
+        },
+        methods: {
+          saveTodo: function() {
+            axios({
+              method: 'post',
+              url: '{% url 'todos:save' %}',
+              headers: {
+                'X-CSRFToken': '{{csrf_token}}'
+              },
+              data: {
+                'todo': this.newTodo
+              }
+            }).then(response => {
+              if (response.data){
+                this.todoList.push({'todo': this.newTodo, 'id': response.data})
+              }
+            })
+          },
+          completeTodo: function(todo) {
+            let todoIndex = this.todoList.indexOf(todo)
+            this.todoList.splice(todoIndex,1)
+            this.completedList.unshift(todo)
+            axios({
+              method: 'post',
+              url: '{% url 'todos:complete' %}',
+              headers: {
+                'X-CSRFToken': '{{csrf_token}}'
+              },
+              data: {
+                'id': todo.id,
+                'completed': 'true'
+              }
+            }).then(response => {
+              if (response.data){
+                this.errorMessage = response.data
+              }
+            })
+          },
+          uncompleteTodo: function(todo) {
+            let todoIndex = this.completedList.indexOf(todo)
+            this.completedList.splice(todoIndex,1)
+            this.todoList.unshift(todo)
+            axios({
+              method: 'post',
+              url: '{% url 'todos:complete' %}',
+              headers: {
+                'X-CSRFToken': '{{csrf_token}}'
+              },
+              data: {
+                'id': todo.id,
+                'completed': 'false'
+              }
+            }).then(response => {
+              if (response.data){
+                this.errorMessage = response.data
+              }
+            })
+          },
+          deleteTodo: function(todo) {
+            let todoIndex = this.completedList.indexOf(todo)
+            this.completedList.splice(todoIndex,1)
+            axios({
+              method: 'post',
+              url: '{% url 'todos:delete' %}',
+              headers: {
+                'X-CSRFToken': '{{csrf_token}}'
+              },
+              data: {
+                'id': todo.id,
+              }
+            }).then(response => {
+              if (response.data){
+                this.errorMessage = response.data
+              }
+            })
+          },
+        }
+      })
+    </script>
+  </body>
+</html>

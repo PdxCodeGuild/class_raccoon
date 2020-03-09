@@ -109,4 +109,4 @@
 
 
 ## Your Concerns
-    -
+    - Beyond the standard "I have no idea what I'm doing, what have I gotten myself into", not much at the moment. I'm sure issues will rear up throughout the process.

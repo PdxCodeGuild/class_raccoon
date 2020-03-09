@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- Materialize -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        .card {
+            display: flex;
+        }
+        .typeWrapper{
+            display: flex;
+        }
+
+        body {
+            margin: 0 auto;
+            max-width: 50vw;
+            background-color: #2d383a;
+        }
+
+        .image {
+            max-width: 200px;
+            max-height: 200px;
+        }
+
+        .card {
+            max-width: 50vw;
+            margin: 10 auto;
+            padding: 1em;
+            background-color: #778587;
+        }
+        .button{
+            margin: 10 auto;
+            background-color: #5C8187;
+        }
+        .nextLast {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="nextLast">
+            <div class="backButton">
+                <a class="waves-effect waves-light btn-small button" v-if="pokeList.previous" v-on:click="paginate(false)"><i
+                        class="material-icons left">arrow_back</i>Last</a>
+            </div>
+            <a class="waves-effect waves-light btn-small button" v-on:click="paginate(true)"><i
+                    class="material-icons left">arrow_forward</i>Next</a>
+        </div>
+        <div v-for="mons in pokemon">
+            <div class="card">
+                <div class="card-image">
+                    <img :src="mons.image" class="image">
+                    <h4>{{mons.name | capitalize}}</h4>
+                    <h6>ID# {{mons.id}}</h6>
+                    <span class="card-title"></span>
+                </div>
+                <div class="card-content">
+                    <div class="typeWrapper">
+                        <h5>Type: </h5>
+                        <div class="multiType">
+                            <h5 v-for="type in mons.types">&nbsp;{{type.type.name | capitalize}}</h5>
+                        </div>
+                    </div>
+                   <h5 v-for="stat in mons.stats">{{stat.stat.name | capitalize}}: {{stat.base_stat}}</h5>
+                </div>
+            </div>
+
+        </div>
+        <div class="nextLast">
+            <div class="backButton">
+                <a class="waves-effect waves-light btn-small button" v-if="pokeList.previous" v-on:click="paginate(false)"><i
+                        class="material-icons left">arrow_back</i>Last</a>
+            </div>
+            <a class="waves-effect waves-light btn-small button" v-on:click="paginate(true)"><i
+                    class="material-icons left">arrow_forward</i>Next</a>
+        </div>
+        <script type="text/javascript">
+
+            let app = new Vue({
+                el: '#app',
+                data: {
+                    pokeList: {},
+                    pokemon: [],
+                    // offset: 0
+                },
+
+                methods: {
+                    grabMons: function () {
+                        this.pokemon = []
+                        let pokemon = []
+                        for (let mon of this.pokeList.results) {
+                            axios({
+                                method: 'get',
+                                url: mon.url
+                            }).then((response) => {
+                                let pokemon = response.data
+                                pokemon.image = `https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`
+                                this.pokemon.push(pokemon)
+                                this.pokemon = this.pokemon.sort((mon1, mon2) => parseInt(mon1.id) - parseInt(mon2.id))
+                            })
+                        }
+
+                        this.pokemon = pokemon
+                    },
+
+                    paginate: function (nextLast) {
+                        axios({
+                            method: 'get',
+                            url: nextLast ? this.pokeList.next : this.pokeList.previous
+                        }).then(response => {
+                            let pokeList = response.data
+                            this.pokeList = pokeList
+                            this.grabMons()
+                        })
+                    }
+
+                },
+                created: function () {
+                    pokeList = []
+
+                    axios({
+                        method: 'get',
+                        url: `https://pokeapi.co/api/v2/pokemon/`,
+                        params: {
+                            limit: 20,
+                            // offset: this.offset,
+                        },
+                    }).then((response) => {
+                        let pokeList = response.data
+                        this.pokeList = pokeList
+                        this.grabMons()
+                    })
+
+
+                },
+                filters: {
+                    capitalize: function(value) {
+                        if (!value) return ''
+                        value = value.toString()
+                        return value.charAt(0).toUpperCase()+value.slice(1)
+                    }
+                }
+            
+            })
+
+        </script>
+
+</body>
+
+</html>

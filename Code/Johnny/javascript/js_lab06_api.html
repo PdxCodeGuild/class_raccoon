@@ -11,10 +11,18 @@
 <body>
   <div id="app">
     <div v-for="pokemon in info">
-        {{pokemon.name}} 
+      {{pokemon.name}}
     </div>
 
-    {{ info }}
+
+    {{ info[1] }}
+
+    ----
+    pulling pokemon url-data
+    <div v-for="name in user_data">
+      {{ name.name }}
+      ({{ name.id }})
+    </div>
   </div>
 
 
@@ -25,15 +33,39 @@
       el: '#app',
       data: {
         info: [],
+        user_number: 55,
+        user_data: [],
       },
       methods: {
+        pokemonInfo: function() {
+          axios({
+            method: 'get',
+            url: `https://pokeapi.co/api/v2/pokemon/${this.user_number}`,
+            params: {
+              user_number: this.user_number,
+            }
+          }).then((response) => {
+            let user_data = response.data
+            this.user_data.push(user_data)
+            console.log(this.user_data)
+          })
+        }
       },
       created: function() {
         axios({
           method: 'get',
           url: `https://pokeapi.co/api/v2/pokemon?limit=151`,
-          params: {}
-        }).then(response => (this.info = response.data.results))
+          params: {
+          },
+        }).then((response) => {
+          console.log(response.data)
+          this.info = response.data.results
+          this.pokemonInfo()
+        }).then(response => {
+          axios({
+
+          })
+        })
       },
     });
   </script>

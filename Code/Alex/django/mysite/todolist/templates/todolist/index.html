@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>To Do List 4</title>
+        <!-- Vue -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <!-- Axios -->
+        <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div id="input_container">
+                <input v-model="new_item" type="text" id="user_input">
+                <select v-model="new_item_priority" id="priority_selector">
+                    <option>Choose a priority</option>
+                    <option v-for="priority in priorities" v-bind:value="{ priority }">[[priority.priority]]</option>
+                </select>
+                <button v-on:click="postToDos"type="button" id="input_btn">Add</button>
+            </div>
+            <h1>Do this shit</h1>
+            <ul>
+                <li v-for="todo in todos">[[todo.todoitem]] - [[todo.priority]]</li>
+            </ul>
+        </div>
+        <script type="text/javascript">
+            let app = new Vue ({
+                el: '#app',
+                delimiters: ['[[', ']]'],
+                data: {
+                    todos: [],
+                    todo_input: '',
+                    priorities: [],
+                    new_item: '',
+                    new_item_priority: ''
+                },
+                methods: {
+                    getToDos: function() {
+                        axios({
+                            method: 'get',
+                            url: '{% url 'todolist:listtodos' %}',
+                        }).then(response => {
+                            console.log(response.data)
+                            this.todos = response.data.data
+                            this.priorities = response.data.priorities
+                        })
+                    },
+                    postToDos: function() {
+                        axios({
+                            method: 'post',
+                            url: '{% url 'todolist:addtodo' %}',
+                            headers: {
+                              'X-CSRFToken': '{{csrf_token}}'
+                            },
+                            data: {
+                                item: this.new_item,
+                                priority: this.new_item_priority
+                            }
+                        }).then(response => {
+                            this.new_item = ''
+                            this.new_item_priority = ''
+                            this.getToDos()
+                        })
+                    }
+                },
+                created: function () {
+                    this.getToDos()
+                }
+            })
+        </script>
+    </body>
+</html>

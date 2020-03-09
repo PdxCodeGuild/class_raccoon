@@ -1,32 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="./secrets.js"></script>
-    <script src="./script.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="./styles.css">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<!--    bootstrap---->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> 
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> 
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> 
+<!--    end boot----> 
+<script src="./secrets.js"></script> 
+<script src="./script.js" defer></script> 
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
-    <main id="app">
-        <div class="container">
-            <div class="search">
-                <input type="text"v-model='drinkName'>
-                <button class="search-btn" v-on:click='startFind'>Search</button>
-            </div>
-            <div class="results">
-                <p>{{drinkResults}}</p>
-            </div>
+<main id="app">
+  <div class="container">
+    <div class="jumbotron jumbotron-fluid">
+      <h1 class="display-4">Drink Search</h1>
+      <p class="lead">Type the name of a drink to see results.</p>
+      <input type="text"v-model='drinkName' v-on:keyup.enter='startFind' >
+      <button class="search-btn" v-on:click='startFind' >Search</button>
+      <div class="dropdown dpdn">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Variations </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> 
+      <button v-for="drink in drinkResults" class="dropdown-item" v-on:click= "advancedFind(drink.name)">{{drink.name}}</button>
+		</div>
+      </div>
+      <div class="btn-grp">
+        <div class="btn-group" >
+        <button v-for="drink in drinkResults" type="button" class="btn btn-secondary drink-btn" v-on:click= "advancedFind(drink.name)" >{{drink.name}}</button>
         </div>
-    </main>
+      </div>
+    </div>
+<!-- THINGS TO DO: ADD search by ingredient, maybe multiple fields and check which ones are filled in? search using the parameters provided possibly? select multiple or single, add to list to save for user. logged in user will be able to search through personal or global, then add food and create more in depth search array using spoonacular possibly. look at USERS, 2 APIS, CONDENSING -->
 
-
+    <!--	  cards created to display results----->
+    <div class="card-contain">
+       <div id="cardId" class="card" style="width: 18rem;" v-for='drink in drinkResults2'> <img v-bind:src='drink.image' class="card-img-top" alt="...">
+        <!-- Creating an individual cards based off of the second axios pull. The second axios pull may not be necessary? the idea is to be able to click on the preopulated list of buttons that were created for the drinks and when clicked the div displays the card.-- -->
+      <div class="card-body">
+        <h5 class="card-title">{{drink.name}}</h5>
+        <a class="btn btn-primary">Instructions</a> </div>
+        <a class="btn btn-primary" onclick="showCard(cardHide)">Click here </a><!--when the functions arent commented this unhides div-->
+        <div class="card-text" id="cardHide">
+          <table>
+            <tr>
+              <th>Ingredient</th>
+              <th>Measurement</th>
+            </tr>
+            <tr v-for='ingredient in drink.ingredients'>
+              <td>{{ingredient.name}}</td>
+              <td>{{ingredient.amount}}</td>
+            </tr>
+          </table>
+          <p>{{drink.instructions}}</p>
+        </div>
+    </div>
+    </div>
+  </div>
+  
+  <!--    slide-----> 
+  
+</main>
 </body>
-
 </html>

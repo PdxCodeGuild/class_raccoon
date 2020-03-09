@@ -1,0 +1,188 @@
+html {
+  scroll-behavior: smooth;
+}
+.btn{
+    /*background-color: black;*/
+    color: white;
+    text-align: center;
+    font-size: 28px;
+    align-items: center;
+    width: 150px;
+    height: 50px;
+
+
+
+}
+.btn:hover {
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+}
+body {
+    font-family: 'Ubuntu Mono', monospace;
+    /*background-image: url("https://storage.needpix.com/rsynced_images/typewriter-3899285_1280.jpg");*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
+}
+.nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.navbar ul li {
+    color: white;
+    display: inline-flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 28px;
+    align-items: center;
+    width: 80px;
+    height: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+}
+.navbar ul li:hover{
+    background-color: white;
+    color: black;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+}
+.nav ul {
+    text-decoration: none;
+    list-style: none;
+    display: inline;
+    padding: auto;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.navbar {
+    margin-top: 15px;
+}
+.logo {
+    color: white;
+}
+.hero {
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    height: 100vh;
+    background-image: url("https://storage.needpix.com/rsynced_images/typewriter-3899285_1280.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.hero-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.hero-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+
+}
+.hero-head h1{
+    font-size: 80px;
+    color: white;
+}
+.container-small {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /*border: 8px;*/
+    /*border-color: white;*/
+    /*background-color: rgba(230, 223, 223,.1);*/
+    /*border-radius: 50%;*/
+    height: 400px;
+    width: 400px;
+    margin-top: 100px;
+
+}
+/*cards--*/
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /*flex-wrap: wrap;*/
+    /*justify-content: center;*/
+}
+.blogcard {
+    height: 600px;
+    width: 30%;
+    border: white 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+    margin: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    overflow: scroll;
+}
+.blog-cont {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 65%;
+    height: 100vh;
+}
+.sidebar{
+    width: 30%;
+    height: 100vh;
+    background-color: grey;
+}
+/*modal*/
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: table;
+  transition: opacity 0.3s ease;
+}
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+.modal-container {
+  width: 300px;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  transition: all 0.3s ease;
+  font-family: Helvetica, Arial, sans-serif;
+}
+.modal-header h3 {
+  margin-top: 0;
+  color: #42b983;
+}
+.modal-body {
+  margin: 20px 0;
+}
+.modal-default-button {
+  float: right;
+}
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+.modal-enter {
+  opacity: 0;
+}
+.modal-leave-active {
+  opacity: 0;
+}
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}

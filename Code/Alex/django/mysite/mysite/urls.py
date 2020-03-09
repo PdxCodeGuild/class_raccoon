@@ -22,4 +22,5 @@ urlpatterns = [
     path('contacts/', include('contacts.urls')),
     path('urlshortener/', include('urlshortener.urls')),
     path('library/', include('library.urls')),
+    path('todolist/', include('todolist.urls')),
 ]

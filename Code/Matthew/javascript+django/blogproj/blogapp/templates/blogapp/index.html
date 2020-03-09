@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Axios -->
+    <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- Materialize -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div id="app">
+      <h1>Web Blag</h1>
+      <div v-if="current_view == 'create'">
+        <input type="text" placeholder="title" v-model="new_post_title"/>
+        <textarea placeholder="body" v-model="new_post_body"></textarea>
+        <button v-on:click="current_view = 'list'">cancel</button>
+        <button v-on:click="savePost">save</button>
+      </div>
+      <div v-if="current_view == 'list'">
+        <span v-on:click="current_view = 'create'">&plus;</span>
+        <span v-if="blog_posts.length == 0">Loading...</span>
+        <div v-for="blog_post in blog_posts">
+          <h2>[[ blog_post.title ]]</h2>
+          <div v-html="blog_post.body"></div>
+        </div>
+
+        <ul class="pagination">
+          <li v-on:click="firstPage" v-bind:class="{disabled: page == 1 }"><a href="#!"><i class="material-icons">first_page</i></a></li>
+          <li v-on:click="previousPage" v-bind:class="{disabled: page == 1 }"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+          <li class="waves-effect">[[ page ]]</li>
+          <li v-on:click="nextPage" v-bind:class="{disabled: page == num_pages }"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+          <li v-on:click="lastPage" v-bind:class="{disabled: page == num_pages }"><a href="#!"><i class="material-icons">last_page</i></a></li>
+        </ul>
+
+        <!-- <div class="pages">
+          <span v-on:click="previousPage" v-if="page != 1">&lt;</span>
+          <span>[[ page ]]</span>
+          <span v-on:click="nextPage" v-if="page != num_pages">&gt;</span>
+        </div> -->
+      </div>
+    </div>
+    <script type="text/javascript">
+      let app = new Vue({
+        el: '#app',
+        delimiters: ['[[', ']]'],
+        data: {
+          page: 1,
+          num_pages: 0,
+          blog_posts: [],
+          current_view: 'list',
+          new_post_title: '',
+          new_post_body: ''
+        },
+        methods: {
+          firstPage: function() {
+            if (this.page != 1) {
+              this.page = 1
+              this.getPosts()
+            }
+          },
+          previousPage: function() {
+            if (this.page != 1) {
+              this.page -= 1
+              this.getPosts()
+            }
+          },
+          nextPage: function() {
+            if (this.page != this.num_pages) {
+              this.page += 1
+              this.getPosts()
+            }
+          },
+          lastPage: function() {
+            if (this.page != this.num_pages) {
+              this.page = this.num_pages
+              this.getPosts()
+            }
+          },
+          getPosts: function() {
+            axios({
+              method: 'get',
+              url: '{% url 'blogapp:posts' %}',
+              params: {
+                page: this.page
+              }
+            }).then(response => {
+              this.blog_posts = response.data.blog_posts
+              this.num_pages = response.data.num_pages
+              setTimeout(function() {
+                window.scrollTo(0, 0)
+              }, 50)
+            })
+          },
+          savePost: function() {
+            if (this.new_post_title == '' || this.new_post_body == '') {
+              alert('please enter a title and body for the blog post')
+              return
+            }
+            axios({
+              method: 'post',
+              url: '{% url 'blogapp:create_post' %}',
+              headers: {
+                'X-CSRFToken': '{{csrf_token}}'
+              },
+              data: {
+                title: this.new_post_title,
+                body: this.new_post_body
+              }
+            }).then(response => {
+              console.log(response)
+              if (response.data == 'not ok') {
+                alert('enter a title and body')
+              }
+              this.new_post_title = ''
+              this.new_post_body = ''
+              this.getPosts()
+              this.current_view = 'list'
+            })
+          }
+        },
+        created: function() {
+          this.getPosts()
+        }
+      })
+
+    </script>
+  </body>
+</html>

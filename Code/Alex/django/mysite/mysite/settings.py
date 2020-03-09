@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'urlshortener',
     'library',
     'users',
+    'todolist',
 ]
 
 MIDDLEWARE = [

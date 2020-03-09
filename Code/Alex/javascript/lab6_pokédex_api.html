@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+        <title>Pokédex</title>
+        <style media="screen">
+
+            #app {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                overflow: hidden;
+            }
+
+            .pokedex {
+                background-image: url("https://pbs.twimg.com/profile_images/1870947834/pokedex1.gif");
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 1100px;
+                width: 1100px;
+            }
+
+            #inputPokemon {
+                background-color: transparent;
+                /* border-color: transparent; */
+                position: relative;
+                top: 570px;
+                left: 133px;
+                height: 75px;
+                width: 168px;
+                font-size: 40px;
+                font-family: 'Press Start 2P';
+            }
+
+            #findPokemonButton:active {
+                transform: translateY(1.5px);
+            }
+
+            #findPokemonButton {
+                background-color: transparent;
+                /* border-color: transparent; */
+                position: relative;
+                top: 457px;
+                left: -123px;
+                height: 73px;
+                width: 73px;
+                font-size: 12.8px;
+                padding-left: 15px;
+                border-radius: 40px;
+                font-family: 'Press Start 2P';
+                outline: none;
+            }
+
+            #pokemonImageDisplay {
+                height: 235px;
+                top: 380px;
+                left: 152px;
+                z-index: 100;
+                position: relative;
+            }
+
+            #statBox {
+
+            }
+
+        </style>
+    </head>
+    <body class="main">
+        <div id="app">
+            <div class="pokedex">
+                <img :src="pokemon.image" id="pokemonImageDisplay">
+                <div id="statBox">
+
+                </div>
+                <input id="inputPokemon" type="text" v-model="id"/>
+                <button id="findPokemonButton" v-on:click="findPokemonButton">Find</button>
+            </div>
+        </div>
+        <script type="text/javascript">
+            let app = new Vue({
+                el: '#app',
+                data: {
+                    inputPokemon: "",
+                    id: '',
+                    pokemon: '',
+                },
+                methods: {
+                    findPokemonButton: function() {
+                        axios({
+                            method: 'get',
+                            url: `https://pokeapi.co/api/v2/pokemon/${this.id}/`,
+                            params: {
+
+                            }
+                        }).then((response) => {
+                            let pokemon = response.data
+                            let pokemonImage = `https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`
+                            pokemon.image = pokemonImage
+                            this.pokemon = pokemon
+                            console.log(this.pokemon)
+                        })
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

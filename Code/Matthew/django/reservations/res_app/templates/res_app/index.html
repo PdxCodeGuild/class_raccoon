@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div v-if="view=='reservation'">
+        <h1>Reservations!</h1>
+        <input type="text" placeholder="Party name" v-model="party_name">
+        <input type="number" placeholder="Party size" v-model="party_size">
+        <select v-model="restaurant_id">
+          <option value="" disabled>Choose your restaurant!</option>
+          <option v-for="restaurant in restaurants" :value="restaurant.id">[[ restaurant.name ]]</option>
+        </select>
+        <input type="date" v-model="date">
+        <input type="time" v-model="time">
+        <button @click="saveReservation" :disabled="this.party_name=='' || this.party_size=='' || this.restaurant_id=='' || this.date=='' || this.time==''">Submit</button>
+        <button @click="view='admin'">Admin Panel</button>
+      </div>
+      <div v-if="view=='admin'">
+        <h3>Admin Panel</h3>
+        <table>
+          <tr>
+            <th>Restaurant</th>
+            <th>Party</th>
+            <th>Size</th>
+            <th>Time</th>
+          </tr>
+          <tr v-for="res in reservations">
+            <td>[[res.restaurant]]</td>
+            <td>[[res.party_name]]</td>
+            <td>[[res.party_size]]</td>
+            <td>[[res.time]]</td>
+          </tr>
+        </table>
+        <button @click="view = 'reservation'">Go back</button>
+      </div>
+    </div>
+    <script type="text/javascript">
+      var app = new Vue({
+        el: '#app',
+        delimiters: ['[[', ']]'],
+        data: {
+          party_name: '',
+          party_size: '',
+          restaurant_id: '',
+          restaurants: [],
+          reservations: [],
+          date: '',
+          time: '',
+          view: 'reservation',
+        },
+        methods: {
+          getRestaurants: function() {
+            axios({
+              method: 'get',
+              url: '{% url 'res_app:restaurants' %}',
+            }).then(response => {
+              console.log(response.data)
+              this.restaurants=response.data.restaurants
+            })
+          },
+          saveReservation: function() {
+            axios({
+              method: 'post',
+              url: '{% url 'res_app:save_res' %}',
+              headers: {
+                'X-CSRFToken': '{{csrf_token}}'
+              },
+              data: {
+                party_name: this.party_name,
+                party_size: this.party_size,
+                restaurant_id: this.restaurant_id,
+                date: this.date,
+                time: this.time
+              }
+            }).then(response => {
+              console.log(response)
+              this.party_name = ''
+              this.party_size = ''
+              this.restaurant_id = ''
+              this.date = ''
+              this.time = ''
+            })
+          },
+          getReservations: function () {
+            axios({
+              method: 'get',
+              url: '{% url 'res_app:reservations' %}'
+            }).then(response => {
+              console.log(response.data)
+              this.reservations = response.data.reservations
+            })
+          }
+        },
+        created: function() {
+          this.getRestaurants()
+          this.getReservations()
+        }
+      })
+    </script>
+  </body>
+</html>

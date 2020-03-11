@@ -1,6 +1,12 @@
 
 # 7 Git
 
+- [git book](https://git-scm.com/book/en/v2)
+- [git reference docs](https://git-scm.com/docs)
+- [git tutorial](https://git-scm.com/docs/gittutorial/)
+- [git cheat sheet](https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf)
+- [super simple git guide](https://rogerdudler.github.io/git-guide/)
+
 ## 7.1 Version Control & Git
 
 Version control is software that enables us to keep track of changes to files. This helps us retrieve older versions of code and undo mistakes. It also allows multiple developers to work on a project simultaneously. It can be used with any type of file, but is ordinarily used for source code. [Git](https://git-scm.com/) is one popular form of version control, others include [SVN](https://subversion.apache.org/) and [Mercurial](https://www.mercurial-scm.org/).
@@ -118,13 +124,6 @@ Git has a staging area for files to be added to before they're committed to the 
 
 
 #### 7.5 Tagging
+ 
+ TODO :(
 
-
-
-### 7.X Resources
-
-- [git book](https://git-scm.com/book/en/v2)
-- [git reference docs](https://git-scm.com/docs)
-- [git tutorial](https://git-scm.com/docs/gittutorial/)
-- [git cheat sheet](https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf)
-- [super simple git guide](https://rogerdudler.github.io/git-guide/)

@@ -23,17 +23,19 @@ Each commit has a globally unique **hash**, an author, a timestamp, a descriptio
 
 ## Terms
 
-- **git**
-- **clone**
-- **commit** the commit
+- **git** a popular version control system https://git-scm.com/
+- **clone** creating a local copy of a remote repository
+- **commit** a list of changes made to files
+- **branch** a thread of commits
 - **master** the primary branch of a repository
-- **branch** 
-- **remote**
-- **origin**
+- **merge** combining two branches into one by taking parts from each
+- **rebase** combining two branches into one by rewriting the commit history
+- **remote** a remote repository
+- **origin** the default remote repository
 - **pull** synchronizing a local repository with a remote repository
 - **push** synchronizing a remote repository with our local repository
-- **HEAD**
-- **rebase**
+- **HEAD** the latest commit
+
 
 ## 7.2 Configuration and Status
 

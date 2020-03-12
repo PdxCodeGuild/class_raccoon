@@ -3,8 +3,15 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
     <!-- Vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
     <!-- Axios -->
     <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
@@ -20,32 +27,86 @@
         <button type="submit">Submit</button>
       </form> -->
       <input type="text" placeholder="Add an entry..." v-model="todo_text" v-on:keypress.enter="addEntry"/>
+      <input type="date" v-model="due_date">
+      <select v-model="priority">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
       <button v-on:click="addEntry">Submit</button>
       <div v-if="no_entry">Please input a value!</div>
-      <ul>
-        {% for todo_item in todo_items %}
-        <li>{{todo_item.text}}</li>
-        {% endfor %}
+      <ul class="collection" v-for="(todo_item, index) in todo_items">
+        <label>
+          <input type="checkbox" v-bind:id="'check'+index" v-model="completed" v-on:click="updateEntry"/>
+          <span></span>
+        </label>
+          [[todo_item.text]]<span v-if="todo_item.due_date"> | Due: [[todo_item.due_date]]</span> | Priority: [[todo_item.priority]]</li>
       </ul>
-      <script type="text/javascript">
-        let app = new Vue({
-          el: '#app',
-          delimiters: ['[[',']]'],
-          data: {
-            todo_text: '',
-            no_entry: false,
-          },
-          methods: {
-            addEntry: function() {
-              if (this.todo_text) {
-                this.no_entry = false
-                }  else {
-                this.no_entry = true
-              }
-            }
-          }
-        })
-      </script>
+      <!-- {% for todo_item in todo_items %}
+      {{todo_item.text}}
+      {% endfor %} -->
     </div>
+    <script type="text/javascript">
+      let app = new Vue({
+        el: '#app',
+        delimiters: ['[[',']]'],
+        data: {
+          todo_text: '',
+          due_date: null,
+          priority: "low",
+          no_entry: false,
+          completed: false,
+          todo_items: [],
+        },
+        methods: {
+          addEntry: function() {
+            if (this.todo_text) {
+              this.no_entry = false
+              // if (this.priority == "low") {
+              //   this.priority = "0"
+              // } else if (this.priority == "medium") {
+              //   this.priority = "1"
+              // } else {
+              //   this.priority = "2"
+              // }
+              axios({
+                method: 'post',
+                url: '{% url 'todoapp:savetodo' %}',
+                headers: {
+                  'X-CSRFToken': '{{csrf_token}}'
+                },
+                data: {
+                  todo_text: this.todo_text,
+                  due_date: this.due_date,
+                  priority: this.priority,
+                  completed: this.completed
+                }
+              }).then(response => {
+                console.log(response)
+                this.todo_text = ''
+                this.due_date = null
+                this.priority = "low"
+                this.completed = false
+                this.showList()
+              })
+            }  else {
+              this.no_entry = true
+            }
+          },
+          showList: function() {
+            axios({
+              method: 'get',
+              url: '{% url 'todoapp:entries' %}',
+            }).then(response => {
+              console.log(response.data)
+              this.todo_items = response.data.todo_items
+            })
+          },
+        },
+        created: function() {
+          this.showList()
+        }
+      })
+    </script>
   </body>
 </html>

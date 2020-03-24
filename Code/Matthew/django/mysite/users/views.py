@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 
-from . import secrets
+# from . import secrets
 
 import requests
 
@@ -35,15 +35,15 @@ def login_page(request):
 
 def login_user(request):
 
-    next = request.POST['next']
-    recaptcha_response = request.POST.get('g-recaptcha-response')
-    r = requests.post('https://www.google.com/recaptcha/api/siteverify', data = {
-        'secret': secrets.google_recaptcha_key,
-        'response': recaptcha_response
-    })
-    result = r.json()
-    if not result['success']:
-        return HttpResponseRedirect(reverse('users:login') + '?message=invalid_recaptcha&next='+next)
+    # next = request.POST['next']
+    # recaptcha_response = request.POST.get('g-recaptcha-response')
+    # r = requests.post('https://www.google.com/recaptcha/api/siteverify', data = {
+    #     'secret': secrets.google_recaptcha_key,
+    #     'response': recaptcha_response
+    # })
+    # result = r.json()
+    # if not result['success']:
+    #     return HttpResponseRedirect(reverse('users:login') + '?message=invalid_recaptcha&next='+next)
 
 
 

@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  {% if user.image %}
+  <img src="{{user.image.url}}" alt="profile"/>
+  {% else %}
+  <img src="{% static 'usersapp/profile_default.png' %}" alt="profile"/>
+  {% endif %}
+  {{user.username}}
+</body>
+</html>
+
+
+
+
+

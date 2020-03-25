@@ -5,6 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style type="text/css">
+    img {
+      max-width:100px;
+      max-height:100px;
+      border-radius:100px;
+      border: 1px solid black;
+    }
+  </style>
 </head>
 <body>
   {% if user.image %}
@@ -13,6 +21,7 @@
   <img src="{% static 'usersapp/profile_default.png' %}" alt="profile"/>
   {% endif %}
   {{user.username}}
+  <a href="{% url 'usersapp:logout' %}">logout</a>
 </body>
 </html>
 

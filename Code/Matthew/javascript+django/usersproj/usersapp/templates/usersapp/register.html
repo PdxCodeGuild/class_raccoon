@@ -6,6 +6,8 @@
   <title>Document</title>
 </head>
 <body>
+  <h1>Register</h1>
+  {% if message == 'already_taken' %}<span>That username is already taken</span>{% endif %}
   <form action="{% url 'usersapp:register_user' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <input type="text" name="username" placeholder="username"/>
@@ -14,5 +16,6 @@
     <input type="file" name="image" placeholder="image" accept="image/*"/>
     <button type="submit">register</button>
   </form>
+  <a href="{% url 'usersapp:login' %}">login</a>
 </body>
 </html>

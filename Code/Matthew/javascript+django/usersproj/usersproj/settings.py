@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'usersapp'
+    'usersapp',
+    'usersajax',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,5 @@ AUTH_USER_MODEL = 'usersapp.User'
 
 MEDIA_URL = '/uploaded_files/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploaded_files')
+
+LOGIN_URL = '/users/login/'

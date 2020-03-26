@@ -32,6 +32,7 @@
 
 Version control systems (VCS) are software that enables us to keep track of changes to files. This helps us retrieve older versions of code and undo mistakes. It also allows multiple developers to work on a project simultaneously. It can be used with any type of file, but is ordinarily used for source code. [Git](https://git-scm.com/) is one popular form of version control, others include [SVN](https://subversion.apache.org/) and [Mercurial](https://www.mercurial-scm.org/).
 
+
 Git calls the directory it tracks changes in a **repository**. Git stores timestamped snapshots of the state of the repository called **commits**:
 
 ```

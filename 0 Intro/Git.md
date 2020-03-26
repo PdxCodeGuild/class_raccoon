@@ -135,7 +135,6 @@ There are two ways of creating a repository [git book](https://git-scm.com/book/
 
 - `git clone <repo_url>` creates a local repository in the current folder, which is automatically connected to the remote repository.
 - `git init` initializes the current folder as a repository. One must then add a remote repo in order to push.
-  - 
 
 
 ## 3.2 Staging and Committing
@@ -193,8 +192,8 @@ Rm removes a file from git tracking
 ### 4.3 Reset
 
 - `git reset <file>` unstages a file
-- `git reset --soft <commit> ` goes back one commit, 
-- `git reset --hard <commit>` goes back 1 commit and also undoes all the changes to file
+- `git reset --soft <commit> ` goes back to a previous commit, does not modify file contents
+- `git reset --hard <commit>` goes back to a previous commit, DOES modify file contents
 - with both of these you'll need to follow up with `git push origin master --force`
 
 

@@ -49,7 +49,6 @@ def in_folder(request):
 
 def turn_in(request):
     current = Composition.objects.filter(turn_in_date__isnull = False)
-    print(current)
     today = datetime.date.today()
     offset = (today.weekday() - 6)
     coming_sunday = today - datetime.timedelta(days=offset)
@@ -95,9 +94,14 @@ def this_season(request):
 
     return JsonResponse({'late_stuffs': late})
 
+# **********************************************************************************
+# *************************LIBRARIAN FUNCTIONS**************************************
+# **********************************************************************************
+
 def lib_login(request):
     data = json.loads(request.body)
     password = data['password']
+    print(request.COOKIES.get('csrftoken'))
     user = django.contrib.auth.authenticate(request, username='Librarian', password=password)
     if user is not None:
       django.contrib.auth.login(request, user)
@@ -138,7 +142,8 @@ def save_piece(request):
 def edit_due(request):
     data = json.loads(request.body)
     composition = Composition.objects.filter(id=data['id'])
-    composition.update(turn_in_date=data['new_due'])
+    composition.update(turn_in_date=data['new_due'], choristers=str(data['choristers']).capitalize())
+
     return HttpResponse('edit_due function response')
 
 
@@ -194,8 +199,7 @@ def set_folder(request):
         'id': dump[i]['id'],
         'composer': dump[i]['composer'],
         'piece': dump[i]['piece'],
-        'turn_in_date': dump[i]['turn_in_date'],
+        'edit_turn_in_date': dump[i]['turn_in_date'],
         'choristers': dump[i]['choristers']
         })
-    print(results)
     return JsonResponse({'results': results})

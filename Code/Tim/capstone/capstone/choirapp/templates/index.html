@@ -306,9 +306,12 @@
                 <div class="card-body" style="color: #ffffff;">
                   <form method="post">
                     <ul v-for="composition in compositions">
-                      <li>[[ composition.composer + " - " + composition.piece ]] <br>
-                      <input type="date" v-model="composition.edit_turn_in_date">
-                      <button type="button" value="composition.id" v-on:click="editDueDate(composition)" >Submit</button></li>
+                      <li>[[ composition.composer + " - " + composition.piece ]] &nbsp&nbsp <br>
+                        <input type="date" v-model="composition.edit_turn_in_date">
+                        <label for="">Choristers&nbsp</label>
+                        <input type="checkbox" name="Choristers" v-model="composition.choristers">
+                        <button type="button" value="composition.id" v-on:click="editDueDate(composition)" >Submit</button>
+                      </li>
                     </ul>
                 </form>
                 </div>
@@ -346,7 +349,15 @@
                     <form method="post">
                       <input type="text" v-model='search' placeholder="Search Title or Cat. #">
                       <button type="button" v-on:click="setFolder">Submit</button>
-                  </form>
+                  </form><br>
+                    <ul v-for="result in results">
+                        <li>[[ result.composer + " - " + result.piece ]] <br>
+                          <input type="date" v-model="result.edit_turn_in_date">
+                          <label for="">Choristers&nbsp&nbsp</label>
+                          <input type="checkbox" v-model="result.choristers">
+                          <button type="button" value="result.id" v-on:click="editDueDate(result)" >Submit</button>
+                        </li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -391,6 +402,7 @@
           input_password:'',
           login_message:'',
           search:'',
+          results:[],
         },
         methods: {
           inFolder: function() {
@@ -419,6 +431,10 @@
              })
           },
           libLogin: function() {
+            if (Cookies.get('csrftoken') == '{{csrf_token}}' ){
+              this.page_view = 'librarians'
+            }
+            else {
             axios({
               method: 'post',
               url: '{% url 'choirapp:lib_login' %}',
@@ -434,9 +450,10 @@
                 this.login_message = 'wrong password - try again'
               } else {
                 this.page_view = 'librarians'
+                this.login_message = ''
               }
              })
-          },
+          }},
           savePiece: function() {
             if (this.title == '') {
               alert('please enter a title for this piece')
@@ -486,6 +503,7 @@
                 'X-CSRFToken': Cookies.get('csrftoken')
               },
               data: {
+                choristers: composition.choristers,
                 new_due: composition.edit_turn_in_date,
                 id: composition.id,
               }
@@ -493,7 +511,7 @@
               this.inFolder()
               this.turnIn()
               this.youreLate()
-              alert('Due date changed')
+              alert('Saved')
               this.new_due = ''
               this.page_view = 'librarians'
             })
@@ -537,10 +555,10 @@
                 search: this.search,
               }
             }).then(response => {
-              console.log(response.data)
+              console.log(response.data.results)
+              this.results = response.data.results
               this.notes = ''
               this.piece = []
-              this.page_view = 'login'
             })
           },
           thisRehearsal: function() {

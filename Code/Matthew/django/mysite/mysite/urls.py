@@ -24,4 +24,5 @@ urlpatterns = [
     path('catapi/', include('catapi.urls')),
     path('users/', include('users.urls')),
     path('urlshortener/', include('urlshortener.urls')),
+    path('search/', include('search.urls'))
 ]

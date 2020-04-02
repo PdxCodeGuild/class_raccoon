@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+{% load static %}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
+    <title></title>
+
+    <style type="text/css">
+
+      html, body {
+        width:100%;
+        padding:0;
+        margin:0 auto;
+      }
+      .app_accordion{
+        width: 600px;
+      }
+      .accordion {
+        font-size: 1.2em;
+      }
+      .footer {
+        margin: 0 auto;
+      }
+      nav {
+        width:100%;
+      }
+      .footer {
+        text-align:center;
+      }
+      .button {
+        padding: 5px;
+      }
+      #app {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #ffffff;
+        width:100%;
+        margin: 0 auto;
+      }
+      /* smaller screens */
+      @media screen and (max-width: 600px) {
+        .app_accordion {
+          width: 400px;
+        }
+      }
+      /* larger screens */
+      @media screen and (min-width: 900px) {
+        .app_accordion {
+          width:800px;
+        }
+        .navbar-brand img {
+          width: 100px;
+          height: 100px;
+        }
+
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="app">
+      <nav class="navbar" style="background-color: #470a59; ">
+        <a class="navbar-brand" v-on:click="page_view = 'login'"style="font-size: 40px; color: #ffffff; background-color: #470a59; font-family: trajan-pro-3, serif; font-style: normal; font-weight: 400;">
+          <img src="{% static 'choirapp/trinity_logo.png' %}" width="70" height="70" class="d-inline-block align-top" alt="Trinity Music Logo">
+          ChoraLib
+        </a>
+      </nav>
+<!-- ***************************************************** -->
+  <!-- LANDING PAGE ACCORDION       -->
+<!-- ***************************************************** -->
+      <div class="app_accordion">
+        <div v-if="page_view == 'login'" class="accordion w-100 p-3" id="accordionExample">
+<!-- ADULT CHOIR COLLAPSE BUTTON -->
+          <div v-on:click="page_view = 'choir'" class="card border border-white" style="background-color: #470a59;">
+            <div class="card-header" v-on:click="inFolder" id="headingOne">
+              <h2 class="mb-0">
+                <button v-on:click="page_view = 'choir'" class="btn btn-link" type="button" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="font-size: 16px;  color: #ffffff; background-color: #470a59; ">
+                  Adult Choir
+                </button>
+              </h2>
+            </div>
+          </div>
+<!-- CHORISTERS COLLAPSE BUTTON -->
+          <div v-on:click="page_view = 'choristers'" class="card border border-white" style=" background-color: #470a59;">
+            <div class="card-header" id="headingTwo">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="font-size: 16px;  color: #ffffff; background-color: #470a59; ">
+                  Choristers
+                </button>
+              </h2>
+            </div>
+          </div>
+<!-- LIBARIANS COLLAPSE BUTTON -->
+          <div class="card border border-white" style=" background-color: #470a59;">
+            <div class="card-header" data-toggle="collapse" data-target="#collapseThree" id="headingThree">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button"  aria-expanded="false" aria-controls="collapseThree" style="font-size: 16px;  color: #ffffff; background-color: #470a59; ">Librarians</button>
+              </h2>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+              <div class="card-body"style="color: #ffffff;">
+                <input type="password" v-model="input_password" placeholder="password">
+                <button type="button" v-on:click="libLogin" name="button">Submit</button> <p>[[login_message]]</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+<!-- ***************************************************** -->
+  <!-- ADULT CHOIR ACCORDION       -->
+<!-- ***************************************************** -->
+      <div class="app_accordion">
+        <div v-if="page_view == 'choir'" class="accordion w-100 p-3" id="accordionExample">
+<!-- ADULTS MUSIC IN FOLDER BUTTON -->
+          <div class="card border border-white" data-toggle="collapse" data-target="#collapseOne" style=" background-color: #470a59;">
+            <div class="card-header" id="headingOne">
+              <h2 class="mb-0">
+                <button class="btn btn-link" type="button" aria-expanded="false" aria-controls="collapseOne" style="font-size: 16px;  color: #ffffff; background-color: #470a59; ">
+                  Music in Your Folder
+                </button>
+              </h2>
+            </div>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div class="card-body"style="color: #ffffff;">
+                <ul v-for="composition in compositions">
+                  <li>[[ composition.composer + " - " + composition.piece ]] <br> due on [[ composition.turn_in_date ]]</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+<!-- ADULTS TURN IN THIS SUNDAY BUTTON -->
+          <div class="card border border-white" data-toggle="collapse" data-target="#collapseTwo" style=" background-color: #470a59;">
+            <div class="card-header" id="headingTwo">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" aria-expanded="false" aria-controls="collapseTwo" style="font-size: 16px;  color: #ffffff; background-color: #470a59;">
+                  Turn in this Sunday
+                </button>
+              </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+              <div class="card-body" style="color: #ffffff;">
+                <ul v-for="turn_in in turn_ins">
+                  <li>[[ turn_in.composer + " - " + turn_in.piece ]]</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+<!-- ADULTS TURNED IN THIS SEASON BUTTON -->
+          <div class="card border border-white" data-toggle="collapse" data-target="#collapseThree" style=" background-color: #470a59;">
+            <div class="card-header" id="headingTwo">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" aria-expanded="false" aria-controls="collapseThree" style="font-size: 16px;  color: #ffffff; background-color: #470a59;">Turned in this Season</button>
+              </h2>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+              <div class="card-body"style="color: #ffffff;">
+                <ul v-for="late_stuff in late_stuffs">
+                  <li>[[ late_stuff.composer + " - " + late_stuff.piece ]]</li>
+                </ul>
+                </div>
+              </div>
+            </div>
+<!-- ADULTS REHEARSAL ORDER BUTTON -->
+            <div class="card border border-white" data-toggle="collapse" data-target="#collapseFour" v-on:click="thisRehearsal" style=" background-color: #470a59;">
+              <div class="card-header" id="headingFour">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="font-size: 16px;  color: #ffffff; background-color: #470a59; ">Rehearsal Order</button>
+                </h2>
+              </div>
+              <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                <div class="card-body"style="color: #ffffff;">
+                  <p>[[ this.note ]]</p>
+                  <ul v-for="piece in schedule">
+                    <li>[[ piece.pieces ]]</li>
+                  </ul>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+<!-- ***************************************************** -->
+  <!-- CHORISTER ACCORDION       -->
+<!-- ***************************************************** -->
+        <div class="app_accordion">
+          <div v-if="page_view == 'choristers'" class="accordion w-100 p-3" id="accordionExample">
+<!-- CHORISTERS MUSIC IN FOLDER BUTTON -->
+            <div class="card border border-white" data-toggle="collapse" data-target="#collapseOne" style=" background-color: #470a59;">
+              <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                  <button class="btn btn-link" type="button" aria-expanded="false" aria-controls="collapseOne" style="font-size: 16px;  color: #ffffff; background-color: #470a59; ">
+                    Music in Your Folder
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body"style="color: #ffffff;">
+                  <ul v-for="composition in compositions"  v-if="composition.choristers == true">
+                    <li>[[ composition.composer + " - " + composition.piece ]] <br> due on [[ composition.turn_in_date ]]</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+<!-- CHORISTER TURN IN THIS SUNDAY BUTTON -->
+            <div class="card border border-white" data-toggle="collapse" data-target="#collapseTwo" style=" background-color: #470a59;">
+              <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" aria-expanded="false" aria-controls="collapseTwo" style="font-size: 16px;  color: #ffffff; background-color: #470a59;">
+                    Turn in this Sunday
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body" style="color: #ffffff;">
+                  <ul v-for="turn_in in turn_ins" v-if="turn_in.choristers == true">
+                    <li>[[ turn_in.composer + " - " + turn_in.piece ]]</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+<!-- CHORISTER TURNED IN THIS SEASON BUTTON -->
+            <div class="card border border-white" data-toggle="collapse" data-target="#collapseThree" style=" background-color: #470a59;">
+              <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                  <button class="btn btn-link   collapsed" type="button" aria-expanded="false" aria-controls="collapseThree" style="font-size: 16px;  color: #ffffff; background-color: #470a59; ">Turned in this Season</button>
+                </h2>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body"style="color: #ffffff;">
+                  <ul v-for="late_stuff in late_stuffs"  v-if="late_stuff.choristers == true">
+                    <li>[[ late_stuff.composer + " - " + late_stuff.piece ]]</li>
+                  </ul>
+                  </div>
+                </div>
+              </div>
+<!-- CHORISTER REHEARSAL ORDER BUTTON -->
+              <div class="card border border-white" data-toggle="collapse" data-target="#collapseFour" v-on:click="thisRehearsal" style=" background-color: #470a59;">
+                <div class="card-header" id="headingFour">
+                  <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" aria-expanded="false" aria-controls="collapseFour" style="font-size: 16px;  color: #ffffff; background-color: #470a59; ">Rehearsal Order</button>
+                  </h2>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                  <div class="card-body"style="color: #ffffff;">
+                    <p>[[ this.note ]]</p>
+                    <ul v-for="piece in schedule">
+                      <li>[[ piece.pieces ]]</li>
+                    </ul>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+
+<!-- ***************************************************** -->
+  <!-- LIBRARIAN ACCORDION       -->
+<!-- ***************************************************** -->
+        <div class="app_accordion">
+          <div v-if="page_view == 'librarians'"  class="accordion w-100 p-3" id="accordionExample">
+<!-- LIBRARIAN CREATE NEW PIECE BUTTON -->
+            <div class="card border border-white" style=" background-color: #470a59;">
+              <div class="card-header" data-toggle="collapse" data-target="#collapseOne" id="headingOne">
+                <h2 class="mb-0">
+                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="font-size: 16px;  color: #ffffff; background-color: #470a59; ">
+                    Create New Piece
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body"style="color: #ffffff;">
+                  <form class="" method="post">
+                    <input type="text" v-model="catalog" placeholder="Catalog No."><br>
+                    <input type="text" v-model="comp_last" placeholder="Composer Last Name">
+                    <input type="text" v-model="comp_first" placeholder="Composer First Name"><br>
+                    <input type="text" v-model="title" placeholder="Title"><br>
+                    <input type="text" v-model="voicing" placeholder="Voicing (SATB,SSAATB,etc)"><br>
+                    <textarea rows="4" cols="35" v-model="notes" placeholder="Special Notes"></textarea><br>
+                    <input type="text" v-model="location" placeholder="Location (if not apparent)"><br>
+                    <label for="">Copies</label><br>
+                    <input type="number" v-model="copies"><br>
+                    <label for="">Choristers&nbsp&nbsp</label>
+                    <input type="checkbox" v-model="choristers"><br>
+                    <label for="">Turn in Date</label>
+                    <input type="date" v-model="turnin" placeholder="Turn in Date"><br>
+                    <button class="npb" type="button" v-on:click="savePiece" name="button">Submit</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+<!-- LIBRARIAN EDIT PIECE IN FOLDER BUTTON -->
+            <div class="card border border-white" style=" background-color: #470a59;">
+              <div data-toggle="collapse" data-target="#collapseTwo" class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="font-size: 16px;  color: #ffffff; background-color: #470a59; ">
+                    Edit Piece in Folder
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body" style="color: #ffffff;">
+                  <form method="post">
+                    <ul v-for="composition in compositions">
+                      <li>[[ composition.composer + " - " + composition.piece ]] &nbsp&nbsp <br>
+                        <input type="date" v-model="composition.edit_turn_in_date">
+                        <label for="">Choristers&nbsp</label>
+                        <input type="checkbox" name="Choristers" v-model="composition.choristers">
+                        <button type="button" value="composition.id" v-on:click="editDueDate(composition)" >Submit</button>
+                      </li>
+                    </ul>
+                </form>
+                </div>
+              </div>
+            </div>
+<!-- LIBRARIAN SET REHEARSAL SCHEDULE BUTTON -->
+            <div class="card border border-white" data-toggle="collapse" data-target="#collapseThree" style=" background-color: #470a59;">
+              <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" aria-expanded="false" aria-controls="collapseThree" style="font-size: 16px;  color: #ffffff; background-color: #470a59;">Set Rehearsal Schedule</button>
+                </h2>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body"style="color: #ffffff;">
+                  <form class="rehearsal" method="post">
+                    <textarea name="name" rows="4" cols="35" v-model="notes" placeholder="Special Notes (Start in Cathedral, etc)"></textarea><br>
+                    <label for="">Rehearsal Order</label><br>
+                    <input v-for="piece in pieces" type="text" name="" v-model="piece.piece"><br>
+                    <button  v-on:click="saveRehearsal"type="button" name="button">Submit</button>
+                  </form>
+                  </div>
+                </div>
+              </div>
+<!-- LIBRARIAN DISTRIBUTE NEW MUSIC -->
+              <div class="card border border-white" style=" background-color: #470a59;">
+                <div data-toggle="collapse" data-target="#collapseFour" class="card-header" id="headingFour">
+                  <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="font-size: 16px;  color: #ffffff; background-color: #470a59; ">
+                      Distribute New Music
+                    </button>
+                  </h2>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                  <div class="card-body" style="color: #ffffff;">
+                    <form method="post">
+                      <input type="text" v-model='search' placeholder="Search Title or Cat. #">
+                      <button type="button" v-on:click="setFolder">Submit</button>
+                  </form><br>
+                    <ul v-for="result in results">
+                        <li>[[ result.composer + " - " + result.piece ]] <br>
+                          <input type="date" v-model="result.edit_turn_in_date">
+                          <label for="">Choristers&nbsp&nbsp</label>
+                          <input type="checkbox" v-model="result.choristers">
+                          <button type="button" value="result.id" v-on:click="editDueDate(result)" >Submit</button>
+                        </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<!-- END OF LIBRARIAN ACCORDION  -->
+        </div>
+<!-- ^^^ END OF APP ^^^ -->
+
+        <div class="footer">
+          <img src="https://static.wixstatic.com/media/25961d_21b07916fd504cb884cb64bddade3157~mv2.png/v1/fill/w_194,h_194,al_c,q_85,usm_0.66_1.00_0.01/logo-trinity.webp" alt="Trinity Logo Footer">
+        </div>
+          <nav class="navbar fixed-bottom" style="background-color: #470a59;"></nav>
+    </div>
+
+<!-- Bootstrap javascript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!-- Vue initialization -->
+    <script type="text/javascript">
+      var app = new Vue ({
+        el: '#app',
+        delimiters: ['[[', ']]'],
+        data: {
+          page_view: 'login',
+          catalog: '',
+          comp_last: '',
+          comp_first: '',
+          title: '',
+          voicing: '',
+          notes: '',
+          copies: 0,
+          location: '',
+          choristers: false,
+          turnin: '',
+          reh_date: '',
+          comp_name: '',
+          pieces: [],
+          new_due:'',
+          edit_turn_in_date: '',
+          input_password:'',
+          login_message:'',
+          search:'',
+          results:[],
+        },
+        methods: {
+          inFolder: function() {
+            axios({
+              method: 'get',
+              url: '{% url 'choirapp:in_folder' %}',
+            }).then(response => {
+              this.compositions = response.data.compositions
+             })
+          },
+          turnIn: function(){
+            axios({
+              method: 'get',
+              url: '{% url 'choirapp:turn_in' %}',
+            }).then(response => {
+              this.turn_ins = response.data.turn_ins
+             })
+          },
+
+          youreLate: function() {
+            axios({
+              method: 'get',
+              url: '{% url 'choirapp:this_season' %}',
+            }).then(response => {
+              this.late_stuffs = response.data.late_stuffs
+             })
+          },
+          libLogin: function() {
+            if (Cookies.get('csrftoken') == '{{csrf_token}}' ){
+              this.page_view = 'librarians'
+            }
+            else {
+            axios({
+              method: 'post',
+              url: '{% url 'choirapp:lib_login' %}',
+              data: {
+                password: this.input_password
+              },
+              headers: {
+                'X-CSRFToken': '{{csrf_token}}'
+              }
+            }).then(response => {
+              let result = response.data
+              if (result == 'fail') {
+                this.login_message = 'wrong password - try again'
+              } else {
+                this.page_view = 'librarians'
+                this.login_message = ''
+              }
+             })
+          }},
+          savePiece: function() {
+            if (this.title == '') {
+              alert('please enter a title for this piece')
+              page_view = 'librarians'
+              return
+            }
+            axios({
+              method: 'post',
+              url: '{% url 'choirapp:save_piece' %}',
+              headers: {
+                'X-CSRFToken': Cookies.get('csrftoken')
+              },
+              data: {
+                catalog: this.catalog,
+                comp_last: this.comp_last,
+                comp_first: this.comp_first,
+                title: this.title,
+                voicing: this.voicing,
+                notes: this.notes,
+                location: this.location,
+                copies: this.copies,
+                choristers: this.choristers,
+                turnin: this.turnin,
+              }
+            }).then(response => {
+              if (response.data == 'not ok') {
+                alert('enter a title')
+              }
+              alert('New piece created')
+              this.catalog = ''
+              this.comp_last = ''
+              this.comp_first = ''
+              this.title = ''
+              this.voicing = ''
+              this.notes = ''
+              this.location = ''
+              this.copies = 0
+              this.choristers = ''
+              this.turnin = ''
+            })
+          },
+          editDueDate: function(composition) {
+            axios({
+              method: 'post',
+              url: '{% url 'choirapp:edit_due' %}',
+              headers: {
+                'X-CSRFToken': Cookies.get('csrftoken')
+              },
+              data: {
+                choristers: composition.choristers,
+                new_due: composition.edit_turn_in_date,
+                id: composition.id,
+              }
+            }).then(response => {
+              this.inFolder()
+              this.turnIn()
+              this.youreLate()
+              alert('Saved')
+              this.new_due = ''
+              this.page_view = 'librarians'
+            })
+          },
+
+          saveRehearsal: function() {
+            axios({
+              method: 'post',
+              url: '{% url 'choirapp:rehearsal' %}',
+              headers: {
+                'X-CSRFToken': Cookies.get('csrftoken')
+              },
+              data: {
+                notes: this.notes,
+                pieces: this.pieces,
+              }
+            }).then(response => {
+              alert('Rehearsal Schedule Set')
+              this.notes = ''
+              this.piece = []
+              this.page_view = 'login'
+            })
+          },
+          thisRehearsal: function() {
+            axios({
+              method: 'get',
+              url: '{% url 'choirapp:schedule' %}',
+            }).then(response => {
+              this.schedule = response.data.schedule,
+              this.note = response.data.note
+             })
+          },
+          setFolder: function() {
+            axios({
+              method: 'post',
+              url: '{% url 'choirapp:set_folder' %}',
+              headers: {
+                'X-CSRFToken': Cookies.get('csrftoken')
+              },
+              data: {
+                search: this.search,
+              }
+            }).then(response => {
+              console.log(response.data.results)
+              this.results = response.data.results
+              this.notes = ''
+              this.piece = []
+            })
+          },
+          thisRehearsal: function() {
+            axios({
+              method: 'get',
+              url: '{% url 'choirapp:schedule' %}',
+            }).then(response => {
+              this.schedule = response.data.schedule,
+              this.note = response.data.note
+             })
+          },
+        },
+
+      created: function() {
+        for (let i=1; i<22; i++){
+          this.pieces.push({
+            piece: i
+          })
+        }
+        this.inFolder()
+        this.turnIn()
+        this.youreLate()
+        this.thisRehearsal()
+      },
+    })
+    </script>
+  </body>
+</html>

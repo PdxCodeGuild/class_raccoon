@@ -25,4 +25,5 @@ urlpatterns = [
     path('redir/', include('urlshortener.urls')),
     path('accounts/', include('accounts.urls')),
     path('library/', include('library.urls')),
+    path('todos/', include('todos.urls')),
 ]

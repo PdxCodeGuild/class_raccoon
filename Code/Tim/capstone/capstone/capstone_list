@@ -1,0 +1,47 @@
+# Trinity Cathedral Choir Library Capstone
+
+## EXISTING EXCEL FIELDS
+-  Catalog number
+-  Composer Last Name
+-  Composer First Name
+-  Title
+-  Number of Copies
+-  Voicing
+-  Special Notes
+-  Location
+
+
+## FIELDS TO ADD
+-  Final Performance Date this season (turn-in date)
+-  In Folder Boolean (tied to user type and final performance date)
+-  Front Page image file
+-  performance dates
+
+
+
+## DEFAULT USER PAGE VIEWS (clickable) accordion
+-  **Select** - Adult Choir, Choristers, Librarians (needs login), Admin (needs login)
+-  In My Folder Now (List) format - Composer Last Name, Title, Performance Date
+-  Turn In This Weekend (List) - will display pieces with final performance in the next 6 days
+-  Recently Turned-In Pieces (List) format - Composer Last Name, Title
+-  Full Season Turned-In Pieces (List) format - Composer Last Name, Title
+
+
+## COMPOSITION DETAIL VIEW
+-  Front Page image
+-  Title
+-  Composer First and Last Names
+-  In Folder Boolean indicator
+
+## USER ACCESS LEVELS
+-  Admin - me, Arwen, Christine, Bruce
+-  Librarians - all current librarians (individual logins)
+    Create and edit all elements
+-  Choir members - one login for all adult choir members
+    View only
+-  Choristers - one login for all choristers
+    View only
+
+## LOGIC CONSIDERATIONS
+-  When librarians set the Final Performance Date for the season, In Folder Boolean will be set to True and will return to False the day of the final performance.
+-  When final performance date is set, append date to performance dates

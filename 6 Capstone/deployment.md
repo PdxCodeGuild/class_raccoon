@@ -3,24 +3,14 @@
 
 ## Hosting Services
 
-[saas-vs-paas-vs-iaas](http://www.bmc.com/blogs/saas-vs-paas-vs-iaas-whats-the-difference-and-how-to-choose/)
 
-- [Python Anywhere](https://www.pythonanywhere.com/) allows you to host a single website for free. You're given a file system you can clone a git repo into. You can find a guide for deploying a Django app [here](
-https://help.pythonanywhere.com/pages/DeployExistingDjangoProject/).
-- [Amazon Web Services (AWS)](https://aws.amazon.com/)
-- [Microsoft Azure](https://azure.microsoft.com/en-us/)
+- [PythonAnywhere](https://www.pythonanywhere.com/)
+- [Heroku](https://devcenter.heroku.com/articles/deploying-python)
+- [WebFaction](https://www.webfaction.com/)
 - [NearlyFreeSpeech.net](https://www.nearlyfreespeech.net/)
 - [Digital Ocean](https://www.digitalocean.com/)
-- [WebFaction](https://www.webfaction.com/)
-
-## Domain Names
-
-Most hosting services will give your website a default domain name, but if you want something custom, you'll have to rent it from a domain registrar. You can then add a DNS record to associate it with your server's IP address. You can read more about domains on the [MDN](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_is_a_domain_name).
-
-
-## HTTPS
-
-To allow your site to use HTTP, you must install an SSL Certificate on your server. SSL certificates can be purchased from a Commercial Certificate Authority, created with Let's Encrypt, or self-signed.
+- [Amazon Web Services (AWS)](https://aws.amazon.com/)
+- [Microsoft Azure](https://azure.microsoft.com/en-us/)
 
 
 ## SaaS vs PaaS vs IaaS
@@ -32,15 +22,33 @@ To allow your site to use HTTP, you must install an SSL Certificate on your serv
 | IaaS | Infrastructure as a Service: they provide the hardware, you install software | Digital Ocean, AWS |
 | Self-hosted | You manage all the software and hardware |    |
 
+
 [read more](https://www.bmc.com/blogs/saas-vs-paas-vs-iaas-whats-the-difference-and-how-to-choose/)
 
 
 
+## Domain Names
+
+Most hosting services will give your website a default domain name, but if you want something custom, you'll have to rent it from a domain registrar. You can then add a DNS record to associate it with your server's IP address. You can read more about domains on the [MDN](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_is_a_domain_name).
 
 
-## Deploying with Python Anywhere
+## HTTPS
 
-[tutorial](https://help.pythonanywhere.com/pages/DeployExistingDjangoProject), [video](https://www.youtube.com/watch?v=Y4c4ickks2A)
+To allow your site to use HTTP, you must install an SSL Certificate on your server. SSL certificates can be purchased from a Commercial Certificate Authority, created with Let's Encrypt, or self-signed.
+
+
+## Domain registrars
+
+To use a custom domain name, you have to register it with a domain registrar. Some hosting sites are also domain registrars, some are not.
+
+- [Google Domains](https://domains.google/)
+- [Hover](https://www.hover.com/)
+- [GoDaddy](https://www.godaddy.com/)
+
+
+## Deploying with PythonAnywhere
+
+Python [tutorial](https://help.pythonanywhere.com/pages/DeployExistingDjangoProject) and [video](https://www.youtube.com/watch?v=Y4c4ickks2A). If your project uses static files, check out [this document](https://help.pythonanywhere.com/pages/DjangoStaticFiles).
 
 
 How to print to the error log on pythonanywhere
@@ -54,4 +62,3 @@ Find more info about virtual environments [here](https://github.com/PdxCodeGuild
 
 Deploying with Django channels is [more complicated](https://channels.readthedocs.io/en/latest/deploying.html)
 
-## Domain registrars

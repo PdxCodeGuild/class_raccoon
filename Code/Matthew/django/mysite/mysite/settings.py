@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'catapi',
     'users',
     'urlshortener',
-    'library'
+    'library',
+    'search'
 ]
 
 MIDDLEWARE = [

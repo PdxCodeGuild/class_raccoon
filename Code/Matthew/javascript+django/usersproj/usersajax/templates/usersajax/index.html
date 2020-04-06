@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- Vue -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- Axios -->
+  <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div v-if="view == 'login'">
+      <span>[[login_message]]</span>
+      <input type="text" v-model="input_username" placeholder="username"/>
+      <input type="password" v-model="input_password" placeholder="password"/>
+      <button @click="login">login</button>
+    </div>
+    <div v-if="view == 'home'">
+      <span>Home</span>
+      <button @click="logout">logout</button>
+      <ul>
+        <li v-for="fruit in fruits">[[fruit]]</li>
+      </ul>
+    </div>
+  </div>
+  <script type="text/javascript">
+    let app = new Vue({
+      el: '#app',
+      delimiters: ['[[', ']]'],
+      data: {
+        view: '',
+        login_message: '',
+        input_username: '',
+        input_password: '',
+        fruits: []
+      },
+      methods: {
+        login: function() {
+          axios({
+            method: 'post',
+            url: "{% url 'usersajax:login' %}",
+            data: {
+              username: this.input_username,
+              password: this.input_password
+            },
+            headers: {
+              'X-CSRFToken': '{{csrf_token}}'
+            }
+          }).then(response => {
+            let result = response.data
+            if (result == 'fail') {
+              this.login_message = 'failed to log in'
+            } else {
+              this.view = 'home'
+              this.get_user_data()
+            }
+          })
+        },
+        logout: function() {
+          axios({
+            method: 'get',
+            url: "{% url 'usersajax:logout' %}",
+          }).then(response => {
+            let result = response.data
+            if (result == 'ok') {
+              this.view = 'login'
+            }
+          })
+        },
+        get_user_data: function() {
+          axios({
+            method: 'get',
+            url: "{% url 'usersajax:get_user_data' %}"
+          }).then(response => {
+            if (response.data.fruits) {
+              this.fruits = response.data.fruits
+            }
+          })
+        }
+      },
+      created: function() {
+        //{% if user.is_authenticated %}
+        this.view = 'home'
+        this.get_user_data()
+        //{% else %}
+        this.view = 'login'
+        //{% endif %}
+
+      }
+    })
+  </script>
+</body>
+</html>

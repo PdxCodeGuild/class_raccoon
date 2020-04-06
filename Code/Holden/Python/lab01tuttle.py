@@ -1,35 +1,28 @@
 from turtle import *
 
 penup()
-color("red")
-right(90)
-forward(100)
-left(119)
+color("black")
 pendown()
-i=0
-c="red"
-while (i<100):
-    forward(100)
-    left(131)
-    forward(60)
-    left(114)
-    forward(30)
-    left(140)
-    if (c=="red"):
-        c="orange"
-    elif (c=="orange"):
-        c="yellow"
-    elif (c=="yellow"):
-        c="green"
-    elif (c=="green"):
-        c="blue"
-    elif (c=="green"):
-        c="blue"
-    elif (c=="blue"):
-        c="purple"
-    elif (c=="purple"):
-        c="red"
-    color(c)
-    i=i+1
-
+# legs
+right(60)
+forward(100)
+right(180)
+forward(100)
+left(120)
+forward(100)
+right(180)
+forward(100)
+# body
+left(30)
+forward(100)
+# head
+right(90)
+circle(20)
+# arms
+right(60)
+forward(100)
+right(180)
+forward(100)
+left(120)
+forward(100)
 done()

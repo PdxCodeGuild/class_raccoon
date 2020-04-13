@@ -1,10 +1,80 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
+    <head>
+        <meta charset="utf-8">
+        <title> html-css lab2 blog</title>
+        <style type="text/css">
 
-  </body>
+            body {
+                background-color: green;
+            }
+
+            header {
+                font-size: 40px;
+                display: flex;
+                justify-content: center;
+                max-width: 400px;
+                border-radius: 10px;
+                margin-bottom: 30px;
+            }
+
+            nav {
+                position: sticky;
+                top: 0;
+                display: flex;
+                justify-content: space-between;
+                background-color: rgb(0,53,21);
+                padding: 5px 20px;
+                margin-bottom: 30px;
+            }
+
+            a {
+                color: white;
+            }
+
+            section > div{
+                padding: 15px;
+                margin-top: 20px;
+                margin-left: 20px;
+                margin-right: 20px;
+                margin-bottom: 0px;
+                background-color: rgb(0,53,21);
+            }
+
+            footer {
+                background-color: rgb(0,53,21);
+                color: white;
+                margin: 20px
+            }
+        </style>
+    </head>
+    <body>
+        <header>Gardening Blog</header>
+        <nav class="navigator">
+            <div class="children_of_nav">
+                <a href="#">My Garden</a>
+            </div>
+            <div class="children_of_nav">
+                <a href="#">About Me</a>
+            </div>
+            <div class="children_of_nav">
+                <a href="#">Home</a>
+            </div>
+        </nav>
+        <section>
+            <div class="good_for_health">
+                <p>Gardening is good therapy and stuff</p>
+            </div>
+            <div class="i_did_this_today">
+                <p>Yo, I replanted a fern today 4/13/20</p>
+            </div>
+            <div class="my_favorite_plant">
+                <img src="https://i.pinimg.com/736x/fe/92/07/fe9207f2d919d8767e265c3c989d1052--spirals-texture.jpg">
+                <p>Ferns are #1</p>
+            </div>
+        </section>
+        <footer>
+            © Copyright Alex's Bloggin'
+        </footer>
+    </body>
 </html>

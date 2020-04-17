@@ -3,10 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Url Shortener</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <style type="text/css">
+        .main-bod{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            /* align-items: center; */
+            margin-top: 30px;
+
+        }
+        .card-bod{
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .main-cards{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 500px;
+            background-color: grey;
+        }
+        .submit-card{
+            width: 300px;
+            height: 300px;
+        }
+    </style>
 </head>
 <body>
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1">URL Shortener</span>
+    </nav>
+    <div class="main-bod">
+        <div class="card submit-card">
+            <div class="card-header">
+              Shorten Your really long URL
+            </div>
+            <div class="card-body">
+                <form action="{% url 'urlshortener:create' %}" method="POST" class="pure-form">
+                    {% csrf_token %}
+                    <input type="text" class="form-control" placeholder="Website Name" name="name">
+                    <input type="text" class="form-control" placeholder="Website URL" name = "url">
+                    <button type="submit" class="pure-button">Shorten</button>
+                </form>
+            </div>
+          </div>
+<!-- This is the div for the display/'' -->
+    <div class="main-cards">
+    {% for url in urls %}
+    <div class="card card-bod" style="width: 18rem;">
+        <div class="card-header">
+          Site Name: {{url.site_name}}
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Site URL: {{url.site_url}}</li>
+          <li class="list-group-item">Short Key: <a href="{% url 'urlshortener:visit' url.short_url %}">{{url.short_url}}</a></li>
+          <li class="list-group-item">Times visited: {{url.clicks}} </li>
+          <li class="list-group-item"><a href="{% url 'urlshortener:delete' url.id %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Delete</a></li>
+        </ul>
 
+      </div>
+
+    {% endfor %}
+    </div>
+    </div>
 </body>
 </html>

@@ -1,9 +1,12 @@
 from django.db import models
 
+# Create your models here.
 
-class Shortener(models.Model):
-    code = models.CharField(max_length=6)
-    url = models.CharField(max_length=2048)
+class Shorten(models.Model):
+    site_name = models.CharField(max_length=50)
+    site_url = models.CharField(max_length=200)
+    short_url = models.CharField(max_length=60)
+    clicks = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.code
+        return self.site_name

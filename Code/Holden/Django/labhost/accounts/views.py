@@ -27,7 +27,7 @@ def save_user(request):
             return redirect(reverse('accounts:register') + '?message=invalid')
 
 
-        if User.objects.exists(username=username):
+        if User.objects.filter(username=username):
             return redirect(reverse('accounts:register') + '?message=user_exists')
         user = User.objects.create_user(username, email, password)
         login(request, user)

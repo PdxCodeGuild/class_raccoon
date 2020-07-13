@@ -28,7 +28,7 @@ Example:
 
 
 '''
-"Im in a glass case of emotion."
+"Im in a glass case of emotion." - Ron Burgundy
 '''
 
 #variables and user input

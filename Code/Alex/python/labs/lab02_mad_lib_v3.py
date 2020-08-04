@@ -1,5 +1,5 @@
 '''
-Version 3 (optional) *not complete*
+Version 3 (optional)
 
 Make it a repeatable game. Once you're done prompting the user for words, prompt them for whether they'd like to hear the story. Use a while loop to keep asking if they'd like to hear the story again until the answer is 'no'. You could then ask them if they'd like to make another story, and so on.
 Key Concepts
@@ -20,7 +20,11 @@ play_again = "yes"
 while play_again == "yes":
 
     #variables and user inputs
-    adj_list = list(input("Choose 3 adjectives: ").split(" "))
+    adj_list = list(input("\n\n\n\nChoose 3 adjectives: ").split(" "))
+
+    if range(len(adj_list)) != 2:
+        print("\nincorrect amount of adjectives used")
+
     for i in range(len(adj_list)):
         adj_list[i] = adj_list[i].capitalize()
 

@@ -24,63 +24,63 @@ while play_again == "y":
 
     if computer_move_choice == move_list[0]: #computer chooses 'rock'
         if user_move_choice == move_list[0]: #user chooses 'rock'
-            print("\nQuit copying me.\n")
+            print("\n\nQuit copying me.\n")
         elif user_move_choice == move_list[1]: #user chooses 'paper'
-            print("\nYou've won this round..\n")
+            print("\n\nYou've won this round..\n")
         elif user_move_choice == move_list[2]: #user chooses 'scissors'
-            print("\nHah! I'm better than you!\n")
+            print("\n\nHah! I'm better than you!\n")
         elif user_move_choice == move_list[3]: #user chooses 'lizard'
-            print("\nI crushed your lizard with a rock. I win.\n")
+            print("\n\nI crushed your lizard with a rock. I win.\n")
         elif user_move_choice == move_list[4]: #user chooses 'spock'
-            print("\nWhat? Spock vaporized my rock! I guess you win..\n")
+            print("\n\nWhat? Spock vaporized my rock! I guess you win..\n")
 
     elif computer_move_choice == move_list[1]: #computer chooses 'paper'
         if user_move_choice == move_list[0]: #user chooses 'rock'
-            print("\nSorry Charlie.\nI win.\n")
+            print("\n\nSorry Charlie.\nI win.\n")
         elif user_move_choice == move_list[1]: #user chooses 'paper'
-            print("\nQuit copying me.\n")
+            print("\n\nQuit copying me.\n")
         elif user_move_choice == move_list[2]: #user chooses 'scissors'
-            print("\nAlright, i give up.. you win\n")
+            print("\n\nAlright, i give up.. you win\n")
         elif user_move_choice == move_list[3]: #user chooses 'lizard'
-            print("\nYou've won. Your lizard ate my paper\n")
+            print("\n\nWhat the heck! Your lizard ate my paper man... you win\n")
         elif user_move_choice == move_list[4]: #user chooses 'spock'
-            print("\nPaper disproves Spock. \nYou loose.\n")
+            print("\n\nPaper disproves Spock. \nYou loose.\n")
 
     elif computer_move_choice == move_list[2]: #computer chooses 'scissors'
         if user_move_choice == move_list[0]: #user chooses 'rock'
-            print("\nYou win.\nI loose.\n")
+            print("\n\nYou win.\nI loose.\n")
         elif user_move_choice == move_list[1]: #user chooses 'paper'
-            print("\nI win.\nYou loose.\n")
+            print("\n\nI win.\nYou loose.\n")
         elif user_move_choice == move_list[2]: #user chooses 'scissors'
-            print("\nquit copying me.\n")
+            print("\n\nquit copying me.\n")
         elif user_move_choice == move_list[3]: #user chooses 'lizard'
-            print("\nI decapitated your lizard with my scissors.\nYou loose.\n")
+            print("\n\nI decapitated your lizard with my scissors.\nYou loose.\n")
         elif user_move_choice == move_list[4]: #user chooses 'spock'
-            print("\nSpock smashes scissors. \nYou win.\n")
+            print("\n\nSpock smashes scissors. \nYou win.\n")
 
     elif computer_move_choice == move_list[3]: #computer chooses 'lizard'
         if user_move_choice == move_list[0]: #user chooses 'rock'
-            print("\nyou win. rock smashed lizard\n")
+            print("\n\nyou win. rock smashed lizard\n")
         elif user_move_choice == move_list[1]: #user chooses 'paper'
-            print("\nLizard ate your piece of paper.\nI win.\n")
+            print("\n\nLizard ate your piece of paper.\nI win.\n")
         elif user_move_choice == move_list[2]: #user chooses 'scissors'
-            print("\nscissors decapitated lizard..\n")
+            print("\n\nscissors decapitated lizard..\n")
         elif user_move_choice == move_list[3]: #user chooses 'lizard'
-            print("\ntied.            but my lizard is cooler than yours.\n")
+            print("\n\ntied.            but my lizard is cooler than yours.\n")
         elif user_move_choice == move_list[4]: #user chooses 'spock'
-            print("\nlizard poisons spock.\n\n                                     You loose.\n")
+            print("\n\nlizard poisons spock.\n\n                                     You loose.\n")
 
     elif computer_move_choice == move_list[4]: #computer chooses 'spock'
         if user_move_choice == move_list[0]: #user chooses 'rock'
-            print("\nspock vaporizes rock.\n I win!\n")
+            print("\n\nspock vaporizes rock.\n I win!\n")
         elif user_move_choice == move_list[1]: #user chooses 'paper'
-            print("\nyou win. paper disproves spock\n")
+            print("\n\nyou win. paper disproves spock\n")
         elif user_move_choice == move_list[2]: #user chooses 'scissors'
-            print("\nspock smashes scissors.\n     Ya lost.\n")
+            print("\n\nspock smashes scissors.\n     Ya lost.\n")
         elif user_move_choice == move_list[3]: #user chooses 'lizard'
-            print("\ni guess you win\n")
+            print("\n\ni guess you win\n")
         elif user_move_choice == move_list[4]: #user chooses 'spock'
-            print("\nIt's a tie.\n\n\n\n\n\n\n                       Spock... \n\n\n              meet Spock.\n")
+            print("\n\nIt's a tie.\n\n\n\n\n\n\n                       Spock... \n\n\n              meet Spock.\n")
 
         #v2 addition. i used the user input to ask if they wanted to play again and then created a while loop incase of invalid entry
     play_again = input("play again? y/n\n\n").lower()
@@ -89,7 +89,7 @@ while play_again == "y":
     while play_again != "n" and play_again != "y":
         print(f"\nWrong.")
 
-        play_again = input("\nWould you like to play again?\n").lower()
+        play_again = input("\nWould you like to play again? y/n\n").lower()
 
         if play_again == "n":
             break
